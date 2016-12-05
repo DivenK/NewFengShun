@@ -2,15 +2,19 @@
 var editId = 0;
 var pageIndex = 1;
 var pageSize = 15;
+var $modal;
 
 
 $(function () {
     //控制新增的弹层
-    var $modal = $('#doc-modal-1');//弹窗div  
+    $modal = $('#doc-modal-1');//弹窗div  
 
     $('#btnAddManage').on('click', function (e) {
         //修改新增标识
         addFlag = 0;
+        $("#doc-title").val("");
+        $("#doc-author").val("");
+        editor.setContent("");
         $modal.modal({ closeViaDimmer: 0, width: 800, height: 800 });//弹起
     });
 
@@ -27,7 +31,7 @@ $(function () {
         }
         var contentModel = {
             "flag": addFlag,
-            "id": 0,
+            "id": editId,
             "title": title,
             "conter": editor.getContent(),
             "author": $("#doc-author").val()
@@ -57,6 +61,7 @@ $(function () {
     2.0 富文本编辑器取消
     ****************************************/
     $("#Cancel").unbind("click").bind("click", function () {
+        editId = 0;
         $modal.modal('close');
     })
 
@@ -76,13 +81,14 @@ $(function () {
 
 
 })
-   /****************************************
-   4.0 开启或者关闭评论功能
-   ****************************************/
+/****************************************
+4.0 开启或者关闭评论功能
+****************************************/
 $(document).on('click', '.changelook', function () {
     var content = {
-        "id": $(this).find("input[type=checkbox]").attr("data-id")
-    }    
+        "id": $(this).find("input[type=checkbox]").attr("data-id"),
+        "look": ($(this).hasClass('am-active') ? 1 : 0)
+    }
     $.ajax({
         url: "/admin/manage/ChangeLook",
         data: content,
@@ -103,88 +109,113 @@ $(document).on('click', '.changelook', function () {
     })
 });
 
- /****************************************
-   编辑
-  ****************************************/
+/****************************************
+  编辑
+ ****************************************/
 $(document).on("click", ".edit-model", function () {
-    alert();
+    var content = {
+        "id": $(this).attr("data-id")
+    }
+    $.ajax({
+        url: "/admin/manage/GetManageById",
+        data: content,
+        type: "get",
+        datatype: "json",
+        success: function (e) {
+            if (e.status == 0) {
+                addFlag = 1;
+                editId = e.datas.id;
+                $("#doc-title").val(e.datas.Title);
+                $("#doc-author").val(e.datas.Author);
+                editor.setContent(e.datas.Conter);
+                $modal.modal({ closeViaDimmer: 0, width: 800, height: 800 });//弹起
+            }
+            else {
+                bfeMsgBox.error("", e.msg);
+            }
+        },
+        error: function (er) {
+            bfeMsgBox.error("", er);
+            editId = 0;
+        }
+    })
 })
 
-    /***********************
-    获取数据
-    ***********************/
-    function GetContentByPage(pageIndex, pageSize, searchMsg) {
-        var content = {
-            "pageIndex": pageIndex,
-            "PageSize": pageSize,
-            "searchContent": searchMsg
-        };
-        $.post("/Admin/Manage/GetManageData", content, function (retContent) {
-            if (retContent.status == 0) {
-                var totalPage = retContent.datas.TotalPage;
-                var dataContent = retContent.datas.Content;
+/***********************
+获取数据
+***********************/
+function GetContentByPage(pageIndex, pageSize, searchMsg) {
+    var content = {
+        "pageIndex": pageIndex,
+        "PageSize": pageSize,
+        "searchContent": searchMsg
+    };
+    $.post("/Admin/Manage/GetManageData", content, function (retContent) {
+        if (retContent.status == 0) {
+            var totalPage = retContent.datas.TotalPage;
+            var dataContent = retContent.datas.Content;
 
-                $("#new-pageCount").text(totalPage);
-                //TODO：将totalPage赋值给分页插件
+            $("#new-pageCount").text(totalPage);
+            //TODO：将totalPage赋值给分页插件
 
-                //将数据展示到页面
-                var showHtml = "";
-                for (var i = 0; i < dataContent.length; i++) {
-                    showHtml += '<tr>';
-                    showHtml += '<td>' + (i + 1) + '</td>';
-                    showHtml += '<td>' + dataContent[i].Title + '</td>';
-                    showHtml += '<td class="am-hide-sm-only" ><div _switch="" class="am-switch am-round am-switch-success changelook  newDisplay am-active"><div class="am-switch-handle"><input type="checkbox" class="" ' + (dataContent[i].Look == 0 ? "checked='true'" : "") + ' data-id="' + dataContent[i].id + '"></div></div></td>';
-                    showHtml += '<td>' + dataContent[i].Author + '</td>';
-                    showHtml += '<td class="am-hide-sm-only">' + dataContent[i].Creator + '</td>';
-                    showHtml += '<td class="am-hide-sm-only">' + dataContent[i].CreateTime + '</td>';
-                    showHtml += '<td><div class="am-btn-toolbar"><div class="am-btn-group am-btn-group-xs">';
-                    showHtml += '<a class="am-btn am-btn-default am-btn-xs am-text-secondary edit-model" data-id="' + dataContent[i].id + '"><span class="am-icon-pencil-square-o"></span> 编辑</a>';
-                    showHtml += '<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="Del(@item.id)"><span class="am-icon-trash-o"></span> 删除</a>';
-                    showHtml += '</div></div></td></tr>';
-                    //-----------------
-                    //showHtml += '<tr>';
-                    //showHtml +='<td>'+ (i + 1) + '</td>';
-                    //showHtml +='<td>' + dataContent[i].Title +'</td>';
-                    //showHtml +='<td class="am-hide-sm-only" data-id="'+dataContent[i].id+'"><div _switch="" class="am-switch am-round am-switch-success  newDisplay am-active"><div class="am-switch-handle"><input type="checkbox" class="" checked=""></div></div></td>';
-                    //showHtml +='<td>' + dataContent[i].Author + '</td>';
-                    //showHtml += '<td class="am-hide-sm-only">' + dataContent[i].Creator + '</td>';
-                    //showHtml += '<td class="am-hide-sm-only">' + dataContent[i].CreateTime + '</td>';
-                    //showHtml += '<td><div class="am-btn-toolbar"><div class="am-btn-group am-btn-group-xs">';
-                    //showHtml += '<a class="am-btn am-btn-default am-btn-xs am-text-secondary" id="btnEdit"><span class="am-icon-pencil-square-o"></span> 编辑</a>';
-                    //showHtml += '<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="Del(1)"><span class="am-icon-trash-o"></span> 删除</a>';
-                    //showHtml += '</div></div></td></tr>';
-                }
-                $("#showTb").html(showHtml);
+            //将数据展示到页面
+            var showHtml = "";
+            for (var i = 0; i < dataContent.length; i++) {
+                showHtml += '<tr>';
+                showHtml += '<td>' + (i + 1) + '</td>';
+                showHtml += '<td>' + dataContent[i].Title + '</td>';
+                showHtml += '<td class="am-hide-sm-only" ><div _switch="" class="am-switch am-round am-switch-success changelook  newDisplay am-active"><div class="am-switch-handle"><input type="checkbox" class="" ' + (dataContent[i].Look == 0 ? "checked='true'" : "") + ' data-id="' + dataContent[i].id + '"></div></div></td>';
+                showHtml += '<td>' + dataContent[i].Author + '</td>';
+                showHtml += '<td class="am-hide-sm-only">' + dataContent[i].Creator + '</td>';
+                showHtml += '<td class="am-hide-sm-only">' + dataContent[i].CreateTime + '</td>';
+                showHtml += '<td><div class="am-btn-toolbar"><div class="am-btn-group am-btn-group-xs">';
+                showHtml += '<a class="am-btn am-btn-default am-btn-xs am-text-secondary edit-model" data-id="' + dataContent[i].id + '"><span class="am-icon-pencil-square-o"></span> 编辑</a>';
+                showHtml += '<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="Del(@item.id)"><span class="am-icon-trash-o"></span> 删除</a>';
+                showHtml += '</div></div></td></tr>';
+                //-----------------
+                //showHtml += '<tr>';
+                //showHtml +='<td>'+ (i + 1) + '</td>';
+                //showHtml +='<td>' + dataContent[i].Title +'</td>';
+                //showHtml +='<td class="am-hide-sm-only" data-id="'+dataContent[i].id+'"><div _switch="" class="am-switch am-round am-switch-success  newDisplay am-active"><div class="am-switch-handle"><input type="checkbox" class="" checked=""></div></div></td>';
+                //showHtml +='<td>' + dataContent[i].Author + '</td>';
+                //showHtml += '<td class="am-hide-sm-only">' + dataContent[i].Creator + '</td>';
+                //showHtml += '<td class="am-hide-sm-only">' + dataContent[i].CreateTime + '</td>';
+                //showHtml += '<td><div class="am-btn-toolbar"><div class="am-btn-group am-btn-group-xs">';
+                //showHtml += '<a class="am-btn am-btn-default am-btn-xs am-text-secondary" id="btnEdit"><span class="am-icon-pencil-square-o"></span> 编辑</a>';
+                //showHtml += '<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="Del(1)"><span class="am-icon-trash-o"></span> 删除</a>';
+                //showHtml += '</div></div></td></tr>';
             }
-        }, "json")
-
-    }
-
-
-    /*******************************
-    删除
-    *******************************/
-    function Del(mId) {
-        if (mId == null) {
-            bfeMsgBox.error("", "数据异常，请刷新重试");
-            return;
+            $("#showTb").html(showHtml);
         }
-        $.ajax({
-            url: "/admin/manage/Del",
-            data: { "id": mId },
-            type: "post",
-            dataType: "json",
-            success: function (e) {
-                if (e.status == 0) {
-                    window.location.reload();
-                }
-                else {
-                    bfeMsgBox.error("", e.msg);
-                }
-            },
-            error: function (er) {
-                bfeMsgBox.error("", er);
-            }
-        })
+    }, "json")
+
+}
+
+
+/*******************************
+删除
+*******************************/
+function Del(mId) {
+    if (mId == null) {
+        bfeMsgBox.error("", "数据异常，请刷新重试");
+        return;
     }
+    $.ajax({
+        url: "/admin/manage/Del",
+        data: { "id": mId },
+        type: "post",
+        dataType: "json",
+        success: function (e) {
+            if (e.status == 0) {
+                window.location.reload();
+            }
+            else {
+                bfeMsgBox.error("", e.msg);
+            }
+        },
+        error: function (er) {
+            bfeMsgBox.error("", er);
+        }
+    })
+}
 

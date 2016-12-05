@@ -50,7 +50,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             }
             if (manageList != null)
             {
-                return WriteSuccess("获取成功", new { TotalPage = count, Content = manageList.Select(c => new { c.id, c.Title, CreateTime= c.CreateTime.ToString("yyyy/MM/dd HH:mm:ss"), c.Creator, c.Author, c.Look }) });
+                return WriteSuccess("获取成功", new { TotalPage = count, Content = manageList.Select(c => new { c.id, c.Title, CreateTime = c.CreateTime.ToString("yyyy/MM/dd HH:mm:ss"), c.Creator, c.Author, c.Look }) });
             }
             else
             {
@@ -59,13 +59,13 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult Change(int flag,int id, string title,string conter,string author)
+        public ActionResult Change(int flag, int id, string title, string conter, string author)
         {
-            if(string.IsNullOrEmpty(title))
+            if (string.IsNullOrEmpty(title))
             {
                 return WriteError("标题不能为空");
             }
-            if(flag==0)//新增
+            if (flag == 0)//新增
             {
                 Manage addModel = new Manage();
                 addModel.Title = title;
@@ -74,23 +74,20 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 addModel.CreateTime = DateTime.Now;
                 addModel.Creator = "";
                 manageSer.Add(addModel);
-               int retAdd=  manageSer.SaveChanges();
-                if(retAdd==1)
+                int retAdd = manageSer.SaveChanges();
+                if (retAdd == 1)
                 {
-                   return WriteSuccess("添加成功");
+                    return WriteSuccess("添加成功");
                 }
                 else
                 {
-                  return  WriteError("添加失败");
+                    return WriteError("添加失败");
                 }
             }
             else
             {
-                Manage editModel = manageSer.QueryWhere(c => c.id == id).FirstOrDefault();
-                if(editModel==null)
-                {
-                    return WriteError("该信息不存在");
-                }
+                Manage editModel = new Manage();
+                editModel.id = id;
                 editModel.Author = author;
                 editModel.Conter = conter;
                 editModel.Title = title;
@@ -107,14 +104,14 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             }
         }
 
-        public ActionResult ChangeLook(int id)
+        public ActionResult ChangeLook(int id,int look)
         {
-            Manage changeModel = manageSer.QueryWhere(c => c.id == id).FirstOrDefault();
-            if(changeModel==null)
+            
+            Manage changeModel = new Manage() { id = id,Look=look };
+            if (changeModel == null)
             {
                 return WriteError("该信息不存在");
             }
-            changeModel.Look = changeModel.Look == 0 ? 1 : 0;
             manageSer.Edit(changeModel, new string[] { "Look" });
             int changeRet = manageSer.SaveChanges();
             if (changeRet == 1)
@@ -135,7 +132,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 return WriteError("该信息不存在");
             }
             manageSer.Delete(delModel, false);
-            int delRet= manageSer.SaveChanges();
+            int delRet = manageSer.SaveChanges();
             if (delRet == 1)
             {
                 return WriteSuccess("删除成功");
@@ -146,5 +143,17 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             }
         }
 
+        public ActionResult GetManageById(int id)
+        {
+            Manage entity = manageSer.QueryWhere(c => c.id == id).FirstOrDefault();
+            if(entity==null)
+            {
+                return WriteError("数据不存在");
+            }
+            else
+            {
+                return WriteSuccess("获取成功", entity);
+            }
+        }
     }
 }
