@@ -3,11 +3,14 @@ var editId = 0;
 var pageIndex = 1;
 var pageSize = 15;
 var $modal;
+var isFirst = true;
 
 
 $(function () {
     //控制新增的弹层
     $modal = $('#doc-modal-1');//弹窗div  
+    SetPageHtml();
+    isFirst = false;
 
     $('#btnAddManage').on('click', function (e) {
         //修改新增标识
@@ -70,13 +73,7 @@ $(function () {
     3.0 搜索查询数据
     ****************************************/
     $("#btnSearch").unbind("click").bind("click", function () {
-        var searchContent = $("#txtSearchContent").val();
-        //if (searchContent == "") {
-        //    bfeMsgBox.error("", "请输入查询条件");
-        //    $("#txtSearchContent").focus();
-        //    return;
-        //}
-        GetContentByPage(pageIndex, pageSize, searchContent)
+        SetPageHtml();
     })
 
 
@@ -217,5 +214,26 @@ function Del(mId) {
             bfeMsgBox.error("", er);
         }
     })
+}
+
+
+//赋值页面上的分页
+function SetPageHtml() {
+    var pageCount = $("#pageDemo").attr("data-PageCount");
+    var pageIndex = $("#pageDemo").attr("data-indexPage");
+    var searchContent = $("#txtSearchContent").val();
+    $('#pageDemo').page({
+        pages: pageCount,
+        first: "首页", //设置false则不显示，默认为false  
+        last: "尾页", //设置false则不显示，默认为false      
+        prev: '<', //若不显示，设置false即可，默认为上一页
+        next: '>', //若不显示，设置false即可，默认为下一页
+        groups: 5, //连续显示分页数
+        jump: function (context) {
+            if (!isFirst) {
+                GetContentByPage(context.option.curr, 10, searchContent);
+            }
+        }//这里就是去异步请求方法
+    });
 }
 

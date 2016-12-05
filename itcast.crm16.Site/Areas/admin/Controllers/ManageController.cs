@@ -25,11 +25,10 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
 
         public ActionResult Index()
         {
-            int count = 0;
             //获取企业数据信息
-            List<Manage> manageList = manageSer.QueryByPage(1, 15, out count, c => true, c => c.id);
+            List<Manage> manageList = manageSer.QueryByPage(1, base.pageSize, out base.TotalPage, c => true, c => c.id);
             ViewBag.manageList = manageList;
-
+            base.SetViewBagPage();
             return View();
         }
 
