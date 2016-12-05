@@ -1,0 +1,84 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script type="text/javascript">
+        $(function () { getlist(); })
+
+        var grid;
+        function creategrid(toolbaritems) {
+            grid = $("#list").ligerGrid({
+                columns: [
+                    { display: "编号", name: "wfRFID" },
+                    { display: "所属工作流", name: "wfTitle" },
+                     { display: "标题", name: "wfRFTitle" },
+                    { display: "备注", name: "wfRFRemark" },
+                    { display: "优先级", name: "Priority" },
+                     {
+                         display: "状态", name: "wfRFStatus", render: function (data, index, value) {
+                             if (value == "42") {
+                                 return "<font color='red'>" + data.wfRFStatusName + "</font>";
+                             } else if (value == "43") {
+                                 return "<font color='green'>" + data.wfRFStatusName + "</font>";
+                             } else {
+                                 return data.wfRFStatusName;
+                             }
+                         }
+                     }
+                ]
+                , url: "/workflow/requestform/getlist"
+                , usePager: false, checkbox: false,
+                toolbar: { items: toolbaritems }
+            });
+        }
+
+        //提交某个工作流申请单
+        function add() {
+            //1.0 打开工作流申请单面板
+            helper.openPanel("提交申请单","/workflow/requestform/add");
+        }
+        function edit() { }
+        function del() { }
+        //查看明细
+        function getDetils() {
+            var row = grid.getSelectedRow();
+            var wfrfid = row.wfRFID;
+            helper.openPanel("查看审核进度", "/workflow/requestform/getDetils/"+wfrfid,600,500);
+        }
+
+    </script>
+</head>
+<body>
+    <div id="content">
+        <div id="content-header">
+            <div id="breadcrumb">
+                <a href="javascript:void(0)" title="首页"><i class="icon-home"></i>首页</a>
+                <a href="javascript:void(0)" title="工作流管理"><i class="icon-road"></i>工作流管理</a>
+                <a class="current" href="javascript:void(0)">我的申请单</a>
+            </div>
+        </div>
+        <div style="height: 100%;">
+            <div id="content-body" class="row-fluid">
+                <div class="span22">
+                    <!--列表-->
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <span class="icon"><i class="icon-th"></i></span>
+                            <h5>我的申请单</h5>
+                        </div>
+                        <div id="list" class="widget-content nopadding">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

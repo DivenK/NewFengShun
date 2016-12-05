@@ -1,0 +1,86 @@
+﻿@model itcast.crm16.model.ModelViews.wfRequestFormView
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    <div style="margin-top: 15px">
+        @using (Ajax.BeginForm("Add", "requestform", new AjaxOptions()
+    {
+        Url = Url.Action("Add", "requestform"),
+        HttpMethod = "post",
+        OnBegin = "helper.ajaxbegin",
+        OnSuccess = "helper.ajaxsuccess"
+    }))
+        {
+            @Html.ValidationSummary(true)
+    
+            <table class="list">
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.wfID)
+                    </th>
+                    <td>
+                        @Html.DropDownListFor(model => model.wfID, ViewBag.wfworks as SelectList)
+                        @Html.ValidationMessageFor(model => model.wfID)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.wfRFPriority)
+                    </th>
+                    <td>
+                        @Html.DropDownListFor(model => model.wfRFPriority, ViewBag.Prioritys as SelectList)
+                        @Html.ValidationMessageFor(model => model.wfRFPriority)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.wfRFTitle)
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(model => model.wfRFTitle)
+                        @Html.ValidationMessageFor(model => model.wfRFTitle)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.wfRFNum)
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(model => model.wfRFNum)
+                        @Html.ValidationMessageFor(model => model.wfRFNum)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.wfRFRemark)
+                    </th>
+                    <td>
+                        @Html.TextAreaFor(model => model.wfRFRemark)
+                        @Html.ValidationMessageFor(model => model.wfRFRemark)
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <input type="submit" value="新增" class="btn btn-info" />
+                        <input type="button" onclick="window.parent.helper.win.close();" value="返回" class="btn btn-info" />
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+</body>
+</html>

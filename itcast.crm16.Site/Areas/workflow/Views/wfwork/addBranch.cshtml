@@ -1,0 +1,59 @@
+﻿@model itcast.crm16.model.ModelViews.wfWorkBranchView
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>   
+</head>
+<body>
+    <div style="margin-top: 15px">
+        @using (Ajax.BeginForm("addBranch", "wfwork", new AjaxOptions()
+    {
+        Url = Url.Action("addBranch", "wfwork"),
+        HttpMethod = "post",
+        OnBegin = "helper.ajaxbegin",
+        OnSuccess = "helper.ajaxsuccess"
+    }))
+        {
+            @Html.ValidationSummary(true)
+    
+            <table class="list">
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.wfnToken)
+                    </th>
+                    <td>
+                        @Html.DropDownListFor(model => model.wfnToken,ViewBag.tokens as SelectList)
+                        @Html.ValidationMessageFor(model => model.wfnToken)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.wfNodeID)
+                    </th>
+                    <td>
+                        @Html.DropDownListFor(model => model.wfNodeID,ViewBag.nodes as SelectList)
+                        @Html.ValidationMessageFor(model => model.wfNodeID)
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <input type="submit" value="新增" class="btn btn-info" />
+                        <input type="button" onclick="window.parent.helper.win.close();" value="返回" class="btn btn-info" />
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+</body>
+</html>

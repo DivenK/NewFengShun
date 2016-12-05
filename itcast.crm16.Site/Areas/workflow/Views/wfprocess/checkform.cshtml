@@ -1,0 +1,152 @@
+﻿@model  List<itcast.crm16.model.wfProcess>
+
+@{
+    Layout = null;
+}
+@using Autofac
+@using itcast.crm16.Common
+@using itcast.crm16.IServices
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>getDetils</title>
+    <style type="text/css">
+        #processdiv {
+            border: 1px solid green;
+            padding: 5px;
+            width: 450px;
+        }
+
+            #processdiv ul li {
+                display: inline;
+                list-style: none;
+            }
+
+        .c40 {
+            /*审核中*/
+            color: #000;
+        }
+
+        .c41 {
+            /*驳回上级*/
+            color: #ff6a00;
+        }
+
+        .c42 {
+            /*拒绝*/
+            color: red;
+        }
+
+        .c43 {
+            /*通过*/
+            color: green;
+        }
+    </style>
+</head>
+<body style="background-color: white">
+    <div style="width: 500px; margin: 10px auto;">
+        @{
+            bool isHidden = false;
+        }
+        @if (Model != null)
+        {
+            int index = 1;
+            int count = Model.Count;
+            string c = "c"; //定义类名的前缀
+
+
+            foreach (var wfprocess in Model)
+            {
+            <div id="processdiv">
+                <ul>
+                    <li><b>处理流程节点:</b>@wfprocess.wfWorkNodes.wfNodeTitle</li>
+                    <li><b>处理状态:</b><span class="@c@wfprocess.wfRFStatus">@wfprocess.sysKeyValue.KName</span></li>
+                    <li><b>处理人:</b>
+                        @if (wfprocess.wfRFStatus == 40)
+                        {
+                            //表示处理中状态:去sysUserInfo_Role表中根据wfprocess.wfProcessor查询出所有的审批用户名称
+                            //1.0 获取sysUserInfo_Role的业务逻辑接口的具体实现类的对象
+                            //1.0.1 从缓存中获取autofac的容器对象
+                            Autofac.IContainer container = CacheMgr.GetData<IContainer>(Keys.autofac);
+                            IsysUserInfo_RoleServices urSer = container.Resolve<IsysUserInfo_RoleServices>();
+                            var userList = urSer.QueryWhere(d => d.rID == wfprocess.wfProcessor).Select(d => d.sysUserInfo.uRealName).ToList();
+                            //将集合的名称拼接成字符串使用都号隔开
+                            string userRName = string.Join(",", userList);
+                            //输出结果
+                            @userRName;
+                        }
+                        else
+                        {
+                            //根据wfprocess.wfPExt1去sysuserinfo表中查询出用户名称
+                            Autofac.IContainer container = CacheMgr.GetData<IContainer>(Keys.autofac);
+                            IsysUserInfoServices userSer = container.Resolve<IsysUserInfoServices>();
+                            int iuserid = wfprocess.wfPExt1.AsInt();
+                            var userinfo = userSer.QueryWhere(d => d.uID == iuserid).FirstOrDefault();
+                            @userinfo.uRealName;
+                        }
+                    </li>
+                    <br />
+                    <li><b>处理理由:</b>@wfprocess.wfPDescription</li>
+                    <br />
+                    <li><b>请假理由:</b>@wfprocess.wfRequestForm.wfRFRemark (天数/金额:@wfprocess.wfRequestForm.wfRFNum)</li>
+                </ul>
+            </div>
+                        if (index < count)
+                        {                          
+            <div style="width: 40px; margin: 0 auto;">
+                <img src="/Content/admin/ligerUI/skins/icons/down.gif" />
+            </div> 
+                        }
+                        else
+                        {
+                            isHidden = wfprocess.wfWorkNodes.wfnOrderNo == 2;
+                        }
+                        index++;
+            }
+        }
+        <br />
+        <div>
+            <textarea id="txtDes"></textarea>
+            <input type="button" value="通过" class="c43" onclick="pass()" />
+            @if (!isHidden)
+            {
+                <input type="button" value="驳回上级" class="c41" onclick="back()" />
+            }
+            <input type="button" value="拒绝" class="c42" onclick="Reject()" />
+            <input type="button" value="关闭" onclick="window.parent.helper.win.close()" />
+        </div>
+    </div>
+    <script type="text/javascript">
+        //当前要操作的审核明细主键
+        var wfpid = '@ViewBag.wfpid';
+
+        function pass() {
+            ajaxProcess("pass");
+        }
+
+        function back() {
+            ajaxProcess("back");
+        }
+
+        function Reject() {
+            ajaxProcess("Reject");         
+        }
+
+        function ajaxProcess(actionName) {
+            //1.0 获取拒绝理由
+            var des = $("#txtDes").val();
+
+            $.post("/workflow/wfprocess/" + actionName + "/" + wfpid, "des=" + des, function (ajaxobj) {
+                helper.checkstatus(ajaxobj, function () {
+                    //刷新当前页面
+                    window.location = window.location;
+                });
+            }, "json");
+        }
+
+    </script>
+</body>
+</html>

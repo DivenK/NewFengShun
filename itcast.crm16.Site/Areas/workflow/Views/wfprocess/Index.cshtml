@@ -1,0 +1,84 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script type="text/javascript">
+        $(function () { getlist(); })
+
+        var grid;
+        function creategrid(toolbaritems) {
+            grid = $("#list").ligerGrid({
+                columns: [
+                    { display: "编号", name: "wfPID" },
+                     { display: "申请人", name: "uRealName" },
+                    { display: "请假/报销理由", name: "wfRFRemark" },
+                    { display: "天数/金额", name: "wfRFNum" },
+                     {
+                         display: "状态", name: "wfRFStatus", render: function (data, index, value) {
+                             if (value == "40") {
+                                 return data.StatusName;
+                             } else if (value == "41") {
+                                 return "<font color='#ff6a00'>" + data.StatusName + "</font>";
+                             }
+                             else if (value == "42") {
+                                 return "<font color='red'>" + data.StatusName + "</font>";
+                             } else {
+                                 return "<font color='green'>" + data.StatusName + "</font>";
+                             }
+                         }
+                     }
+                ],
+                url: "/workflow/wfprocess/getlist"
+                , checkbox: false, usePager: false,
+                onSuccess: function (data) {
+                    if (data.status) {
+                        $.ligerDialog.warn(data.msg);
+                    }
+                },
+                toolbar: { items: toolbaritems }
+            });
+        }
+
+        //审核操作
+        function checkform() {
+            var row = grid.getSelectedRow();
+            var wfpid = row.wfPID; //获取当前审核明细的主键
+
+            helper.openPanel("审核操作", "/workflow/wfprocess/checkform/" + wfpid, 600, 500);
+        }
+    </script>
+</head>
+<body>
+    <div id="content">
+        <div id="content-header">
+            <div id="breadcrumb">
+                <a href="javascript:void(0)" title="首页"><i class="icon-home"></i>首页</a>
+                <a href="javascript:void(0)" title="工作流管理"><i class="icon-road"></i>工作流管理</a>
+                <a class="current" href="javascript:void(0)">我的审核单</a>
+            </div>
+        </div>
+        <div style="height: 100%;">
+            <div id="content-body" class="row-fluid">
+                <div class="span22">
+                    <!--列表-->
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <span class="icon"><i class="icon-th"></i></span>
+                            <h5>我的审核单</h5>
+                        </div>
+                        <div id="list" class="widget-content nopadding">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

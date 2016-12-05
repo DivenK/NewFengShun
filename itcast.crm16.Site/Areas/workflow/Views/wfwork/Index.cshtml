@@ -1,0 +1,88 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script type="text/javascript">
+        $(function () {
+            getlist();
+        })
+
+        var grid;
+        function creategrid(toolbaritems) {
+            grid = $("#list").ligerGrid({
+                columns: [
+                    { display: "编号", name: "wfID" },
+                     { display: "标题", name: "wfTitle" },
+                      { display: "备注", name: "wfRemark", width: 250 },
+                       {
+                           display: "状态", name: "wfStatus", render: function (data, index, value) {
+                               if (value == "1")
+                                   return "<font color='red'>停用</font>";
+                               return "<font color='green'>正常</font>";
+                           }
+                       }
+                ],
+                checkbox: false,
+                usePager: false,
+                url: "/workflow/wfwork/getlist",
+                toolbar: { items: toolbaritems }
+            });
+        }
+
+        function add() {
+            helper.openPanel("新增工作流", "/workflow/wfwork/add");
+        }
+        function edit() { }
+        function del() { }
+        //设置当前工作流的节点数据
+        function setNodes() {
+            //1.0 获取选择行的id
+            var row = grid.getSelectedRow();
+
+            if (!row) {
+                $.ligerDialog.warn("请选择要设置节点的工作流数据行"); return;
+            }
+
+            //2.0 获取工作流主键id wfID
+            var wfid = row.wfID;
+
+            //3.0 打开面板
+            helper.openPanel("设置节点", "/workflow/wfwork/setNodes/" + wfid,1000,500);
+        }
+
+    </script>
+</head>
+<body>
+    <div id="content">
+        <div id="content-header">
+            <div id="breadcrumb">
+                <a href="javascript:void(0)" title="首页"><i class="icon-home"></i>首页</a>
+                <a href="javascript:void(0)" title="工作流管理"><i class="icon-road"></i>工作流管理</a>
+                <a class="current" href="javascript:void(0)">工作流定义表</a>
+            </div>
+        </div>
+        <div style="height: 100%;">
+            <div id="content-body" class="row-fluid">
+                <div class="span22">
+                    <!--列表-->
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <span class="icon"><i class="icon-th"></i></span>
+                            <h5>工作流定义表</h5>
+                        </div>
+                        <div id="list" class="widget-content nopadding">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

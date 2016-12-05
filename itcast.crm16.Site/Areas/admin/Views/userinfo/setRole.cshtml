@@ -1,0 +1,90 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>setRole</title>
+    <script type="text/javascript">
+        $(function () {
+            getrolelist();
+        })
+
+        var useridwkid = '@ViewBag.useridwkid';  // uid-wkid
+        var uid = useridwkid.split('-')[0]; //获取用户id
+
+        var grid;
+        function getrolelist() {
+            grid = $("#list").ligerGrid({
+                url: "/admin/userinfo/getrolelist/" + useridwkid
+                , columns: [
+                    { display: "角色名称", name: "rName" }
+                ]
+                , checkbox: true
+                , toolbar: {
+                    items: [
+                        { text: "确认", click: ok, icon: "ok" }
+                        , { line: true },
+                          { text: "关闭", click: function () { window.parent.helper.win.close(); }, icon: "delete" }
+                    ]
+                }
+                , usePager: false
+                , isChecked: function (data) {
+                    return data.ischekced;
+                }
+            });
+        }
+
+        //删除当前用户的老角色，保存当前用户的新角色
+
+        function ok() {
+            var parms = uid + ";"; //格式：uid;rid,rid,
+
+            //1.0 获取用户选择的所有行数据对象
+            var rows = grid.getSelectedRows();
+            if (!rows || rows.length == 0) {
+                $.ligerDialog.warn("用户至少要分配一个角色"); return;
+            }
+
+            //2.0 遍历
+            for (var i = 0; i < rows.length; i++) {
+                parms += rows[i].rID + ",";
+            }
+
+            //3.0 发出ajax请求给服务器
+            $.post("/admin/userinfo/savedata/" + parms, null, function (ajaxobj) {
+                helper.checkstatus(ajaxobj, function () {
+                    $.ligerDialog.success(ajaxobj.msg);
+                    setTimeout(function () {
+                        window.parent.helper.win.close();
+                    }, 1000);
+                });
+            }, "json");
+        }
+
+    </script>
+</head>
+<body>
+    <div id="content">
+        <div style="height: 100%;">
+            <div id="content-body" class="row-fluid">
+                <div class="span22">
+                    <!--列表-->
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <span class="icon"><i class="icon-th"></i></span>
+                            <h5>角色列表</h5>
+                        </div>
+                        <div id="list" class="widget-content nopadding">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

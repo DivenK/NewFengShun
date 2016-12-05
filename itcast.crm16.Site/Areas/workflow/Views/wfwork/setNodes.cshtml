@@ -1,0 +1,158 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>setNodes</title>
+    <script type="text/javascript">
+
+        //1.0 获取当前设置的工作流主键
+        var wfid = '@ViewBag.wfid';
+
+        $(function () {
+            getnodes();
+        })
+
+        //2.0 负责根据wfid获取其下的所有节点数据列表，以ligergrid呈现给用户
+        var grid;
+        function getnodes() {
+            grid = $("#list").ligerGrid(
+                {
+                    columns: [
+                    { display: "编号", name: "wfnID" },
+                        { display: "排序号", name: "wfnOrderNo" },
+                            {
+                                display: "节点类型", name: "NodeTypeName", render: function (data, index, value) {
+                                    if (data.wfNodeType == "35") //执行节点
+                                        return "<font color='blue'>" + value + "</font>";
+                                    return "<font color='green'>" + value + "</font>";
+                                }
+                            },
+                                { display: "节点标题", name: "wfNodeTitle" },
+                                 { display: "审批角色类型", name: "RoleTypeName" },
+                                   { display: "处理逻辑", name: "BizProcess" }
+                    ],
+                    url: "/workflow/wfwork/setNodes/" + wfid,
+                    checkbox: false,
+                    usePager: false,
+                    toolbar: {
+                        items: [
+                           { text: "新增", click: add, icon: "add" },
+                        { line: true },
+                        { text: "编辑", click: edit, icon: "modify" },
+                        { line: true },
+                        { text: "删除", click: del, icon: "delete" },
+                        { line: true },
+                           { text: "节点分支设置", click: setNodeBranch, icon: "ok" },
+                        { line: true },
+                           { text: "上移一行", click: toup, icon: "up" },
+                        { line: true },
+                           { text: "下移一行", click: todown, icon: "down" }
+                        ]
+                    }
+                }
+                );
+        }
+
+        function add() {
+            helper.openPanel("新增节点", "/workflow/wfwork/addNode/" + wfid);
+        }
+        function edit() { }
+        function del() {
+            $.ligerDialog.confirm("您确定要删除此节点吗?", "删除确认", function (yes) {
+                if (!yes) return;
+                delnode();
+            });
+        }
+        function delnode() {
+            //1.0 利用jquery 发出上移的请求,将当前要移动的数据编号发送给action
+            var row = grid.getSelectedRow();
+            if (!row) {
+                $.ligerDialog.warn("必须选择要上移的数据行"); return;
+            }
+            var wfnid = row.wfnID;  //上移的节点主键
+
+            $.post("/workflow/wfwork/delNode/" + wfnid, null, function (ajaxobj) {
+                helper.checkstatus(ajaxobj, function () {
+                    //直接刷新
+                    grid.reload();
+                });
+            }, "json");
+        }
+       
+        //上移一行
+        function toup() {
+            //1.0 利用jquery 发出上移的请求,将当前要移动的数据编号发送给action
+            var row=grid.getSelectedRow();
+            if(!row){
+                $.ligerDialog.warn("必须选择要上移的数据行");return ;
+            }
+            var wfnid=row.wfnID;  //上移的节点主键
+
+            $.post("/workflow/wfwork/toup/" + wfnid, null, function (ajaxobj) {
+                helper.checkstatus(ajaxobj, function () {
+                    grid.reload(); //刷新表格
+                });
+            }, "json");
+        }
+        //下移一行
+        function todown() {
+            //1.0 利用jquery 发出上移的请求,将当前要移动的数据编号发送给action
+            var row = grid.getSelectedRow();
+            if (!row) {
+                $.ligerDialog.warn("必须选择要上移的数据行"); return;
+            }
+            var wfnid = row.wfnID;  //上移的节点主键
+
+            $.post("/workflow/wfwork/todown/" + wfnid, null, function (ajaxobj) {
+                helper.checkstatus(ajaxobj, function () {
+                    grid.reload(); //刷新表格
+                });
+            }, "json");
+        }
+
+        //节点分支设置
+        function setNodeBranch() {
+            var row = grid.getSelectedRow();
+            if (!row) {
+                $.ligerDialog.warn("必须选择要上移的数据行"); return;
+            }
+            var wfnid = row.wfnID;  //上移的节点主键
+
+            //2.0 打开节点分支设置面板
+            helper.openPanel("设置节点分支", "/workflow/wfwork/setNodeBranch/"+wfnid,700);
+        }
+
+    </script>
+</head>
+<body>
+    <div id="content">
+        <div id="content-header">
+            <div id="breadcrumb">
+                <a href="javascript:void(0)" title="首页"><i class="icon-home"></i>首页</a>
+                <a href="javascript:void(0)" title="系统管理"><i class="icon-road"></i>工作流管理</a>
+                <a class="current" href="javascript:void(0)">工作流节点定义</a>
+            </div>
+        </div>
+        <div style="height: 100%;">
+            <div id="content-body" class="row-fluid">
+                <div class="span22">
+                    <!--列表-->
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <span class="icon"><i class="icon-th"></i></span>
+                            <h5>工作流节点定义</h5>
+                        </div>
+                        <div id="list" class="widget-content nopadding">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
