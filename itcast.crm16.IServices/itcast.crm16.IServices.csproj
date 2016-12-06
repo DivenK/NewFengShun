@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticleType.cs" />
     <Compile Include="IBaseBLL.cs" />
     <Compile Include="IServices.cs">
       <AutoGen>True</AutoGen>
@@ -48,6 +49,7 @@
     <Compile Include="Manage.cs">
       <DependentUpon>IServices.tt</DependentUpon>
     </Compile>
+    <Compile Include="MemberDynamic.cs" />
     <Compile Include="New.cs">
       <DependentUpon>IServices.tt</DependentUpon>
     </Compile>

@@ -39,10 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticleType.cs" />
     <Compile Include="BaseBLL.cs" />
     <Compile Include="Manage.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
+    <Compile Include="MemberDynamic.cs" />
     <Compile Include="New.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>

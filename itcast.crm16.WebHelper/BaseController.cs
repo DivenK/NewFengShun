@@ -14,25 +14,14 @@ namespace itcast.crm16.WebHelper
     {
         #region 1.0 定义所有表的Services的接口成员
 
-        //protected IsysFunctionServices funSer;
-        //protected IsysKeyValueServices keyvalSer;
-        //protected IsysMenusServices menuSer;
-        //protected IsysOrganStructServices organSer;
-        //protected IsysPermissListServices permissSer;
-        //protected IsysRoleServices roleSer;
-        //protected IsysUserInfoServices userinfoSer;
-        //protected IsysUserInfo_RoleServices userinfoRoleSer;
-        //protected IwfProcessServices processSer;
-        //protected IwfRequestFormServices requestformSer;
-        //protected IwfWorkServices workSer;
-        //protected IwfWorkBranchServices workbranchSer;
-        //protected IwfWorkNodesServices worknodesSer;
-
         protected IsysMenusServices menuSer;
         protected IsysUserInfoServices userinfoSer;
         protected INewServices news;
         protected INewTypeServices newsType;
         protected IManageServices manageSer;
+        protected IMemberDynamicServices memberSer;
+        protected IArticleTypeServices articleSerr;
+
         protected int pageSize=10;
         protected int TotalPage;//总叶数
         protected int PageCount;//有多少页

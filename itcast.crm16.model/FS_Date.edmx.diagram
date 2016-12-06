@@ -16,6 +16,9 @@
         <EntityTypeShape EntityType="FS_SiteModel.VipUser" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
         <AssociationConnector Association="FS_SiteModel.FK_sysUserInfo_Role_sysRole" ManuallyRouted="false" />
         <AssociationConnector Association="FS_SiteModel.FK_sysUserInfo_Role_sysUserInfo" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FS_SiteModel.ArticleType" Width="1.5" PointX="5.375" PointY="9.5" />
+        <EntityTypeShape EntityType="FS_SiteModel.MemberDynamic" Width="1.5" PointX="7.625" PointY="9" />
+        <AssociationConnector Association="FS_SiteModel.FK_MemberDynamic_ArticleType" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticleType.cs" />
     <Compile Include="IBaseDal.cs" />
     <Compile Include="IRepository.cs">
       <AutoGen>True</AutoGen>
@@ -48,6 +49,7 @@
     <Compile Include="Manage.cs">
       <DependentUpon>IRepository.tt</DependentUpon>
     </Compile>
+    <Compile Include="MemberDynamic.cs" />
     <Compile Include="New.cs">
       <DependentUpon>IRepository.tt</DependentUpon>
     </Compile>

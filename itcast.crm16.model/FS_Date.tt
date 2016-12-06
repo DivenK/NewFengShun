@@ -12,7 +12,7 @@ var itemCollection = new EdmMetadataLoader(textTransform.Host, textTransform.Err
 var codeStringGenerator = new CodeStringGenerator(code, typeMapper, ef);
 
 if (!typeMapper.VerifyCaseInsensitiveTypeUniqueness(typeMapper.GetAllGlobalItems(itemCollection), inputFile))
-{
+{ 
     return string.Empty;
 }
 

@@ -43,11 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticleType.cs" />
     <Compile Include="Base\BaseDal.cs" />
     <Compile Include="Base\BaseDbContext.cs" />
     <Compile Include="Manage.cs">
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>
+    <Compile Include="MemberDynamic.cs" />
     <Compile Include="New.cs">
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>
