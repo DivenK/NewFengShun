@@ -33,7 +33,7 @@
                     <table class="am-table am-table-striped am-table-hover  table-main am-table-centered">
                         <thead>
                             <tr>
-                                <th class="table-id">ID</th>
+                                <th class="table-id">序号</th>
                                 <th class="table-title">标题</th>
                                 <th class="table-site">显示</th>
                                 <th class="table-author am-hide-sm-only">作者</th>
@@ -44,16 +44,17 @@
                         </thead>
                         <tbody id="showTb">
                               @{
-                                var manageListObj = ViewBag.manageList;
-                                if (manageListObj != null)
-                                {
-                                    List<Manage> manageList = manageListObj as List<Manage>;
-                                    if (manageList != null && manageList.Count > 0)
-                                    {
-                                        foreach (var item in manageList)
-                                        {
-                                            <tr>
-                                                <td>@item.id</td>
+                                      var manageListObj = ViewBag.manageList;
+                                      if (manageListObj != null)
+                                      {
+                                          List<Manage> manageList = manageListObj as List<Manage>;
+                                          if (manageList != null && manageList.Count > 0)
+                                          {
+                                              int i = 0;
+                                              foreach (var item in manageList)
+                                              {
+                                            <tr data-count="@(i++)">
+                                                <td>@i</td>
                                                 <td>@item.Title</td>
                                                 <td class="am-hide-sm-only" ><input type="checkbox" class="am-switch am-round am-switch-success  newDisplay changelook" @(item.Look==0 ? "Checked" : "") data-id="@item.id"/></td>
                                                 <td>@item.Author</td>
@@ -64,7 +65,7 @@
                                                     <div class="am-btn-toolbar">
                                                         <div class="am-btn-group am-btn-group-xs">
                                                             <a class="am-btn am-btn-default am-btn-xs am-text-secondary edit-model" data-id="@item.id"><span class="am-icon-pencil-square-o"></span> 编辑</a>
-                                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="Del(@item.id)"><span class="am-icon-trash-o"></span> 删除</a>
+                                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only del-model" data-id="@item.id"><span class="am-icon-trash-o"></span> 删除</a>
                                                         </div>
                                                     </div>
                                                 </td>
