@@ -23,7 +23,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
         {
             int index = 1;
             int count = 0;
-            
+            throw new Exception("sdfsdfsdf");
             var list = newsType.QueryWhere(c => c.IsDelete == 0);
            var newlist = news.NewPageList(index, 0,"", out count).Select(c => new NewViewModel
             {
@@ -60,9 +60,6 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             newModel.id = id;
             newModel.IsComment = true;
             newModel.display = 0;
-            newModel.Author = "User";
-            newModel.Creator = "User";
-            newModel.CreatTime = DateTime.Now;
             try
             {
                 if (id > 0)
@@ -72,6 +69,9 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 }
                 else
                 {
+                    newModel.Author = "User";
+                    newModel.Creator = "User";
+                    newModel.CreatTime = DateTime.Now;
                     news.Add(newModel);
                 }
                 news.SaveChanges();

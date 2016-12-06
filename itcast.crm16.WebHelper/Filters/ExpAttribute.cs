@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace itcast.crm16.WebHelper.Filters
 {
+    using itcast.crm16.Common;
     using System.Web.Mvc;
 
     /// <summary>
@@ -24,7 +25,7 @@ namespace itcast.crm16.WebHelper.Filters
            
             //2.0 将详细的堆栈信息存入到文本日志(数据表) ,Log4Net.dll
             //千万不要用  System.IO.File.AppendAllText(); 因为会产生多线程并发问题
-
+            LogHelp.WriteLog(typeof(Exception), innerExp);
             //3.0 区分是否为ajax请求
             if (filterContext.HttpContext.Request.IsAjaxRequest()) //表示是一个ajax请求
             {

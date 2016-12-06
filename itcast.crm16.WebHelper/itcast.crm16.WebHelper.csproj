@@ -33,6 +33,12 @@
     <Reference Include="Autofac">
       <HintPath>..\Libs\Autofac.3.1.1\lib\net40\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="Autofac.Integration.Mvc">
+      <HintPath>..\Libs\Autofac.Mvc4.3.1.0\lib\net40\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="CK1.Common.Helper">
+      <HintPath>E:\Work\ck1-sup-servicepool\CK1.SUP.ServicePool.Svc\bin\Debug\CK1.Common.Helper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
