@@ -23,6 +23,8 @@ namespace itcast.crm16.model
         public int IsDelete { get; set; }
         public Nullable<int> Updator { get; set; }
         public Nullable<System.DateTime> UpdateTime { get; set; }
+        public string Title { get; set; }
+        public bool IscComment { get; set; }
     
         public virtual ArticleType ArticleType { get; set; }
     }

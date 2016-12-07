@@ -18,8 +18,12 @@ namespace itcast.crm16.Services
     public partial class MemberDynamicServices:BaseBLL<MemberDynamic>,IMemberDynamicServices
     {
     IMemberDynamicRepository dal;
-       
-       
+
+        public MemberDynamicServices(IMemberDynamicRepository memberDal)
+        {
+            base.basedal = memberDal;
+            this.dal = memberDal;
+        }
        
        
        

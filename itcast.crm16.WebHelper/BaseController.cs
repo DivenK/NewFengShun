@@ -20,7 +20,7 @@ namespace itcast.crm16.WebHelper
         protected INewTypeServices newsType;
         protected IManageServices manageSer;
         protected IMemberDynamicServices memberSer;
-        protected IArticleTypeServices articleSerr;
+        protected IArticleTypeServices articleSer;
 
         protected int pageSize=10;
         protected int TotalPage;//总叶数

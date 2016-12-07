@@ -32,8 +32,10 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Content" Type="nvarchar" MaxLength="2000" Nullable="false" />
           <Property Name="Praise" Type="int" Nullable="false" />
+          <Property Name="IscComment" Type="bit" Nullable="false" />
           <Property Name="Creator" Type="int" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="IsDelete" Type="int" Nullable="false" />
@@ -501,6 +503,8 @@ FROM [dbo].[VipUser] AS [VipUser]</DefiningQuery>
           <Property Name="Updator" Type="Int32" />
           <Property Name="UpdateTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="ArticleType" Relationship="FS_SiteModel.FK_MemberDynamic_ArticleType" FromRole="MemberDynamic" ToRole="ArticleType" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IscComment" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_MemberDynamic_ArticleType">
           <End Type="FS_SiteModel.ArticleType" Role="ArticleType" Multiplicity="1" />
@@ -672,6 +676,8 @@ FROM [dbo].[VipUser] AS [VipUser]</DefiningQuery>
           <EntitySetMapping Name="MemberDynamic">
             <EntityTypeMapping TypeName="FS_SiteModel.MemberDynamic">
               <MappingFragment StoreEntitySet="MemberDynamic">
+                <ScalarProperty Name="IscComment" ColumnName="IscComment" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
                 <ScalarProperty Name="Updator" ColumnName="Updator" />
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
