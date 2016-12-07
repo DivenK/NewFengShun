@@ -161,26 +161,14 @@ function GetContentByPage(pageIndex, pageSize, searchMsg) {
                 showHtml += '<tr>';
                 showHtml += '<td>' + (i + 1) + '</td>';
                 showHtml += '<td>' + dataContent[i].Title + '</td>';
-                showHtml += '<td class="am-hide-sm-only" ><div _switch="" class="am-switch am-round am-switch-success changelook  newDisplay am-active"><div class="am-switch-handle"><input type="checkbox" class="" ' + (dataContent[i].Look == 0 ? "checked='true'" : "") + ' data-id="' + dataContent[i].id + '"></div></div></td>';
+                showHtml += '<td class="am-hide-sm-only" ><div _switch="" class="am-switch am-round am-switch-success changelook  newDisplay '+ (dataContent[i].Look == 0 ? "am-active" : "") + '"><div class="am-switch-handle"><input type="checkbox" class="" ' + (dataContent[i].Look == 0 ? "checked" : "") + ' data-id="' + dataContent[i].id + '"></div></div></td>';
                 showHtml += '<td>' + dataContent[i].Author + '</td>';
                 showHtml += '<td class="am-hide-sm-only">' + dataContent[i].Creator + '</td>';
                 showHtml += '<td class="am-hide-sm-only">' + dataContent[i].CreateTime + '</td>';
                 showHtml += '<td><div class="am-btn-toolbar"><div class="am-btn-group am-btn-group-xs">';
                 showHtml += '<a class="am-btn am-btn-default am-btn-xs am-text-secondary edit-model" data-id="' + dataContent[i].id + '"><span class="am-icon-pencil-square-o"></span> 编辑</a>';
-                showHtml += '<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="Del(@item.id)"><span class="am-icon-trash-o"></span> 删除</a>';
+                showHtml += '<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only del-model" data-id="' + dataContent[i].id + '"><span class="am-icon-trash-o"></span> 删除</a>';
                 showHtml += '</div></div></td></tr>';
-                //-----------------
-                //showHtml += '<tr>';
-                //showHtml +='<td>'+ (i + 1) + '</td>';
-                //showHtml +='<td>' + dataContent[i].Title +'</td>';
-                //showHtml +='<td class="am-hide-sm-only" data-id="'+dataContent[i].id+'"><div _switch="" class="am-switch am-round am-switch-success  newDisplay am-active"><div class="am-switch-handle"><input type="checkbox" class="" checked=""></div></div></td>';
-                //showHtml +='<td>' + dataContent[i].Author + '</td>';
-                //showHtml += '<td class="am-hide-sm-only">' + dataContent[i].Creator + '</td>';
-                //showHtml += '<td class="am-hide-sm-only">' + dataContent[i].CreateTime + '</td>';
-                //showHtml += '<td><div class="am-btn-toolbar"><div class="am-btn-group am-btn-group-xs">';
-                //showHtml += '<a class="am-btn am-btn-default am-btn-xs am-text-secondary" id="btnEdit"><span class="am-icon-pencil-square-o"></span> 编辑</a>';
-                //showHtml += '<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="Del(1)"><span class="am-icon-trash-o"></span> 删除</a>';
-                //showHtml += '</div></div></td></tr>';
             }
             $("#showTb").html(showHtml);
         }
@@ -192,29 +180,38 @@ function GetContentByPage(pageIndex, pageSize, searchMsg) {
 /*******************************
 删除
 *******************************/
-function Del(mId) {
-    if (mId == null) {
-        bfeMsgBox.error("", "数据异常，请刷新重试");
-        return;
-    }
-    $.ajax({
-        url: "/admin/manage/Del",
-        data: { "id": mId },
-        type: "post",
-        dataType: "json",
-        success: function (e) {
-            if (e.status == 0) {
-                window.location.reload();
-            }
-            else {
-                bfeMsgBox.error("", e.msg);
-            }
+$(document).on("click", ".del-model", function () {
+    var mid = $(this).attr("data-id");
+    $('#my-confirm-Del').modal({
+        relatedTarget: this,
+        onConfirm: function (options) {
+            $.ajax({
+                url: "/admin/manage/Del",
+                data: { "id": mid },
+                type: "post",
+                dataType: "json",
+                success: function (e) {
+                    if (e.status == 0) {
+                        window.location.reload();
+                    }
+                    else {
+                        bfeMsgBox.error("", e.msg);
+                    }
+                },
+                error: function (er) {
+                    bfeMsgBox.error("", er);
+                }
+            })
         },
-        error: function (er) {
-            bfeMsgBox.error("", er);
+        // closeOnConfirm: false,
+        onCancel: function () {
+
         }
-    })
-}
+    });
+
+
+})
+
 
 
 //赋值页面上的分页
