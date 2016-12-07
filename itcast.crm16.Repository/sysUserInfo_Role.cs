@@ -14,22 +14,8 @@ namespace itcast.crm16.Repository
     
     using itcast.crm16.IRepository;
     using itcast.crm16.model;
-    public partial class sysUserInfoRepository:BaseDal<sysUserInfo>,IsysUserInfoRepository
+    public partial class sysUserInfo_RoleRepository:BaseDal<sysUserInfo_Role>,IsysUserInfo_RoleRepository
     {
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
        
        
        

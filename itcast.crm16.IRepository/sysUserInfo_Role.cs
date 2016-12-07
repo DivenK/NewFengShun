@@ -7,29 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace itcast.crm16.Repository
+namespace itcast.crm16.IRepository
 {
     using System;
     using System.Collections.Generic;
     
-    using itcast.crm16.IRepository;
     using itcast.crm16.model;
-    public partial class sysUserInfoRepository:BaseDal<sysUserInfo>,IsysUserInfoRepository
+    public partial interface IsysUserInfo_RoleRepository:IBaseDal<sysUserInfo_Role>
     {
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
        
        
        

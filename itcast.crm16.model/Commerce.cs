@@ -7,33 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace itcast.crm16.Repository
+namespace itcast.crm16.model
 {
     using System;
     using System.Collections.Generic;
     
-    using itcast.crm16.IRepository;
-    using itcast.crm16.model;
-    public partial class sysUserInfoRepository:BaseDal<sysUserInfo>,IsysUserInfoRepository
+    public partial class Commerce
     {
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
+        public int id { get; set; }
+        public string Name { get; set; }
+        public string Contents { get; set; }
+        public int Look { get; set; }
+        public int IsDelete { get; set; }
+        public string Creater { get; set; }
+        public System.DateTime CreateTime { get; set; }
+        public System.DateTime UpdateTime { get; set; }
+        public string Remark { get; set; }
     }
 }

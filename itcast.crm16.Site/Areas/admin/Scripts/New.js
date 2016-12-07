@@ -13,7 +13,6 @@
         });
 
     });
-
     $('#Cancel').on('click', function () {
         $modal.modal('close');
     });
@@ -56,7 +55,7 @@
             });
     });
 
-    $('.newEdit').click(function () {
+    $(document).on('click', '.newEdit',(function () {
         var id = $(this).attr('data-id');
         $.ajax({
             url: "../New/GetModel",
@@ -74,7 +73,8 @@
                 BackErr(er);
             }
         });
-    });
+    }));
+
 
     $('.newDel').click(function () {
         var id = $(this).attr('data-id');
@@ -146,7 +146,8 @@ $(document).on('click','.am-switch',function(){
 			    $(this).addClass('am-active');
                   UpdateNewDisplay(this,0);
 			}
-		});
+});
+
 function UpdateNewDisplay(e,val)
 {
       id = $(e).parent('td').attr('data-id')
@@ -165,6 +166,8 @@ function UpdateNewDisplay(e,val)
             }
         });
 }
+
+
 //赋值页面上的分页
 function SetPageHtml() {
     var pageCount = $("#pageDemo").attr("data-PageCount");
@@ -219,8 +222,8 @@ function AjaxGetList(index, typeId, Name) {
                 htmlTem += ' <td>';
                 htmlTem += ' <div class="">';
                 htmlTem += ' <div class="am-btn-group am-btn-group-xs">';
-                htmlTem += '<button class="am-btn am-btn-default am-btn-xs am-text-secondary newEdit" id="newEdit" data-id="' + e.id + '"><span class="am-icon-pencil-square-o"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span> 编辑</button>';
-                htmlTem += ' <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only newDel"  data-id="' + e.id + '"><span class="am-icon-trash-o"></span> 删除</button>';
+                htmlTem += '<a class="am-btn am-btn-default am-btn-xs am-text-secondary newEdit" id="newEdit" data-id="' + e.id + '"><span class="am-icon-pencil-square-o"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span> 编辑</a>';
+                htmlTem += ' <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only newDel"  data-id="' + e.id + '"><span class="am-icon-trash-o"></span> 删除</a>';
                 htmlTem += '</div>';
                 htmlTem += '</div>';
                 htmlTem += '</td>';

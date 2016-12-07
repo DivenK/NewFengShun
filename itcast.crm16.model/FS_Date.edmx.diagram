@@ -16,6 +16,7 @@
         <EntityTypeShape EntityType="FS_SiteModel.VipUser" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
         <AssociationConnector Association="FS_SiteModel.FK_sysUserInfo_Role_sysRole" ManuallyRouted="false" />
         <AssociationConnector Association="FS_SiteModel.FK_sysUserInfo_Role_sysUserInfo" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FS_SiteModel.Commerce" Width="1.5" PointX="5.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

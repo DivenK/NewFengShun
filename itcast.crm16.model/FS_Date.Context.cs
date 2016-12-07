@@ -7,32 +7,31 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace itcast.crm16.model
+using itcast.crm16.model;
+using System;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+
+public partial class FS_SiteEntities2 : DbContext
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
-    
-    public partial class FS_SiteEntities2 : DbContext
+    public FS_SiteEntities2()
+        : base("name=FS_SiteEntities2")
     {
-        public FS_SiteEntities2()
-            : base("name=FS_SiteEntities2")
-        {
-        }
-    
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            throw new UnintentionalCodeFirstException();
-        }
-    
-        public DbSet<Manage> Manage { get; set; }
-        public DbSet<New> New { get; set; }
-        public DbSet<NewType> NewType { get; set; }
-        public DbSet<sysMenus> sysMenus { get; set; }
-        public DbSet<sysRole> sysRole { get; set; }
-        public DbSet<sysUserInfo> sysUserInfo { get; set; }
-        public DbSet<sysUserInfo_Role> sysUserInfo_Role { get; set; }
-        public DbSet<User> User { get; set; }
-        public DbSet<VipUser> VipUser { get; set; }
     }
+
+    protected override void OnModelCreating(DbModelBuilder modelBuilder)
+    {
+        throw new UnintentionalCodeFirstException();
+    }
+
+    public DbSet<Manage> Manage { get; set; }
+    public DbSet<New> New { get; set; }
+    public DbSet<NewType> NewType { get; set; }
+    public DbSet<sysMenus> sysMenus { get; set; }
+    public DbSet<sysRole> sysRole { get; set; }
+    public DbSet<sysUserInfo> sysUserInfo { get; set; }
+    public DbSet<sysUserInfo_Role> sysUserInfo_Role { get; set; }
+    public DbSet<User> User { get; set; }
+    public DbSet<VipUser> VipUser { get; set; }
+    public DbSet<Commerce> Commerce { get; set; }
 }

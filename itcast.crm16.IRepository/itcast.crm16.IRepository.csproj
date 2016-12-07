@@ -39,6 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commerce.cs">
+      <DependentUpon>IRepository.tt</DependentUpon>
+    </Compile>
     <Compile Include="IBaseDal.cs" />
     <Compile Include="IRepository.cs">
       <AutoGen>True</AutoGen>
@@ -58,7 +61,13 @@
     <Compile Include="sysMenus.cs">
       <DependentUpon>IRepository.tt</DependentUpon>
     </Compile>
+    <Compile Include="sysRole.cs">
+      <DependentUpon>IRepository.tt</DependentUpon>
+    </Compile>
     <Compile Include="sysUserInfo.cs">
+      <DependentUpon>IRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysUserInfo_Role.cs">
       <DependentUpon>IRepository.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
