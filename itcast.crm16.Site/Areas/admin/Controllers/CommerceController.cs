@@ -27,7 +27,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
 
         public ActionResult Index()
         {
-          ViewBag.DateList=GetItemModel(1,"");
+          ViewBag.DateList=GetItemModel(1,"").ToList();
           SetViewBagPage();
            return View();
         }
@@ -136,11 +136,11 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             List<Commerce>itemList=null;
             if(string.IsNullOrWhiteSpace(name))
             {
-                  itemList=Commerce.QueryByPage(index, pageSize, out TotalPage, c => true, c => c.id).ToList<Commerce>();
+                  itemList=Commerce.QueryByPage(index, pageSize, out TotalPage, c => c.IsDelete==0, c => c.id).ToList<Commerce>();
             }
             else
             {
-                 itemList=Commerce.QueryByPage(index, pageSize, out TotalPage, c => c.Name.Contains(name), c => c.id).ToList<Commerce>();
+                itemList = Commerce.QueryByPage(index, pageSize, out TotalPage, c => c.IsDelete == 0&& c.Name.Contains(name), c => c.id).ToList<Commerce>();
             }
 
             return itemList.Select(d => new CommerceViewModel
