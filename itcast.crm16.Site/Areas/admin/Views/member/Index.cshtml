@@ -52,7 +52,7 @@
                                             <td>@(i + 1)</td>
                                             <td>@memberList[i].ArticleType.typeName</td>
                                             <td>@memberList[i].Title</td>
-                                             <td class="am-hide-sm-only" data-id="@memberList[i].id"><input type="checkbox" class="am-switch am-round am-switch-success  newDisplay" @(memberList[i].IscComment ? "Checked" : "") /></td>
+                                             <td class="am-hide-sm-only" data-id="@memberList[i].id"><input type="checkbox" class="am-switch am-round am-switch-success  newDisplay changelook" @(memberList[i].IscComment ? "Checked" : "")  data-id="@memberList[i].id"/></td>
                                             <td>@memberList[i].CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
                                             <td>
                                                 <div class="newtableBTN">

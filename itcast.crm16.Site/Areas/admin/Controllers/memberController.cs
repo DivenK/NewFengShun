@@ -28,10 +28,12 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             //获取会员文章相关类型数据
             List<ArticleType> artList = articleSer.QueryWhere(c => c.TypeFor == 1);
             ViewBag.ArtList = artList;
-             
 
-            List<MemberDynamic>  memberList= memberSer.QueryByPage(1, pageSize, out PageCount, c => c.IsDelete == 0, c => c.id);
+
+            List<MemberDynamic> memberList = memberSer.QueryByPage(1, pageSize, out TotalPage, c => c.IsDelete == 0, c => c.id);
             ViewBag.MemberList = memberList;
+                        
+            base.SetViewBagPage();
             return View();
         }
 
@@ -46,11 +48,11 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             //获取企业数据信息
             if (string.IsNullOrEmpty(searchMsg))
             {
-                memberList = memberSer.QueryByPage(pageIndex, pageSize, out count, c => true, c => c.id);
+                memberList = memberSer.QueryByPage(pageIndex, pageSize, out count, c => c.IsDelete==0, c => c.id);
             }
             else
             {
-                memberList = memberSer.QueryByPage(pageIndex, pageSize, out count, c => c.Title.Contains(searchMsg), c => c.id);
+                memberList = memberSer.QueryByPage(pageIndex, pageSize, out count, c => c.Title.Contains(searchMsg)&&c.IsDelete==0, c => c.id);
             }
             if (memberList != null)
             {
@@ -63,7 +65,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                         c.Creator,
                         CreateTime = c.CreateTime.ToString("yyyy-MM-dd HH:mm:ss"),
                         c.Type,
-                        typeName = artList.Where(d=>d.id==c.Type) })
+                        typeName = artList.Where(d=>d.id==c.Type).FirstOrDefault().typeName })
                 });
             }
             else
@@ -143,5 +145,40 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             }
         }
 
+        public ActionResult ChangeComment(int id,int comment)
+        {
+            if(id<=0)
+            {
+                return WriteError("参数异常");
+            }
+            MemberDynamic entity = new MemberDynamic() { id = id, IscComment = comment == 1 };
+            memberSer.Edit(entity, new string[] { "IscComment" });
+            int ret = memberSer.SaveChanges();
+            if(ret==1)
+            {
+                return WriteSuccess("修改成功");
+            }
+            else
+            {
+                return WriteError("修改失败");
+            }
+        }
+
+        public ActionResult GetMemberDyNamicById(int id)
+        {
+            if (id <= 0)
+            {
+                return WriteError("参数异常");
+            }
+            MemberDynamic entity = memberSer.QueryWhere(c => c.id == id&&c.IsDelete==0).FirstOrDefault();
+            if(entity==null)
+            {
+                return WriteError("数据不存在");
+            }
+            else
+            {
+                return WriteSuccess("", new { entity.id,entity.Title,entity.Content,entity.Type });
+            }
+        }
     }
 }
