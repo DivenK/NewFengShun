@@ -56,11 +56,12 @@
                         message = '编辑成功';
                     }
                     bfeMsgBox.success("", message);
+                    GetItems();
                 }
                 else {
                     bfeMsgBox.error("", result.msg);
                 }
-                AjaxGetList(1, 0);
+                GetItems();
             });
     });
 
@@ -77,7 +78,7 @@
                     dataType: 'json',
                     success: function (result) {
                         bfeMsgBox.success("", result.msg);
-                        AjaxGetList(1, 0);
+                        GetItems(1, 0);
                     },
                     error: function (er) {
                         bfeMsgBox.error("", result.msg);
@@ -122,14 +123,15 @@ function UpdateLook(e, val)
         dataType: 'json',
         success: function (result) {
             bfeMsgBox.success("", result.msg);
-            AjaxGetList(1, 0);
+            GetItems();
         },
         error: function (er) {
             bfeMsgBox.error("", result.msg);
-            AjaxGetList(1, 0);
+            GetItems();
         }
     });
 }
+
 function SetNewModel(id,title,content)
 {
     $('#newTitle').text("编辑");
@@ -138,4 +140,51 @@ function SetNewModel(id,title,content)
     $('#doc-ipt-text-1').val(title);
     editor.setContent(content);
 }
+
+function GetItems()
+{
+    $('#my-modal-loading').modal();//正在加载...
+    Name= $('#searchName').val();
+    $.ajax({
+        url: "../Commerce/SearchCommerce",
+        data: { index: 1,Name:Name},
+        type: "post",
+        dataType: 'json',
+        success: function (result) {
+             $('#my-modal-loading').modal('close');
+            var htmlTem = '';
+          
+            result.date.forEach(function (e) {
+                htmlTem += '<tr> <td>'+e.id+'</td>';
+                htmlTem += '<td>' + e.Name + '</td>';
+                htmlTem += '<td class="am-hide-sm-only">' + e.Contents + '</td>';
+                htmlTem += ' <td class="am-hide-sm-only" data-id='+e.id+'><div _switch="" class="am-switch  am-switch-success newDisplay ' + (e.LookBool ? 'am-active' : '') + '"><div class="am-switch-handle"><input type="checkbox"  '+(e.LookBool ? 'checked' : '')+'></div></div></td>';
+                htmlTem += '  <td class="am-hide-sm-only">' + e.Creater + '</td>';
+                htmlTem += ' <td class="am-hide-sm-only">' + e.UpdateTimeStr + '</td>';
+                htmlTem += ' <td>';
+                htmlTem += ' <div class="">';
+                htmlTem += ' <div class="am-btn-group am-btn-group-xs">';
+                htmlTem += '<a class="am-btn am-btn-default am-btn-xs am-text-secondary editCommerce" id="newEdit" data-id="' + e.id + '"><span class="am-icon-pencil-square-o"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span> 编辑</a>';
+                htmlTem += ' <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only delCommerce"  data-id="' + e.id + '"><span class="am-icon-trash-o"></span> 删除</a>';
+                htmlTem += '</div>';
+                htmlTem += '</div>';
+                htmlTem += '</td>';
+                htmlTem += '</tr>'
+            });
+            $("#CommerceTbody").html('');
+            $("#CommerceTbody").html(htmlTem);
+            //还差重新初始化分页控件
+        },
+        error: function (er) {
+             $('#my-modal-loading').modal('close');
+            bfeMsgBox.error("", "数据更新失败！");
+        }
+    });
+}
+
+
+$('#searchName').on('click', function (e) {
+    GetItems();
+});
+
 

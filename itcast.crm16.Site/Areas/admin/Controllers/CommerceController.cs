@@ -148,7 +148,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 IsDelete = d.IsDelete,
                 LookBool = d.Look==0?true:false,
                 id=d.id,
-                Contents=d.Contents,
+                Contents=d.Contents.Length>7?d.Contents.Substring(0,7):d.Contents,
                 Creater=d.Creater,
                 CreateTime=d.CreateTime,
                 Look=d.Look,
