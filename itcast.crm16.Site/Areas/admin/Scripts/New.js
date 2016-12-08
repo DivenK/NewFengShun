@@ -102,27 +102,6 @@
         });
     });
 
-    //控制网站是否显示新闻内容
-    $('.am-switch-handle').on("click", (function (e) {
-        id = e.parent('td').attr('date-id')
-        var val = 1;
-        if (e.hasClass('am-active')) {
-            val = 0;
-        }
-        $.ajax({
-            url: "../New/UpdateDispay",
-            data: { id: id, display: val },
-            type: "post",
-            dataType: 'json',
-            success: function (result) {
-                bfeMsgBox.success("", result.msg);
-            },
-            error: function (er) {
-                bfeMsgBox.error("", result.msg);
-                AjaxGetList(1, 0);
-            }
-        });
-    }));
 
     //模糊查询标题
     $('#seachNew').on('click', function (e)
@@ -132,6 +111,7 @@
     });
 });
 
+///开关监控
 $(document).on('click','.am-switch',function(){
 			var $checkbox=$(this).find("input[type='checkbox']");
 			var state=$checkbox.is(':checked');

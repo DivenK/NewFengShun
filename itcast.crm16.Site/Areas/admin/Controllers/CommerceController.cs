@@ -89,7 +89,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                     CommerceModel.CreateTime = DateTime.Now;
                     Commerce.Add(CommerceModel);
                 }
-                news.SaveChanges();
+                Commerce.SaveChanges();
                 return WriteSuccess("成功");
             }
             catch (Exception ex)

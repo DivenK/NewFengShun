@@ -23,5 +23,8 @@ namespace itcast.crm16.model
         public System.DateTime CreateTime { get; set; }
         public System.DateTime UpdateTime { get; set; }
         public string Remark { get; set; }
+        public Nullable<int> Type { get; set; }
+        public string ImageUrl { get; set; }
+        public Nullable<int> Sort { get; set; }
     }
 }
