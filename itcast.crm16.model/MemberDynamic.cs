@@ -16,15 +16,15 @@ namespace itcast.crm16.model
     {
         public int id { get; set; }
         public int Type { get; set; }
+        public string Title { get; set; }
         public string Content { get; set; }
         public int Praise { get; set; }
-        public int Creator { get; set; }
+        public bool IsComment { get; set; }
+        public string Creator { get; set; }
         public System.DateTime CreateTime { get; set; }
         public int IsDelete { get; set; }
-        public Nullable<int> Updator { get; set; }
+        public string Updator { get; set; }
         public Nullable<System.DateTime> UpdateTime { get; set; }
-        public string Title { get; set; }
-        public bool IscComment { get; set; }
     
         public virtual ArticleType ArticleType { get; set; }
     }

@@ -7,11 +7,10 @@ using System.Web.Mvc;
 using itcast.crm16.IServices;
 using itcast.crm16.model;
 using itcast.crm16.WebHelper.Attrs;
+using itcast.crm16.Common;
 
 namespace itcast.crm16.Site.Areas.admin.Controllers
 {
-    [SkipCheckLogin]
-    [SkipCheckPermiss]
     public class memberController : BaseController
     {
         public memberController(IsysMenusServices mSer,IMemberDynamicServices memberSer,IArticleTypeServices articleTypeSer) : base(mSer)
@@ -59,7 +58,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 return WriteSuccess("获取成功", new { TotalPage = count, Content = memberList.Select(
                     c => new {
                         c.id,
-                        c.IscComment,
+                        c.IsComment,
                         c.Title,
                         c.Praise,
                         c.Creator,
@@ -89,9 +88,9 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 addModel.Title = title;
                 addModel.Content = content;
                 addModel.Type = type;
-                addModel.IscComment = true;
+                addModel.IsComment = true;
                 addModel.CreateTime = DateTime.Now;
-                addModel.Creator = 1;//TODO:获取当前登录的用户名称
+                addModel.Creator = (Session[Keys.uinfo] as sysUserInfo).uLoginName; ;
                 memberSer.Add(addModel);
                 int addRet = memberSer.SaveChanges();
                 if (addRet == 1)
@@ -111,7 +110,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 editModel.Content = content;
                 editModel.Type = type;
                 editModel.UpdateTime = DateTime.Now;
-                editModel.Updator = 1;//TODO:获取当前登录的用户名称
+                editModel.Updator = (Session[Keys.uinfo] as sysUserInfo).uLoginName; 
                 memberSer.Edit(editModel, new string[] { "Title", "Content", "Type", "UpdateTime", "Updator" });
                 int editRet = memberSer.SaveChanges();
                 if (editRet == 1)
@@ -151,8 +150,8 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             {
                 return WriteError("参数异常");
             }
-            MemberDynamic entity = new MemberDynamic() { id = id, IscComment = comment == 1 };
-            memberSer.Edit(entity, new string[] { "IscComment" });
+            MemberDynamic entity = new MemberDynamic() { id = id, IsComment = comment == 1 };
+            memberSer.Edit(entity, new string[] { "IsComment" });
             int ret = memberSer.SaveChanges();
             if(ret==1)
             {

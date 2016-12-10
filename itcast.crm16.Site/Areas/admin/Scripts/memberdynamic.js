@@ -85,7 +85,7 @@ function GetContentByPage(pageIndex, pageSize, searchMsg) {
                 showHtml += '<td>' + (i + 1) + '</td>';
                 showHtml += '<td>' + dataContent[i].typeName + '</td>';
                 showHtml += '<td>' + dataContent[i].Title + '</td>';
-                showHtml += '<td class="am-hide-sm-only" ><div _switch="" class="am-switch am-round am-switch-success changelook  newDisplay ' + (dataContent[i].IscComment ? "am-active" : "") + '"><div class="am-switch-handle"><input type="checkbox" class="" ' + (dataContent[i].IscComment == 0 ? "checked" : "") + ' data-id="' + dataContent[i].id + '"></div></div></td>';
+                showHtml += '<td class="am-hide-sm-only" ><div _switch="" class="am-switch am-round am-switch-success changelook  newDisplay ' + (dataContent[i].IsComment ? "am-active" : "") + '"><div class="am-switch-handle"><input type="checkbox" class="" ' + (dataContent[i].IsComment == 0 ? "checked" : "") + ' data-id="' + dataContent[i].id + '"></div></div></td>';
                 showHtml += '<td class="am-hide-sm-only">' + dataContent[i].CreateTime + '</td>';
                 showHtml += '<td><div class="am-btn-toolbar"><div class="am-btn-group am-btn-group-xs">';
                 showHtml += '<a class="am-btn am-btn-default am-btn-xs am-text-secondary member-edit" data-id="' + dataContent[i].id + '"><span class="am-icon-pencil-square-o"></span> 编辑</a>';
@@ -109,23 +109,32 @@ $(document).on("click", ".member-del", function () {
         "id": $(this).attr("data-id")
     }
     var aDel = $(this);
-    $.ajax({
-        url: "/admin/member/del",
-        type: "post",
-        data: content,
-        dataType: "json",
-        success: function (e) {
-            if (e.status == 0) {
-                aDel.parents("tr:first").remove();
-            }
-            else {
-                bfeMsgBox.error("", e.msg);
-            }
+    $('#my-confirm-Del').modal({
+        relatedTarget: this,
+        onConfirm: function (options) {
+            $.ajax({
+                url: "/admin/member/del",
+                type: "post",
+                data: content,
+                dataType: "json",
+                success: function (e) {
+                    if (e.status == 0) {
+                        aDel.parents("tr:first").remove();
+                    }
+                    else {
+                        bfeMsgBox.error("", e.msg);
+                    }
+                },
+                error: function (er) {
+                    bfeMsgBox.error("", er.msg);
+                }
+            })
         },
-        error: function (er) {
-            bfeMsgBox.error("", er.msg);
+        // closeOnConfirm: false,
+        onCancel: function () {
+
         }
-    })
+    });
 })
 
 //开启关闭按钮功能
@@ -141,7 +150,7 @@ $(document).on('click', '.changelook', function () {
         datatype: "json",
         success: function (e) {
             if (e.status == 0) {
-                
+
             }
             else {
                 bfeMsgBox.error("", "操作失败");
