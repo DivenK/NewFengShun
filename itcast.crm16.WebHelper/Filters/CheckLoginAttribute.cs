@@ -21,10 +21,6 @@ namespace itcast.crm16.WebHelper.Filters
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            //将当前访问的相对路径存入session中，方便菜单样式
-            string url = filterContext.HttpContext.Request.Url.AbsolutePath;
-            filterContext.HttpContext.Session[Keys.AbsolutePathStr] = url.ToLower();
-
             //1.0 判断如果贴有    [SkipCheckLogin]则跳过登录检查
             if (filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(SkipCheckLoginAttribute), false))
             {

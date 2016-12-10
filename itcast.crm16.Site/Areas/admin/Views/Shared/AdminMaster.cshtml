@@ -90,7 +90,8 @@
                         if (objMenusList != null)
                         {
                             List<sysMenus> mList = objMenusList as List<sysMenus>;
-                            sysMenus currentMenus = mList.Where(c => (c.mUrl.ToLower() == Session[Keys.AbsolutePathStr].ToString())).FirstOrDefault();
+                            string url = Request.Url.AbsolutePath;
+                            sysMenus currentMenus = mList.Where(c => (c.mUrl.ToLower() == url.ToLower())).FirstOrDefault();
                             int currentUrlParentId = 0;
                             //获取当前访问的parentid
                             if(currentMenus!=null)
