@@ -30,5 +30,6 @@ namespace itcast.crm16.Common
         /// </summary>
         public const string functions = "CRM16functions";
 
+        public static string AbsolutePathStr = "CRM16AbsolutePathStr";
     }
 }

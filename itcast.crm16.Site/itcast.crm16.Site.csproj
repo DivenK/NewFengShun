@@ -169,6 +169,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\admin\Scripts\login.js" />
     <Content Include="Areas\admin\Scripts\manage.js" />
     <Content Include="Areas\admin\Scripts\memberdynamic.js" />
     <Content Include="Areas\admin\Scripts\New.js" />

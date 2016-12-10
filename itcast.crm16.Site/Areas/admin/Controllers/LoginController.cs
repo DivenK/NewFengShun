@@ -26,7 +26,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
 
         public LoginController(IsysUserInfoServices userifoMenus, IsysMenusServices mSer) : base(mSer)
         {
-            base.userinfoSer = userinfoSer;
+            base.userinfoSer = userifoMenus;
         }
 
         #region 1.0 登录
@@ -59,11 +59,11 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                     vcodeFromSession = Session[Keys.Vcode].ToString();
                 }
 
-                if (model.VCode.IsEmpty()
-                    || model.VCode.Equals(vcodeFromSession, StringComparison.OrdinalIgnoreCase) == false)
-                {
-                    return WriteError("验证码错误，请重新输入");
-                }
+                //if (model.VCode.IsEmpty()
+                //    || model.VCode.Equals(vcodeFromSession, StringComparison.OrdinalIgnoreCase) == false)
+                //{
+                //    return WriteError("验证码错误，请重新输入");
+                //}
 
                 //2.0 验证用户名和密码的正确性
                 string md5Pwd = Kits.MD5Entry(model.LoginPWD);
@@ -93,8 +93,8 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 if (model.IsReMember)
                 {
                     HttpCookie cookie = new HttpCookie(Keys.isremember, userinfo.uID.ToString());
-                    //设置cookie的过期时间为3天
-                    cookie.Expires = DateTime.Now.AddDays(3);
+                    //设置cookie的过期时间为7天
+                    cookie.Expires = DateTime.Now.AddDays(7);
 
                     //添加到响应报文头中
                     Response.Cookies.Add(cookie);

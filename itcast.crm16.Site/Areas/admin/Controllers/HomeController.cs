@@ -30,7 +30,6 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
         public ActionResult Index()
         {
             //1.0 获取菜单表sysmenus中的所有有效数据
-            
             return View();
             //return View();
            

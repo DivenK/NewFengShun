@@ -32,7 +32,6 @@ namespace itcast.crm16.WebHelper
             menuSer = mSer;
             var list = menuSer.QueryWhere(c => c.mStatus == 0).OrderBy(c => c.mSortid).ToList();
 
-
             //获取当前左边的菜单
             // var permissMenus = menuSer.RunProc<sysMenus>("USP_GetMenusForUserid16 " + UserMgr.GetUserInfo().uID);
             ViewBag.mList = list;
