@@ -6,6 +6,7 @@ using itcast.crm16.WebHelper.Attrs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -25,9 +26,9 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
         //
         // GET: /admin/Commerce/
 
-        public ActionResult Index()
+        public ActionResult Index(int type=0)
         {
-          ViewBag.DateList=GetItemModel(1,"").ToList();
+            ViewBag.DateList = GetItemModel(1, "", type).ToList();
           SetViewBagPage();
            return View();
         }
@@ -68,25 +69,31 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
 
 
         [ValidateInput(false)]//防止对文本验证，保存不了HTML元素
-        public ActionResult UpdateCommerce(string Name, string Conent,  int id)
+        public ActionResult UpdateCommerce(string Name, string Conent,  int id,int type)
         {
             model.Commerce CommerceModel = new model.Commerce();
             CommerceModel.Name = Name;
             CommerceModel.Contents = Conent;
             CommerceModel.id = id;
             CommerceModel.Look = 0;
+            CommerceModel.Type = type;
             CommerceModel.UpdateTime = DateTime.Now;
+            if (CommerceModel.Type == 2)//是不是商会领导。
+            {
+                CommerceModel.ImageUrl=GetImageUrl(CommerceModel.Contents);
+            }
             try
             {
                 if (id > 0)
                 {
 
-                    Commerce.Edit(CommerceModel, new string[] { "Name", "Contents" });
+                    Commerce.Edit(CommerceModel, new string[] { "Name", "Contents", "ImageUrl" });
                 }
                 else
                 {
                     CommerceModel.Creater = "User";
                     CommerceModel.CreateTime = DateTime.Now;
+                  
                     Commerce.Add(CommerceModel);
                 }
                 Commerce.SaveChanges();
@@ -98,9 +105,20 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             }
         }
 
-        public ActionResult SearchCommerce(int index,string name)
+        public string GetImageUrl(string conters)
         {
-            var list = GetItemModel(index,name);
+            System.Text.RegularExpressions.Regex regImg = new Regex(@"<img\b[^<>]*?\bsrc[\s\t\r\n]*=[\s\t\r\n]*[""']?[\s\t\r\n]*(?<imgUrl>[^\s\t\r\n""'<>]*)[^<>]*?/?[\s\t\r\n]*>", RegexOptions.IgnoreCase);
+
+            // 搜索匹配的字符串 
+
+            MatchCollection matches = regImg.Matches(conters);
+             if (matches.Count>0)
+            { return matches[0].Groups["imgUrl"].Value; }
+            return string.Empty;
+        }
+        public ActionResult SearchCommerce(int index,string name,int type)
+        {
+            var list = GetItemModel(index,name,type);
             return Json(new { rowCount = TotalPage, pageCount = ViewBag.PageCount, date = list });
         }
 
@@ -131,24 +149,25 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        public IEnumerable <CommerceViewModel> GetItemModel(int index,string name)
+        public IEnumerable <CommerceViewModel> GetItemModel(int index,string name,int type)
         {
             List<Commerce>itemList=null;
             if(string.IsNullOrWhiteSpace(name))
             {
-                  itemList=Commerce.QueryByPage(index, pageSize, out TotalPage, c => c.IsDelete==0, c => c.id).ToList<Commerce>();
+                  itemList=Commerce.QueryByPage(index, pageSize, out TotalPage, c => c.IsDelete==0&&c.Type==type, c => c.id).ToList<Commerce>();
             }
             else
             {
-                itemList = Commerce.QueryByPage(index, pageSize, out TotalPage, c => c.IsDelete == 0&& c.Name.Contains(name), c => c.id).ToList<Commerce>();
+                itemList = Commerce.QueryByPage(index, pageSize, out TotalPage, c => c.IsDelete == 0 && c.Type == type&& c.Name.Contains(name), c => c.id).ToList<Commerce>();
             }
-
+            int newid = 1;
             return itemList.Select(d => new CommerceViewModel
             {
+                Nid=newid++,
                 IsDelete = d.IsDelete,
                 LookBool = d.Look==0?true:false,
                 id=d.id,
-                Contents=d.Contents.Length>7?d.Contents.Substring(0,7):d.Contents,
+                Contents=d.Contents.Length>10?d.Contents.Substring(0,8):d.Contents,
                 Creater=d.Creater,
                 CreateTime=d.CreateTime,
                 Look=d.Look,
@@ -156,6 +175,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 Remark=d.Remark,
                 UpdateTime=d.UpdateTime,
                 UpdateTimeStr=d.UpdateTime.ToShortDateString(),
+                typeName=d.Type
             });
         }
     }

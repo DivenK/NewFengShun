@@ -16,38 +16,20 @@
     $('#Cancel').on('click', function () {
         $modal.modal('close');
     });
-    $('.editCommerce').on('click', function ()
-    {
-        var id = $(this).attr('data-id');
-        $.ajax({
-            url: "../Commerce/GetModel",
-            data: { id: id },
-            type: "post",
-            dataType: 'json',
-            success: function (result) {
-                SetNewModel(result.id, result.Name, result.Contents)
-                $modal.modal({
-                    width: 800,
-                    height: 650
-                });
-            },
-            error: function (er) {
-                BackErr(er);
-            }
-        });
-    });
+
 
     //修改和新增的保存
     $('#formSubmit').click(function () {
         var id = 0;
         id = $(this).attr('date-id');
+        var type = $('#CommerceTbody').attr('data-type');
         var newModel = {
             id: 0,
             Name: $('#doc-ipt-text-1').val(),
             Conent: editor.getContent(),
         };
         $.post("../Commerce/UpdateCommerce",
-            { "Conent": newModel.Conent, "Name": newModel.Name,  "id": id },
+            { "Conent": newModel.Conent, "Name": newModel.Name,  "id": id,"type":type },
             function (result) {
                 $modal.modal('close');
                 if (result.status == 0) {
@@ -92,7 +74,26 @@
         });
     }));
 
-
+    $(document).on('click', '.editCommerce',(function () {
+        var id = $(this).attr('data-id');
+        $.ajax({
+            url: "../Commerce/GetModel",
+            data: { id: id },
+            type: "post",
+            dataType: 'json',
+            success: function (result) {
+                SetNewModel(result.id, result.Name, result.Contents);
+               
+                $modal.modal({
+                    width: 800,
+                    height: 650
+                });
+            },
+            error: function (er) {
+                BackErr(er);
+            }
+        });
+    }));
 });
 
 //控制网站是否显示商会章程
@@ -144,10 +145,10 @@ function SetNewModel(id,title,content)
 function GetItems()
 {
     $('#my-modal-loading').modal();//正在加载...
-    Name= $('#searchName').val();
+    Name= $('#searchValue').val();
     $.ajax({
         url: "../Commerce/SearchCommerce",
-        data: { index: 1,Name:Name},
+        data: { index: 1,Name:Name,type:$('#CommerceTbody').attr('data-type')},
         type: "post",
         dataType: 'json',
         success: function (result) {
@@ -164,7 +165,7 @@ function GetItems()
                 htmlTem += ' <td>';
                 htmlTem += ' <div class="">';
                 htmlTem += ' <div class="am-btn-group am-btn-group-xs">';
-                htmlTem += '<a class="am-btn am-btn-default am-btn-xs am-text-secondary editCommerce" id="newEdit" data-id="' + e.id + '"><span class="am-icon-pencil-square-o"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span> 编辑</a>';
+                htmlTem += '<a class="am-btn am-btn-default am-btn-xs am-text-secondary editCommerce"  data-id="' + e.id + '"><span class="am-icon-pencil-square-o"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span> 编辑</a>';
                 htmlTem += ' <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only delCommerce"  data-id="' + e.id + '"><span class="am-icon-trash-o"></span> 删除</a>';
                 htmlTem += '</div>';
                 htmlTem += '</div>';
@@ -174,6 +175,7 @@ function GetItems()
             $("#CommerceTbody").html('');
             $("#CommerceTbody").html(htmlTem);
             //还差重新初始化分页控件
+            $('#rowCount').text(result.rowCount);
         },
         error: function (er) {
              $('#my-modal-loading').modal('close');
@@ -186,5 +188,6 @@ function GetItems()
 $('#searchName').on('click', function (e) {
     GetItems();
 });
+
 
 

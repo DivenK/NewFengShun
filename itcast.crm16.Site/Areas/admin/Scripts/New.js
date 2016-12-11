@@ -191,8 +191,8 @@ function AjaxGetList(index, typeId, Name) {
             var htmlTem = '';
             SetAllCount(result.page.count);
             result.rows.forEach(function (e) {
-                htmlTem += '<tr><td><input type="checkbox" /></td>';
-                htmlTem += ' <td>1</td>';
+                htmlTem += '<tr>';
+                htmlTem += ' <td>'+e.id+'</td>';
                 htmlTem += '<td>' + e.TypeName + '</td>';
                 htmlTem += '<td>' + e.Name + '</td>';
                 htmlTem += '<td class="am-hide-sm-only">' + e.Conent + '</td>';

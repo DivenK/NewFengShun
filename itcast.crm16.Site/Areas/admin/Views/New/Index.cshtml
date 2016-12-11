@@ -32,7 +32,7 @@
                     <table class="am-table am-table-striped am-table-hover  table-main am-table-centered">
                         <thead>
                             <tr>
-                                <th class="table-check"><input type="checkbox" /></th>
+                           
                                 <th class="table-id">ID</th>
                                 <th class="table-type">类别</th>
                                 <th class="table-title">标题</th>
@@ -47,8 +47,7 @@
                             @foreach (NewViewModel item in  (ViewBag.newList as List<NewViewModel>))
                             {
                                 <tr>
-                                <td><input type="checkbox" /></td>
-                                <td>1</td>
+                                <td>@(item.id)</td>
                                 <td>@(item.TypeName)</td>
                                 <td>@item.Name</td>
                                 <td class="am-hide-sm-only">@item.Conent.Substring(0,4).....</td>

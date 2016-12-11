@@ -10,6 +10,7 @@ namespace itcast.crm16.Site.Models
     /// </summary>
     public class CommerceViewModel
     {
+        public int Nid { get; set; }
         public int id { get; set; }
         public string Name { get; set; }
         public string Contents { get; set; }
@@ -29,5 +30,8 @@ namespace itcast.crm16.Site.Models
         public string UpdateTimeStr    { get; set; }
         public System.DateTime UpdateTime { get; set; }
         public string Remark { get; set; }
+        public int Sort { get; set; }
+        public string ImageUrl { get; set; }
+        public int? typeName { get; set; }
     }
 }

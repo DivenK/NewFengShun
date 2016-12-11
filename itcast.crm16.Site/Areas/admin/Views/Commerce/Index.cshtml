@@ -18,7 +18,7 @@
 
             <div class="am-u-sm-12 am-u-md-3">
                 <div class="am-input-group am-input-group-sm">
-                    <input type="text" class="am-form-field">
+                    <input type="text" class="am-form-field" id="searchValue">
                     <span class="am-input-group-btn">
                         <button class="am-btn am-btn-default" id="searchName" type="button">搜索</button>
                     </span>
@@ -43,7 +43,7 @@
                                 <th class="table-set">操作</th>
                             </tr>
                         </thead>
-                        <tbody id="CommerceTbody">
+                        <tbody id="CommerceTbody"  data-type="@((ViewBag.DateList as List<CommerceViewModel>).FirstOrDefault().typeName)">
                             @foreach (var item in (ViewBag.DateList as List<CommerceViewModel>))
                             {
                                 <tr>
@@ -68,7 +68,7 @@
                         </tbody>
                     </table>
                     <div class="am-cf">
-                        共 <span>@(ViewBag.TotalPage)</span> 条记录
+                        共 <span id="rowCount">@(ViewBag.TotalPage)</span> 条记录
                         <div class="am-fr">
                           
                         </div>
