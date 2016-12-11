@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticleType.cs">
+      <DependentUpon>FS_Date.tt</DependentUpon>
+    </Compile>
     <Compile Include="Commerce.cs">
       <DependentUpon>FS_Date.tt</DependentUpon>
     </Compile>
@@ -69,6 +72,9 @@
       <DependentUpon>FS_Date.edmx</DependentUpon>
     </Compile>
     <Compile Include="Manage.cs">
+      <DependentUpon>FS_Date.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MemberDynamic.cs">
       <DependentUpon>FS_Date.tt</DependentUpon>
     </Compile>
     <Compile Include="ModelViews\LoginInfo.cs" />

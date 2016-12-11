@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="FS_SiteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ArticleType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="typeName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="TypeFor" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Commerce">
           <Key>
             <PropertyRef Name="id" />
@@ -34,6 +42,22 @@
           <Property Name="Author" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Praise" Type="int" Nullable="false" />
           <Property Name="Look" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MemberDynamic">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Content" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="Praise" Type="int" Nullable="false" />
+          <Property Name="IsComment" Type="bit" Nullable="false" />
+          <Property Name="Creator" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="IsDelete" Type="int" Nullable="false" />
+          <Property Name="Updator" Type="nvarchar" MaxLength="64" />
+          <Property Name="UpdateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="New">
           <Key>
@@ -153,6 +177,18 @@
           <Property Name="CreatTime" Type="datetime" />
           <Property Name="IsDelete" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_MemberDynamic_ArticleType">
+          <End Role="ArticleType" Type="Self.ArticleType" Multiplicity="1" />
+          <End Role="MemberDynamic" Type="Self.MemberDynamic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArticleType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MemberDynamic">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_sysUserInfo_Role_sysRole">
           <End Role="sysRole" Type="Self.sysRole" Multiplicity="1" />
           <End Role="sysUserInfo_Role" Type="Self.sysUserInfo_Role" Multiplicity="*" />
@@ -178,8 +214,10 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="FS_SiteModelStoreContainer">
+          <EntitySet Name="ArticleType" EntityType="Self.ArticleType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Commerce" EntityType="Self.Commerce" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Manage" EntityType="Self.Manage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemberDynamic" EntityType="Self.MemberDynamic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="New" EntityType="Self.New" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NewType" EntityType="Self.NewType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysMenus" EntityType="Self.sysMenus" Schema="dbo" store:Type="Tables" />
@@ -188,6 +226,10 @@
           <EntitySet Name="sysUserInfo_Role" EntityType="Self.sysUserInfo_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VipUser" EntityType="Self.VipUser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_MemberDynamic_ArticleType" Association="Self.FK_MemberDynamic_ArticleType">
+            <End Role="ArticleType" EntitySet="ArticleType" />
+            <End Role="MemberDynamic" EntitySet="MemberDynamic" />
+          </AssociationSet>
           <AssociationSet Name="FK_sysUserInfo_Role_sysRole" Association="Self.FK_sysUserInfo_Role_sysRole">
             <End Role="sysRole" EntitySet="sysRole" />
             <End Role="sysUserInfo_Role" EntitySet="sysUserInfo_Role" />
@@ -379,6 +421,12 @@
             <End Role="sysUserInfo_Role" EntitySet="sysUserInfo_Role" />
           </AssociationSet>
           <EntitySet Name="Commerce" EntityType="FS_SiteModel.Commerce" />
+          <EntitySet Name="ArticleType" EntityType="FS_SiteModel.ArticleType" />
+          <EntitySet Name="MemberDynamic" EntityType="FS_SiteModel.MemberDynamic" />
+          <AssociationSet Name="FK_MemberDynamic_ArticleType" Association="FS_SiteModel.FK_MemberDynamic_ArticleType">
+            <End Role="ArticleType" EntitySet="ArticleType" />
+            <End Role="MemberDynamic" EntitySet="MemberDynamic" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Commerce">
           <Key>
@@ -397,6 +445,44 @@
           <Property Name="ImageUrl" Type="String" MaxLength="120" FixedLength="true" Unicode="true" />
           <Property Name="Sort" Type="Int32" />
         </EntityType>
+        <EntityType Name="ArticleType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="typeName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="TypeFor" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MemberDynamic" Relationship="FS_SiteModel.FK_MemberDynamic_ArticleType" FromRole="ArticleType" ToRole="MemberDynamic" />
+        </EntityType>
+        <EntityType Name="MemberDynamic">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Praise" Type="Int32" Nullable="false" />
+          <Property Name="IsComment" Type="Boolean" Nullable="false" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDelete" Type="Int32" Nullable="false" />
+          <Property Name="Updator" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ArticleType" Relationship="FS_SiteModel.FK_MemberDynamic_ArticleType" FromRole="MemberDynamic" ToRole="ArticleType" />
+        </EntityType>
+        <Association Name="FK_MemberDynamic_ArticleType">
+          <End Type="FS_SiteModel.ArticleType" Role="ArticleType" Multiplicity="1" />
+          <End Type="FS_SiteModel.MemberDynamic" Role="MemberDynamic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArticleType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MemberDynamic">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -557,6 +643,32 @@
                 <ScalarProperty Name="Look" ColumnName="Look" />
                 <ScalarProperty Name="Contents" ColumnName="Contents" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArticleType">
+            <EntityTypeMapping TypeName="FS_SiteModel.ArticleType">
+              <MappingFragment StoreEntitySet="ArticleType">
+                <ScalarProperty Name="TypeFor" ColumnName="TypeFor" />
+                <ScalarProperty Name="typeName" ColumnName="typeName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberDynamic">
+            <EntityTypeMapping TypeName="FS_SiteModel.MemberDynamic">
+              <MappingFragment StoreEntitySet="MemberDynamic">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="Updator" ColumnName="Updator" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="IsComment" ColumnName="IsComment" />
+                <ScalarProperty Name="Praise" ColumnName="Praise" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
