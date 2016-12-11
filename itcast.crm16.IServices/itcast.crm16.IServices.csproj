@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticleType.cs" />
     <Compile Include="ICommerce.cs" />
     <Compile Include="IBaseBLL.cs" />
     <Compile Include="IServices.cs">
@@ -49,6 +50,7 @@
     <Compile Include="Manage.cs">
       <DependentUpon>IServices.tt</DependentUpon>
     </Compile>
+    <Compile Include="MemberDynamic.cs" />
     <Compile Include="New.cs">
       <DependentUpon>IServices.tt</DependentUpon>
     </Compile>
@@ -59,9 +61,11 @@
     <Compile Include="sysMenus.cs">
       <DependentUpon>IServices.tt</DependentUpon>
     </Compile>
+    <Compile Include="sysRole.cs" />
     <Compile Include="sysUserInfo.cs">
       <DependentUpon>IServices.tt</DependentUpon>
     </Compile>
+    <Compile Include="sysUserInfo_Role.cs" />
     <Compile Include="User.cs">
       <DependentUpon>IServices.tt</DependentUpon>
     </Compile>

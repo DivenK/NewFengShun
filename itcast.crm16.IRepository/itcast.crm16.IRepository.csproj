@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticleType.cs" />
     <Compile Include="Commerce.cs">
       <DependentUpon>IRepository.tt</DependentUpon>
     </Compile>
@@ -51,6 +52,7 @@
     <Compile Include="Manage.cs">
       <DependentUpon>IRepository.tt</DependentUpon>
     </Compile>
+    <Compile Include="MemberDynamic.cs" />
     <Compile Include="New.cs">
       <DependentUpon>IRepository.tt</DependentUpon>
     </Compile>
