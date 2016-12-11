@@ -29,6 +29,5 @@ namespace itcast.crm16.Common
         /// 每个用户的权限缓存key，注意在后面一定要加上用户id
         /// </summary>
         public const string functions = "CRM16functions";
-
     }
 }

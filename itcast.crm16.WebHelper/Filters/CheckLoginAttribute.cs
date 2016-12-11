@@ -49,20 +49,20 @@ namespace itcast.crm16.WebHelper.Filters
                     var container = CacheMgr.GetData<IContainer>(Keys.autofac);
 
                     //4.0 根据uid去表sysuserinfo中查询用户对象重新赋值给Session[Keys.uinfo]
-                    //IsysUserInfoServices userServics = container.Resolve<IsysUserInfoServices>();
-                    //int iuserid = uid.AsInt();
-                    //var userinfo = userServics.QueryWhere(c => c.uID == iuserid).FirstOrDefault();
-                    //if (userinfo == null)
-                    //{
-                    //    ToLogin(filterContext);
-                    //}
-                    //else
-                    //{
-                    //    filterContext.HttpContext.Session[Keys.uinfo] = userinfo;
+                    IsysUserInfoServices userServics = container.Resolve<IsysUserInfoServices>();
+                    int iuserid = uid.AsInt();
+                    var userinfo = userServics.QueryWhere(c => c.uID == iuserid).FirstOrDefault();
+                    if (userinfo == null)
+                    {
+                        ToLogin(filterContext);
+                    }
+                    else
+                    {
+                        filterContext.HttpContext.Session[Keys.uinfo] = userinfo;
 
-                    //    //设置缓存
-                    //    container.Resolve<IsysPermissListServices>().GetPermissListByUid(userinfo.uID);
-                    //}
+                        //设置缓存
+                        //container.Resolve<IsysPermissListServices>().GetPermissListByUid(userinfo.uID);
+                    }
                 }
             }
         }

@@ -34,8 +34,8 @@ namespace itcast.crm16.model
         public DbSet<sysUserInfo_Role> sysUserInfo_Role { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<VipUser> VipUser { get; set; }
-        public DbSet<Commerce> Commerce { get; set; }
         public DbSet<ArticleType> ArticleType { get; set; }
         public DbSet<MemberDynamic> MemberDynamic { get; set; }
+        public DbSet<Commerce> Commerce { get; set; }
     }
 }

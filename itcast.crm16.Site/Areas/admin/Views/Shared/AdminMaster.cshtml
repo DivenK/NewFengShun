@@ -1,4 +1,5 @@
 ﻿@using itcast.crm16.model
+@using itcast.crm16.Common
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,6 +90,14 @@
                         if (objMenusList != null)
                         {
                             List<sysMenus> mList = objMenusList as List<sysMenus>;
+                            string url = Request.Url.AbsolutePath;
+                            sysMenus currentMenus = mList.Where(c => (c.mUrl.ToLower() == url.ToLower())).FirstOrDefault();
+                            int currentUrlParentId = 0;
+                            //获取当前访问的parentid
+                            if(currentMenus!=null)
+                            {
+                                currentUrlParentId = currentMenus.mParentID;
+                            }
                             if (mList != null && mList.Count > 0)
                             {
                                 foreach (sysMenus item in mList)
@@ -96,17 +105,16 @@
                                     if (item.mParentID == -1)
                                     {
                                         <li class="admin-parent">
-                                            <a class="am-cf" data-am-collapse="{target:'@("#collapse-nav"+nav)'}"><span class="@item.
-"></span> @item.mName <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
-                                            <ul class="am-list admin-sidebar-sub am-collapse am-in" id="@("collapse-nav"+nav)" data-attr="@(nav++)">
+                                            <a class="am-cf @(item.mID==currentUrlParentId?"":"am-collapsed")" data-am-collapse="{target:'@("#collapse-nav"+nav)'}"><span class="@item.mPicname"></span> @item.mName <span class=" am-fr am-margin-right"></span></a>
+                                            <ul class="am-list admin-sidebar-sub am-collapse @(item.mID==currentUrlParentId?"am-in":"")" id="@("collapse-nav"+nav)" data-attr="@(nav++)">
                                               
                                                 @foreach (var subItem in mList)
-                                                {
-                                                    if (item.mID == subItem.mParentID)
-                                                    {
+                                {
+                                    if (item.mID == subItem.mParentID)
+                                    {
                                                         <li><a href="@subItem.mUrl" class="am-cf"><span> @subItem.mName</span></a></li>
                                                     }
-                                                }
+                        }
                                             </ul>
                                         </li>
                                     }
@@ -157,7 +165,7 @@
 
     <div class="am-modal am-modal-confirm" tabindex="-1" id="my-confirm-Del">
         <div class="am-modal-dialog">
-            <div class="am-modal-hd">EBO UI</div>
+            <div class="am-modal-hd">提 示</div>
             <div class="am-modal-bd">
                 你，确定要删除这条记录吗？
             </div>

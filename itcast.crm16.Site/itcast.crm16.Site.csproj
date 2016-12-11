@@ -143,6 +143,7 @@
     <Compile Include="Areas\admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\admin\Controllers\ManageController.cs" />
+    <Compile Include="Areas\admin\Controllers\memberController.cs" />
     <Compile Include="Areas\admin\Controllers\NewController.cs" />
     <Compile Include="Areas\admin\Controllers\roleController.cs" />
     <Compile Include="Areas\chat\chatAreaRegistration.cs" />
@@ -175,7 +176,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\admin\Scripts\Commerce.js" />
+    <Content Include="Areas\admin\Scripts\login.js" />
     <Content Include="Areas\admin\Scripts\manage.js" />
+    <Content Include="Areas\admin\Scripts\memberdynamic.js" />
     <Content Include="Areas\admin\Scripts\New.js" />
     <Content Include="Content\admin\bootstrap\css\bootstrap-responsive.css" />
     <Content Include="Content\admin\bootstrap\css\bootstrap-responsive.min.css" />
@@ -1146,6 +1149,7 @@
     <Content Include="Areas\admin\Views\Manage\Index.cshtml" />
     <Content Include="Areas\admin\Views\role\Index.cshtml" />
     <Content Include="Config\log4net.config" />
+    <Content Include="Areas\admin\Views\member\Index.cshtml" />
     <Content Include="Areas\admin\Views\Commerce\Index.cshtml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="iconsel.html" />

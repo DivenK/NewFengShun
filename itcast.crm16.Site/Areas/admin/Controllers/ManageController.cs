@@ -1,4 +1,5 @@
-﻿using itcast.crm16.IServices;
+﻿using itcast.crm16.Common;
+using itcast.crm16.IServices;
 using itcast.crm16.model;
 using itcast.crm16.Site.Models;
 using itcast.crm16.WebHelper;
@@ -11,7 +12,6 @@ using System.Web.Mvc;
 
 namespace itcast.crm16.Site.Areas.admin.Controllers
 {
-    [SkipCheckLogin]
     public class ManageController : BaseController
     {
         public ManageController(IsysMenusServices mMer, IManageServices manageSer) : base(mMer)
@@ -69,7 +69,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 Manage addModel = new Manage();
                 addModel.Title = title;
                 addModel.Conter = conter;
-                addModel.Author = author;
+                addModel.Author = (Session[Keys.uinfo] as sysUserInfo).uLoginName;
                 addModel.CreateTime = DateTime.Now;
                 addModel.Creator = "";
                 manageSer.Add(addModel);
