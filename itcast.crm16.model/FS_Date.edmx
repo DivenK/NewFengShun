@@ -13,6 +13,23 @@
           <Property Name="typeName" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="TypeFor" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Commerce">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contents" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Look" Type="int" Nullable="false" />
+          <Property Name="IsDelete" Type="int" Nullable="false" />
+          <Property Name="Creater" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="int" />
+          <Property Name="ImageUrl" Type="nchar" MaxLength="120" />
+          <Property Name="Sort" Type="int" />
+        </EntityType>
         <EntityType Name="Manage">
           <Key>
             <PropertyRef Name="id" />
@@ -228,6 +245,7 @@
         </Association>
         <EntityContainer Name="FS_SiteModelStoreContainer">
           <EntitySet Name="ArticleType" EntityType="Self.ArticleType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Commerce" EntityType="Self.Commerce" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Manage" EntityType="Self.Manage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MemberDynamic" EntityType="Self.MemberDynamic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysMenus" EntityType="Self.sysMenus" Schema="dbo" store:Type="Tables" />
@@ -479,6 +497,7 @@ FROM [dbo].[VipUser] AS [VipUser]</DefiningQuery>
             <End Role="ArticleType" EntitySet="ArticleType" />
             <End Role="MemberDynamic" EntitySet="MemberDynamic" />
           </AssociationSet>
+          <EntitySet Name="Commerce" EntityType="FS_SiteModel.Commerce" />
         </EntityContainer>
         <EntityType Name="ArticleType">
           <Key>
@@ -518,6 +537,23 @@ FROM [dbo].[VipUser] AS [VipUser]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Commerce">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contents" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Look" Type="Int32" Nullable="false" />
+          <Property Name="IsDelete" Type="Int32" Nullable="false" />
+          <Property Name="Creater" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="ImageUrl" Type="String" MaxLength="120" FixedLength="true" Unicode="true" />
+          <Property Name="Sort" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -686,6 +722,24 @@ FROM [dbo].[VipUser] AS [VipUser]</DefiningQuery>
                 <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Commerce">
+            <EntityTypeMapping TypeName="FS_SiteModel.Commerce">
+              <MappingFragment StoreEntitySet="Commerce">
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Creater" ColumnName="Creater" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Look" ColumnName="Look" />
+                <ScalarProperty Name="Contents" ColumnName="Contents" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

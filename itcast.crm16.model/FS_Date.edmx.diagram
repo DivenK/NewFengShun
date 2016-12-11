@@ -19,6 +19,7 @@
         <EntityTypeShape EntityType="FS_SiteModel.ArticleType" Width="1.5" PointX="5.375" PointY="9.5" />
         <EntityTypeShape EntityType="FS_SiteModel.MemberDynamic" Width="1.5" PointX="7.625" PointY="8.75" />
         <AssociationConnector Association="FS_SiteModel.FK_MemberDynamic_ArticleType" />
+        <EntityTypeShape EntityType="FS_SiteModel.Commerce" Width="1.5" PointX="9.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
