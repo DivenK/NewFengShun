@@ -150,7 +150,7 @@ $(document).on('click', '.changelook', function () {
         datatype: "json",
         success: function (e) {
             if (e.status == 0) {
-
+                bfeMsgBox.success("", "操作成功");
             }
             else {
                 bfeMsgBox.error("", "操作失败");

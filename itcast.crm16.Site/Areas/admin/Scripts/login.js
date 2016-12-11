@@ -1,6 +1,5 @@
 ﻿$(document).on("click", ".btn-login", function () {
-    $('#your-modal').modal();
-    return;
+   
     //获取登录数据信息
     var loginName = $("#loginname").val();
     var pwd = $("#password").val();
