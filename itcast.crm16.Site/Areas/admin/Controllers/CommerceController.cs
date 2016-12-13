@@ -71,6 +71,14 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
         [ValidateInput(false)]//防止对文本验证，保存不了HTML元素
         public ActionResult UpdateCommerce(string Name, string Conent,  int id,int type)
         {
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                return WriteError("标题不能为空！");
+            }
+            if (string.IsNullOrWhiteSpace(Conent))
+            {
+                return WriteError("内容不能为空！");
+            }
             model.Commerce CommerceModel = new model.Commerce();
             CommerceModel.Name = Name;
             CommerceModel.Contents = Conent;
@@ -78,7 +86,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             CommerceModel.Look = 0;
             CommerceModel.Type = type;
             CommerceModel.UpdateTime = DateTime.Now;
-            if (CommerceModel.Type == 2)//是不是商会领导。
+            if (CommerceModel.Type == 2)//是不是商会领导相册的那些数据。
             {
                 CommerceModel.ImageUrl=GetImageUrl(CommerceModel.Contents);
             }

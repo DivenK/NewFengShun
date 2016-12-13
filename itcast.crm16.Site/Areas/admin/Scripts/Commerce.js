@@ -38,12 +38,12 @@
                         message = '编辑成功';
                     }
                     bfeMsgBox.success("", message);
-                    GetItems();
+                    GetItems(1);
                 }
                 else {
                     bfeMsgBox.error("", result.msg);
                 }
-                GetItems();
+                GetItems(1);
             });
     });
 
@@ -124,11 +124,11 @@ function UpdateLook(e, val)
         dataType: 'json',
         success: function (result) {
             bfeMsgBox.success("", result.msg);
-            GetItems();
+            GetItems(1);
         },
         error: function (er) {
             bfeMsgBox.error("", result.msg);
-            GetItems();
+            GetItems(1);
         }
     });
 }
@@ -142,13 +142,13 @@ function SetNewModel(id,title,content)
     editor.setContent(content);
 }
 
-function GetItems()
+function GetItems(index)
 {
     $('#my-modal-loading').modal();//正在加载...
     Name= $('#searchValue').val();
     $.ajax({
         url: "../Commerce/SearchCommerce",
-        data: { index: 1,Name:Name,type:$('#CommerceTbody').attr('data-type')},
+        data: { index:index,Name:Name,type:$('#CommerceTbody').attr('data-type')},
         type: "post",
         dataType: 'json',
         success: function (result) {
@@ -156,7 +156,7 @@ function GetItems()
             var htmlTem = '';
           
             result.date.forEach(function (e) {
-                htmlTem += '<tr> <td>'+e.id+'</td>';
+                htmlTem += '<tr> <td>'+e.Nid+'</td>';
                 htmlTem += '<td>' + e.Name + '</td>';
                 htmlTem += '<td class="am-hide-sm-only">' + e.Contents + '</td>';
                 htmlTem += ' <td class="am-hide-sm-only" data-id='+e.id+'><div _switch="" class="am-switch  am-switch-success newDisplay ' + (e.LookBool ? 'am-active' : '') + '"><div class="am-switch-handle"><input type="checkbox"  '+(e.LookBool ? 'checked' : '')+'></div></div></td>';
@@ -186,8 +186,30 @@ function GetItems()
 
 
 $('#searchName').on('click', function (e) {
-    GetItems();
+    GetItems(1);
 });
 
+
+function SetPage()
+{
+    var pageCount = $('#rowCount').attr('data-pageCount');
+    if (pageCount > 1)
+    {
+        $('#pageDemo').page({
+        pages: pageCount,
+        first: "首页", //设置false则不显示，默认为false  
+        last: "尾页", //设置false则不显示，默认为false      
+        prev: '<', //若不显示，设置false即可，默认为上一页
+        next: '>', //若不显示，设置false即可，默认为下一页
+        groups: 5, //连续显示分页数
+        jump: function (context, first) {
+            if (!first)//第一次不执行。
+            {
+                GetItems(context.option.curr);
+            }
+        }//这里就是去异步请求方法
+    });
+    }
+}
 
 

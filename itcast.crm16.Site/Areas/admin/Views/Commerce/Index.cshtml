@@ -48,7 +48,7 @@
                             {
                                 <tr>
                                    
-                                    <td>@(item.id)</td>
+                                    <td>@(item.Nid)</td>
                                     <td>@(item.Name)</td>
                                     <td>@item.Contents</td>
                                     <td class="am-hide-sm-only" data-id="@item.id"><input type="checkbox" class="am-switch  am-switch-success  newDisplay" @(item.Look == 0 ? "Checked" : "") /></td>
@@ -68,9 +68,8 @@
                         </tbody>
                     </table>
                     <div class="am-cf">
-                        共 <span id="rowCount">@(ViewBag.TotalPage)</span> 条记录
+                        共 <span id="rowCount" data-pageCount="@(ViewBag.DateList as List<CommerceViewModel>).FirstOrDefault().typeName==2?ViewBag.PageCount:"")">@(ViewBag.TotalPage)</span> 条记录
                         <div class="am-fr">
-                          
                         </div>
                     </div>
                     <hr>
