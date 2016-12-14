@@ -49,6 +49,7 @@
     <Compile Include="Commerce.cs">
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>
+    <Compile Include="FSHistory.cs" />
     <Compile Include="Manage.cs">
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>

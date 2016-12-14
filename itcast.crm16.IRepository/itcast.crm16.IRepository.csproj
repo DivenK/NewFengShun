@@ -43,6 +43,7 @@
     <Compile Include="Commerce.cs">
       <DependentUpon>IRepository.tt</DependentUpon>
     </Compile>
+    <Compile Include="FSHistory.cs" />
     <Compile Include="IBaseDal.cs" />
     <Compile Include="IRepository.cs">
       <AutoGen>True</AutoGen>

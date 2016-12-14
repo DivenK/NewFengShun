@@ -30,6 +30,20 @@
           <Property Name="ImageUrl" Type="nchar" MaxLength="120" />
           <Property Name="Sort" Type="int" />
         </EntityType>
+        <EntityType Name="FSHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Contents" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Display" Type="int" Nullable="false" />
+          <Property Name="Look" Type="int" Nullable="false" />
+          <Property Name="Likes" Type="int" Nullable="false" />
+          <Property Name="Creater" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreaterTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Manage">
           <Key>
             <PropertyRef Name="id" />
@@ -216,6 +230,7 @@
         <EntityContainer Name="FS_SiteModelStoreContainer">
           <EntitySet Name="ArticleType" EntityType="Self.ArticleType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Commerce" EntityType="Self.Commerce" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FSHistory" EntityType="Self.FSHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Manage" EntityType="Self.Manage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MemberDynamic" EntityType="Self.MemberDynamic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="New" EntityType="Self.New" Schema="dbo" store:Type="Tables" />
@@ -427,6 +442,7 @@
             <End Role="MemberDynamic" EntitySet="MemberDynamic" />
           </AssociationSet>
           <EntitySet Name="Commerce" EntityType="FS_SiteModel.Commerce" />
+          <EntitySet Name="FSHistory" EntityType="FS_SiteModel.FSHistory" />
         </EntityContainer>
         <EntityType Name="ArticleType">
           <Key>
@@ -482,6 +498,20 @@
           <Property Name="Type" Type="Int32" />
           <Property Name="ImageUrl" Type="String" MaxLength="120" FixedLength="true" Unicode="true" />
           <Property Name="Sort" Type="Int32" />
+        </EntityType>
+        <EntityType Name="FSHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Contents" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Display" Type="Int32" Nullable="false" />
+          <Property Name="Look" Type="Int32" Nullable="false" />
+          <Property Name="Likes" Type="Int32" Nullable="false" />
+          <Property Name="Creater" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreaterTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -669,6 +699,21 @@
                 <ScalarProperty Name="Look" ColumnName="Look" />
                 <ScalarProperty Name="Contents" ColumnName="Contents" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FSHistory">
+            <EntityTypeMapping TypeName="FS_SiteModel.FSHistory">
+              <MappingFragment StoreEntitySet="FSHistory">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreaterTime" ColumnName="CreaterTime" />
+                <ScalarProperty Name="Creater" ColumnName="Creater" />
+                <ScalarProperty Name="Likes" ColumnName="Likes" />
+                <ScalarProperty Name="Look" ColumnName="Look" />
+                <ScalarProperty Name="Display" ColumnName="Display" />
+                <ScalarProperty Name="Contents" ColumnName="Contents" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
