@@ -46,6 +46,7 @@
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
     <Compile Include="MemberDynamic.cs" />
+    <Compile Include="MemberMsgServices.cs" />
     <Compile Include="New.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>

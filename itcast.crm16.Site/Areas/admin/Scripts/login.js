@@ -1,4 +1,10 @@
-﻿$(document).on("click", ".btn-login", function () {
+﻿var $modal ;
+$(function(){
+    $modal= $('#my-modal');
+})
+
+
+$(document).on("click", ".btn-login", function () {
    
     //获取登录数据信息
     var loginName = $("#loginname").val();
@@ -6,11 +12,13 @@
     var isRemember = $(".remeber").is(":checked") ? true : false;
     if (loginName == "") {
         $("#loginname").focus();
-        alert("请输入登陆名")
+        $("#showmsg").text("请输入登陆名");
+        $modal.modal();
         return;
     }
     if (pwd == "") {
-        alert("请输入密码");
+        $("#showmsg").text("请输入密码");
+        $modal.modal();
         $("#passpord").focus();
         return;
     }
@@ -31,6 +39,8 @@
             }
             else {
                 //TODO:提示返回消息
+                $("#showmsg").text(e.msg);
+                   //$modal.modal();
             }
         },
         error: function (er) {

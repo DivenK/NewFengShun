@@ -22,6 +22,7 @@ namespace itcast.crm16.WebHelper
         protected ICommerce Commerce;
         protected IMemberDynamicServices memberSer;
         protected IArticleTypeServices articleSer;
+        protected IMemberMsgServices memberMsgSer;
 
         protected int pageSize=10;
         protected int TotalPage;//总行数

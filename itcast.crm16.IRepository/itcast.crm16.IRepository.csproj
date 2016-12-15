@@ -44,6 +44,7 @@
       <DependentUpon>IRepository.tt</DependentUpon>
     </Compile>
     <Compile Include="IBaseDal.cs" />
+    <Compile Include="IMemberMsgRepository.cs" />
     <Compile Include="IRepository.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

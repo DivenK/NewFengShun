@@ -37,5 +37,6 @@ namespace itcast.crm16.model
         public DbSet<ArticleType> ArticleType { get; set; }
         public DbSet<MemberDynamic> MemberDynamic { get; set; }
         public DbSet<Commerce> Commerce { get; set; }
+        public DbSet<MemberMsg> MemberMsg { get; set; }
     }
 }
