@@ -178,6 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\admin\Scripts\Commerce.js" />
+    <Content Include="Areas\admin\Scripts\FSHistory.js" />
     <Content Include="Areas\admin\Scripts\login.js" />
     <Content Include="Areas\admin\Scripts\manage.js" />
     <Content Include="Areas\admin\Scripts\memberdynamic.js" />
@@ -1153,6 +1154,7 @@
     <Content Include="Config\log4net.config" />
     <Content Include="Areas\admin\Views\member\Index.cshtml" />
     <Content Include="Areas\admin\Views\Commerce\Index.cshtml" />
+    <Content Include="Areas\admin\Views\FSHistory\Index.cshtml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="iconsel.html" />
     <Content Include="images\avatar.gif" />
