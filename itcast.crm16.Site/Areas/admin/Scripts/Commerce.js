@@ -94,6 +94,8 @@
             }
         });
     }));
+
+    SetPage();
 });
 
 //控制网站是否显示商会章程
@@ -176,6 +178,7 @@ function GetItems(index)
             $("#CommerceTbody").html(htmlTem);
             //还差重新初始化分页控件
             $('#rowCount').text(result.rowCount);
+            SetPage();
         },
         error: function (er) {
              $('#my-modal-loading').modal('close');

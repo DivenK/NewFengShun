@@ -180,6 +180,7 @@ function SetNewModel(id, title, typeId, content, d) {
 //异步获取数据并更新列表
 function AjaxGetList(index, typeId, Name) {
     $('#my-modal-loading').modal();//正在加载...
+    typeId = $('#newType').val();
     Name= $('#searchName').val();
     $.ajax({
         url: "../New/GetList",
@@ -212,6 +213,7 @@ function AjaxGetList(index, typeId, Name) {
             $("#newTbody").html('');
             $("#newTbody").html(htmlTem);
             //还差重新初始化分页控件
+            SetPageHtmlz();
         },
         error: function (er) {
              $('#my-modal-loading').modal('close');
@@ -224,3 +226,8 @@ function AjaxGetList(index, typeId, Name) {
 function SetAllCount(count) {
     $('#new-pageCount').text(count);
 }
+
+$('#newType').on('change', function ()
+{
+    AjaxGetList(1, 0, "");
+})

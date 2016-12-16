@@ -69,7 +69,7 @@
                     </table>
                     <div class="am-cf">
                         共 <span id="rowCount" data-pageCount="@(ViewBag.DateList as List<CommerceViewModel>).FirstOrDefault().typeName==2?ViewBag.PageCount:"")">@(ViewBag.TotalPage)</span> 条记录
-                        <div class="am-fr">
+                        <div class="am-fr" id="pageDemo">
                         </div>
                     </div>
                     <hr>
