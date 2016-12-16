@@ -42,7 +42,7 @@
     <Compile Include="ArticleType.cs" />
     <Compile Include="ICommerce.cs" />
     <Compile Include="IBaseBLL.cs" />
-    <Compile Include="IIMemberMsgService.cs" />
+    <Compile Include="IMemberMsgService.cs" />
     <Compile Include="IServices.cs">
       <DependentUpon>IServices.tt</DependentUpon>
       <DesignTime>True</DesignTime>
