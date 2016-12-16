@@ -114,15 +114,9 @@
           <Property Name="Look" Type="int" Nullable="false" />
           <Property Name="display" Type="int" Nullable="false" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“FS_Site.dbo.NewType”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="NewType">
           <Key>
             <PropertyRef Name="id" />
-            
-            
-            
-            
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -199,15 +193,9 @@
           <Property Name="uID" Type="int" Nullable="false" />
           <Property Name="rID" Type="int" Nullable="false" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“FS_Site.dbo.User”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserId" />
-            
-            
-            
-            
           </Key>
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -216,15 +204,9 @@
           <Property Name="CreatTime" Type="datetime" Nullable="false" />
           <Property Name="IsDelete" Type="int" Nullable="false" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“FS_Site.dbo.VipUser”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="VipUser">
           <Key>
             <PropertyRef Name="id" />
-            
-            
-            
-            
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VipName" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -277,39 +259,13 @@
           <EntitySet Name="MemberDynamic" EntityType="Self.MemberDynamic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MemberMsg" EntityType="Self.MemberMsg" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="New" EntityType="Self.New" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewType" EntityType="Self.NewType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysMenus" EntityType="Self.sysMenus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysRole" EntityType="Self.sysRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysUserInfo" EntityType="Self.sysUserInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysUserInfo_Role" EntityType="Self.sysUserInfo_Role" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="NewType" EntityType="Self.NewType" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[NewType].[id] AS [id], 
-[NewType].[TypeName] AS [TypeName], 
-[NewType].[CreatTime] AS [CreatTime], 
-[NewType].[Creator] AS [Creator], 
-[NewType].[IsDelete] AS [IsDelete]
-FROM [dbo].[NewType] AS [NewType]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="User" EntityType="Self.User" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[User].[UserId] AS [UserId], 
-[User].[UserName] AS [UserName], 
-[User].[UserPwd] AS [UserPwd], 
-[User].[Name] AS [Name], 
-[User].[CreatTime] AS [CreatTime], 
-[User].[IsDelete] AS [IsDelete]
-FROM [dbo].[User] AS [User]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="VipUser" EntityType="Self.VipUser" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[VipUser].[id] AS [id], 
-[VipUser].[VipName] AS [VipName], 
-[VipUser].[VipPwd] AS [VipPwd], 
-[VipUser].[Company] AS [Company], 
-[VipUser].[CreatTime] AS [CreatTime], 
-[VipUser].[IsDelete] AS [IsDelete]
-FROM [dbo].[VipUser] AS [VipUser]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VipUser" EntityType="Self.VipUser" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_MemberDynamic_ArticleType" Association="Self.FK_MemberDynamic_ArticleType">
             <End Role="ArticleType" EntitySet="ArticleType" />
             <End Role="MemberDynamic" EntitySet="MemberDynamic" />
@@ -327,192 +283,33 @@ FROM [dbo].[VipUser] AS [VipUser]</DefiningQuery>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FS_SiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Manage">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Conter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Creator" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Author" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Praise" Type="Int32" Nullable="false" />
-          <Property Name="Look" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="New">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Conent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IsComment" Type="Boolean" Nullable="false" />
-          <Property Name="IsDelete" Type="Int32" Nullable="false" />
-          <Property Name="Author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TypeId" Type="Int32" />
-          <Property Name="CreatTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Creator" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Praise" Type="Int32" Nullable="false" />
-          <Property Name="Look" Type="Int32" Nullable="false" />
-          <Property Name="display" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="NewType">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CreatTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Creator" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IsDelete" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysMenus">
-          <Key>
-            <PropertyRef Name="mID" />
-          </Key>
-          <Property Name="mID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="mParentID" Type="Int32" Nullable="false" />
-          <Property Name="mName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="mUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="mArea" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="mController" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="mAction" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="mSortid" Type="Int32" Nullable="false" />
-          <Property Name="mStatus" Type="Int32" Nullable="false" />
-          <Property Name="mPicname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="mLevel" Type="Int32" Nullable="false" />
-          <Property Name="mExp1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="mExp2" Type="Int32" />
-          <Property Name="mCreatorID" Type="Int32" Nullable="false" />
-          <Property Name="mCreateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="mUpdateID" Type="Int32" />
-          <Property Name="mUpdateTime" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
-        <EntityType Name="sysRole">
-          <Key>
-            <PropertyRef Name="rID" />
-          </Key>
-          <Property Name="rID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="eDepID" Type="Int32" />
-          <Property Name="RoleType" Type="Int32" Nullable="false" />
-          <Property Name="rName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="rRemark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="rSort" Type="Int32" Nullable="false" />
-          <Property Name="rStatus" Type="Int32" Nullable="false" />
-          <Property Name="rCreatorID" Type="Int32" Nullable="false" />
-          <Property Name="rCreateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="rUpdateID" Type="Int32" />
-          <Property Name="rUpdateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="sysUserInfo_Role" Relationship="Self.FK_sysUserInfo_Role_sysRole" FromRole="sysRole" ToRole="sysUserInfo_Role" />
-        </EntityType>
-        <EntityType Name="sysUserInfo">
-          <Key>
-            <PropertyRef Name="uID" />
-          </Key>
-          <Property Name="uID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="uLoginName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="uLoginPWD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="uRealName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="uTelphone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="uMobile" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="uEmial" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="uQQ" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-          <Property Name="uGender" Type="Int32" Nullable="false" />
-          <Property Name="uStatus" Type="Int32" Nullable="false" />
-          <Property Name="uCompanyID" Type="Int32" Nullable="false" />
-          <Property Name="uDepID" Type="Int32" />
-          <Property Name="uWorkGroupID" Type="Int32" />
-          <Property Name="uRemark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="uCreatorID" Type="Int32" Nullable="false" />
-          <Property Name="uCreateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="uUpdateID" Type="Int32" />
-          <Property Name="uUpdateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="sysUserInfo_Role" Relationship="Self.FK_sysUserInfo_Role_sysUserInfo" FromRole="sysUserInfo" ToRole="sysUserInfo_Role" />
-        </EntityType>
-        <EntityType Name="sysUserInfo_Role">
-          <Key>
-            <PropertyRef Name="urID" />
-          </Key>
-          <Property Name="urID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="uID" Type="Int32" Nullable="false" />
-          <Property Name="rID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="sysRole" Relationship="Self.FK_sysUserInfo_Role_sysRole" FromRole="sysUserInfo_Role" ToRole="sysRole" />
-          <NavigationProperty Name="sysUserInfo" Relationship="Self.FK_sysUserInfo_Role_sysUserInfo" FromRole="sysUserInfo_Role" ToRole="sysUserInfo" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserPwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IsDelete" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="VipUser">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VipName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="VipPwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CreatTime" Type="DateTime" Precision="3" />
-          <Property Name="IsDelete" Type="Int32" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_sysUserInfo_Role_sysRole">
-          <End Role="sysRole" Type="Self.sysRole" Multiplicity="1" />
-          <End Role="sysUserInfo_Role" Type="Self.sysUserInfo_Role" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="sysRole">
-              <PropertyRef Name="rID" />
-            </Principal>
-            <Dependent Role="sysUserInfo_Role">
-              <PropertyRef Name="rID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_sysUserInfo_Role_sysUserInfo">
-          <End Role="sysUserInfo" Type="Self.sysUserInfo" Multiplicity="1" />
-          <End Role="sysUserInfo_Role" Type="Self.sysUserInfo_Role" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="sysUserInfo">
-              <PropertyRef Name="uID" />
-            </Principal>
-            <Dependent Role="sysUserInfo_Role">
-              <PropertyRef Name="uID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="FS_SiteEntities2" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Manage" EntityType="Self.Manage" />
-          <EntitySet Name="New" EntityType="Self.New" />
-          <EntitySet Name="NewType" EntityType="Self.NewType" />
-          <EntitySet Name="sysMenus" EntityType="Self.sysMenus" />
-          <EntitySet Name="sysRole" EntityType="Self.sysRole" />
-          <EntitySet Name="sysUserInfo" EntityType="Self.sysUserInfo" />
-          <EntitySet Name="sysUserInfo_Role" EntityType="Self.sysUserInfo_Role" />
-          <EntitySet Name="User" EntityType="Self.User" />
-          <EntitySet Name="VipUser" EntityType="Self.VipUser" />
-          <AssociationSet Name="FK_sysUserInfo_Role_sysRole" Association="Self.FK_sysUserInfo_Role_sysRole">
-            <End Role="sysRole" EntitySet="sysRole" />
-            <End Role="sysUserInfo_Role" EntitySet="sysUserInfo_Role" />
-          </AssociationSet>
-          <AssociationSet Name="FK_sysUserInfo_Role_sysUserInfo" Association="Self.FK_sysUserInfo_Role_sysUserInfo">
-            <End Role="sysUserInfo" EntitySet="sysUserInfo" />
-            <End Role="sysUserInfo_Role" EntitySet="sysUserInfo_Role" />
-          </AssociationSet>
+        <EntityContainer Name="FS_SiteEntities1" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="ArticleType" EntityType="FS_SiteModel.ArticleType" />
+          <EntitySet Name="Commerce" EntityType="FS_SiteModel.Commerce" />
+          <EntitySet Name="FSHistory" EntityType="FS_SiteModel.FSHistory" />
+          <EntitySet Name="Manage" EntityType="FS_SiteModel.Manage" />
           <EntitySet Name="MemberDynamic" EntityType="FS_SiteModel.MemberDynamic" />
+          <EntitySet Name="MemberMsg" EntityType="FS_SiteModel.MemberMsg" />
+          <EntitySet Name="New" EntityType="FS_SiteModel.New" />
+          <EntitySet Name="NewType" EntityType="FS_SiteModel.NewType" />
+          <EntitySet Name="sysMenus" EntityType="FS_SiteModel.sysMenus" />
+          <EntitySet Name="sysRole" EntityType="FS_SiteModel.sysRole" />
+          <EntitySet Name="sysUserInfo" EntityType="FS_SiteModel.sysUserInfo" />
+          <EntitySet Name="sysUserInfo_Role" EntityType="FS_SiteModel.sysUserInfo_Role" />
+          <EntitySet Name="User" EntityType="FS_SiteModel.User" />
+          <EntitySet Name="VipUser" EntityType="FS_SiteModel.VipUser" />
           <AssociationSet Name="FK_MemberDynamic_ArticleType" Association="FS_SiteModel.FK_MemberDynamic_ArticleType">
             <End Role="ArticleType" EntitySet="ArticleType" />
             <End Role="MemberDynamic" EntitySet="MemberDynamic" />
           </AssociationSet>
-          <EntitySet Name="Commerce" EntityType="FS_SiteModel.Commerce" />
-          <EntitySet Name="FSHistory" EntityType="FS_SiteModel.FSHistory" />
-          <EntitySet Name="MemberMsg" EntityType="FS_SiteModel.MemberMsg" />
+          <AssociationSet Name="FK_sysUserInfo_Role_sysRole" Association="FS_SiteModel.FK_sysUserInfo_Role_sysRole">
+            <End Role="sysRole" EntitySet="sysRole" />
+            <End Role="sysUserInfo_Role" EntitySet="sysUserInfo_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sysUserInfo_Role_sysUserInfo" Association="FS_SiteModel.FK_sysUserInfo_Role_sysUserInfo">
+            <End Role="sysUserInfo" EntitySet="sysUserInfo" />
+            <End Role="sysUserInfo_Role" EntitySet="sysUserInfo_Role" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ArticleType">
           <Key>
@@ -522,6 +319,50 @@ FROM [dbo].[VipUser] AS [VipUser]</DefiningQuery>
           <Property Name="typeName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="TypeFor" Type="Int32" Nullable="false" />
           <NavigationProperty Name="MemberDynamic" Relationship="FS_SiteModel.FK_MemberDynamic_ArticleType" FromRole="ArticleType" ToRole="MemberDynamic" />
+        </EntityType>
+        <EntityType Name="Commerce">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contents" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Look" Type="Int32" Nullable="false" />
+          <Property Name="IsDelete" Type="Int32" Nullable="false" />
+          <Property Name="Creater" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="ImageUrl" Type="String" MaxLength="120" FixedLength="true" Unicode="true" />
+          <Property Name="Sort" Type="Int32" />
+        </EntityType>
+        <EntityType Name="FSHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Contents" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Display" Type="Int32" Nullable="false" />
+          <Property Name="Look" Type="Int32" Nullable="false" />
+          <Property Name="Likes" Type="Int32" Nullable="false" />
+          <Property Name="Creater" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreaterTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Manage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Conter" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Author" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Praise" Type="Int32" Nullable="false" />
+          <Property Name="Look" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="MemberDynamic">
           <Key>
@@ -539,35 +380,6 @@ FROM [dbo].[VipUser] AS [VipUser]</DefiningQuery>
           <Property Name="Updator" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="UpdateTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="ArticleType" Relationship="FS_SiteModel.FK_MemberDynamic_ArticleType" FromRole="MemberDynamic" ToRole="ArticleType" />
-        </EntityType>
-        <Association Name="FK_MemberDynamic_ArticleType">
-          <End Type="FS_SiteModel.ArticleType" Role="ArticleType" Multiplicity="1" />
-          <End Type="FS_SiteModel.MemberDynamic" Role="MemberDynamic" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ArticleType">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="MemberDynamic">
-              <PropertyRef Name="Type" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Commerce">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Contents" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Look" Type="Int32" Nullable="false" />
-          <Property Name="IsDelete" Type="Int32" Nullable="false" />
-          <Property Name="Creater" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="Int32" />
-          <Property Name="ImageUrl" Type="String" MaxLength="120" FixedLength="true" Unicode="true" />
-          <Property Name="Sort" Type="Int32" />
         </EntityType>
         <EntityType Name="MemberMsg">
           <Key>
@@ -593,174 +405,175 @@ FROM [dbo].[VipUser] AS [VipUser]</DefiningQuery>
           <Property Name="WhoPass" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="PassTime" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="New">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Conent" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsComment" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Int32" Nullable="false" />
+          <Property Name="Author" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeId" Type="Int32" />
+          <Property Name="CreatTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Praise" Type="Int32" Nullable="false" />
+          <Property Name="Look" Type="Int32" Nullable="false" />
+          <Property Name="display" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysMenus">
+          <Key>
+            <PropertyRef Name="mID" />
+          </Key>
+          <Property Name="mID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mParentID" Type="Int32" Nullable="false" />
+          <Property Name="mName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="mUrl" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="mArea" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="mController" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="mAction" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="mSortid" Type="Int32" Nullable="false" />
+          <Property Name="mStatus" Type="Int32" Nullable="false" />
+          <Property Name="mPicname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="mLevel" Type="Int32" Nullable="false" />
+          <Property Name="mExp1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mExp2" Type="Int32" />
+          <Property Name="mCreatorID" Type="Int32" Nullable="false" />
+          <Property Name="mCreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="mUpdateID" Type="Int32" />
+          <Property Name="mUpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="sysRole">
+          <Key>
+            <PropertyRef Name="rID" />
+          </Key>
+          <Property Name="rID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="eDepID" Type="Int32" />
+          <Property Name="RoleType" Type="Int32" Nullable="false" />
+          <Property Name="rName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="rRemark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="rSort" Type="Int32" Nullable="false" />
+          <Property Name="rStatus" Type="Int32" Nullable="false" />
+          <Property Name="rCreatorID" Type="Int32" Nullable="false" />
+          <Property Name="rCreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="rUpdateID" Type="Int32" />
+          <Property Name="rUpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="sysUserInfo_Role" Relationship="FS_SiteModel.FK_sysUserInfo_Role_sysRole" FromRole="sysRole" ToRole="sysUserInfo_Role" />
+        </EntityType>
+        <EntityType Name="sysUserInfo">
+          <Key>
+            <PropertyRef Name="uID" />
+          </Key>
+          <Property Name="uID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uLoginName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="uLoginPWD" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="uRealName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="uTelphone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="uMobile" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="uEmial" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="uQQ" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="uGender" Type="Int32" Nullable="false" />
+          <Property Name="uStatus" Type="Int32" Nullable="false" />
+          <Property Name="uCompanyID" Type="Int32" Nullable="false" />
+          <Property Name="uDepID" Type="Int32" />
+          <Property Name="uWorkGroupID" Type="Int32" />
+          <Property Name="uRemark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="uCreatorID" Type="Int32" Nullable="false" />
+          <Property Name="uCreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="uUpdateID" Type="Int32" />
+          <Property Name="uUpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="sysUserInfo_Role" Relationship="FS_SiteModel.FK_sysUserInfo_Role_sysUserInfo" FromRole="sysUserInfo" ToRole="sysUserInfo_Role" />
+        </EntityType>
+        <EntityType Name="sysUserInfo_Role">
+          <Key>
+            <PropertyRef Name="urID" />
+          </Key>
+          <Property Name="urID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uID" Type="Int32" Nullable="false" />
+          <Property Name="rID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="sysRole" Relationship="FS_SiteModel.FK_sysUserInfo_Role_sysRole" FromRole="sysUserInfo_Role" ToRole="sysRole" />
+          <NavigationProperty Name="sysUserInfo" Relationship="FS_SiteModel.FK_sysUserInfo_Role_sysUserInfo" FromRole="sysUserInfo_Role" ToRole="sysUserInfo" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserPwd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDelete" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VipUser">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VipName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VipPwd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Company" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatTime" Type="DateTime" Precision="3" />
+          <Property Name="IsDelete" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_MemberDynamic_ArticleType">
+          <End Type="FS_SiteModel.ArticleType" Role="ArticleType" Multiplicity="1" />
+          <End Type="FS_SiteModel.MemberDynamic" Role="MemberDynamic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArticleType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MemberDynamic">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sysUserInfo_Role_sysRole">
+          <End Type="FS_SiteModel.sysRole" Role="sysRole" Multiplicity="1" />
+          <End Type="FS_SiteModel.sysUserInfo_Role" Role="sysUserInfo_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sysRole">
+              <PropertyRef Name="rID" />
+            </Principal>
+            <Dependent Role="sysUserInfo_Role">
+              <PropertyRef Name="rID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sysUserInfo_Role_sysUserInfo">
+          <End Type="FS_SiteModel.sysUserInfo" Role="sysUserInfo" Multiplicity="1" />
+          <End Type="FS_SiteModel.sysUserInfo_Role" Role="sysUserInfo_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sysUserInfo">
+              <PropertyRef Name="uID" />
+            </Principal>
+            <Dependent Role="sysUserInfo_Role">
+              <PropertyRef Name="uID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FS_SiteModelStoreContainer" CdmEntityContainer="FS_SiteEntities2">
-          <EntitySetMapping Name="Manage">
-            <EntityTypeMapping TypeName="FS_SiteModel.Manage">
-              <MappingFragment StoreEntitySet="Manage">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Conter" ColumnName="Conter" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="Creator" ColumnName="Creator" />
-                <ScalarProperty Name="Author" ColumnName="Author" />
-                <ScalarProperty Name="Praise" ColumnName="Praise" />
-                <ScalarProperty Name="Look" ColumnName="Look" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="New">
-            <EntityTypeMapping TypeName="FS_SiteModel.New">
-              <MappingFragment StoreEntitySet="New">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Conent" ColumnName="Conent" />
-                <ScalarProperty Name="IsComment" ColumnName="IsComment" />
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
-                <ScalarProperty Name="Author" ColumnName="Author" />
-                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
-                <ScalarProperty Name="CreatTime" ColumnName="CreatTime" />
-                <ScalarProperty Name="Creator" ColumnName="Creator" />
-                <ScalarProperty Name="Praise" ColumnName="Praise" />
-                <ScalarProperty Name="Look" ColumnName="Look" />
-                <ScalarProperty Name="display" ColumnName="display" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="NewType">
-            <EntityTypeMapping TypeName="FS_SiteModel.NewType">
-              <MappingFragment StoreEntitySet="NewType">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
-                <ScalarProperty Name="CreatTime" ColumnName="CreatTime" />
-                <ScalarProperty Name="Creator" ColumnName="Creator" />
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysMenus">
-            <EntityTypeMapping TypeName="FS_SiteModel.sysMenus">
-              <MappingFragment StoreEntitySet="sysMenus">
-                <ScalarProperty Name="mID" ColumnName="mID" />
-                <ScalarProperty Name="mParentID" ColumnName="mParentID" />
-                <ScalarProperty Name="mName" ColumnName="mName" />
-                <ScalarProperty Name="mUrl" ColumnName="mUrl" />
-                <ScalarProperty Name="mArea" ColumnName="mArea" />
-                <ScalarProperty Name="mController" ColumnName="mController" />
-                <ScalarProperty Name="mAction" ColumnName="mAction" />
-                <ScalarProperty Name="mSortid" ColumnName="mSortid" />
-                <ScalarProperty Name="mStatus" ColumnName="mStatus" />
-                <ScalarProperty Name="mPicname" ColumnName="mPicname" />
-                <ScalarProperty Name="mLevel" ColumnName="mLevel" />
-                <ScalarProperty Name="mExp1" ColumnName="mExp1" />
-                <ScalarProperty Name="mExp2" ColumnName="mExp2" />
-                <ScalarProperty Name="mCreatorID" ColumnName="mCreatorID" />
-                <ScalarProperty Name="mCreateTime" ColumnName="mCreateTime" />
-                <ScalarProperty Name="mUpdateID" ColumnName="mUpdateID" />
-                <ScalarProperty Name="mUpdateTime" ColumnName="mUpdateTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysRole">
-            <EntityTypeMapping TypeName="FS_SiteModel.sysRole">
-              <MappingFragment StoreEntitySet="sysRole">
-                <ScalarProperty Name="rID" ColumnName="rID" />
-                <ScalarProperty Name="eDepID" ColumnName="eDepID" />
-                <ScalarProperty Name="RoleType" ColumnName="RoleType" />
-                <ScalarProperty Name="rName" ColumnName="rName" />
-                <ScalarProperty Name="rRemark" ColumnName="rRemark" />
-                <ScalarProperty Name="rSort" ColumnName="rSort" />
-                <ScalarProperty Name="rStatus" ColumnName="rStatus" />
-                <ScalarProperty Name="rCreatorID" ColumnName="rCreatorID" />
-                <ScalarProperty Name="rCreateTime" ColumnName="rCreateTime" />
-                <ScalarProperty Name="rUpdateID" ColumnName="rUpdateID" />
-                <ScalarProperty Name="rUpdateTime" ColumnName="rUpdateTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysUserInfo">
-            <EntityTypeMapping TypeName="FS_SiteModel.sysUserInfo">
-              <MappingFragment StoreEntitySet="sysUserInfo">
-                <ScalarProperty Name="uID" ColumnName="uID" />
-                <ScalarProperty Name="uLoginName" ColumnName="uLoginName" />
-                <ScalarProperty Name="uLoginPWD" ColumnName="uLoginPWD" />
-                <ScalarProperty Name="uRealName" ColumnName="uRealName" />
-                <ScalarProperty Name="uTelphone" ColumnName="uTelphone" />
-                <ScalarProperty Name="uMobile" ColumnName="uMobile" />
-                <ScalarProperty Name="uEmial" ColumnName="uEmial" />
-                <ScalarProperty Name="uQQ" ColumnName="uQQ" />
-                <ScalarProperty Name="uGender" ColumnName="uGender" />
-                <ScalarProperty Name="uStatus" ColumnName="uStatus" />
-                <ScalarProperty Name="uCompanyID" ColumnName="uCompanyID" />
-                <ScalarProperty Name="uDepID" ColumnName="uDepID" />
-                <ScalarProperty Name="uWorkGroupID" ColumnName="uWorkGroupID" />
-                <ScalarProperty Name="uRemark" ColumnName="uRemark" />
-                <ScalarProperty Name="uCreatorID" ColumnName="uCreatorID" />
-                <ScalarProperty Name="uCreateTime" ColumnName="uCreateTime" />
-                <ScalarProperty Name="uUpdateID" ColumnName="uUpdateID" />
-                <ScalarProperty Name="uUpdateTime" ColumnName="uUpdateTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysUserInfo_Role">
-            <EntityTypeMapping TypeName="FS_SiteModel.sysUserInfo_Role">
-              <MappingFragment StoreEntitySet="sysUserInfo_Role">
-                <ScalarProperty Name="urID" ColumnName="urID" />
-                <ScalarProperty Name="uID" ColumnName="uID" />
-                <ScalarProperty Name="rID" ColumnName="rID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="FS_SiteModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserPwd" ColumnName="UserPwd" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CreatTime" ColumnName="CreatTime" />
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VipUser">
-            <EntityTypeMapping TypeName="FS_SiteModel.VipUser">
-              <MappingFragment StoreEntitySet="VipUser">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="VipName" ColumnName="VipName" />
-                <ScalarProperty Name="VipPwd" ColumnName="VipPwd" />
-                <ScalarProperty Name="Company" ColumnName="Company" />
-                <ScalarProperty Name="CreatTime" ColumnName="CreatTime" />
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+        <EntityContainerMapping StorageEntityContainer="FS_SiteModelStoreContainer" CdmEntityContainer="FS_SiteEntities1" >
           <EntitySetMapping Name="ArticleType">
             <EntityTypeMapping TypeName="FS_SiteModel.ArticleType">
               <MappingFragment StoreEntitySet="ArticleType">
                 <ScalarProperty Name="TypeFor" ColumnName="TypeFor" />
                 <ScalarProperty Name="typeName" ColumnName="typeName" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MemberDynamic">
-            <EntityTypeMapping TypeName="FS_SiteModel.MemberDynamic">
-              <MappingFragment StoreEntitySet="MemberDynamic">
-                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
-                <ScalarProperty Name="Updator" ColumnName="Updator" />
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="Creator" ColumnName="Creator" />
-                <ScalarProperty Name="IsComment" ColumnName="IsComment" />
-                <ScalarProperty Name="Praise" ColumnName="Praise" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -798,6 +611,37 @@ FROM [dbo].[VipUser] AS [VipUser]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Manage">
+            <EntityTypeMapping TypeName="FS_SiteModel.Manage">
+              <MappingFragment StoreEntitySet="Manage">
+                <ScalarProperty Name="Look" ColumnName="Look" />
+                <ScalarProperty Name="Praise" ColumnName="Praise" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Conter" ColumnName="Conter" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberDynamic">
+            <EntityTypeMapping TypeName="FS_SiteModel.MemberDynamic">
+              <MappingFragment StoreEntitySet="MemberDynamic">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="Updator" ColumnName="Updator" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="IsComment" ColumnName="IsComment" />
+                <ScalarProperty Name="Praise" ColumnName="Praise" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="MemberMsg">
             <EntityTypeMapping TypeName="FS_SiteModel.MemberMsg">
               <MappingFragment StoreEntitySet="MemberMsg">
@@ -820,6 +664,132 @@ FROM [dbo].[VipUser] AS [VipUser]</DefiningQuery>
                 <ScalarProperty Name="LoginPwd" ColumnName="LoginPwd" />
                 <ScalarProperty Name="LoginName" ColumnName="LoginName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="New">
+            <EntityTypeMapping TypeName="FS_SiteModel.New">
+              <MappingFragment StoreEntitySet="New">
+                <ScalarProperty Name="display" ColumnName="display" />
+                <ScalarProperty Name="Look" ColumnName="Look" />
+                <ScalarProperty Name="Praise" ColumnName="Praise" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="CreatTime" ColumnName="CreatTime" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="IsComment" ColumnName="IsComment" />
+                <ScalarProperty Name="Conent" ColumnName="Conent" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewType">
+            <EntityTypeMapping TypeName="FS_SiteModel.NewType">
+              <MappingFragment StoreEntitySet="NewType">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="CreatTime" ColumnName="CreatTime" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysMenus">
+            <EntityTypeMapping TypeName="FS_SiteModel.sysMenus">
+              <MappingFragment StoreEntitySet="sysMenus">
+                <ScalarProperty Name="mUpdateTime" ColumnName="mUpdateTime" />
+                <ScalarProperty Name="mUpdateID" ColumnName="mUpdateID" />
+                <ScalarProperty Name="mCreateTime" ColumnName="mCreateTime" />
+                <ScalarProperty Name="mCreatorID" ColumnName="mCreatorID" />
+                <ScalarProperty Name="mExp2" ColumnName="mExp2" />
+                <ScalarProperty Name="mExp1" ColumnName="mExp1" />
+                <ScalarProperty Name="mLevel" ColumnName="mLevel" />
+                <ScalarProperty Name="mPicname" ColumnName="mPicname" />
+                <ScalarProperty Name="mStatus" ColumnName="mStatus" />
+                <ScalarProperty Name="mSortid" ColumnName="mSortid" />
+                <ScalarProperty Name="mAction" ColumnName="mAction" />
+                <ScalarProperty Name="mController" ColumnName="mController" />
+                <ScalarProperty Name="mArea" ColumnName="mArea" />
+                <ScalarProperty Name="mUrl" ColumnName="mUrl" />
+                <ScalarProperty Name="mName" ColumnName="mName" />
+                <ScalarProperty Name="mParentID" ColumnName="mParentID" />
+                <ScalarProperty Name="mID" ColumnName="mID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysRole">
+            <EntityTypeMapping TypeName="FS_SiteModel.sysRole">
+              <MappingFragment StoreEntitySet="sysRole">
+                <ScalarProperty Name="rUpdateTime" ColumnName="rUpdateTime" />
+                <ScalarProperty Name="rUpdateID" ColumnName="rUpdateID" />
+                <ScalarProperty Name="rCreateTime" ColumnName="rCreateTime" />
+                <ScalarProperty Name="rCreatorID" ColumnName="rCreatorID" />
+                <ScalarProperty Name="rStatus" ColumnName="rStatus" />
+                <ScalarProperty Name="rSort" ColumnName="rSort" />
+                <ScalarProperty Name="rRemark" ColumnName="rRemark" />
+                <ScalarProperty Name="rName" ColumnName="rName" />
+                <ScalarProperty Name="RoleType" ColumnName="RoleType" />
+                <ScalarProperty Name="eDepID" ColumnName="eDepID" />
+                <ScalarProperty Name="rID" ColumnName="rID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysUserInfo">
+            <EntityTypeMapping TypeName="FS_SiteModel.sysUserInfo">
+              <MappingFragment StoreEntitySet="sysUserInfo">
+                <ScalarProperty Name="uUpdateTime" ColumnName="uUpdateTime" />
+                <ScalarProperty Name="uUpdateID" ColumnName="uUpdateID" />
+                <ScalarProperty Name="uCreateTime" ColumnName="uCreateTime" />
+                <ScalarProperty Name="uCreatorID" ColumnName="uCreatorID" />
+                <ScalarProperty Name="uRemark" ColumnName="uRemark" />
+                <ScalarProperty Name="uWorkGroupID" ColumnName="uWorkGroupID" />
+                <ScalarProperty Name="uDepID" ColumnName="uDepID" />
+                <ScalarProperty Name="uCompanyID" ColumnName="uCompanyID" />
+                <ScalarProperty Name="uStatus" ColumnName="uStatus" />
+                <ScalarProperty Name="uGender" ColumnName="uGender" />
+                <ScalarProperty Name="uQQ" ColumnName="uQQ" />
+                <ScalarProperty Name="uEmial" ColumnName="uEmial" />
+                <ScalarProperty Name="uMobile" ColumnName="uMobile" />
+                <ScalarProperty Name="uTelphone" ColumnName="uTelphone" />
+                <ScalarProperty Name="uRealName" ColumnName="uRealName" />
+                <ScalarProperty Name="uLoginPWD" ColumnName="uLoginPWD" />
+                <ScalarProperty Name="uLoginName" ColumnName="uLoginName" />
+                <ScalarProperty Name="uID" ColumnName="uID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysUserInfo_Role">
+            <EntityTypeMapping TypeName="FS_SiteModel.sysUserInfo_Role">
+              <MappingFragment StoreEntitySet="sysUserInfo_Role">
+                <ScalarProperty Name="rID" ColumnName="rID" />
+                <ScalarProperty Name="uID" ColumnName="uID" />
+                <ScalarProperty Name="urID" ColumnName="urID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="FS_SiteModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreatTime" ColumnName="CreatTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserPwd" ColumnName="UserPwd" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VipUser">
+            <EntityTypeMapping TypeName="FS_SiteModel.VipUser">
+              <MappingFragment StoreEntitySet="VipUser">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreatTime" ColumnName="CreatTime" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="VipPwd" ColumnName="VipPwd" />
+                <ScalarProperty Name="VipName" ColumnName="VipName" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

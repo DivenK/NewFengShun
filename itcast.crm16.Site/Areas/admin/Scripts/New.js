@@ -9,7 +9,7 @@
 
         $modal.modal({
             width: 800,
-            height: 650
+            height: 710
         });
 
     });

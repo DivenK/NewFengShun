@@ -13,10 +13,10 @@ namespace itcast.crm16.model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class FS_SiteEntities2 : DbContext
+    public partial class FS_SiteEntities1 : DbContext
     {
-        public FS_SiteEntities2()
-            : base("name=FS_SiteEntities2")
+        public FS_SiteEntities1()
+            : base("name=FS_SiteEntities1")
         {
         }
     
@@ -25,7 +25,12 @@ namespace itcast.crm16.model
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<ArticleType> ArticleType { get; set; }
+        public DbSet<Commerce> Commerce { get; set; }
+        public DbSet<FSHistory> FSHistory { get; set; }
         public DbSet<Manage> Manage { get; set; }
+        public DbSet<MemberDynamic> MemberDynamic { get; set; }
+        public DbSet<MemberMsg> MemberMsg { get; set; }
         public DbSet<New> New { get; set; }
         public DbSet<NewType> NewType { get; set; }
         public DbSet<sysMenus> sysMenus { get; set; }
@@ -34,10 +39,5 @@ namespace itcast.crm16.model
         public DbSet<sysUserInfo_Role> sysUserInfo_Role { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<VipUser> VipUser { get; set; }
-        public DbSet<ArticleType> ArticleType { get; set; }
-        public DbSet<MemberDynamic> MemberDynamic { get; set; }
-        public DbSet<Commerce> Commerce { get; set; }
-        public DbSet<FSHistory> FSHistory { get; set; }
-        public DbSet<MemberMsg> MemberMsg { get; set; }
     }
 }
