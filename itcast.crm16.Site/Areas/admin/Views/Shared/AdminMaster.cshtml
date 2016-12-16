@@ -37,12 +37,14 @@
             </ul>
 
             <ul class="am-nav am-navbar-nav am-navbar-right">
-                <li class="inform"><i class="am-icon-bell-o" aria-hidden="true"></i></li>
+                <li><button class="am-btn am-btn-warning"><i class="am-icon-remove" ></i>退出</button></li>
+               
+                @*<li class="inform"><i class="am-icon-bell-o" aria-hidden="true"></i></li>
                 <li class="hidden-xs am-hide-sm-only">
                     <form role="search" class="app-search">
                         <label></label>
                     </form>
-                </li>
+                </li>*@
             </ul>
         </div>
     </header>
@@ -64,7 +66,7 @@
                         <img src="~/Content/themes/templateUI/assets/img/avatar-1.jpg" alt="user-img" title="Mat Helme" class="img-circle img-thumbnail img-responsive">
                         <div class="user-status offline">@*<i class="am-icon-dot-circle-o" aria-hidden="true"></i>*@</div>
                     </div>
-                    <h5><a href="#">@(ViewBag.User == null ? "Manage" : "SupperManage")</a> </h5>
+                    <h5>昵称：<a href="#">@(ViewBag.User == null ? "丰顺商会秘书处" : "SupperManage")</a> </h5>
                     <ul class="list-inline">
                         <li>
                             <a href="#">

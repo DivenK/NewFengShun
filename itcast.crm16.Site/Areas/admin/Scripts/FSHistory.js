@@ -27,13 +27,15 @@
         };
         if (newModel.Name == "")
         {
-            alert("标题不能为空");
-            $('#doc-ipt-text-1').focus();
+           bfeMsgBox.jsError("标题不能为空");
+           $('#doc-ipt-text-1').focus();
             return;
         }
         if (newModel.Conent == "")
         {
-            alert("内容不能为空");
+            bfeMsgBox.jsError("内容不能为空");
+            editor.target.focus();
+            return;
         }
         $.post("../FSHistory/UpdateFsHistory",
             { "Content": newModel.Conent, "title": newModel.Name, "id": id },
@@ -90,7 +92,7 @@
             type: "post",
             dataType: 'json',
             success: function (result) {
-                SetNewModel(result.id, result.Name, result.Contents);
+                SetNewModel(result.id, result.Title, result.Contents);
 
                 $modal.modal({
                     width: 800,

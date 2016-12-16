@@ -14,22 +14,26 @@
                 info: 'info',
                 success: 'success',
                 warning: 'warning',
-                confirm: 'confirm'
+                confirm: 'confirm',
+                jsError:"jsError",
             };
 
             function error(content,title) {
                 content = content.length > 200 ? content.substring(0, 200) + '......' : content;
-                
-                    swal({title:'错误', content : '操作失败',type: bfeMsgBoxType.info,timer:2000});
+                    swal({title:title, content : content,type: bfeMsgBoxType.error,timer:2000});
+            }
+            function jsError(title)
+            {
+                    swal({title:title, content : "错误",type: bfeMsgBoxType.error});
             }
 
             function info(content,title) {
           
-                  swal({title:'提示', content : '提示',type: bfeMsgBoxType.info,timer:2000});
+                  swal({title:title, content :content,type: bfeMsgBoxType.info,timer:2000});
             }
 
             function success(title, content) {
-                swal({title:'成功', content : '成功',type: bfeMsgBoxType.success,timer:2000});
+                swal({title:title, content :content,type: bfeMsgBoxType.success,timer:2000});
             }
 
             function confirm(content, callback, title) {
@@ -64,6 +68,7 @@
                 warning: warning,
                 confirm: confirm,
                 success: success,
+                jsError:jsError,
                 version: '1.1'
             };
 

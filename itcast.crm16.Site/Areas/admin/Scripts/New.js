@@ -37,6 +37,18 @@
             IsDelete: false,
             CreatTime: new Date("yyyy-MM-dd HH:MM:SS")
         };
+           if (newModel.Name == "")
+        {
+           bfeMsgBox.jsError("标题不能为空");
+           $('#doc-ipt-text-1').focus();
+            return;
+        }
+        if (newModel.Conent == "")
+        {
+            bfeMsgBox.jsError("内容不能为空");
+            editor.target.focus();
+            return;
+        }
         $.post("../New/UpdateNews",
             { "Conent": newModel.Conent, "Name": newModel.Name, "TypeId": newModel.TypeId, "id": id },
             function (result) {

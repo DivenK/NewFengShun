@@ -28,6 +28,18 @@
             Name: $('#doc-ipt-text-1').val(),
             Conent: editor.getContent(),
         };
+           if (newModel.Name == "")
+        {
+           bfeMsgBox.jsError("标题不能为空");
+           $('#doc-ipt-text-1').focus();
+            return;
+        }
+        if (newModel.Conent == "")
+        {
+            bfeMsgBox.jsError("内容不能为空");
+            editor.target.focus();
+            return;
+        }
         $.post("../Commerce/UpdateCommerce",
             { "Conent": newModel.Conent, "Name": newModel.Name,  "id": id,"type":type },
             function (result) {
