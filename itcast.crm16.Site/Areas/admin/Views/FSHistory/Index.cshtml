@@ -1,7 +1,9 @@
-﻿@{
+﻿@using itcast.crm16.Site.Models;
+@{
     ViewBag.Title = "Index";
     Layout = "~/Areas/admin/Views/Shared/AdminMaster.cshtml";
 }
+
 <div class="content">
     <div class="card-box">
         <!-- Row start -->
@@ -41,15 +43,15 @@
                                 <th class="table-set">操作</th>
                             </tr>
                         </thead>
-                        <tbody id="CommerceTbody" data-type="@((ViewBag.DateList as List<CommerceViewModel>).FirstOrDefault().typeName)">
-                            @foreach (var item in (ViewBag.DateList as List<CommerceViewModel>))
+                        <tbody id="CommerceTbody" data-type="@((ViewBag.DateList as List<FSHistoryViewModel>).FirstOrDefault().typeName)">
+                            @foreach (var item in (ViewBag.DateList as List<FSHistoryViewModel>))
                             {
                                 <tr>
 
                                     <td>@(item.Nid)</td>
-                                    <td>@(item.Name)</td>
+                                    <td>@(item.Title)</td>
                                     <td>@item.Contents</td>
-                                    <td class="am-hide-sm-only" data-id="@item.id"><input type="checkbox" class="am-switch  am-switch-success  newDisplay" @(item.Look == 0 ? "Checked" : "") /></td>
+                                    <td class="am-hide-sm-only" data-id="@item.id"><input type="checkbox" class="am-switch  am-switch-success  newDisplay" @(item.DisplayStr ==true? "Checked" : "") /></td>
                                     <td class="am-hide-sm-only">@item.Creater</td>
                                     <td class="am-hide-sm-only">@item.UpdateTimeStr</td>
                                     <td>

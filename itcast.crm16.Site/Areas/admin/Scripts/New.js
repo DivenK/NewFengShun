@@ -8,8 +8,8 @@
         //使用详情看 http://amazeui.org/javascript/modal
 
         $modal.modal({
-            width: 900,
-            height: 800
+            width: 800,
+            height: 650
         });
 
     });
