@@ -54,6 +54,7 @@
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>
     <Compile Include="MemberDynamic.cs" />
+    <Compile Include="MemberMsgRepository.cs" />
     <Compile Include="New.cs">
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>

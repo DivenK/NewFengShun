@@ -80,6 +80,9 @@
     <Compile Include="MemberDynamic.cs">
       <DependentUpon>FS_Date.tt</DependentUpon>
     </Compile>
+    <Compile Include="MemberMsg.cs">
+      <DependentUpon>FS_Date.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModelViews\LoginInfo.cs" />
     <Compile Include="ModelViews\ModelView.cs">
       <AutoGen>True</AutoGen>

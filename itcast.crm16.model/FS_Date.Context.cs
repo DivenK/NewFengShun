@@ -38,5 +38,6 @@ namespace itcast.crm16.model
         public DbSet<MemberDynamic> MemberDynamic { get; set; }
         public DbSet<Commerce> Commerce { get; set; }
         public DbSet<FSHistory> FSHistory { get; set; }
+        public DbSet<MemberMsg> MemberMsg { get; set; }
     }
 }
