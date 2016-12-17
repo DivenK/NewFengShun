@@ -60,14 +60,22 @@ $(function () {
     })
 
     SetPageHtml();
+
+    //分类查询
+    $("#memberType").change(function () {
+        var typeId = $(this).val();
+        GetContentByPage(typeId, 1, 10, "");
+    })
+
 })
 
 
 /***********************
-获取数据
+获取数据 typeId=0,标识获取全部类型数据
 ***********************/
-function GetContentByPage(pageIndex, pageSize, searchMsg) {
+function GetContentByPage(typeId,pageIndex, pageSize, searchMsg) {
     var content = {
+        "typeid":typeId,
         "pageIndex": pageIndex,
         "PageSize": pageSize,
         "searchMsg": searchMsg
@@ -181,7 +189,7 @@ $(document).on("click", ".member-edit", function () {
 
 
 $(document).on("click", "#seachNew", function () {
-    GetContentByPage(1, 10, $("#searchName").val());
+    GetContentByPage(0,1, 10, $("#searchName").val());
 })
 
 function SetPageHtml() {
@@ -197,7 +205,7 @@ function SetPageHtml() {
         groups: 5, //连续显示分页数
         jump: function (context) {
             if (!isFirst) {
-                GetContentByPage(context.option.curr, 10, searchContent);
+                GetContentByPage(0,context.option.curr, 10, searchContent);
             }
         }//这里就是去异步请求方法
     });

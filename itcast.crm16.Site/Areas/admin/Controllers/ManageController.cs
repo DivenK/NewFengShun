@@ -69,9 +69,9 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 Manage addModel = new Manage();
                 addModel.Title = title;
                 addModel.Conter = conter;
-                addModel.Author = (Session[Keys.uinfo] as sysUserInfo).uLoginName;
+                addModel.Author =author ;
                 addModel.CreateTime = DateTime.Now;
-                addModel.Creator = "";
+                addModel.Creator = (Session[Keys.uinfo] as sysUserInfo).uLoginName;
                 manageSer.Add(addModel);
                 int retAdd = manageSer.SaveChanges();
                 if (retAdd == 1)

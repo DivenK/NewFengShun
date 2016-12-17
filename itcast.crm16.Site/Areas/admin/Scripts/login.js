@@ -1,6 +1,6 @@
 ﻿var $modal ;
 $(function(){
-    $modal= $('#my-modal');
+    $modal= $('#my-alert');
 })
 
 
@@ -40,11 +40,12 @@ $(document).on("click", ".btn-login", function () {
             else {
                 //TODO:提示返回消息
                 $("#showmsg").text(e.msg);
-                   //$modal.modal();
+                $modal.modal();
             }
         },
         error: function (er) {
-
+            $("#showmsg").text(er);
+            $modal.modal();
         }
     })
 
