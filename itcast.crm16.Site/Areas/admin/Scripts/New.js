@@ -205,7 +205,7 @@ function AjaxGetList(index, typeId, Name) {
             SetAllCount(result.page.count);
             result.rows.forEach(function (e) {
                 htmlTem += '<tr>';
-                htmlTem += ' <td>'+e.id+'</td>';
+                htmlTem += ' <td>'+e.Nid+'</td>';
                 htmlTem += '<td>' + e.TypeName + '</td>';
                 htmlTem += '<td>' + e.Name + '</td>';
                 htmlTem += '<td class="am-hide-sm-only">' + e.Conent + '</td>';

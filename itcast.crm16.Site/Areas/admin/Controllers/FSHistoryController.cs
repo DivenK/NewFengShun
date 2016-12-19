@@ -162,8 +162,12 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             {
                 itemList = FSHistorySer.QueryByPage(index, pageSize, out TotalPage, c => c.Title.Contains(name), c => c.id).ToList<FSHistory>();
             }
-            this.TotalPage = TotalPage;
             int newid = 1;
+            if (index > 1)
+            {
+                newid = (index - 1) * 10 + newid;
+            }
+    
             return itemList.Select(d => new FSHistoryViewModel
             {
                 Nid = newid++,

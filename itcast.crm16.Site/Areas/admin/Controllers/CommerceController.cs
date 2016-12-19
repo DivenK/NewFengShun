@@ -169,6 +169,10 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 itemList = Commerce.QueryByPage(index, pageSize, out TotalPage, c => c.IsDelete == 0 && c.Type == type&& c.Name.Contains(name), c => c.id).ToList<Commerce>();
             }
             int newid = 1;
+            if (index > 1)
+            {
+                newid = (index - 1) * 10 + newid;
+            }
             return itemList.Select(d => new CommerceViewModel
             {
                 Nid=newid++,

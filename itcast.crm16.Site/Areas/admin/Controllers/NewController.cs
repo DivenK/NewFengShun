@@ -22,25 +22,10 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
         public ActionResult Index()
         {
             int index = 1;
-            int count = 0;
-    
             var list = newsType.QueryWhere(c => c.IsDelete == 0);
-           var newlist = news.NewPageList(index, 0,"", out count).Select(c => new NewViewModel
-            {
-                id = c.id,
-                TypeName = list.Where(s => s.id == c.TypeId).First().TypeName,
-                Name = c.Name,
-                Conent = c.Conent.Substring(0, 4) + "...",
-                Author = c.Author,
-                display = c.display,
-                CreatTimeStr = c.CreatTime.ToString(),
-                TypeId = c.TypeId,
-                CreatTime = c.CreatTime,
-                displayBool = c.display == 0 ? true : false
-            }).ToList();
+            var newlist= GetItems(index, 0, "");
             ViewBag.newList = newlist;
             ViewBag.newsType = list;
-            TotalPage = count;
             SetViewBagPage();
             return View();
         }
@@ -150,23 +135,35 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
 
         public ActionResult GetList(int index, int typeId,string Name)
         {
-            int count = 0;
-            var list = newsType.QueryWhere(c => c.IsDelete == 0);
-            var pagelist = news.NewPageList(index, typeId, Name, out count).Select(c => new NewViewModel
+            var pagelist=GetItems(index, typeId, Name);
+            var page = new { index = index, count = TotalPage };
+            return Json(new { page = page, rows = pagelist });
+        }
+
+        public IEnumerable<dynamic> GetItems(int index, int typeId, string Name)
+        {
+            
+            int ids = 1;
+            if (index > 1)
             {
+                ids = (index - 1) * 10 + ids;
+            }
+            var list = newsType.QueryWhere(c => c.IsDelete == 0);
+            var pagelist = news.NewPageList(index, typeId, Name, out TotalPage).Select(c => new NewViewModel
+            {
+                Nid = ids++,
                 id = c.id,
                 TypeName = list.Where(s => s.id == c.TypeId).First().TypeName,
                 Name = c.Name,
-                Conent = c.Conent.Substring(0,4)+"...",
+                Conent = c.Conent.Substring(0, 4) + "...",
                 Author = c.Author,
                 display = c.display,
                 CreatTimeStr = c.CreatTime.ToString(),
-                TypeId=c.TypeId,
-                CreatTime=c.CreatTime,
-                displayBool= c.display==0?true:false
-            });
-            var page = new { index = index, count = count };
-            return Json(new { page = page, rows = pagelist });
+                TypeId = c.TypeId,
+                CreatTime = c.CreatTime,
+                displayBool = c.display == 0 ? true : false
+            }).ToList();
+            return pagelist;
         }
     }
 }

@@ -7,6 +7,7 @@ namespace itcast.crm16.Site.Models
 {
     public class NewViewModel
     {
+        public int Nid { get; set; }
         public int id { get; set; }
         public string Name { get; set; }
         public string Conent { get; set; }
