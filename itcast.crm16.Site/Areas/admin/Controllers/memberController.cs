@@ -37,23 +37,38 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             return View();
         }
 
-        public ActionResult GetContentByPage(int pageIndex, int pageSize, string searchMsg)
+        public ActionResult GetContentByPage(int typeid, int pageIndex, int pageSize, string searchMsg)
         {
             //获取会员文章相关类型数据
             List<ArticleType> artList = articleSer.QueryWhere(c => c.TypeFor == 1);
 
             int count = 0;
             List<MemberDynamic> memberList = null;
-            //判断是否模糊查询
-            //获取企业数据信息
-            if (string.IsNullOrEmpty(searchMsg))
+            System.Linq.Expressions.Expression<Func<MemberMsg, bool>> where = null;
+            if(typeid==0)
             {
-                memberList = memberSer.QueryByPage(pageIndex, pageSize, out count, c => c.IsDelete == 0, c => c.id);
+               if(string.IsNullOrEmpty(searchMsg))
+                {
+                    memberList = memberSer.QueryByPage(pageIndex, pageSize, out count, c => c.IsDelete == 0, c => c.id);
+                }
+               else
+                {
+                    memberList = memberSer.QueryByPage(pageIndex, pageSize, out count, c => c.Title.Contains(searchMsg) && c.IsDelete == 0, c => c.id);
+                }
             }
             else
             {
-                memberList = memberSer.QueryByPage(pageIndex, pageSize, out count, c => c.Title.Contains(searchMsg) && c.IsDelete == 0, c => c.id);
+                if (string.IsNullOrEmpty(searchMsg))
+                {
+                    memberList = memberSer.QueryByPage(pageIndex, pageSize, out count, c => c.IsDelete == 0&&c.Type==typeid, c => c.id);
+                }
+                else
+                {
+                    memberList = memberSer.QueryByPage(pageIndex, pageSize, out count, c => c.Title.Contains(searchMsg) && c.IsDelete == 0 && c.Type == typeid, c => c.id);
+                }
             }
+
+            
             if (memberList != null)
             {
                 return WriteSuccess("获取成功", new
