@@ -147,6 +147,7 @@
     <Compile Include="Areas\admin\Controllers\memberController.cs" />
     <Compile Include="Areas\admin\Controllers\NewController.cs" />
     <Compile Include="Areas\admin\Controllers\roleController.cs" />
+    <Compile Include="Areas\admin\Controllers\SiteSetController.cs" />
     <Compile Include="Areas\chat\chatAreaRegistration.cs" />
     <Compile Include="Areas\chat\Controllers\ChatMgrController.cs" />
     <Compile Include="Areas\workflow\Controllers\requestformController.cs" />
@@ -1242,6 +1243,7 @@
     <Content Include="Areas\admin\Views\Commerce\Index.cshtml" />
     <Content Include="Areas\admin\Views\FSHistory\Index.cshtml" />
     <Content Include="Areas\admin\Views\member\MemberMsgIndex.cshtml" />
+    <Content Include="Content\aa.docx" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="iconsel.html" />
     <Content Include="images\avatar.gif" />
