@@ -31,5 +31,6 @@ namespace itcast.crm16.model
         public System.DateTime mCreateTime { get; set; }
         public Nullable<int> mUpdateID { get; set; }
         public System.DateTime mUpdateTime { get; set; }
+        public Nullable<int> Look { get; set; }
     }
 }

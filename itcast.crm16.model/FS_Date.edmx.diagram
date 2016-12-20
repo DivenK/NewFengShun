@@ -22,6 +22,7 @@
         <AssociationConnector Association="FS_SiteModel.FK_MemberDynamic_ArticleType" />
         <AssociationConnector Association="FS_SiteModel.FK_sysUserInfo_Role_sysRole" />
         <AssociationConnector Association="FS_SiteModel.FK_sysUserInfo_Role_sysUserInfo" />
+        <EntityTypeShape EntityType="FS_SiteModel.SiteSet" Width="1.5" PointX="7.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -124,6 +124,20 @@
           <Property Name="Creator" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IsDelete" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="SiteSet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="120" Nullable="false" />
+          <Property Name="Image" Type="nchar" MaxLength="200" Nullable="false" />
+          <Property Name="Contents" Type="nvarchar(max)" />
+          <Property Name="Creator" Type="nvarchar" MaxLength="70" />
+          <Property Name="CreatTime" Type="datetime" />
+          <Property Name="Remark" Type="nchar" MaxLength="10" />
+          <Property Name="type" Type="int" Nullable="false" />
+          <Property Name="Look" Type="int" />
+        </EntityType>
         <EntityType Name="sysMenus">
           <Key>
             <PropertyRef Name="mID" />
@@ -145,6 +159,7 @@
           <Property Name="mCreateTime" Type="datetime" Nullable="false" />
           <Property Name="mUpdateID" Type="int" />
           <Property Name="mUpdateTime" Type="datetime" Nullable="false" />
+          <Property Name="Look" Type="int" />
         </EntityType>
         <EntityType Name="sysRole">
           <Key>
@@ -260,6 +275,7 @@
           <EntitySet Name="MemberMsg" EntityType="Self.MemberMsg" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="New" EntityType="Self.New" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NewType" EntityType="Self.NewType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SiteSet" EntityType="Self.SiteSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysMenus" EntityType="Self.sysMenus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysRole" EntityType="Self.sysRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysUserInfo" EntityType="Self.sysUserInfo" Schema="dbo" store:Type="Tables" />
@@ -310,6 +326,7 @@
             <End Role="sysUserInfo" EntitySet="sysUserInfo" />
             <End Role="sysUserInfo_Role" EntitySet="sysUserInfo_Role" />
           </AssociationSet>
+          <EntitySet Name="SiteSet" EntityType="FS_SiteModel.SiteSet" />
         </EntityContainer>
         <EntityType Name="ArticleType">
           <Key>
@@ -453,6 +470,7 @@
           <Property Name="mCreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="mUpdateID" Type="Int32" />
           <Property Name="mUpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Look" Type="Int32" />
         </EntityType>
         <EntityType Name="sysRole">
           <Key>
@@ -563,6 +581,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SiteSet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" Nullable="false" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="Contents" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Creator" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="CreatTime" Type="DateTime" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="type" Type="Int32" Nullable="false" />
+          <Property Name="Look" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -699,6 +731,7 @@
           <EntitySetMapping Name="sysMenus">
             <EntityTypeMapping TypeName="FS_SiteModel.sysMenus">
               <MappingFragment StoreEntitySet="sysMenus">
+                <ScalarProperty Name="Look" ColumnName="Look" />
                 <ScalarProperty Name="mUpdateTime" ColumnName="mUpdateTime" />
                 <ScalarProperty Name="mUpdateID" ColumnName="mUpdateID" />
                 <ScalarProperty Name="mCreateTime" ColumnName="mCreateTime" />
@@ -789,6 +822,21 @@
                 <ScalarProperty Name="Company" ColumnName="Company" />
                 <ScalarProperty Name="VipPwd" ColumnName="VipPwd" />
                 <ScalarProperty Name="VipName" ColumnName="VipName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SiteSet">
+            <EntityTypeMapping TypeName="FS_SiteModel.SiteSet">
+              <MappingFragment StoreEntitySet="SiteSet">
+                <ScalarProperty Name="Look" ColumnName="Look" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="CreatTime" ColumnName="CreatTime" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="Contents" ColumnName="Contents" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
