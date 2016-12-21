@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace itcast.crm16.model.ModelViews
 {
-    public partial class SiteSet
+    public partial class SiteSetViewModel
     {
+        public int NId { get; set; }
         public int id { get; set; }
         public string Title { get; set; }
         public string Image { get; set; }

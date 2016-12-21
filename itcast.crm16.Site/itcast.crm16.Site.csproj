@@ -185,6 +185,7 @@
     <Content Include="Areas\admin\Scripts\memberdynamic.js" />
     <Content Include="Areas\admin\Scripts\membermsg.js" />
     <Content Include="Areas\admin\Scripts\New.js" />
+    <Content Include="Areas\admin\Scripts\SiteSet.js" />
     <Content Include="Content\admin\bootstrap\css\bootstrap-responsive.css" />
     <Content Include="Content\admin\bootstrap\css\bootstrap-responsive.min.css" />
     <Content Include="Content\admin\bootstrap\css\bootstrap.css" />
@@ -1244,6 +1245,7 @@
     <Content Include="Areas\admin\Views\FSHistory\Index.cshtml" />
     <Content Include="Areas\admin\Views\member\MemberMsgIndex.cshtml" />
     <Content Include="Content\aa.docx" />
+    <Content Include="Areas\admin\Views\SiteSet\Index.cshtml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="iconsel.html" />
     <Content Include="images\avatar.gif" />

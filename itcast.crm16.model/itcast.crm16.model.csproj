@@ -89,6 +89,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelView.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModelViews\SiteSetViewModel.cs" />
     <Compile Include="ModelViews\sysFunction.cs">
       <DependentUpon>ModelView.tt</DependentUpon>
     </Compile>
@@ -136,6 +137,9 @@
       <DependentUpon>FS_Date.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SiteSet.cs">
+      <DependentUpon>FS_Date.tt</DependentUpon>
+    </Compile>
     <Compile Include="sysMenus.cs">
       <DependentUpon>FS_Date.tt</DependentUpon>
     </Compile>

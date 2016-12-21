@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace itcast.crm16.IRepository
 {
-    class SiteSet
+
+      using System;
+    using System.Collections.Generic;
+
+    using itcast.crm16.model;
+    public partial interface ISiteSetRepository : IBaseDal<SiteSet>
     {
+
+
+
+
     }
 }

@@ -24,6 +24,7 @@ namespace itcast.crm16.WebHelper
         protected IArticleTypeServices articleSer;
         protected IFSHistoryService FSHistorySer;
         protected IMemberMsgServices memberMsgSer;
+        protected ISiteSetService siteService;
         protected int pageSize=10;
         protected int TotalPage;//总行数
         protected int PageCount;//有多少页

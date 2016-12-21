@@ -61,6 +61,7 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="SiteSet.cs" />
     <Compile Include="sysMenus.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>

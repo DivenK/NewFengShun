@@ -84,7 +84,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             model.id = id;
             model.Contents = Content;
             model.Title = title;
-            model.CreatTime = DateTime.Now;
+          
             model.Image = GetImageUrl(Content);
             model.type = type;
             if (id > 0)
@@ -93,6 +93,9 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             }
             else
             {
+                model.Creator = "丰顺商会";
+                model.CreatTime = DateTime.Now;
+                model.Look = 0;
                 siteService.Add(model);
             }
             var result = siteService.SaveChanges();
@@ -130,6 +133,21 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             if (matches.Count > 0)
             { return matches[0].Groups["imgUrl"].Value; }
             return string.Empty;
+        }
+
+        public ActionResult GetItems(int index = 1, int pageSize = 10, int type = 0)
+        {
+           var list= siteService.GetItems(index, pageSize, type);
+            return Json(list);
+        }
+        public ActionResult GetModel(int id)
+        {
+            if (id > 0)
+            {
+                model.SiteSet model = siteService.QueryWhere(c => c.id == id).First();
+                return Json(model);
+            }
+            return WriteError("参数错误！");
         }
     }
 }

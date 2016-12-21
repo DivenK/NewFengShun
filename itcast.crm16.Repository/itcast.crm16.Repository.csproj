@@ -67,6 +67,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>
+    <Compile Include="SiteSet.cs" />
     <Compile Include="sysMenus.cs">
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>
