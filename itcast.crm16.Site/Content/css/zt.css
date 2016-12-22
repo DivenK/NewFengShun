@@ -362,7 +362,22 @@ body{
 .index-page   .title-item{
 	background: rgba(136,3,3,1);
 }
-
+.global-max-logo {
+	position: absolute;
+	left: -170px;
+	top:50%;
+	margin-top: -170px;
+	z-index: -1;
+	opacity: .15;
+}
+.global-min-logo {
+	position: absolute;
+	right: -45px;
+	top:80%;
+	
+	z-index: -1;
+	opacity: .15;
+}
 .index-page   .title-item .title-txt{
 	padding:10px;
 	font-size: 18px;

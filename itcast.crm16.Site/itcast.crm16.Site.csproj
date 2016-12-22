@@ -167,8 +167,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CommerceViewModel.cs" />
-    <Compile Include="Models\FSHistoryViewModel.cs" />
+    <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\NewViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\WcfChatServer\Reference.cs">
@@ -661,6 +660,7 @@
     <Content Include="Content\images\banner2.jpg" />
     <Content Include="Content\images\banner3.jpg" />
     <Content Include="Content\images\bg.png" />
+    <Content Include="Content\images\class_a.jpg" />
     <Content Include="Content\images\close-btn.png" />
     <Content Include="Content\images\code_03.jpg" />
     <Content Include="Content\images\img-icon.png" />
@@ -670,7 +670,9 @@
     <Content Include="Content\images\logo.gif" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\logo1.png" />
+    <Content Include="Content\images\max-logo.png" />
     <Content Include="Content\images\min-code.jpg" />
+    <Content Include="Content\images\min-logo.png" />
     <Content Include="Content\images\mini-img_03.jpg" />
     <Content Include="Content\images\mini-img_05.jpg" />
     <Content Include="Content\images\mini-img_07.jpg" />
@@ -681,6 +683,11 @@
     <Content Include="Content\images\point-icon.gif" />
     <Content Include="Content\images\right-btn-2.png" />
     <Content Include="Content\images\right-btn.png" />
+    <Content Include="Content\images\smile.jpg" />
+    <Content Include="Content\images\step1.gif" />
+    <Content Include="Content\images\step2.gif" />
+    <Content Include="Content\images\step3.gif" />
+    <Content Include="Content\images\step4.gif" />
     <Content Include="Content\images\test\1.jpg" />
     <Content Include="Content\images\test\10.jpg" />
     <Content Include="Content\images\test\11.jpg" />
@@ -728,8 +735,12 @@
     <Content Include="Content\images\test\banner2.jpg" />
     <Content Include="Content\images\title-2_03.jpg" />
     <Content Include="Content\images\title-bg_03.jpg" />
+    <Content Include="Content\images\userImg.jpg" />
     <Content Include="Content\images\weibo.jpg" />
     <Content Include="Content\images\welcome_bg.png" />
+    <Content Include="Content\images\yq-img.jpg" />
+    <Content Include="Content\images\zan.gif" />
+    <Content Include="Content\images\zanPic.jpg" />
     <Content Include="Content\JQPagination\jquery.pagination.js" />
     <Content Include="Content\JQPagination\pagination.css" />
     <Content Include="Content\js\jquery-1.4.2.min.js" />
@@ -1322,6 +1333,7 @@
     <Folder Include="Areas\chat\Views\Shared\" />
     <Folder Include="Areas\workflow\Models\" />
     <Folder Include="Areas\workflow\Views\Shared\" />
+    <Folder Include="Content\images\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -12,6 +12,8 @@ namespace itcast.crm16.Services
     using itcast.crm16.IServices;
     using itcast.crm16.model;
     using itcast.crm16.IRepository;
+    using Site.Models;
+
     public partial class FSHistoryService : BaseBLL<FSHistory>, IFSHistoryService
     {
         IFSHistoryRepository dal;
@@ -21,7 +23,38 @@ namespace itcast.crm16.Services
             base.basedal = dal;
         }
 
+        public IEnumerable<FSHistoryViewModel> GetItemModel(int index, out int totalPage, string name, int pageSize = 10)
+        {
+            List<FSHistory> itemList = null;
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                itemList = dal.QueryByPage(index, pageSize, out totalPage, c => true, c => c.id).ToList<FSHistory>();
+            }
+            else
+            {
+                itemList = dal.QueryByPage(index, pageSize, out totalPage, c => c.Title.Contains(name), c => c.id).ToList<FSHistory>();
+            }
+            int newid = 1;
+            if (index > 1)
+            {
+                newid = (index - 1) * 10 + newid;
+            }
 
+            return itemList.Select(d => new FSHistoryViewModel
+            {
+                Nid = newid++,
+                DisplayStr = d.Display == 0 ? true : false,
+                Likes = d.Likes,
+                id = d.id,
+                Contents = d.Contents.Length > 10 ? d.Contents.Substring(0, 8) : d.Contents,
+                Creater = d.Creater,
+                CreaterTime = d.CreaterTime,
+                Look = d.Look,
+                Title = d.Title,
+                UpdateTime = d.UpdateTime,
+                UpdateTimeStr = d.UpdateTime.ToShortDateString(),
+            }).ToList();
+        }
 
 
     }

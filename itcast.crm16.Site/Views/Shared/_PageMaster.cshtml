@@ -1,5 +1,6 @@
-﻿<!DOCTYPE html>
-
+﻿@using itcast.crm16.model
+@using itcast.crm16.Common
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html" charset="utf-8"></meta>
@@ -37,20 +38,32 @@
 
                 <div class="nav-item fldi">
                     <ul class="list clearfix first-nav" data-role="first-nav">
-                        <li class=" first-li ">
-                            <a href="#">首页</a>
-                        </li>
-                        <li class=" first-li cur">
-                            <a href="#">关于商会</a>
-                        </li>
-                        <li class="first-li"><a href="#">动态新闻</a></li>
-                        <li class="first-li"><a href="#">会员风采</a></li>
-                        <li class="first-li"><a href="#">人物访谈</a></li>
-                        <li class="first-li"><a href="#">丰顺风情</a></li>
-                        <li class="first-li"><a href="#">商会会刊</a></li>
-                        <li class="first-li"><a href="#">政策法规</a></li>
-                        <li class="first-li"><a href="#">企业管理</a></li>
-
+                        @{
+                            object objMenusList = ViewBag.mList;
+                            int nav = 1;
+                            if (objMenusList != null)
+                            {
+                                List<sysMenus> mList = objMenusList as List<sysMenus>;
+                                string url = Request.Url.AbsolutePath;
+                                sysMenus currentMenus = mList.Where(c => (c.mUrl.Split('?')[0].ToLower() == url.ToLower())).FirstOrDefault();
+                                int currentUrlParentId = 0;
+                                //获取当前访问的parentid
+                                if (currentMenus != null)
+                                {
+                                    currentUrlParentId = currentMenus.mParentID;
+                                }
+                                var pMenusList = mList.Where(c => c.mParentID == -2);
+                                <li class=" first-li @(currentUrlParentId == 0 ? "cur" : "")">
+                                    <a href="#">首页</a>
+                                </li>
+                                foreach (var item in pMenusList)
+                                {
+                                    <li class=" first-li @(currentUrlParentId == item.mID ? "cur" : "") ">
+                                        <a href="@(item.mUrl)">@item.mName</a>
+                                    </li>
+                                }
+                            }
+                        }
                     </ul>
                 </div>
             </div>
@@ -106,6 +119,12 @@
         <div class="txt tc color-333 pt5">扫一扫，关注公众号</div>
     </div>
     <a href="javascript:;" class="arrow-icon" data-role="open-ewm-btn"></a>
+    <div class="global-max-logo">
+        <img src="Content/images/max-logo.png">
+    </div>
+    <div class="global-min-logo">
+        <img src="Content/images/min-logo.png">
+    </div>
     <!-- 公共footer结束 -->
 </body>
 </html>

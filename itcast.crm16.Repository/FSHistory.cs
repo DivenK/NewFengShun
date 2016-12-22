@@ -11,12 +11,11 @@ namespace itcast.crm16.Repository
 
     using itcast.crm16.IRepository;
     using itcast.crm16.model;
+    using Site.Models;
+
     public partial class FSHistoryRepository : BaseDal<FSHistory>, IFSHistoryRepository
     {
-
-
-
-
+        
     }
 
 }

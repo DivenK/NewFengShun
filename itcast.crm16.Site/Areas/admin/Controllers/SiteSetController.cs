@@ -73,6 +73,14 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             return WriteError("修改失败！");
         }
 
+        /// <summary>
+        /// 更新实体
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="Content"></param>
+        /// <param name="type"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ValidateInput(false)]
         public ActionResult Update(string title, string Content, int type,int id)
         {
@@ -84,7 +92,6 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             model.id = id;
             model.Contents = Content;
             model.Title = title;
-          
             model.Image = GetImageUrl(Content);
             model.type = type;
             if (id > 0)

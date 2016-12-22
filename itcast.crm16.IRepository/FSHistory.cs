@@ -10,10 +10,12 @@ namespace itcast.crm16.IRepository
     using System.Collections.Generic;
 
     using itcast.crm16.model;
+    using Site.Models;
+
     public partial interface IFSHistoryRepository : IBaseDal<FSHistory>
     {
 
-
+        
 
 
     }

@@ -83,6 +83,8 @@
     <Compile Include="MemberMsg.cs">
       <DependentUpon>FS_Date.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModelViews\CommerceViewModel.cs" />
+    <Compile Include="ModelViews\FSHistoryViewModel.cs" />
     <Compile Include="ModelViews\LoginInfo.cs" />
     <Compile Include="ModelViews\ModelView.cs">
       <AutoGen>True</AutoGen>

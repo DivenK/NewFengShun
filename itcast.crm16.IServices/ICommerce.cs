@@ -16,9 +16,9 @@ namespace itcast.crm16.IServices
     public partial interface ICommerce : IBaseBLL<Commerce>
     {
 
-    
 
 
+        IEnumerable<Site.Models.CommerceViewModel> GetItemModel(int index, string name,out int totalPage, int type, int pageSize = 10);
 
 
 

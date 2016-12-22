@@ -15,6 +15,9 @@ namespace itcast.crm16.Services
     using itcast.crm16.IServices;
     using itcast.crm16.model;
     using itcast.crm16.IRepository;
+    using Site.Models;
+    using System.Linq;
+
     public partial class CommerceServices : BaseBLL<Commerce>, ICommerce
     {
         ICommerceRepository dal;
@@ -24,10 +27,39 @@ namespace itcast.crm16.Services
             base.basedal = dal;
         }
 
-
-
-
-
+        public IEnumerable<CommerceViewModel> GetItemModel(int index, string name, out int totalPage, int type, int pageSize = 10)
+        {
+            List<Commerce> itemList = null;
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                itemList = dal.QueryByPage(index, pageSize, out totalPage, c => c.IsDelete == 0 && c.Type == type, c => c.id).ToList<Commerce>();
+            }
+            else
+            {
+                itemList = dal.QueryByPage(index, pageSize, out totalPage, c => c.IsDelete == 0 && c.Type == type && c.Name.Contains(name), c => c.id).ToList<Commerce>();
+            }
+            int newid = 1;
+            if (index > 1)
+            {
+                newid = (index - 1) * 10 + newid;
+            }
+            return itemList.Select(d => new CommerceViewModel
+            {
+                Nid = newid++,
+                IsDelete = d.IsDelete,
+                LookBool = d.Look == 0 ? true : false,
+                id = d.id,
+                Contents = d.Contents.Length > 10 ? d.Contents.Substring(0, 8) : d.Contents,
+                Creater = d.Creater,
+                CreateTime = d.CreateTime,
+                Look = d.Look,
+                Name = d.Name,
+                Remark = d.Remark,
+                UpdateTime = d.UpdateTime,
+                UpdateTimeStr = d.UpdateTime.ToShortDateString(),
+                typeName = d.Type
+            });
+        }
     }
 }
 

@@ -26,7 +26,8 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.DateList= GetItemModel(1,"");
+
+            ViewBag.DateList = FSHistorySer.GetItemModel(1, out TotalPage, "");
             SetViewBagPage();
             return View();
         }
@@ -147,41 +148,8 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
 
         public ActionResult SearchCommerce(int index, string name)
         {
-            var list = GetItemModel(index, name);
+            var list =FSHistorySer.GetItemModel (index,out TotalPage, name);
             return Json(new { rowCount = TotalPage, pageCount = ViewBag.PageCount, date = list });
-        }
-
-        public IEnumerable<FSHistoryViewModel> GetItemModel(int index, string name)
-        {
-            List<FSHistory> itemList = null;
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                itemList = FSHistorySer.QueryByPage(index, pageSize, out TotalPage, c=>true, c => c.id).ToList<FSHistory>();
-            }
-            else
-            {
-                itemList = FSHistorySer.QueryByPage(index, pageSize, out TotalPage, c => c.Title.Contains(name), c => c.id).ToList<FSHistory>();
-            }
-            int newid = 1;
-            if (index > 1)
-            {
-                newid = (index - 1) * 10 + newid;
-            }
-    
-            return itemList.Select(d => new FSHistoryViewModel
-            {
-                Nid = newid++,
-                DisplayStr=d.Display == 0 ? true : false,
-                Likes=d.Likes,
-                id = d.id,
-                Contents = d.Contents.Length > 10 ? d.Contents.Substring(0, 8) : d.Contents,
-                Creater = d.Creater,
-                CreaterTime = d.CreaterTime,
-                Look = d.Look,
-                Title=d.Title,
-                UpdateTime = d.UpdateTime,
-                UpdateTimeStr = d.UpdateTime.ToShortDateString(),
-            }).ToList();
         }
     }
 }

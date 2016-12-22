@@ -28,8 +28,8 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
 
         public ActionResult Index(int type=0)
         {
-            ViewBag.DateList = GetItemModel(1, "", type).ToList();
-          SetViewBagPage();
+            ViewBag.DateList = Commerce.GetItemModel(1, "",out TotalPage, type).ToList();
+           SetViewBagPage();
            return View();
         }
 
@@ -66,8 +66,6 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             }
             return WriteError("设置失败:选择值参数为空，请在尝试");
         }
-
-
         [ValidateInput(false)]//防止对文本验证，保存不了HTML元素
         public ActionResult UpdateCommerce(string Name, string Conent,  int id,int type)
         {
@@ -116,9 +114,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
         public string GetImageUrl(string conters)
         {
             System.Text.RegularExpressions.Regex regImg = new Regex(@"<img\b[^<>]*?\bsrc[\s\t\r\n]*=[\s\t\r\n]*[""']?[\s\t\r\n]*(?<imgUrl>[^\s\t\r\n""'<>]*)[^<>]*?/?[\s\t\r\n]*>", RegexOptions.IgnoreCase);
-
             // 搜索匹配的字符串 
-
             MatchCollection matches = regImg.Matches(conters);
              if (matches.Count>0)
             { return matches[0].Groups["imgUrl"].Value; }
@@ -126,7 +122,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
         }
         public ActionResult SearchCommerce(int index,string name,int type)
         {
-            var list = GetItemModel(index,name,type);
+            var list =Commerce.GetItemModel(index,name,out TotalPage,type);
             return Json(new { rowCount = TotalPage, pageCount = ViewBag.PageCount, date = list });
         }
 
@@ -152,43 +148,6 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             }
             return WriteError("删除失败:选择值参数为空，请在尝试");
         }
-        /// <summary>
-        /// 获取list将model 转 viewModel
-        /// </summary>
-        /// <param name="items"></param>
-        /// <returns></returns>
-        public IEnumerable <CommerceViewModel> GetItemModel(int index,string name,int type)
-        {
-            List<Commerce>itemList=null;
-            if(string.IsNullOrWhiteSpace(name))
-            {
-                  itemList=Commerce.QueryByPage(index, pageSize, out TotalPage, c => c.IsDelete==0&&c.Type==type, c => c.id).ToList<Commerce>();
-            }
-            else
-            {
-                itemList = Commerce.QueryByPage(index, pageSize, out TotalPage, c => c.IsDelete == 0 && c.Type == type&& c.Name.Contains(name), c => c.id).ToList<Commerce>();
-            }
-            int newid = 1;
-            if (index > 1)
-            {
-                newid = (index - 1) * 10 + newid;
-            }
-            return itemList.Select(d => new CommerceViewModel
-            {
-                Nid=newid++,
-                IsDelete = d.IsDelete,
-                LookBool = d.Look==0?true:false,
-                id=d.id,
-                Contents=d.Contents.Length>10?d.Contents.Substring(0,8):d.Contents,
-                Creater=d.Creater,
-                CreateTime=d.CreateTime,
-                Look=d.Look,
-                Name=d.Name,
-                Remark=d.Remark,
-                UpdateTime=d.UpdateTime,
-                UpdateTimeStr=d.UpdateTime.ToShortDateString(),
-                typeName=d.Type
-            });
-        }
+  
     }
 }
