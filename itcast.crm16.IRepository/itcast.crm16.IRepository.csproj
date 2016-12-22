@@ -46,6 +46,7 @@
     <Compile Include="FSHistory.cs" />
     <Compile Include="IBaseDal.cs" />
     <Compile Include="IMemberMsgRepository.cs" />
+    <Compile Include="IPolicyRepository.cs" />
     <Compile Include="IRepository.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

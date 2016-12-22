@@ -61,6 +61,7 @@
     <Compile Include="NewType.cs">
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>
+    <Compile Include="PolicyRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs">
       <AutoGen>True</AutoGen>

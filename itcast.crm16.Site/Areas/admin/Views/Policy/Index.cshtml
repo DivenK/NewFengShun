@@ -1,0 +1,243 @@
+﻿@{
+    ViewBag.Title = "政策法规";
+    Layout = "~/Areas/admin/Views/Shared/AdminMaster.cshtml";
+}
+@using itcast.crm16.model
+<script src="~/Areas/admin/Scripts/Policy.js"></script>
+<div class="content" style="margin-top:50px;">
+    <div class="card-box">
+        <!-- Row start -->
+        <div class="am-g">
+            <div class="am-u-sm-12 am-u-md-6">
+                <div class="am-btn-toolbar">    
+                    <div class="am-btn-group am-btn-group-xs">
+                        <button type="button" class="am-btn am-btn-secondary js-modal-open" id="addmember"><span class="am-icon-plus"></span>发布</button>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-sm-12 am-u-md-3">
+                <div class="am-input-group am-input-group-sm">
+                    <input type="text" class="am-form-field" id="searchName">
+                    <span class="am-input-group-btn">
+                        <button class="am-btn am-btn-default" type="button" id="seachNew">搜索</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- Row end -->
+        <!-- Row start -->
+        <div class="am-g">
+            <div class="am-u-sm-12">
+                <form class="am-form">
+                    <table class="am-table am-table-striped am-table-hover  table-main am-table-centered">
+                        <thead>
+                            <tr>
+                                <th class="table-title">序号</th>
+                                <th class="table-title">标题</th>
+                                <th class="table-site">显示</th>
+                                <th class="table-site">发布者</th>
+                                <th class="table-date am-hide-sm-only">发布日期</th>
+                                <th class="table-set newtableBTN">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="memberTbody">
+                            @{
+                                List<Policy> policyList = ViewBag.Policy as List<Policy>;
+                                if (policyList != null)
+                                {
+                                    for (int i = 0; i < policyList.Count; i++)
+                                    {
+                                        <tr>
+                                            <td>@(i + 1)</td>
+                                            <td>@policyList[i].Title</td>
+                                            <td class="am-hide-sm-only" data-id="@policyList[i].id"><input type="checkbox" class="am-switch am-round am-switch-success  newDisplay changelook" @(policyList[i].IsComment ? "Checked" : "") data-id="@policyList[i].id" /></td>
+                                            <td>@policyList[i].Creator</td>
+                                            <td>@policyList[i].CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                            <td>
+                                                <div class="newtableBTN">
+                                                    <div class="am-btn-group am-btn-group-xs">
+                                                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary member-edit" id="newEdit" data-id="@policyList[i].id"><span class="am-icon-pencil-square-o"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span> 编辑</a>
+
+                                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only member-del" data-id="@policyList[i].id"><span class="am-icon-trash-o"></span> 删除</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    <div class="am-cf">
+                        共<span id="new-pageCount"> @ViewBag.TotalPage</span> 条记录
+                        <div class="am-fr" id="pageDemo" date-pageSize="@ViewBag.PageSize" date-TotalPage="@ViewBag.TotalPage" data-indexPage="1" data-PageCount="@ViewBag.PageCount">
+
+                        </div>
+                    </div>
+                    <hr />
+                    <p>注：.....</p>
+                </form>
+                <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1" dat>
+                    <div class="am-modal-dialog">
+                        <div class="am-modal-hd">
+                            <label id="newTitle"> 政策法规 </label>
+                            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+                        </div>
+                        <div class="am-modal-bd">
+                            <div class="am-u-md-12">
+                                <form class="am-form am-text-sm">
+                                    
+                                    <div class="am-form-group">
+                                        <div class="am-g">
+                                            <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ipt-text-1">标题</label>
+                                            <input class="am-u-md-10 form-control" id="doc-ipt-text-1" placeholder="输入标题信息" data-id="0" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <div class="am-g">
+                                            <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ta-1">内容</label>
+                                            <textarea class="am-u-md-10" id="doc-ta-1"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="am-form-group">
+                                        <div class="am-g">
+                                            <label class="am-u-md-6 am-md-text-right am-padding-left-0" for="doc-ta-1"></label>
+                                            <div class="am-u-md-4  am-padding-right-0">
+                                                <button type="button" class="am-btn am-btn-default " id="formSubmit" date-id="0"> 保存</button>
+                                                <button type="button" class="am-btn am-btn-default  " style="margin-left:30px" id="Cancel"> 取消</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    @*富文本工具栏显示的字段toolbars: [
+         [
+             'anchor', //锚点
+              'undo', //撤销
+              'redo', //重做
+              'bold', //加粗
+              'indent', //首行缩进
+              'snapscreen', //截图
+              'italic', //斜体
+              'underline', //下划线
+              'strikethrough', //删除线
+              'subscript', //下标
+              'fontborder', //字符边框
+              'superscript', //上标
+              'formatmatch', //格式刷
+              'source', //源代码
+              'blockquote', //引用
+              'pasteplain', //纯文本粘贴模式
+              'selectall', //全选
+              'print', //打印
+              'preview', //预览
+              'horizontal', //分隔线
+              'removeformat', //清除格式
+              'time', //时间
+              'date', //日期
+              'unlink', //取消链接
+              'insertrow', //前插入行
+              'insertcol', //前插入列
+              'mergeright', //右合并单元格
+              'mergedown', //下合并单元格
+              'deleterow', //删除行
+              'deletecol', //删除列
+              'splittorows', //拆分成行
+              'splittocols', //拆分成列
+              'splittocells', //完全拆分单元格
+              'deletecaption', //删除表格标题
+              'inserttitle', //插入标题
+              'mergecells', //合并多个单元格
+              'deletetable', //删除表格
+              'cleardoc', //清空文档
+              'insertparagraphbeforetable', //"表格前插入行"
+              'insertcode', //代码语言
+              'fontfamily', //字体
+              'fontsize', //字号
+              'paragraph', //段落格式
+              'simpleupload', //单图上传
+              'insertimage', //多图上传
+              'edittable', //表格属性
+              'edittd', //单元格属性
+              'link', //超链接
+              'emotion', //表情
+              'spechars', //特殊字符
+              'searchreplace', //查询替换
+              'map', //Baidu地图
+              'gmap', //Google地图
+              'insertvideo', //视频
+              'help', //帮助
+              'justifyleft', //居左对齐
+              'justifyright', //居右对齐
+              'justifycenter', //居中对齐
+              'justifyjustify', //两端对齐
+              'forecolor', //字体颜色
+              'backcolor', //背景色
+              'insertorderedlist', //有序列表
+              'insertunorderedlist', //无序列表
+              'fullscreen', //全屏
+              'directionalityltr', //从左向右输入
+              'directionalityrtl', //从右向左输入
+              'rowspacingtop', //段前距
+              'rowspacingbottom', //段后距
+              'pagebreak', //分页
+              'insertframe', //插入Iframe
+              'imagenone', //默认
+              'imageleft', //左浮动
+              'imageright', //右浮动
+              'attachment', //附件
+              'imagecenter', //居中
+              'wordimage', //图片转存
+              'lineheight', //行间距
+              'edittip ', //编辑提示
+              'customstyle', //自定义标题
+              'autotypeset', //自动排版
+              'webapp', //百度应用
+              'touppercase', //字母大写
+              'tolowercase', //字母小写
+              'background', //背景
+              'template', //模板
+              'scrawl', //涂鸦
+              'music', //音乐
+              'inserttable', //插入表格
+              'drafts', // 从草稿箱加载
+              'charts', // 图表
+         ]
+
+        ]*@
+    <script type="text/javascript">
+        var editorOption = {
+            initialFrameWidth: 630,
+            initialFrameHeight: 450,
+            autoHeightEnabled: false,//设置滚动条出现
+            toolbars: [
+['source', 'undo', 'redo', 'bold', 'italic', 'indent',
+'underline', 'fontborder', 'backcolor', 'fontsize', 'fontfamily',
+'justifyleft', 'justifyright', 'justifycenter', 'justifyjustify',
+'strikethrough', 'superscript', 'subscript', 'removeformat',
+'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'print', 'date',
+   'insertimage', 'map',
+'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist',
+'selectall', 'cleardoc', 'link', 'unlink', 'emotion', 'help']
+            ]
+        };
+        var editor = new baidu.editor.ui.Editor(editorOption);
+        editor.addListener("ready", function () {
+            // editor准备好之后才可以使用
+            editor.setContent("");
+
+        });
+        editor.render('doc-ta-1');  //绑定id
+    </script>
+}@*//要用这个包起来*@

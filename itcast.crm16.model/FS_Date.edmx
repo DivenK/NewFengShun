@@ -114,15 +114,36 @@
           <Property Name="Look" Type="int" Nullable="false" />
           <Property Name="display" Type="int" Nullable="false" />
         </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“FS_Site.dbo.NewType”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="NewType">
           <Key>
             <PropertyRef Name="id" />
+            
+            
+            
+            
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CreatTime" Type="datetime" Nullable="false" />
           <Property Name="Creator" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IsDelete" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Policy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Content" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="Praise" Type="int" Nullable="false" />
+          <Property Name="IsComment" Type="bit" Nullable="false" />
+          <Property Name="Creator" Type="nvarchar" MaxLength="64" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Updator" Type="nvarchar" MaxLength="64" />
+          <Property Name="UpdateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="sysMenus">
           <Key>
@@ -193,9 +214,15 @@
           <Property Name="uID" Type="int" Nullable="false" />
           <Property Name="rID" Type="int" Nullable="false" />
         </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“FS_Site.dbo.User”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserId" />
+            
+            
+            
+            
           </Key>
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -204,9 +231,15 @@
           <Property Name="CreatTime" Type="datetime" Nullable="false" />
           <Property Name="IsDelete" Type="int" Nullable="false" />
         </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“FS_Site.dbo.VipUser”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="VipUser">
           <Key>
             <PropertyRef Name="id" />
+            
+            
+            
+            
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VipName" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -259,13 +292,40 @@
           <EntitySet Name="MemberDynamic" EntityType="Self.MemberDynamic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MemberMsg" EntityType="Self.MemberMsg" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="New" EntityType="Self.New" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="NewType" EntityType="Self.NewType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Policy" EntityType="Self.Policy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysMenus" EntityType="Self.sysMenus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysRole" EntityType="Self.sysRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysUserInfo" EntityType="Self.sysUserInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysUserInfo_Role" EntityType="Self.sysUserInfo_Role" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="VipUser" EntityType="Self.VipUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewType" EntityType="Self.NewType" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[NewType].[id] AS [id], 
+[NewType].[TypeName] AS [TypeName], 
+[NewType].[CreatTime] AS [CreatTime], 
+[NewType].[Creator] AS [Creator], 
+[NewType].[IsDelete] AS [IsDelete]
+FROM [dbo].[NewType] AS [NewType]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="User" EntityType="Self.User" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[User].[UserId] AS [UserId], 
+[User].[UserName] AS [UserName], 
+[User].[UserPwd] AS [UserPwd], 
+[User].[Name] AS [Name], 
+[User].[CreatTime] AS [CreatTime], 
+[User].[IsDelete] AS [IsDelete]
+FROM [dbo].[User] AS [User]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VipUser" EntityType="Self.VipUser" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[VipUser].[id] AS [id], 
+[VipUser].[VipName] AS [VipName], 
+[VipUser].[VipPwd] AS [VipPwd], 
+[VipUser].[Company] AS [Company], 
+[VipUser].[CreatTime] AS [CreatTime], 
+[VipUser].[IsDelete] AS [IsDelete]
+FROM [dbo].[VipUser] AS [VipUser]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_MemberDynamic_ArticleType" Association="Self.FK_MemberDynamic_ArticleType">
             <End Role="ArticleType" EntitySet="ArticleType" />
             <End Role="MemberDynamic" EntitySet="MemberDynamic" />
@@ -310,6 +370,7 @@
             <End Role="sysUserInfo" EntitySet="sysUserInfo" />
             <End Role="sysUserInfo_Role" EntitySet="sysUserInfo_Role" />
           </AssociationSet>
+          <EntitySet Name="Policy" EntityType="FS_SiteModel.Policy" />
         </EntityContainer>
         <EntityType Name="ArticleType">
           <Key>
@@ -563,6 +624,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Policy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Praise" Type="Int32" Nullable="false" />
+          <Property Name="IsComment" Type="Boolean" Nullable="false" />
+          <Property Name="Creator" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Updator" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -789,6 +865,22 @@
                 <ScalarProperty Name="Company" ColumnName="Company" />
                 <ScalarProperty Name="VipPwd" ColumnName="VipPwd" />
                 <ScalarProperty Name="VipName" ColumnName="VipName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Policy">
+            <EntityTypeMapping TypeName="FS_SiteModel.Policy">
+              <MappingFragment StoreEntitySet="Policy">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="Updator" ColumnName="Updator" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="IsComment" ColumnName="IsComment" />
+                <ScalarProperty Name="Praise" ColumnName="Praise" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
