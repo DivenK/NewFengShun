@@ -54,6 +54,7 @@
     <Compile Include="NewType.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
+    <Compile Include="PolicyServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services.cs" />
     <Compile Include="Services1.cs">
