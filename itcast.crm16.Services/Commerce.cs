@@ -55,6 +55,7 @@ namespace itcast.crm16.Services
                 Look = d.Look,
                 Name = d.Name,
                 Remark = d.Remark,
+                ImageUrl=d.ImageUrl,
                 UpdateTime = d.UpdateTime,
                 UpdateTimeStr = d.UpdateTime.ToShortDateString(),
                 typeName = d.Type

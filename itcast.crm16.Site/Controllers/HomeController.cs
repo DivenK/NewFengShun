@@ -14,11 +14,12 @@ namespace itcast.crm16.Site.Controllers
     [WebHelper.Attrs.SkipCheckLogin]
     public class HomeController : BaseController
     {
-        public HomeController(IsysMenusServices mSer, INewServices newSer, IUserServices user, IFSHistoryService fser, ISiteSetService siteService) :base(mSer)
+        public HomeController(IsysMenusServices mSer, INewServices newSer, IUserServices user, IFSHistoryService fser, ISiteSetService siteService,ICommerce comSer) :base(mSer)
         {
             base.news = newSer;
             base.FSHistorySer = fser;
             base.siteService = siteService;
+            base.Commerce = comSer;
         }
         // GET: /Home/
         public ActionResult Index()
@@ -26,6 +27,10 @@ namespace itcast.crm16.Site.Controllers
             HomeViewModel model = new HomeViewModel();
             model.FSHistoryList = FSHistorySer.GetItemModel(1, out TotalPage, "").ToList();
             model.ImageList = siteService.GetItems(1, 5, 0).ToList();
+            model.NewList = news.NewPageList(1, 0, "", out TotalPage);
+            model.NewListType = news.NewPageList(1, 1, "", out TotalPage);
+            model.vipUserImageList = Commerce.GetItemModel(1, "", out TotalPage, 2).ToList();
+            ViewBag.ModelList = model;
             return View();
         }
 

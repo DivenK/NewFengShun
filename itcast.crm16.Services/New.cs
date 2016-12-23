@@ -28,7 +28,7 @@ namespace itcast.crm16.Services
 
 
 
-        public List<New> NewPageList(int index, int typeId,string Name, out int count)
+        public List<New> NewPageList(int index, int typeId,string Name, out int count,int pageSize=10)
         {
             Expression<Func<New, bool>> where = (c => c.IsDelete == 0);
             if (typeId > 0)

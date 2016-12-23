@@ -13,7 +13,9 @@ namespace itcast.crm16.Site.Models
 
         public List<New> NewList { get; set; }
 
-        public List<Commerce> vipUserImageList { get; set; }
+        public List<New> NewListType { get; set; }
+
+        public List<CommerceViewModel> vipUserImageList { get; set; }
 
         public List<MemberDynamic> MemberList { get; set; }
 

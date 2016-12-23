@@ -1,20 +1,20 @@
-﻿@{
-    ViewBag.Title = "广东丰顺商会";
+﻿@using itcast.crm16.Site.Models;
+@{
+    ViewBag.Title = "丰顺商会欢迎您";
     Layout = "~/Views/Shared/_PageMaster.cshtml";
+    var modelItems = ViewBag.ModelList as HomeViewModel;
 }
 <div class="index-page font_wryh">
     <div class="w1200">
         <div class="p1th">
-
             <div class="scrollBox">
                 <!-- 放图片或者背景都可以 -->
                 <ul class="img_list clearfix" id="foo3">
-                    <li class="banner1"></li>
-                    <li class="banner2"></li>
-                    <li class="banner3"></li>
-                    <li class="banner4"></li>
-                    <li class="banner5"></li>
-
+                     <li class="banner1"></li>
+                     <li class="banner2"></li>
+                     <li class="banner3"></li>
+                     <li class="banner4"></li>
+                     <li class="banner5"></li>
                 </ul>
                 <!-- 大图缩率图 -->
                 <!-- 渐变切换 -->
@@ -25,7 +25,6 @@
                 <div class="page-box" id="pager3" style="display: block;"><a href="#" class="selected"><span>1</span></a><a href="#" class=""><span>2</span></a><a href="#" class=""><span>3</span></a></div>
             </div>
         </div>
-
     </div>
     <div class="p2th">
 
@@ -40,46 +39,26 @@
                 <div class="content">
                     <div class="box-1">
                         <div class="title">
-                            【共谋发展谱新章】2016年度广东丰顺商会常务理事会第一次会议于深圳顺利召开
+                            @(modelItems.NewList.FirstOrDefault().Name)
                         </div>
                         <div class="des-txt clearfix">
-                            此次会议以“共谋发展谱新章”为主题，提出把工作重点放在对会员提供良好的投资项目上，进一步提高服务品质，凝心聚力，共同开创商会新局面！ <span class="time-txt frdi">[2016/12/3]</span>
+                           @Html.Raw(modelItems.NewList.FirstOrDefault().Conent.Substring(0, 35)) <span class="time-txt frdi">@modelItems.NewList.FirstOrDefault().CreatTime.ToShortDateString()</span>
                         </div>
-
                     </div>
                     <div class="box-2">
                         <ul class="list">
                             <a href="">
-                                <li class="clearfix">
-                                    <p class="txt fldi">
-                                        商会代表一行回乡考察，寻找适宜商会发展项目
-                                    </p>
-                                    <span class="time-txt frdi">[2016/12/3]</span>
-                                </li>
-                                <li class="clearfix">
-                                    <p class="txt fldi">
-                                        丰商齐聚 携手共赢——广东丰顺商会会员年度大....
-                                    </p>
-                                    <span class="time-txt frdi">[2016/12/3]</span>
-                                </li>
-                                <li class="clearfix">
-                                    <p class="txt fldi">
-                                        青春齐聚，携手未来--商会二代首堂公开课圆满落幕
-                                    </p>
-                                    <span class="time-txt frdi">[2016/12/3]</span>
-                                </li>
-                                <li class="clearfix">
-                                    <p class="txt fldi">
-                                        各地竞推PPP项目为稳增长加杠杆 投资总额超3万亿　　　
-                                    </p>
-                                    <span class="time-txt frdi">[2016/12/3]</span>
-                                </li>
-                                <li class="clearfix">
-                                    <p class="txt fldi">
-                                        县委副书记、县长曾永祥 ，县教育局局长曾命城一行莅临广东丰顺商会新会址
-                                    </p>
-                                    <span class="time-txt frdi">[2016/12/3]</span>
-                                </li>
+                                @for (int i = 1; i < 6; i++)
+                                {
+
+                                    <li class="clearfix">
+                                        <p class="txt fldi">
+                                            @(modelItems.NewList[i].Name))
+                                        </p>
+                                        <span class="time-txt frdi">@modelItems.NewList[i].CreatTime.ToShortDateString()</span>
+                                    </li>
+
+                                }
                             </a>
                         </ul>
                     </div>
@@ -95,46 +74,24 @@
                 <div class="content">
                     <div class="box-1">
                         <div class="title">
-                            【共谋发展谱新章】2016年度广东丰顺商会常务理事会第一次会议于深圳顺利召开
+                            @(modelItems.NewListType.FirstOrDefault().Name)
                         </div>
                         <div class="des-txt clearfix">
-                            此次会议以“共谋发展谱新章”为主题，提出把工作重点放在对会员提供良好的投资项目上，进一步提高服务品质，凝心聚力，共同开创商会新局面！ <span class="time-txt frdi">[2016/12/3]</span>
+                            @(modelItems.NewListType.FirstOrDefault().Conent.Substring(0, 35)) <span class="time-txt frdi">@modelItems.NewListType.FirstOrDefault().CreatTime.ToShortDateString()</span>
                         </div>
-
                     </div>
                     <div class="box-2">
                         <ul class="list">
                             <a href="">
-                                <li class="clearfix">
-                                    <p class="txt fldi">
-                                        商会代表一行回乡考察，寻找适宜商会发展项目
-                                    </p>
-                                    <span class="time-txt frdi">[2016/12/3]</span>
-                                </li>
-                                <li class="clearfix">
-                                    <p class="txt fldi">
-                                        丰商齐聚 携手共赢——广东丰顺商会会员年度大....
-                                    </p>
-                                    <span class="time-txt frdi">[2016/12/3]</span>
-                                </li>
-                                <li class="clearfix">
-                                    <p class="txt fldi">
-                                        青春齐聚，携手未来--商会二代首堂公开课圆满落幕
-                                    </p>
-                                    <span class="time-txt frdi">[2016/12/3]</span>
-                                </li>
-                                <li class="clearfix">
-                                    <p class="txt fldi">
-                                        各地竞推PPP项目为稳增长加杠杆 投资总额超3万亿　　　
-                                    </p>
-                                    <span class="time-txt frdi">[2016/12/3]</span>
-                                </li>
-                                <li class="clearfix">
-                                    <p class="txt fldi">
-                                        县委副书记、县长曾永祥 ，县教育局局长曾命城一行莅临广东丰顺商会新会址
-                                    </p>
-                                    <span class="time-txt frdi">[2016/12/3]</span>
-                                </li>
+                                @for (int i = 1; i < 6; i++)
+                                {
+                                    <li class="clearfix">
+                                        <p class="txt fldi">
+                                            @(modelItems.NewListType[i].Name))
+                                        </p>
+                                        <span class="time-txt frdi">@modelItems.NewListType[i].CreatTime.ToShortDateString()</span>
+                                    </li>
+                                }
                             </a>
                         </ul>
                     </div>
@@ -161,64 +118,22 @@
                     <div class="" id="pic_marquee">
                         <table border="0" cellspacing="0" cellpadding="0">
                             <tr>
-                                <td>
+                                @foreach (var item in modelItems.vipUserImageList)
+                                {
+                                    <td>
                                     <div class="item">
                                         <div class="img">
-                                            <img src="/Content/images/test/15.jpg">
+                                            <img src="@item.ImageUrl">
                                         </div>
 
                                     </div>
                                 </td>
-                                <td>
-                                    <div class="item">
-                                        <div class="img">
-                                            <img src="/Content/images/test/34.jpg">
-                                        </div>
-
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="item">
-                                        <div class="img">
-                                            <img src="/Content/images/test/36.jpg">
-                                        </div>
-
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="item">
-                                        <div class="img">
-                                            <img src="/Content/images/test/38.jpg">
-                                        </div>
-
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="item">
-                                        <div class="img">
-                                            <img src="/Content/images/test/40.jpg">
-                                        </div>
-
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="item">
-                                        <div class="img">
-                                            <img src="/Content/images/test/15.jpg">
-                                        </div>
-
-                                    </div>
-                                </td>
+                                }
                             </tr>
                         </table>
 
                     </div>
                 </div>
-
-
-
-
-
             </div>
         </div>
     </div>
@@ -377,9 +292,7 @@
                                     <span class="time frdi ">2016-04-14</span>
                                 </div>
                             </a>
-                            <div class="txt-item">
-                                种玊上围的知名度，已经盖过了它所属的行政村——汤南镇新种玊上围的知名度，已经盖过了它所属的行政村——汤南镇新种玊上围的知名度，已经盖过了它所属的行政村——汤南镇新...
-                            </div>
+                    
                         </li>
                         <li>
                             <a href="#">
@@ -388,12 +301,27 @@
                                     <span class="time frdi ">2016-04-14</span>
                                 </div>
                             </a>
-                            <div class="txt-item">
-                                享有“梅州南大门，潮汕后花园”美誉的丰顺，自古以来就是钟灵毓秀之地。丰顺有汉、畲两族，客家、福佬两系以及客、潮两语，历史的磨合...
-                            </div>
+                       
                         </li>
 
-
+                             <li>
+                            <a href="#">
+                                <div class="title-con clearfix">
+                                    <span class="title">丰顺历史名人--开漳圣王陈元光</span>
+                                    <span class="time frdi ">2016-04-14</span>
+                                </div>
+                            </a>
+                       
+                        </li>
+                             <li>
+                            <a href="#">
+                                <div class="title-con clearfix">
+                                    <span class="title">丰顺历史名人--开漳圣王陈元光</span>
+                                    <span class="time frdi ">2016-04-14</span>
+                                </div>
+                            </a>
+                       
+                        </li>
                     </ul>
                 </div>
                 <div class="rbox frdi">
