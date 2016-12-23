@@ -96,7 +96,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             model.type = type;
             if (id > 0)
             {
-                siteService.Edit(model, new string[] { "Title,Contents,Image,type" });
+                siteService.Edit(model, new string[] { "Title","Contents","Image","type" });
             }
             else
             {
