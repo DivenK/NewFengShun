@@ -138,6 +138,9 @@
     <Compile Include="NewType.cs">
       <DependentUpon>FS_Date.tt</DependentUpon>
     </Compile>
+    <Compile Include="Policy.cs">
+      <DependentUpon>FS_Date.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SiteSet.cs">
       <DependentUpon>FS_Date.tt</DependentUpon>

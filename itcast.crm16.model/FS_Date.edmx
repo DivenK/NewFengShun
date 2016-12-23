@@ -124,6 +124,21 @@
           <Property Name="Creator" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IsDelete" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Policy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Content" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="Praise" Type="int" Nullable="false" />
+          <Property Name="IsComment" Type="bit" Nullable="false" />
+          <Property Name="Creator" Type="nvarchar" MaxLength="64" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Updator" Type="nvarchar" MaxLength="64" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="SiteSet">
           <Key>
             <PropertyRef Name="id" />
@@ -275,6 +290,7 @@
           <EntitySet Name="MemberMsg" EntityType="Self.MemberMsg" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="New" EntityType="Self.New" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NewType" EntityType="Self.NewType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Policy" EntityType="Self.Policy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SiteSet" EntityType="Self.SiteSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysMenus" EntityType="Self.sysMenus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysRole" EntityType="Self.sysRole" Schema="dbo" store:Type="Tables" />
@@ -327,6 +343,7 @@
             <End Role="sysUserInfo_Role" EntitySet="sysUserInfo_Role" />
           </AssociationSet>
           <EntitySet Name="SiteSet" EntityType="FS_SiteModel.SiteSet" />
+          <EntitySet Name="Policy" EntityType="FS_SiteModel.Policy" />
         </EntityContainer>
         <EntityType Name="ArticleType">
           <Key>
@@ -595,6 +612,21 @@
           <Property Name="type" Type="Int32" Nullable="false" />
           <Property Name="Look" Type="Int32" />
         </EntityType>
+        <EntityType Name="Policy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Praise" Type="Int32" Nullable="false" />
+          <Property Name="IsComment" Type="Boolean" Nullable="false" />
+          <Property Name="Creator" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Updator" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -836,6 +868,22 @@
                 <ScalarProperty Name="Creator" ColumnName="Creator" />
                 <ScalarProperty Name="Contents" ColumnName="Contents" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Policy">
+            <EntityTypeMapping TypeName="FS_SiteModel.Policy">
+              <MappingFragment StoreEntitySet="Policy">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="Updator" ColumnName="Updator" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="IsComment" ColumnName="IsComment" />
+                <ScalarProperty Name="Praise" ColumnName="Praise" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>

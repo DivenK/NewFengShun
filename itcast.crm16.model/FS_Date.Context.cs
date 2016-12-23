@@ -40,5 +40,6 @@ namespace itcast.crm16.model
         public DbSet<User> User { get; set; }
         public DbSet<VipUser> VipUser { get; set; }
         public DbSet<SiteSet> SiteSet { get; set; }
+        public DbSet<Policy> Policy { get; set; }
     }
 }
