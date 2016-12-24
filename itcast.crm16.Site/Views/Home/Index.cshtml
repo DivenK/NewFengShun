@@ -11,7 +11,6 @@
 
                 <!-- 放图片或者背景都可以 -->
                 <ul class="img_list clearfix" id="foo3">
-                     <li class="banner" style="background-image:url(/Content/ueditor/net/upload/image/20161222/6361804277019016779021134.jpg)"></li>
                     @foreach (var item in modelItems.ImageList)
                     {
                         <li class="banner" style="background-image:url(@item.Image)"></li>
@@ -442,20 +441,6 @@
         $(this).find('.txt-item').addClass('dn');
     });
 
-    // 头部二维码显示或隐藏
-    $('[data-role="min-code-icon"]').hover(function () {
-        $(this).find('.max-code').removeClass('dn');
-
-    }, function () {
-        $(this).find('.max-code').addClass('dn');
-    });
-
-    $('[data-role="close-ewm-btn"]').click(function () {
-        $('[data-role="code-pop"]').addClass('dn');
-    });
-    $('[data-role="open-ewm-btn"]').click(function () {
-        $('[data-role="code-pop"]').removeClass('dn');
-    });
 
     var box_2 = document.getElementById("lately-new"), iscan = true;
     box_2.innerHTML += box_2.innerHTML;

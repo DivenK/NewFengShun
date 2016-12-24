@@ -26,7 +26,7 @@ namespace itcast.crm16.IServices
         /// <param name="pageSize">页容量</param>
         /// <param name="count">总页数</param>
         /// <param name="type">1:会员采访；2：会员动态；3：会员招聘</param>
-        /// <param name="isComent">是否已删除数据</param>
+        /// <param name="isComent">不显示的数据</param>
         /// <returns></returns>
         List<MemberDynamic> GetMemberMsgByPage(int pageIndex, int pageSize, out int count, int type,bool isComent);
 

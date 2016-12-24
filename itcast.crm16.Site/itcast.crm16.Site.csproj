@@ -1243,6 +1243,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.page.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -1296,6 +1298,7 @@
     <Content Include="Views\Cemmend\Index.cshtml" />
     <Content Include="Views\member\Index.cshtml" />
     <Content Include="Views\Cemmend\GetModel.cshtml" />
+    <Content Include="Views\member\MemberDynamic.cshtml" />
     <Content Include="Views\Cemmend\GetAddCemmend.cshtml" />
   </ItemGroup>
   <ItemGroup>

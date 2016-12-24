@@ -111,9 +111,6 @@
 
 
 }
-body{
-    overflow-x:hidden;
-}
 .w1200{
 	width: 1200px;
 	margin:0 auto;
@@ -1384,4 +1381,14 @@ body{
 .register-page .p2th .item-wrap .rbox  .input-item .location-select{
 	height: 27px;
 	margin-right: 10px;
+}
+.lxwm-page .p2th .rbox .title-item{
+	padding:20px 0px;
+	font-size: 20px;
+	color: #333;
+	border-bottom: 2px solid #eee;
+}
+.lxwm-page .p2th .rbox .item{
+	padding:20px;
+	font-size: 16px;
 }

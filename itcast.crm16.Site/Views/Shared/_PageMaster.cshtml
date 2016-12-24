@@ -5,9 +5,10 @@
 <head>
     <meta http-equiv="content-type" content="text/html" charset="utf-8"></meta>
     <title>@ViewBag.Title</title>
-    <link href="/Content/css/zt.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/css/zt.css" rel="stylesheet" />
     <link href="/Content/css/swiper-3.4.0.min.css" type="text/css" rel="stylesheet" />
-    <script type="text/javascript" src="/Content/js/jquery-1.4.2.min.js"></script>
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.page.js"></script>
     <script type="text/javascript" src="/Content/js/jquery.carouFredSel-5.5.0-auto.js"></script>
     <script type="text/javascript" src="/Content/js/swiper-3.4.0.min.js"></script>
     <script type="text/javascript" src="/Content/js/MSClass.js"></script>
@@ -57,14 +58,14 @@
                                     currentUrlParentId = currentMenus.mID;
                                 }
                                 var pMenusList = mList.Where(c => c.mParentID == -2);
-                        <li class=" first-li @(currentUrlParentId == 0 ? "cur" : "") ">
+                                <li class=" first-li @(currentUrlParentId == 0 ? "cur" : "") ">
                                     <a href="/Home/Index">首页</a>
-                        </li>
+                                </li>
                                 foreach (var item in pMenusList)
                                 {
-                        <li class=" first-li @(currentUrlParentId == item.mID ? "cur" : "") ">
-                            <a href="@(item.mUrl)">@item.mName</a>
-                        </li>
+                                    <li class=" first-li @(currentUrlParentId == item.mID ? "cur" : "") ">
+                                        <a href="@(item.mUrl)">@item.mName</a>
+                                    </li>
                                 }
                             }
                         }
@@ -134,3 +135,21 @@
 </html>
 
 
+<script type="text/javascript">
+
+    // 头部二维码显示或隐藏
+    $('[data-role="min-code-icon"]').hover(function () {
+        $(this).find('.max-code').removeClass('dn');
+
+    }, function () {
+        $(this).find('.max-code').addClass('dn');
+    });
+
+    $('[data-role="close-ewm-btn"]').click(function () {
+        $('[data-role="code-pop"]').addClass('dn');
+    });
+    $('[data-role="open-ewm-btn"]').click(function () {
+        $('[data-role="code-pop"]').removeClass('dn');
+    });
+
+</script>
