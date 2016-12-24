@@ -50,11 +50,11 @@
                                 //获取当前访问的parentid
                                 if (currentMenus != null)
                                 {
-                                    currentUrlParentId = currentMenus.mParentID;
+                                    currentUrlParentId = currentMenus.mID;
                                 }
                                 var pMenusList = mList.Where(c => c.mParentID == -2);
                                 <li class=" first-li @(currentUrlParentId == 0 ? "cur" : "")">
-                                    <a href="#">首页</a>
+                                    <a href="/Home/Index">首页</a>
                                 </li>
                                 foreach (var item in pMenusList)
                                 {
@@ -216,25 +216,7 @@
         $('[data-role="code-pop"]').removeClass('dn');
     });
 
-    var box_2 = document.getElementById("lately-new"), iscan = true;
-    box_2.innerHTML += box_2.innerHTML;
-    box_2.onmouseover = function () { iscan = false };
-    box_2.onmouseout = function () { iscan = true };
-    new function () {
-        var stop_2 = box_2.scrollTop % 42 == 0 && !iscan;
-        if (!stop_2) box_2.scrollTop == parseInt(box_2.scrollHeight / 2) ? box_2.scrollTop = 0 : box_2.scrollTop++;
-        setTimeout(arguments.callee, box_2.scrollTop % 42 ? 10 : 1500);
-    };
+ 
 
 </script>
-<script type="text/javascript">
-    var marquee1 = new Marquee("pic_marquee")
-    marquee1.Direction = "left";
-    marquee1.Step = 1;
-    marquee1.Width = 1200;
-    marquee1.Height = 185;
-    marquee1.Timer = 20;
-    marquee1.ScrollStep = 52;
-    marquee1.Start();
 
-</script>

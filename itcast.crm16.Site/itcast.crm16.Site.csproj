@@ -163,6 +163,7 @@
     <Compile Include="Content\ueditor\net\App_Code\NotSupportedHandler.cs" />
     <Compile Include="Content\ueditor\net\App_Code\PathFormater.cs" />
     <Compile Include="Content\ueditor\net\App_Code\UploadHandler.cs" />
+    <Compile Include="Controllers\CemmendController.cs" />
     <Compile Include="Controllers\ExpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -654,6 +655,7 @@
     <Content Include="Content\admin\ligerUI\skins\Tab\images\win\dialog-winbtns.gif" />
     <Content Include="Content\admin\ligerUI\skins\Tab\images\win\dialogbtn.gif" />
     <Content Include="Content\admin\ligerUI\skins\Tab\images\win\dialogicon.gif" />
+    <Content Include="Content\css\jquery.page.css" />
     <Content Include="Content\css\swiper-3.4.0.min.css" />
     <Content Include="Content\css\zt.css" />
     <Content Include="Content\images\12.jpg" />
@@ -683,6 +685,8 @@
     <Content Include="Content\images\nav-bg.png" />
     <Content Include="Content\images\new-gg-icon.png" />
     <Content Include="Content\images\point-icon.gif" />
+    <Content Include="Content\images\register-btn.gif" />
+    <Content Include="Content\images\reset-btn.gif" />
     <Content Include="Content\images\right-btn-2.png" />
     <Content Include="Content\images\right-btn.png" />
     <Content Include="Content\images\smile.jpg" />
@@ -690,6 +694,7 @@
     <Content Include="Content\images\step2.gif" />
     <Content Include="Content\images\step3.gif" />
     <Content Include="Content\images\step4.gif" />
+    <Content Include="Content\images\submit-btn.gif" />
     <Content Include="Content\images\test\1.jpg" />
     <Content Include="Content\images\test\10.jpg" />
     <Content Include="Content\images\test\11.jpg" />
@@ -748,7 +753,10 @@
     <Content Include="Content\js\jquery-1.4.2.min.js" />
     <Content Include="Content\js\jquery.carouFredSel-5.5.0-auto.js" />
     <Content Include="Content\js\jquery.js" />
+    <Content Include="Content\js\jquery.min.js" />
+    <Content Include="Content\js\jquery.page.js" />
     <Content Include="Content\js\MSClass.js" />
+    <Content Include="Content\js\PCASClass.js" />
     <Content Include="Content\js\scroll_080828.js" />
     <Content Include="Content\js\swiper-3.4.0.min.js" />
     <Content Include="Content\My97Date\calendar.js" />
@@ -1260,6 +1268,7 @@
     <Content Include="Content\aa.docx" />
     <Content Include="Areas\admin\Views\Policy\Index.cshtml" />
     <Content Include="Areas\admin\Views\SiteSet\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\FSSite.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="iconsel.html" />
     <Content Include="images\avatar.gif" />
@@ -1328,6 +1337,9 @@
     </None>
     <Content Include="Views\Shared\_PageMaster.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Cemmend\Index.cshtml" />
+    <Content Include="Views\Cemmend\GetModel.cshtml" />
+    <Content Include="Views\Cemmend\GetAddCemmend.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1350,6 +1362,10 @@
       <Project>{a6f44462-3f14-4c42-8555-6804a198d1dc}</Project>
       <Name>itcast.crm16.EntityMapping</Name>
     </ProjectReference>
+    <ProjectReference Include="..\itcast.crm16.IRepository\itcast.crm16.IRepository.csproj">
+      <Project>{2d6c69db-55c9-4f8c-9d98-d8b2d0456104}</Project>
+      <Name>itcast.crm16.IRepository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\itcast.crm16.IServices\itcast.crm16.IServices.csproj">
       <Project>{5836da32-8b72-4555-aa66-53db64e36ca1}</Project>
       <Name>itcast.crm16.IServices</Name>
@@ -1357,6 +1373,14 @@
     <ProjectReference Include="..\itcast.crm16.model\itcast.crm16.model.csproj">
       <Project>{096c8342-83d6-4fe9-9830-7ad36fb9a400}</Project>
       <Name>itcast.crm16.model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\itcast.crm16.Repository\itcast.crm16.Repository.csproj">
+      <Project>{d2fe58d5-a764-4360-b9dd-d1bbe2a66868}</Project>
+      <Name>itcast.crm16.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\itcast.crm16.Services\itcast.crm16.Services.csproj">
+      <Project>{c06b3984-f323-4c02-bb8d-1a7cc65dd7c2}</Project>
+      <Name>itcast.crm16.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\itcast.crm16.WebHelper\itcast.crm16.WebHelper.csproj">
       <Project>{edfcd864-41a2-4878-9c48-2daad0b09827}</Project>
