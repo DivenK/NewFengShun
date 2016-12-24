@@ -13,6 +13,7 @@ namespace itcast.crm16.Services
     using itcast.crm16.model;
     using itcast.crm16.IRepository;
     using Site.Models;
+    using System.Linq.Expressions;
 
     public partial class FSHistoryService : BaseBLL<FSHistory>, IFSHistoryService
     {
@@ -23,23 +24,32 @@ namespace itcast.crm16.Services
             base.basedal = dal;
         }
 
-        public IEnumerable<FSHistoryViewModel> GetItemModel(int index, out int totalPage, string name, int pageSize = 10)
+        public IEnumerable<FSHistoryViewModel> GetItemModel(int index, out int totalPage, string name, int pageSize = 10,bool IsShow=false)
         {
             List<FSHistory> itemList = null;
+            Expression<Func<FSHistory, bool>> where;
             if (string.IsNullOrWhiteSpace(name))
             {
-                itemList = dal.QueryByPage(index, pageSize, out totalPage, c => true, c => c.id).ToList<FSHistory>();
+                where = c => true;
+                if (IsShow)
+                {
+                    where = (c => true && c.Display == 0);
+                }
             }
             else
             {
-                itemList = dal.QueryByPage(index, pageSize, out totalPage, c => c.Title.Contains(name), c => c.id).ToList<FSHistory>();
+                where = c => c.Title.Contains(name);
+                if (IsShow)
+                {
+                    where = (c => c.Title.Contains(name) && c.Display == 0);
+                }
             }
+            itemList = dal.QueryByPage(index, pageSize, out totalPage, where, c => c.id).ToList<FSHistory>();
             int newid = 1;
             if (index > 1)
             {
                 newid = (index - 1) * 10 + newid;
             }
-
             return itemList.Select(d => new FSHistoryViewModel
             {
                 Nid = newid++,

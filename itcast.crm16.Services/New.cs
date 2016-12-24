@@ -28,21 +28,36 @@ namespace itcast.crm16.Services
 
 
 
-        public List<New> NewPageList(int index, int typeId,string Name, out int count,int pageSize=10)
+        public List<New> NewPageList(int index, int typeId, string Name, out int count, int pageSize = 10, bool IsShow = false)
         {
             Expression<Func<New, bool>> where = (c => c.IsDelete == 0);
+            
             if (typeId > 0)
             {
                 if (string.IsNullOrWhiteSpace(Name))
                 {
                     where = (c => c.IsDelete == 0 && c.TypeId == typeId);
+                    if (IsShow)
+                    {
+                        where = (c => c.IsDelete == 0 && c.TypeId == typeId&&c.display==0);
+                    }
                 }
                 else
-                { where = (c => c.IsDelete == 0 && c.TypeId == typeId && c.Name.Contains(Name)); }
+                {
+                    where = (c => c.IsDelete == 0 && c.TypeId == typeId && c.Name.Contains(Name));
+                    if (IsShow)
+                    {
+                        where = (c => c.IsDelete == 0 && c.TypeId == typeId && c.display == 0);
+                    }
+                }
             }
             if (!string.IsNullOrWhiteSpace(Name))
             {
                 where = (c => c.IsDelete == 0 && c.Name.Contains(Name));
+                if (IsShow)
+                {
+                    where = (c => c.IsDelete == 0 && c.TypeId == typeId && c.display == 0);
+                }
             }
             return dal.QueryByPage(index, 10, out count, where,c => c.id);
         }

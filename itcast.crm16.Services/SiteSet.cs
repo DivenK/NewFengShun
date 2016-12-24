@@ -24,7 +24,7 @@ namespace itcast.crm16.Services
             base.basedal = dal;
         }
 
-        public IEnumerable<SiteSetViewModel> GetItems(int index, int pageSize, int Type)
+        public IEnumerable<SiteSetViewModel> GetItems(int index, int pageSize, int Type,bool IsShow=false)
         {
             int count = 0;
             var indexID = 1;
@@ -33,6 +33,10 @@ namespace itcast.crm16.Services
                 indexID = (index - 1 * 10) + indexID;
             }
            var list=  dal.QueryByPage(index, pageSize, out count, c => true, c => c.id);
+            if (IsShow)
+            {
+                list = dal.QueryByPage(index, pageSize, out count, c => true&&c.Look==0, c => c.id);
+            }
             return list.Select(p => new SiteSetViewModel()
             {
                 NId = indexID++,

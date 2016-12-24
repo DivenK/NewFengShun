@@ -13,7 +13,7 @@ namespace itcast.crm16.IServices
     public partial interface ISiteSetService : IBaseBLL<SiteSet>
     {
 
-        IEnumerable<model.ModelViews.SiteSetViewModel> GetItems(int index, int pageSize, int Type);
+        IEnumerable<model.ModelViews.SiteSetViewModel> GetItems(int index, int pageSize, int Type,bool IsShow=false);
 
 
 

@@ -12,7 +12,7 @@
                 <ul class="img_list clearfix" id="foo3">
                     @foreach (var item in modelItems.ImageList)
                     {
-                            <li class="banner" style="background-image:url(@item.Image)"></li>
+                        <li class="banner" style="background-image:url(@item.Image)"></li>
                     }
                 </ul>
                 <!-- 大图缩率图 -->
@@ -41,13 +41,13 @@
                             @(modelItems.NewList.FirstOrDefault().Name)
                         </div>
                         <div class="des-txt clearfix">
-                           @Html.Raw(modelItems.NewList.FirstOrDefault().Conent.Substring(0, 35)) <span class="time-txt frdi">@modelItems.NewList.FirstOrDefault().CreatTime.ToShortDateString()</span>
+                            @Html.Raw(modelItems.NewList.FirstOrDefault().Conent.Substring(0, 35)) <span class="time-txt frdi">@modelItems.NewList.FirstOrDefault().CreatTime.ToShortDateString()</span>
                         </div>
                     </div>
                     <div class="box-2">
                         <ul class="list">
                             <a href="">
-                                @for (int i = 1; i < 6; i++)
+                                @for (int i = 1; i < 5; i++)
                                 {
 
                                     <li class="clearfix">
@@ -82,7 +82,7 @@
                     <div class="box-2">
                         <ul class="list">
                             <a href="">
-                                @for (int i = 1; i < 6; i++)
+                                @for (int i = 1; i < 5; i++)
                                 {
                                     <li class="clearfix">
                                         <p class="txt fldi">
@@ -120,13 +120,13 @@
                                 @foreach (var item in modelItems.vipUserImageList)
                                 {
                                     <td>
-                                    <div class="item">
-                                        <div class="img">
-                                            <img src="@item.ImageUrl">
-                                        </div>
+                                        <div class="item">
+                                            <div class="img">
+                                                <img src="@item.ImageUrl">
+                                            </div>
 
-                                    </div>
-                                </td>
+                                        </div>
+                                    </td>
                                 }
                             </tr>
                         </table>
@@ -149,45 +149,20 @@
                         <a href="#" class="more-txt frdi">+MORE</a>
                     </div>
                     <ul class="list clearfix">
-
-                        <li>
-                            <div class="img">
-                                <img src="/Content/images/test/25.jpg" alt="">
-                            </div>
-                            <div class="txt">
-                                <dl class="clearfix">
-                                    <dt class="fldi">二级绿茶·袋泡茶</dt>
-                                    <dd class="fldi">丰顺丰联绿色食品有限公司成立于2009年12月21日，是广东丰联投资股份有限公司全资子公司。作为一家由朱拉伊、冯小华、谭伟龙等共59位丰顺乡贤投资成立的公司，公司响应梅州“绿色崛起”的发展战略，致力于丰顺地区的农林</dd>
-                                </dl>
-
-                            </div>
-                        </li>
-                        <li>
-                            <div class="img">
-                                <img src="/Content/images/test/26.jpg" alt="">
-                            </div>
-                            <div class="txt">
-                                <dl class="clearfix">
-                                    <dt class="fldi">二级绿茶·袋装茶（250g）</dt>
-                                    <dd class="fldi">丰顺丰联绿色食品有限公司成立于2009年12月21日，是广东丰联投资股份有限公司全资子公司。作为一家由朱拉伊、冯小华、谭伟龙等共59位丰顺乡贤投资成立的公司，公司响应梅州“绿色崛起”的发展战略，致力于丰顺地区的农林</dd>
-                                </dl>
-
-                            </div>
-                        </li>
-                        <li>
-                            <div class="img">
-                                <img src="/Content/images/test/27.jpg" alt="">
-                            </div>
-                            <div class="txt">
-                                <dl class="clearfix">
-                                    <dt class="fldi">二级绿茶·纸罐装</dt>
-                                    <dd class="fldi">丰顺丰联绿色食品有限公司成立于2009年12月21日，是广东丰联投资股份有限公司全资子公司。作为一家由朱拉伊、冯小华、谭伟龙等共59位丰顺乡贤投资成立的公司，公司响应梅州“绿色崛起”的发展战略，致力于丰顺地区的农林</dd>
-                                </dl>
-
-                            </div>
-                        </li>
-
-
+                        @for (int i = 0; i < 3; i++)
+                        {
+                            <li>
+                                <div class="img">
+                                    <img src="/Content/images/test/25.jpg" alt="">
+                                </div>
+                                <div class="txt">
+                                    <dl class="clearfix">
+                                        <dt class="fldi">@modelItems.MemberTellList[i].Title</dt>
+                                        <dd class="fldi">@Html.Raw(modelItems.MemberTellList[i].Content.Length > 20 ? modelItems.MemberTellList[i].Content.Substring(0, 20) : modelItems.MemberTellList[i].Content)</dd>
+                                    </dl>
+                                </div>
+                            </li>
+                        }
                     </ul>
                 </div>
                 <div class="rbox frdi">
@@ -200,68 +175,45 @@
                     </div>
                     <div id="lately-new" class="list">
                         <ul class="">
-                            <a href="#">
-                                <li class="clearfix">
-                                    <span class="txt fldi">1111商会代表一行回乡考察，寻找适宜商会发展项目</span><span class="time frdi">2016-04-14</span>
-                                </li>
-                            </a>
-                            <a href="#">
-                                <li class="clearfix">
-                                    <span class="txt fldi">10月26日“第六届国际硒研讨会暨世界富硒长寿产业联盟大会”十几个国家的专家、学者，中国科学院、中国农业科学院等国内科研院校及专家和商贸主体等齐聚韩山，现场考察，并给予高度的好评。</span><span class="time frdi">2016-04-14</span>
-                                </li>
-                            </a>
-                            <a href="#">
-                                <li class="clearfix">
-                                    <span class="txt fldi">商会代表一行回乡考察，寻找适宜商会发展项目</span><span class="time frdi">2016-04-14</span>
-                                </li>
-                            </a>
-                            <a href="#">
-                                <li class="clearfix">
-                                    <span class="txt fldi">东丰顺商会会员年度大会暨丰顺县委县政府招商推介会在广州云来斯堡酒店隆重召开</span><span class="time frdi">2016-04-14</span>
-                                </li>
-                            </a>
-                            <a href="#">
-                                <li class="clearfix">
-                                    <span class="txt fldi">丰顺商会乡贤一行20余人前往内蒙古进行商务考察内蒙发展，寻找投资商机，游览名胜古迹，领略草原风光，体验民族风情，尽享沙漠激情。</span><span class="time frdi">2016-04-14</span>
-                                </li>
-                            </a>
-                            <a href="#">
-                                <li class="clearfix">
-                                    <span class="txt fldi">2015年9月10日下午，丰顺商会部分会员在会长冯永超的带领下，前往参观学习陈建副会长旗下的盛兴中英文学校。适逢教师节，在浓郁的尊师重教气氛中，副会长陈建热情接待商会一行人。</span><span class="time frdi">2016-04-14</span>
-                                </li>
-                            </a>
-                            <a href="#">
-                                <li class="clearfix">
-                                    <span class="txt fldi">1111商会代表一行回乡考察，寻找适宜商会发展项目</span><span class="time frdi">2016-04-14</span>
-                                </li>
-                            </a>
-                            <a href="#">
-                                <li class="clearfix">
-                                    <span class="txt fldi">10月26日“第六届国际硒研讨会暨世界富硒长寿产业联盟大会”十几个国家的专家、学者，中国科学院、中国农业科学院等国内科研院校及专家和商贸主体等齐聚韩山，现场考察，并给予高度的好评。</span><span class="time frdi">2016-04-14</span>
-                                </li>
-                            </a>
-                            <a href="#">
-                                <li class="clearfix">
-                                    <span class="txt fldi">商会代表一行回乡考察，寻找适宜商会发展项目</span><span class="time frdi">2016-04-14</span>
-                                </li>
-                            </a>
-                            <a href="#">
-                                <li class="clearfix">
-                                    <span class="txt fldi">东丰顺商会会员年度大会暨丰顺县委县政府招商推介会在广州云来斯堡酒店隆重召开</span><span class="time frdi">2016-04-14</span>
-                                </li>
-                            </a>
-                            <a href="#">
-                                <li class="clearfix">
-                                    <span class="txt fldi">丰顺商会乡贤一行20余人前往内蒙古进行商务考察内蒙发展，寻找投资商机，游览名胜古迹，领略草原风光，体验民族风情，尽享沙漠激情。</span><span class="time frdi">2016-04-14</span>
-                                </li>
-                            </a>
-                            <a href="#">
-                                <li class="clearfix">
-                                    <span class="txt fldi">2015年9月10日下午，丰顺商会部分会员在会长冯永超的带领下，前往参观学习陈建副会长旗下的盛兴中英文学校。适逢教师节，在浓郁的尊师重教气氛中，副会长陈建热情接待商会一行人。</span><span class="time frdi">2016-04-14</span>
-                                </li>
-                            </a>
-
-
+                            @if (modelItems.MemberNewsList.Count > 0)
+                            {
+                                for (int i = 0; i < 5; i++)
+                                {
+                                    <a href="">
+                                        <li class="clearfix">
+                                            <span class="txt fldi">@modelItems.MemberNewsList[0].Title</span><span class="time frdi">@modelItems.MemberNewsList[0].CreateTime.ToShortDateString()</span>
+                                        </li>
+                                    </a>
+                                }
+                            }
+                            else
+                            {
+                                 <a href="">
+                                        <li class="clearfix">
+                                            <span class="txt fldi">商会的招聘飒飒大苏打盛大</span><span class="time frdi">2016-12-14</span>
+                                        </li>
+                                    </a>
+                                       <a href="">
+                                        <li class="clearfix">
+                                            <span class="txt fldi">商会的招聘飒飒大苏打盛大</span><span class="time frdi">2016-12-14</span>
+                                        </li>
+                                    </a>
+                                       <a href="">
+                                        <li class="clearfix">
+                                            <span class="txt fldi">商会的招聘飒飒大苏打盛大</span><span class="time frdi">2016-12-14</span>
+                                        </li>
+                                    </a>
+                                       <a href="">
+                                        <li class="clearfix">
+                                            <span class="txt fldi">商会的招聘飒飒大苏打盛大</span><span class="time frdi">2016-12-14</span>
+                                        </li>
+                                    </a>
+                                       <a href="">
+                                        <li class="clearfix">
+                                            <span class="txt fldi">商会的招聘飒飒大苏打盛大</span><span class="time frdi">2016-12-14</span>
+                                        </li>
+                                    </a>
+                            }
                         </ul>
                     </div>
 
@@ -284,43 +236,17 @@
                         <a href="#" class="more-txt frdi">+MORE</a>
                     </div>
                     <ul class="list clearfix">
-                        <li>
-                            <a href="#">
-                                <div class="title-con clearfix">
-                                    <span class="title">种玊上围：请来人猜谜</span>
-                                    <span class="time frdi ">2016-04-14</span>
-                                </div>
-                            </a>
-                    
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="title-con clearfix">
-                                    <span class="title">丰顺历史名人--开漳圣王陈元光</span>
-                                    <span class="time frdi ">2016-04-14</span>
-                                </div>
-                            </a>
-                       
-                        </li>
-
-                             <li>
-                            <a href="#">
-                                <div class="title-con clearfix">
-                                    <span class="title">丰顺历史名人--开漳圣王陈元光</span>
-                                    <span class="time frdi ">2016-04-14</span>
-                                </div>
-                            </a>
-                       
-                        </li>
-                             <li>
-                            <a href="#">
-                                <div class="title-con clearfix">
-                                    <span class="title">丰顺历史名人--开漳圣王陈元光</span>
-                                    <span class="time frdi ">2016-04-14</span>
-                                </div>
-                            </a>
-                       
-                        </li>
+                        @for (int i = 0; i < 4; i++)
+                        {
+                            <li>
+                                <a href="#">
+                                    <div class="title-con clearfix">
+                                        <span class="title">@modelItems.FSHistoryList[i].Title</span>
+                                        <span class="time frdi ">@modelItems.FSHistoryList[i].CreaterTime.ToShortDateString()</span>
+                                    </div>
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
                 <div class="rbox frdi">
@@ -331,34 +257,50 @@
                         <a href="#" class="more-txt frdi">+MORE</a>
                     </div>
                     <ul class="list clearfix">
-
-                        <li>
-                            <a href="#">
-                                <div class="title-con clearfix">
-                                    <span class="title">龙归寨瀑布</span>
-                                    <span class="time frdi ">2016-04-14</span>
+                        @if (modelItems.MemberZhaoList.Count > 3)
+                        {
+                            for (int i = 0; i < 2; i++)
+                            {
+                                <li>
+                                    <a href="#">
+                                        <div class="title-con clearfix">
+                                            <span class="title">@modelItems.MemberZhaoList[i].Title</span>
+                                            <span class="time frdi ">@modelItems.MemberZhaoList[i].CreateTime.ToShortDateString()</span>
+                                        </div>
+                                    </a>
+                                    <div class="txt-item">
+                                        @Html.Raw(modelItems.MemberZhaoList[i].Content.Length > 25 ? modelItems.MemberZhaoList[i].Content.Substring(0, 25) : modelItems.MemberZhaoList[i].Content)
+                                    </div>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="#">
+                                    <div class="title-con clearfix">
+                                        <span class="title">龙归寨瀑布</span>
+                                        <span class="time frdi ">2016-04-14</span>
+                                    </div>
+                                </a>
+                                <div class="txt-item">
+                                    龙归飞瀑位于丰顺县汤坑镇东联横东，距县城13公里，来源于丰顺第二高、海拔1285米的释迦山脉。龙归飞瀑被誉为“广东省黄果树瀑布”、“粤东第一瀑
                                 </div>
-                            </a>
-                            <div class="txt-item">
-                                龙归飞瀑位于丰顺县汤坑镇东联横东，距县城13公里，来源于丰顺第二高、海拔1285米的释迦山脉。龙归飞瀑被誉为“广东省黄果树瀑布”、“粤东第一瀑
-                            </div>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="title-con clearfix">
-                                    <span class="title">云天相掩映 古堂展风采</span>
-                                    <span class="time frdi ">2016-04-14</span>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="title-con clearfix">
+                                        <span class="title">云天相掩映 古堂展风采</span>
+                                        <span class="time frdi ">2016-04-14</span>
+                                    </div>
+                                </a>
+                                <div class="txt-item">
+                                    建筑是历史的最佳见证。位于丰顺县留隍镇口铺村的笃庆堂，占地总面积1万平方米左右，距今已有161年的历史，整体呈太极形平面布局。
                                 </div>
-                            </a>
-                            <div class="txt-item">
-                                建筑是历史的最佳见证。位于丰顺县留隍镇口铺村的笃庆堂，占地总面积1万平方米左右，距今已有161年的历史，整体呈太极形平面布局。
-                            </div>
-                        </li>
-
+                            </li>
+                        }
                     </ul>
                 </div>
-
-
             </div>
         </div>
     </div>

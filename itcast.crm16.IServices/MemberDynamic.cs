@@ -13,7 +13,7 @@ namespace itcast.crm16.IServices
     using System.Collections.Generic;
 
     using itcast.crm16.model;
-    using static Common.Enums;
+
 
     public partial interface IMemberDynamicServices:IBaseBLL<MemberDynamic>
     {

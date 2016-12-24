@@ -18,7 +18,7 @@ namespace itcast.crm16.IServices
 
 
 
-        IEnumerable<Site.Models.CommerceViewModel> GetItemModel(int index, string name,out int totalPage, int type, int pageSize = 10);
+        IEnumerable<Site.Models.CommerceViewModel> GetItemModel(int index, string name, out int totalPage, int type, int pageSize = 10, bool IsShow = false);
 
 
 
