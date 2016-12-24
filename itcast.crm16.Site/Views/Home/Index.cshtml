@@ -10,11 +10,10 @@
             <div class="scrollBox">
                 <!-- 放图片或者背景都可以 -->
                 <ul class="img_list clearfix" id="foo3">
-                     <li class="banner1"></li>
-                     <li class="banner2"></li>
-                     <li class="banner3"></li>
-                     <li class="banner4"></li>
-                     <li class="banner5"></li>
+                    @foreach (var item in modelItems.ImageList)
+                    {
+                            <li class="banner" style="background-image:url(@item.Image)"></li>
+                    }
                 </ul>
                 <!-- 大图缩率图 -->
                 <!-- 渐变切换 -->
