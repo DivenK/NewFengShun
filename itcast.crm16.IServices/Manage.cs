@@ -15,13 +15,31 @@ namespace itcast.crm16.IServices
     using itcast.crm16.model;
     public partial interface IManageServices:IBaseBLL<Manage>
     {
-       
-       
-       
-       
-       
-       
-       
-       
+        /// <summary>
+        /// 前端分页获取显示企业管理数据
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        List<Manage> GetManageByPage(int pageIndex, int pageSize, out int count);
+
+        /// <summary>
+        /// 获取指定id的企业管理详细数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Manage GetManageById(int id);
+
+
+        /// <summary>
+        /// 企业点赞
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="praise"></param>
+        /// <returns></returns>
+        bool ManagePraise(int id, int praise);
+
+
     }
 }
