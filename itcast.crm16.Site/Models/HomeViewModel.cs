@@ -17,7 +17,9 @@ namespace itcast.crm16.Site.Models
 
         public List<CommerceViewModel> vipUserImageList { get; set; }
 
-        public List<MemberDynamic> MemberList { get; set; }
+        public List<MemberDynamic> MemberNewsList { get; set; }
+        public List<MemberDynamic> MemberTellList { get; set; }
+        public List<MemberDynamic> MemberZhaoList { get; set; }
 
         public List<FSHistoryViewModel> FSHistoryList { get; set; }
     }

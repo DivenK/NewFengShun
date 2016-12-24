@@ -17,6 +17,7 @@ namespace itcast.crm16.Services
     using itcast.crm16.IRepository;
     using Site.Models;
     using System.Linq;
+    using System.Linq.Expressions;
 
     public partial class CommerceServices : BaseBLL<Commerce>, ICommerce
     {
@@ -26,18 +27,37 @@ namespace itcast.crm16.Services
             this.dal = dal;
             base.basedal = dal;
         }
-
-        public IEnumerable<CommerceViewModel> GetItemModel(int index, string name, out int totalPage, int type, int pageSize = 10)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="name"></param>
+        /// <param name="totalPage"></param>
+        /// <param name="type"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="IsShow">是否显示在网站前台</param>
+        /// <returns></returns>
+        public IEnumerable<CommerceViewModel> GetItemModel(int index, string name, out int totalPage, int type, int pageSize = 10, bool IsShow=false)
         {
             List<Commerce> itemList = null;
+            Expression<Func<Commerce, bool>> where;
             if (string.IsNullOrWhiteSpace(name))
             {
-                itemList = dal.QueryByPage(index, pageSize, out totalPage, c => c.IsDelete == 0 && c.Type == type, c => c.id).ToList<Commerce>();
+                where = (c => c.IsDelete == 0 && c.Type == type);
+                if (IsShow)
+                {
+                    where = (c => c.IsDelete == 0 && c.Type == type&&c.Look==0);
+                }
             }
             else
             {
-                itemList = dal.QueryByPage(index, pageSize, out totalPage, c => c.IsDelete == 0 && c.Type == type && c.Name.Contains(name), c => c.id).ToList<Commerce>();
+                where = (c => c.IsDelete == 0 && c.Type == type && c.Name.Contains(name));
+                if (IsShow)
+                {
+                    where = (c => c.IsDelete == 0 && c.Type == type && c.Look == 0 && c.Name.Contains(name));
+                }
             }
+            itemList = dal.QueryByPage(index, pageSize, out totalPage, where, c => c.id).ToList<Commerce>();
             int newid = 1;
             if (index > 1)
             {

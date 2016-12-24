@@ -15,7 +15,7 @@ namespace itcast.crm16.IServices
     public partial interface IFSHistoryService: IBaseBLL<FSHistory>
     {
 
-        IEnumerable<FSHistoryViewModel> GetItemModel(int index, out int totalPage, string name, int pageSize = 10);
+        IEnumerable<FSHistoryViewModel> GetItemModel(int index, out int totalPage, string name, int pageSize = 10, bool IsShow = false);
 
 
 
