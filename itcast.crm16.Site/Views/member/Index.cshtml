@@ -1,0 +1,372 @@
+﻿@{
+    ViewBag.Title = "丰顺商会欢迎您";
+    Layout = "~/Views/Shared/_PageMaster.cshtml";
+}
+	
+	<!-- 页面内容开始 -->
+	<div class="register-page font_wryh inner-same-iframe">
+		<div class="w1200">
+			
+			<div class="p2th">
+				<div class="w1200">
+					<div class="item-wrap clearfix">
+						
+						<div class="rbox frdi">
+							<div class="cur-title">
+								<p>
+									当前位置：<a href="#">首页</a> >> 
+									<a href="#">关于商会</a> >> 
+									<a href="#">商会简介</a>
+								</p>
+							</div>
+							<div class="content " id="content">
+								<div class="item clearfix">
+									<div class="tips-item fldi">
+										<span class="txt f14">
+											登录名：
+										</span>
+										<span class="xing">*</span>
+									</div>
+									<div class="input-item fldi">
+										<input type="text" class="input-txt" data-role="nicheng-text" />（由字母和数字组成，至少6位）
+									</div>
+								</div>
+								<div class="item clearfix">
+									<div class="tips-item fldi">
+										<span class="txt f14">
+											登录密码：
+										</span>
+										<span class="xing">*</span>
+									</div>
+									<div class="input-item fldi">
+										<input type="password" class="input-txt" data-role="mima-text"/>（由字母和数字组成，至少6位）
+									</div>
+								</div>
+								<div class="item clearfix">
+									<div class="tips-item fldi">
+										<span class="txt f14">
+											确认密码：
+										</span>
+										<span class="xing">*</span>
+									</div>
+									<div class="input-item fldi">
+										<input type="password" class="input-txt" data-role="sure-mima-text"/>
+									</div>
+								</div>
+								<div class="item clearfix">
+									<div class="tips-item fldi">
+										<span class="txt f14">
+											姓名：
+										</span>
+										<span class="xing">*</span>
+									</div>
+									<div class="input-item fldi">
+										<input type="text" class="input-txt" data-role="name-text"/>
+									</div>
+								</div>
+								<div class="item clearfix">
+									<div class="tips-item fldi">
+										<span class="txt f14">
+											性别：
+										</span>
+										<span class="xing">*</span>
+									</div>
+									<div class="input-item fldi">
+										<label>
+											<input type="radio" class="radio-txt" value="男" name="sex" data-role="sex-text"/>男
+										</label>
+										<label>
+											<input type="radio" class="radio-txt"  value="女" name="sex" data-role="sex-text"/>女
+										</label>
+									</div>
+								</div>
+								<div class="item clearfix">
+									<div class="tips-item fldi">
+										<span class="txt f14">
+											现居住地：
+										</span>
+
+										<span class="xing">*</span>
+									</div>
+									<div class="input-item fldi">
+										<select name="P1"  class="location-select" id="sheng-text"></select><select name="C1" class="location-select" id="city-text"></select>
+									</div>
+								</div>
+								
+								<div class="item clearfix">
+									<div class="tips-item fldi">
+										<span class="txt f14">
+											所在企业：
+										</span>
+										<span class="xing">*</span>
+									</div>
+									<div class="input-item fldi">
+										<input type="text" class="input-txt" data-role="compony-text" />
+									</div>
+								</div>
+								<div class="item clearfix">
+									<div class="tips-item fldi">
+										<span class="txt f14">
+											担任职务:
+										</span>
+										
+									</div>
+									<div class="input-item fldi">
+										<input type="text" class="input-txt" data-role="jiwu-text" />
+									</div>
+								</div>
+								<div class="item clearfix">
+									<div class="tips-item fldi">
+										<span class="txt f14">
+											联系人:
+										</span>
+										
+									</div>
+									<div class="input-item fldi">
+										<input type="text" class="input-txt" data-role="lxr-txt"/>
+									</div>
+								</div>
+								
+								<div class="item clearfix">
+									<div class="tips-item fldi">
+										<span class="txt f14">
+											联系电话：
+										</span>
+										<span class="xing">*</span>
+									</div>
+									<div class="input-item fldi">
+										<input type="text" class="input-txt" data-role="phone-text"/>
+									</div>
+								</div>
+								<div class="item clearfix">
+									<div class="tips-item fldi">
+										<span class="txt f14">
+											电子邮箱：
+										</span>
+										
+									</div>
+									<div class="input-item fldi">
+										<input type="text" class="input-txt" data-role="email-text"/>
+									</div>
+								</div>
+								<div class="item clearfix">
+									<div class="tips-item fldi">
+										<span class="txt f14">
+											联系地址：
+										</span>
+										
+									</div>
+									<div class="input-item fldi">
+										<input type="text" class="input-txt" data-role="address-text"/>
+									</div>
+								</div>
+								<div class="item clearfix">
+									<div class="tips-item fldi">
+										<span class="txt f14">
+											邮政编码：
+										</span>
+										
+									</div>
+									<div class="input-item fldi">
+										<input type="text" class="input-txt" data-role="yb-text"/>
+									</div>
+								</div>
+								<div class="item clearfix">
+									<div class="tips-item fldi">
+										<span class="txt f14">
+											申请为正式会员：
+										</span>
+										
+									</div>
+									<div class="input-item fldi">
+										<input type="checkbox" data-role="sqhy-text" />
+									</div>
+								</div>
+								<div class="submit-item clearfix">
+									<div class="tips-item tc mb20">
+										<span class="txt f14">
+											标有“<span class="xing">*</span>”的输入框必须填写。
+										</span>
+										
+									</div>
+									<div data-role="tips-txt" class="color-ff0 tc mb10"></div>
+									<div class="btn-item tc">
+										<input type="image" data-role="submit-btn" class="btn mr10" title="提交" src="~/Content/images/submit-btn.gif" >
+										<input type="image" data-role="reset-btn"  class="btn"  title="重置" src="~/Content/images/reset-btn.gif" >
+									</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+
+	<!-- 页面内容结束 -->
+	
+		
+
+<script language="javascript" src="~/Content/js/PCASClass.js"></script>
+
+<script type="text/javascript">
+	new PCAS("P1","C1");
+
+	$('#foo3').carouFredSel({
+		prev: '#prev3',
+		next: '#next3',
+		pagination: "#pager3",
+		auto: true,
+		responsive: true,
+			items: 1,
+			scroll: {
+				fx: "crossfade"
+			}
+	});
+	
+	$('[data-role="submit-btn"]').click(function(event) {
+		// 以下是需要验证的信息
+		var nicheng_text=$('[data-role="nicheng-text"]').val();
+		var mima_text=$('[data-role="mima-text"]').val();
+		var sure_mima_text=$('[data-role="sure-mima-text"]').val();
+		var name_text=$('[data-role="name-text"]').val();
+		var sex_text=$(':radio[name="sex"]:checked').val();
+		var compony_text=$('[data-role="compony-text"]').val();
+		var phone_text=$('[data-role="phone-text"]').val();
+		
+		
+		var jiwu_text=$('[data-role="jiwu-text"]').val();
+		var lxr_txt=$('[data-role="lxr-txt"]').val();
+		var email_text=$('[data-role="email-text"]').val();
+		var address_text=$('[data-role="address-text"]').val();
+		var yb_text=$('[data-role="yb-text"]').val();
+		var sqhy_text=$('[data-role="sqhy-text"]').val();
+		
+		// 待解决的是地区选择
+		var s_length = $('#sheng-text option').length;
+		var sheng_text = "";
+		for (var j = 0; j < s_length; j++) {
+		                var selectChild = $('#sheng-text option').eq(j);
+		                if (selectChild.attr('selected')) {
+
+		                    	sheng_text = selectChild.val();
+		                    	
+		                }
+		}
+		var c_length = $('#city-text option').length;
+		var city_text = "";
+		for (var j = 0; j < c_length; j++) {
+		                var selectChild = $('#city-text option').eq(j);
+		                if (selectChild.attr('selected')) {
+
+		                    	city_text = selectChild.val();
+		                    	
+		                }
+		}
+
+		var addr = sheng_text + city_text;
+		
+		if (!nicheng_text) 
+		{
+		    $('[data-role="tips-txt"]').text("请输入登录名");
+		    return;
+		}
+		if (!mima_text) 
+		{
+		    $('[data-role="tips-txt"]').text("请输入登陆密码");
+		    return;
+		}
+		if (mima_text.length<6) 
+		{
+		    $('[data-role="tips-txt"]').text("请输入6位数以上的密码");
+		    return;
+		}
+		if (!sure_mima_text) 
+		{
+		    $('[data-role="tips-txt"]').text("请输入确认密码");
+		    return;
+		}
+		if (!name_text) 
+		{
+		    $('[data-role="tips-txt"]').text("请输入姓名");
+		    return;
+		}
+		if (mima_text != sure_mima_text) 
+		{
+		    $('[data-role="tips-txt"]').text("两次输入的密码不一致，请重新输入！");
+		    return;
+		}
+		if (!sex_text) 
+		{
+		    $('[data-role="tips-txt"]').text("请选择性别");
+		    return;
+		}
+		if (!sheng_text) 
+		{
+		    $('[data-role="tips-txt"]').text("请选择现居住地");
+		    return;
+		}
+		
+		if (!compony_text) 
+		{
+		    $('[data-role="tips-txt"]').text("请输入所在企业");
+		    return;
+		}
+		if (!phone_text) 
+		{
+		    $('[data-role="tips-txt"]').text("请输入联系电话");
+		    return;
+		}
+		$('[data-role="tips-txt"]').text("");
+		var total_data = {
+			"LoginName" : nicheng_text,
+			"LoginPwd" : mima_text,
+			"LoginPwd" : sure_mima_text,
+			"RealName" : name_text,
+			"Gender" : sex_text=="男"?"true":"false",
+			"Enterprise" : compony_text,
+			"CellPhone" : phone_text,
+			"Post" : jiwu_text,
+			"Contacts" : lxr_txt,
+			"Email" : email_text,
+			"ContactAddress" : address_text,
+			"Postcode" : yb_text,
+			"IsFormal": sqhy_text=="on"?"true":"false",
+            "Address":addr
+		}
+
+		$.ajax({
+		    "type": "post",
+		    "data": total_data,
+		    "data-type": "json",
+		    "url": "/member/AddMember",
+		    "success": function (e) {
+		        if(e.status==0)
+		        {
+		            alert("注册成功");
+		            window.location = "/home/index";
+		        }
+		        else
+		        {
+                    alert("注册失败");
+		        }
+		    },
+		    "error": function (er) {
+		        alert("异常错误");
+		    }
+		})
+
+		
+		
+	});
+	$('[data-role="reset-btn"]').click(function() {
+	        $('input').val("");
+	});
+	
+</script>
+
+
+
+</html>

@@ -51,9 +51,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -165,6 +165,7 @@
     <Compile Include="Content\ueditor\net\App_Code\UploadHandler.cs" />
     <Compile Include="Controllers\ExpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\memberController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -671,7 +672,6 @@
     <Content Include="Content\images\left-btn.png" />
     <Content Include="Content\images\logo.gif" />
     <Content Include="Content\images\logo.png" />
-    <Content Include="Content\images\logo1.png" />
     <Content Include="Content\images\max-logo.png" />
     <Content Include="Content\images\min-code.jpg" />
     <Content Include="Content\images\min-logo.png" />
@@ -683,6 +683,8 @@
     <Content Include="Content\images\nav-bg.png" />
     <Content Include="Content\images\new-gg-icon.png" />
     <Content Include="Content\images\point-icon.gif" />
+    <Content Include="Content\images\register-btn.gif" />
+    <Content Include="Content\images\reset-btn.gif" />
     <Content Include="Content\images\right-btn-2.png" />
     <Content Include="Content\images\right-btn.png" />
     <Content Include="Content\images\smile.jpg" />
@@ -690,51 +692,7 @@
     <Content Include="Content\images\step2.gif" />
     <Content Include="Content\images\step3.gif" />
     <Content Include="Content\images\step4.gif" />
-    <Content Include="Content\images\test\1.jpg" />
-    <Content Include="Content\images\test\10.jpg" />
-    <Content Include="Content\images\test\11.jpg" />
-    <Content Include="Content\images\test\12.JPG" />
-    <Content Include="Content\images\test\13.jpg" />
-    <Content Include="Content\images\test\14.jpg" />
-    <Content Include="Content\images\test\15.jpg" />
-    <Content Include="Content\images\test\16.jpg" />
-    <Content Include="Content\images\test\17.jpg" />
-    <Content Include="Content\images\test\18.jpg" />
-    <Content Include="Content\images\test\180x180.png" />
-    <Content Include="Content\images\test\19.jpg" />
-    <Content Include="Content\images\test\20.jpg" />
-    <Content Include="Content\images\test\21.jpg" />
-    <Content Include="Content\images\test\22.jpg" />
-    <Content Include="Content\images\test\23.JPG" />
-    <Content Include="Content\images\test\24.jpg" />
-    <Content Include="Content\images\test\25.jpg" />
-    <Content Include="Content\images\test\26.jpg" />
-    <Content Include="Content\images\test\27.jpg" />
-    <Content Include="Content\images\test\28.jpg" />
-    <Content Include="Content\images\test\29.jpg" />
-    <Content Include="Content\images\test\3.jpg" />
-    <Content Include="Content\images\test\30.jpg" />
-    <Content Include="Content\images\test\31.jpg" />
-    <Content Include="Content\images\test\32.jpg" />
-    <Content Include="Content\images\test\33.jpg" />
-    <Content Include="Content\images\test\34.jpg" />
-    <Content Include="Content\images\test\35.JPG" />
-    <Content Include="Content\images\test\36.jpg" />
-    <Content Include="Content\images\test\37.JPG" />
-    <Content Include="Content\images\test\38.JPG" />
-    <Content Include="Content\images\test\39.JPG" />
-    <Content Include="Content\images\test\4.jpg" />
-    <Content Include="Content\images\test\40.JPG" />
-    <Content Include="Content\images\test\41.JPG" />
-    <Content Include="Content\images\test\42.JPG" />
-    <Content Include="Content\images\test\43.JPG" />
-    <Content Include="Content\images\test\5.jpg" />
-    <Content Include="Content\images\test\6.jpg" />
-    <Content Include="Content\images\test\7.jpg" />
-    <Content Include="Content\images\test\8.JPG" />
-    <Content Include="Content\images\test\9.jpg" />
-    <Content Include="Content\images\test\banner.jpg" />
-    <Content Include="Content\images\test\banner2.jpg" />
+    <Content Include="Content\images\submit-btn.gif" />
     <Content Include="Content\images\title-2_03.jpg" />
     <Content Include="Content\images\title-bg_03.jpg" />
     <Content Include="Content\images\userImg.jpg" />
@@ -749,6 +707,7 @@
     <Content Include="Content\js\jquery.carouFredSel-5.5.0-auto.js" />
     <Content Include="Content\js\jquery.js" />
     <Content Include="Content\js\MSClass.js" />
+    <Content Include="Content\js\PCASClass.js" />
     <Content Include="Content\js\scroll_080828.js" />
     <Content Include="Content\js\swiper-3.4.0.min.js" />
     <Content Include="Content\My97Date\calendar.js" />
@@ -1288,6 +1247,7 @@
     <Content Include="Scripts\knockout-3.4.0.debug.js" />
     <Content Include="Scripts\knockout-3.4.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\PCASClass.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\admin\common.js" />
     <None Include="Service References\WcfChatServer\ChatManager.disco" />
@@ -1328,6 +1288,7 @@
     </None>
     <Content Include="Views\Shared\_PageMaster.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\member\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1337,6 +1298,7 @@
     <Folder Include="Areas\workflow\Models\" />
     <Folder Include="Areas\workflow\Views\Shared\" />
     <Folder Include="Content\images\images\" />
+    <Folder Include="Content\images\test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

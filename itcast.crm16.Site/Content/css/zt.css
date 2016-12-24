@@ -108,6 +108,11 @@
 *,html,body{
 	padding:0px;
 	margin: 0px;
+
+
+}
+body{
+    overflow-x:hidden;
 }
 .w1200{
 	width: 1200px;
@@ -120,12 +125,15 @@
 .color-aaa{
 	color:#aaa;
 }
-
+.color-ff0{
+	color: #FF0000;
+}
 body{
 	background: -moz-linear-gradient(top, rgba(136, 3, 3, 0.08) 0%, rgba(136, 3, 3, 0.05) 50%, rgba(136, 3, 3, 0.01) 100%);
 	    background: -webkit-linear-gradient(top, rgba(136, 3, 3, 0.08) 0%, rgba(136, 3, 3, 0.05) 50%, rgba(136, 3, 3, 0.01) 100%);
 	    background: -ms-linear-gradient(top, rgba(136, 3, 3, 0.08) 0%, rgba(136, 3, 3, 0.05) 50%, rgba(136, 3, 3, 0.01) 100%);
 	    background: linear-gradient(top, rgba(136, 3, 3, 0.08) 0%, rgba(136, 3, 3, 0.05) 50%, rgba(136, 3, 3, 0.01) 100%);
+	    overflow-x: hidden;
 
 
 }
@@ -359,9 +367,6 @@ body{
 	font-size: 14px;
 }
 
-.index-page   .title-item{
-	background: rgba(136,3,3,1);
-}
 .global-max-logo {
 	position: absolute;
 	left: -170px;
@@ -378,6 +383,10 @@ body{
 	z-index: -1;
 	opacity: .15;
 }
+.index-page   .title-item{
+	background: rgba(136,3,3,1);
+}
+
 .index-page   .title-item .title-txt{
 	padding:10px;
 	font-size: 18px;
@@ -593,6 +602,9 @@ body{
 }
 .index-page .p2th .lbox .box-2 .list li .time-txt{
 	color:#666;
+}
+.index-page .p2th .lbox  .box-2 .list li:hover{
+	font-weight: 700;
 }
 
 /* --焦点图样式-- */
@@ -842,11 +854,11 @@ body{
 .inner-same-iframe .p2th .lbox{
 	width: 228px;
 	border:1px solid #f5f5f5;
-	background-color: #fff;
+	
 }
 
 .inner-same-iframe .p2th .lbox h3.title{
-	width: 230px;
+
 	height: 50px;
 	font-size: 18px;
 	line-height: 50px;
@@ -854,38 +866,45 @@ body{
 	color: #fff;
 	background: url(../images/title-bg_03.jpg) no-repeat;
 }
+.inner-same-iframe .p2th .lbox .lx-item .code-item{
+	width: 160px;
+	height: 160px;
+	margin: 0 auto;
+}
+.inner-same-iframe .p2th .lbox .lx-item .code-item img{
+	width: 100%;
+}
+.inner-same-iframe .p2th .lbox  .lx-item .yq-item img{
+	width: 100%;
+}
 .inner-same-iframe .p2th{
 	padding-top: 30px;
 	padding-bottom: 50px;
 }
 .inner-same-iframe .p2th .lbox .list{
-	margin-left: 13px;
 	margin-bottom: 20px;
 }
 .inner-same-iframe .p2th .lbox .list li{
-	width: 200px;
 	font-size: 16px;
-	height: 34px;
-	line-height: 34px;
+	height: 45px;
+	line-height: 45px;
 	text-align: center;
-	
-	margin-top: 6px;
+	background: url(../images/class_a.jpg) no-repeat center bottom;
 }
 .inner-same-iframe .p2th .lbox .list li a{
 	text-decoration: none;
 	display: block;
-	background-color: #e8e8e8;
+
 }
 .inner-same-iframe .p2th .lbox .list li.cur a,
 .inner-same-iframe .p2th .lbox .list li:hover a{
-	background-color: #dc1d1c;
-	color: #fff;
+	color: #dc1d1c;
 }
 .inner-same-iframe .p2th .rbox{
 	width: 950px;
-	height: 1010px;
+	min-height: 550px;
 	background-color: #fff;
-	border:1px solid #f5f5f5;
+
 }
 .inner-same-iframe .p2th .rbox .cur-title{
 	width: 950px;
@@ -900,28 +919,30 @@ body{
 
 .inner-same-iframe .p2th .rbox .content{
 	width: 950px;
-	height: 960px;
 	overflow: hidden;
 }
 .inner-same-iframe .p2th .rbox .content .item{
-	width: 950px;
-	height: 960px;
 }
 
-/*produce*/
-.product-page .p2th .rbox .content .item .page-item{
+.inner-same-iframe .p2th .rbox .content .item .page-item{
 	text-align: center;
-	margin-top: 65px;
+	margin: 50px 0px;
 }
-.product-page .p2th .rbox .content .item .page-item a{
+.inner-same-iframe .p2th .rbox .content .item .page-item a{
 	padding:6px 10px;
+
 	background-color: #c8c8c8;
 	color: #fff;
 }
-.product-page .p2th .rbox .content .item .page-item a.cur,
-.product-page .p2th .rbox .content .item .page-item a:hover{
-	background-color: #e4322b;
+.inner-same-iframe .p2th .rbox .content .item .page-item a.cur,
+.inner-same-iframe .p2th .rbox .content .item .page-item a:hover{
+	color: #e4322b;
+	text-decoration: underline;
 }
+
+
+/*produce*/
+
 .product-page .p2th .rbox .content .item ul{
 	width: 960px;
 	overflow: hidden;
@@ -966,4 +987,166 @@ body{
 }
 .new-page .p2th .rbox .content .item .list li:hover .title{
 	color:#a00000;
+}
+
+
+/*详情页*/
+.detail-page .p2th .item-wrap .content .item{
+	padding:30px;
+}
+.detail-page .p2th .item-wrap .content .title-item{
+	font-size: 20px;
+	padding:15px 0px;
+}
+
+.detail-page .p2th .item-wrap .content .ly-item{
+	color: #333;
+	padding-bottom: 20px;
+}
+.detail-page .p2th .item-wrap .content .main-con{
+	overflow: hidden;
+	padding:30px 0px;
+	border-top: 1px solid #eee;
+}
+.detail-page .p2th .item-wrap .content .main-con p{
+	text-indent: 2em;
+	text-align: left;
+	line-height: 40px;
+	font-size: 14px;
+
+}
+.detail-page .p2th .item-wrap .content .commentBlock {width:550px; margin: 0 auto;}
+.detail-page .p2th .item-wrap .content .commentBlock .comList{margin-top: 30px;}
+.detail-page .p2th .item-wrap .content .commentBlock .comList .list{}
+.detail-page .p2th .item-wrap .content .commentBlock .comList .list .desBox{margin:0px 0 0 15px;width:470px;line-height:23px;}
+.detail-page .p2th .item-wrap .content .commentBlock .comList .list li{border-bottom:1px dotted #c8c7c7;clear:both; overflow:hidden;zoom:1;padding-bottom:6px;margin-top:6px;}
+.detail-page .p2th .item-wrap .content .commentBlock .comList .list .desBox .zan{float:right;padding:5px 0px 0px 0px;}
+.detail-page .p2th .item-wrap .content .commentBlock .comList .list .desBox .zan img{vertical-align:text-bottom;}
+
+.detail-page .p2th .item-wrap .content .commentBlock .textareaBox textarea{width:544px;height:122px;border:1px solid #082b6f; margin-top: 10px;}
+.detail-page .p2th .item-wrap .content .commentBlock .iconBar{padding:5px 5px 0 0 ;}
+.detail-page .p2th .item-wrap .content .commentBlock .iconBar img{vertical-align:middle;}
+
+/*会员中心*/
+.hyzx-page .p2th .item-wrap .content .step-item{
+	width: 530px;
+	margin:30px auto;
+
+}
+.hyzx-page .p2th .item-wrap .content .step-item .list li{
+	float: left;
+	margin-right: 30px;
+	cursor: pointer;
+}
+.hyzx-page .p2th .item-wrap .content .step-item .list li.cur,
+.hyzx-page .p2th .item-wrap .content .step-item .list li:hover{
+	color: #dc1d1c;
+}
+.hyzx-page .p2th .item-wrap .content .step-item .list li img{
+	vertical-align: middle;
+}
+.hyzx-page .p2th .item-wrap .content  .item{
+	padding:30px  30px 0px 30px;
+	border-top: 1px dashed #eee;
+}
+.hyzx-page .p2th .item-wrap .content  .item .title-item{
+	font-size: 20px;
+	margin-bottom: 5px;
+}
+.hyzx-page .p2th .item-wrap .content  .item .main-con{
+	margin: 20px 0px 30px 0px;
+}
+.hyzx-page .p2th .item-wrap .content  .item-1 .main-con  .txt{
+	text-indent: 2em;
+	font-size: 16px;
+	line-height: 30px;
+}
+.hyzx-page .p2th .item-wrap .content  .item-1 .main-con dl{
+	margin:10px 30px 0px 30px;
+}
+.hyzx-page .p2th .item-wrap .content  .item-1 .main-con dl dt{
+	font-size: 16px;
+	font-weight: bold;
+}
+.hyzx-page .p2th .item-wrap .content  .item-1 .main-con dl dd{
+	line-height: 28px;
+	font-size: 14px;
+}
+.hyzx-page .p2th .item-wrap .content  .item-2 .main-con  .txt{
+	text-indent: 2em;
+	font-size: 16px;
+	line-height: 30px;
+}
+.hyzx-page .p2th .item-wrap .content  .item-2 .main-con dl{
+	margin:10px 30px 0px 30px;
+}
+.hyzx-page .p2th .item-wrap .content  .item-2 .main-con dl dd{
+	line-height: 28px;
+	font-size: 14px;
+}
+.hyzx-page .p2th .item-wrap .content  .item-3 .main-con p{
+	font-size: 14px;
+}
+.hyzx-page .p2th .item-wrap .content  .item-3 .check-item{
+	margin-bottom: 30px;
+}
+.hyzx-page .p2th .item-wrap .content  .item-3 .register-btn{
+	display: inline-block;
+	cursor: pointer;
+	vertical-align: middle;
+	margin-left: 20px;
+	
+}
+
+.hyzx-page .p2th .item-wrap .content  .item-4 .main-con .txt{
+	text-indent: 2em;
+	font-size: 16px;
+	line-height: 30px
+}
+.register-page .p2th .rbox{
+	width: 1200px;
+}
+.register-page .p2th .item-wrap .rbox   .content{
+	width: 1000px;
+	margin: 40px auto;
+}
+.register-page .p2th .rbox .cur-title{
+	width: 1200px;
+}
+.register-page .p2th .rbox .tips-item .xing{
+	color:#FF0000;
+}
+
+.register-page .p2th .item-wrap .rbox .item{
+	margin-bottom: 20px;
+}
+.register-page .p2th .item-wrap .rbox  .item .tips-item{
+	width: 320px;
+	margin-right: 50px;
+	text-align: right;
+	margin-top: 3px;
+}
+.register-page .p2th .item-wrap  .rbox  .input-item{
+	width: 600px;
+}
+.register-page .p2th .item-wrap .rbox  .input-item .input-txt{
+	width: 220px;
+	height: 15px;
+	border: 1px solid #CCCCCC;
+	padding:5px;
+	font-size: 14px;
+}
+.register-page .p2th .item-wrap .rbox  .input-item label{
+	margin-right: 10px;
+	font-size: 14px;
+}
+.register-page .p2th .item-wrap .rbox  .input-item .radio-txt{
+	margin-right: 3px;
+	width: 16px;
+	height: 16px;
+	
+}
+.register-page .p2th .item-wrap .rbox  .input-item .location-select{
+	height: 27px;
+	margin-right: 10px;
 }
