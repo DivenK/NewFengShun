@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "MemberDynamic";
+    Layout = "~/Views/Shared/_PageMaster.cshtml";
+}
+@using itcast.crm16.model
+
+<!-- 页面内容开始 -->
+<div class="new-page font_wryh inner-same-iframe">
+    <div class="w1200">
+
+        <div class="p2th">
+            <div class="w1200">
+                <div class="item-wrap clearfix">
+                    <div class="lbox fldi">
+                        <h3 class="title">动态新闻</h3>
+                        <ul class="list">
+                            <li class="cur">
+                                <a href="/member/memberdynamic">会员动态</a>
+                            </li>
+                            <li>
+                                <a href="/member/memberstyle">会员风采</a>
+                            </li>
+                            <li>
+                                <a href="/member/memberrecruit">招聘信息</a>
+                            </li>
+                            <li>
+                                <a href="/member/memberregister">会员注册</a>
+                            </li>
+                        </ul>
+                        <div class="lx-item">
+                            <div class="code-item">
+                                <img src="/Content/images/code_03.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rbox frdi">
+                        <div class="cur-title">
+                            <p>
+                                当前位置：<a href="#">首页</a> >>
+                                <a href="#">会员风采</a> >>
+                                <a href="#">会员动态</a>
+                            </p>
+                        </div>
+                        <div class="content" id="content">
+
+                            <div class="item">
+                                <ul class="list">
+                                    @*<a href="#">
+                                            <li class="clearfix">
+                                                <span class="title fldi">商会代表一行回乡考察，寻找适宜商会发展项目商会代表一行回乡考察，寻找适宜商会发展项目</span>
+                                                <span class="time frdi">[2016/12/3]</span>
+                                            </li>
+                                        </a>*@
+                                    @{
+
+                                        if (ViewBag.MemberList != null)
+                                        {
+                                            List<MemberDynamic> memberList = ViewBag.MemberList as List<MemberDynamic>;
+                                            foreach (var item in memberList)
+                                            {
+                                                <a href="/member/memberdynamicdetail/@item.id">
+                                                    <li class="clearfix">
+                                                        <span class="title fldi">@item.Title</span>
+                                                        <span class="time frdi">[@item.CreateTime.ToString("yyyy-MM-dd")]</span>
+                                                    </li>
+                                                </a>
+                                            }
+                                        }
+
+                                    }
+                                    
+                            </div>
+                            <div class="page-item" id="page">
+                                        <a href="#">上一页</a>
+                                        <a href="#" class="cur">1</a>
+                                        <a href="#">2</a>
+                                        <a href="#">3</a>
+
+                                        <a href="#">下一页</a>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- 页面内容结束 -->
+
+<script type="text/javascript">
+    // 分页组件
+    $("#page").Page({
+        totalPages: 9,//分页总数
+        liNums: 7,//分页的数字按钮数(建议取奇数)
+        activeClass: 'activP', //active 类样式定义
+        callBack: function (page) {
+            console.log(page)
+        }
+    });
+</script>

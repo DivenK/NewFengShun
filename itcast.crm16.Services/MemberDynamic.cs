@@ -29,7 +29,7 @@ namespace itcast.crm16.Services
 
         public List<MemberDynamic> GetMemberMsgByPage(int pageIndex, int pageSize, out int count, int type,bool isComent)
         {
-            return this.dal.QueryByPage(pageIndex, pageSize, out count, c => c.Type == type && c.IsDelete == 0 && c.IsComment == isComent, c => c.id);
+            return this.dal.QueryByPage(pageIndex, pageSize, out count, c => c.Type == type && c.IsDelete == 0 && c.IsComment == (!isComent), c => c.id);
         }
 
         public MemberDynamic GetMemberMsgById(int  id)

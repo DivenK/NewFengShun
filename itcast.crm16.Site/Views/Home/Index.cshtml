@@ -440,20 +440,6 @@
         $(this).find('.txt-item').addClass('dn');
     });
 
-    // 头部二维码显示或隐藏
-    $('[data-role="min-code-icon"]').hover(function () {
-        $(this).find('.max-code').removeClass('dn');
-
-    }, function () {
-        $(this).find('.max-code').addClass('dn');
-    });
-
-    $('[data-role="close-ewm-btn"]').click(function () {
-        $('[data-role="code-pop"]').addClass('dn');
-    });
-    $('[data-role="open-ewm-btn"]').click(function () {
-        $('[data-role="code-pop"]').removeClass('dn');
-    });
 
     var box_2 = document.getElementById("lately-new"), iscan = true;
     box_2.innerHTML += box_2.innerHTML;

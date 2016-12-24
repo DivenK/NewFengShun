@@ -242,7 +242,7 @@
 		var email_text=$('[data-role="email-text"]').val();
 		var address_text=$('[data-role="address-text"]').val();
 		var yb_text=$('[data-role="yb-text"]').val();
-		var sqhy_text=$('[data-role="sqhy-text"]').val();
+		var sqhy_text=$('[data-role="sqhy-text"]').is(':checked');
 		
 		// 待解决的是地区选择
 		var s_length = $('#sheng-text option').length;
@@ -333,7 +333,7 @@
 			"Email" : email_text,
 			"ContactAddress" : address_text,
 			"Postcode" : yb_text,
-			"IsFormal": sqhy_text=="on"?"true":"false",
+			"IsFormal": sqhy_text,
             "Address":addr
 		}
 
