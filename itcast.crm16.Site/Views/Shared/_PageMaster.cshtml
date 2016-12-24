@@ -7,6 +7,10 @@
     <title>@ViewBag.Title</title>
     <link href="/Content/css/zt.css" type="text/css" rel="stylesheet" />
     <link href="/Content/css/swiper-3.4.0.min.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="/Content/js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="/Content/js/jquery.carouFredSel-5.5.0-auto.js"></script>
+    <script type="text/javascript" src="/Content/js/swiper-3.4.0.min.js"></script>
+    <script type="text/javascript" src="/Content/js/MSClass.js"></script>
 </head>
 <body>
     <!-- 公共头部开始 -->
@@ -14,7 +18,7 @@
         <div class="top-item">
             <div class="w1200 clearfix">
                 <div class="lbox fldi">
-                    <img src="/Content/images/logo1.png" alt="">
+                    <img src="~/Content/images/logo.png" alt="">
                 </div>
                 <!-- <div class="rbox fldi clearfix">
                     <p class="time f14 mb5">2016年12月13日</p>
@@ -53,14 +57,14 @@
                                     currentUrlParentId = currentMenus.mID;
                                 }
                                 var pMenusList = mList.Where(c => c.mParentID == -2);
-                                <li class=" first-li @(currentUrlParentId == 0 ? "cur" : "")">
+                        <li class=" first-li @(currentUrlParentId == 0 ? "cur" : "") ">
                                     <a href="/Home/Index">首页</a>
-                                </li>
+                        </li>
                                 foreach (var item in pMenusList)
                                 {
-                                    <li class=" first-li @(currentUrlParentId == item.mID ? "cur" : "") ">
-                                        <a href="@(item.mUrl)">@item.mName</a>
-                                    </li>
+                        <li class=" first-li @(currentUrlParentId == item.mID ? "cur" : "") ">
+                            <a href="@(item.mUrl)">@item.mName</a>
+                        </li>
                                 }
                             }
                         }
@@ -128,95 +132,5 @@
     <!-- 公共footer结束 -->
 </body>
 </html>
-<script type="text/javascript" src="/Content/js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="/Content/js/jquery.carouFredSel-5.5.0-auto.js"></script>
-<script type="text/javascript" src="/Content/js/swiper-3.4.0.min.js"></script>
-<script type="text/javascript" src="/Content/js/MSClass.js"></script>
-<script type="text/javascript">
-    //  Scrolled by user interaction
 
-
-    $('#foo3').carouFredSel({
-        prev: '#prev3',
-        next: '#next3',
-        pagination: "#pager3",
-        auto: true,
-        responsive: true,
-        items: 1,
-        scroll: {
-            fx: "crossfade"
-        }
-    });
-
-
-
-
-
-
-
-
-
-
-
-
-    var swiper = new Swiper('.swiper-container-1', {
-        nextButton: '.swiper-button-next-1',
-        prevButton: '.swiper-button-prev-1',
-        autoplay: 5000,
-        slidesPerView: 4,
-        spaceBetween: 5,
-        loop: true,
-        loopAdditionalSlides: 1,
-    });
-
-
-
-
-
-    var swiper3 = new Swiper('.swiper-container-3', {
-        nextButton: '.swiper-button-next-3',
-        prevButton: '.swiper-button-prev-3',
-        autoplay: 5000,
-        slidesPerView: 5,
-        spaceBetween: 10,
-        loop: true,
-        loopAdditionalSlides: 1,
-    });
-    $('[data-role="swiper-slide"]').find('.swiper-slide').hover(function () {
-        $(this).find('.txt').removeClass('dn');
-    }, function () {
-        $(this).find('.txt').addClass('dn');
-    });
-    $('[data-role="swiper-slide-1"]').find('.swiper-slide').hover(function () {
-        $(this).find('.txt').removeClass('dn');
-        console.log($(this).index());
-    }, function () {
-        $(this).find('.txt').addClass('dn');
-    });
-
-    $('[data-role="swiper-slide-2"]').find('.item').hover(function () {
-        $(this).find('.txt-item').removeClass('dn');
-
-    }, function () {
-        $(this).find('.txt-item').addClass('dn');
-    });
-
-    // 头部二维码显示或隐藏
-    $('[data-role="min-code-icon"]').hover(function () {
-        $(this).find('.max-code').removeClass('dn');
-
-    }, function () {
-        $(this).find('.max-code').addClass('dn');
-    });
-
-    $('[data-role="close-ewm-btn"]').click(function () {
-        $('[data-role="code-pop"]').addClass('dn');
-    });
-    $('[data-role="open-ewm-btn"]').click(function () {
-        $('[data-role="code-pop"]').removeClass('dn');
-    });
-
- 
-
-</script>
 

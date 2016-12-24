@@ -392,4 +392,90 @@
     marquee1.ScrollStep = 52;
     marquee1.Start();
 
+
+
+
+
+
+
+
+
+    var swiper = new Swiper('.swiper-container-1', {
+        nextButton: '.swiper-button-next-1',
+        prevButton: '.swiper-button-prev-1',
+        autoplay: 5000,
+        slidesPerView: 4,
+        spaceBetween: 5,
+        loop: true,
+        loopAdditionalSlides: 1,
+    });
+
+
+
+
+
+    var swiper3 = new Swiper('.swiper-container-3', {
+        nextButton: '.swiper-button-next-3',
+        prevButton: '.swiper-button-prev-3',
+        autoplay: 5000,
+        slidesPerView: 5,
+        spaceBetween: 10,
+        loop: true,
+        loopAdditionalSlides: 1,
+    });
+    $('[data-role="swiper-slide"]').find('.swiper-slide').hover(function () {
+        $(this).find('.txt').removeClass('dn');
+    }, function () {
+        $(this).find('.txt').addClass('dn');
+    });
+    $('[data-role="swiper-slide-1"]').find('.swiper-slide').hover(function () {
+        $(this).find('.txt').removeClass('dn');
+        console.log($(this).index());
+    }, function () {
+        $(this).find('.txt').addClass('dn');
+    });
+
+    $('[data-role="swiper-slide-2"]').find('.item').hover(function () {
+        $(this).find('.txt-item').removeClass('dn');
+
+    }, function () {
+        $(this).find('.txt-item').addClass('dn');
+    });
+
+    // 头部二维码显示或隐藏
+    $('[data-role="min-code-icon"]').hover(function () {
+        $(this).find('.max-code').removeClass('dn');
+
+    }, function () {
+        $(this).find('.max-code').addClass('dn');
+    });
+
+    $('[data-role="close-ewm-btn"]').click(function () {
+        $('[data-role="code-pop"]').addClass('dn');
+    });
+    $('[data-role="open-ewm-btn"]').click(function () {
+        $('[data-role="code-pop"]').removeClass('dn');
+    });
+
+    var box_2 = document.getElementById("lately-new"), iscan = true;
+    box_2.innerHTML += box_2.innerHTML;
+    box_2.onmouseover = function () { iscan = false };
+    box_2.onmouseout = function () { iscan = true };
+    new function () {
+        var stop_2 = box_2.scrollTop % 42 == 0 && !iscan;
+        if (!stop_2) box_2.scrollTop == parseInt(box_2.scrollHeight / 2) ? box_2.scrollTop = 0 : box_2.scrollTop++;
+        setTimeout(arguments.callee, box_2.scrollTop % 42 ? 10 : 1500);
+    };
+
+</script>
+<script type="text/javascript">
+    var marquee1 = new Marquee("pic_marquee")
+    marquee1.Direction = "left";
+    marquee1.Step = 1;
+    marquee1.Width = 1200;
+    marquee1.Height = 185;
+    marquee1.Timer = 20;
+    marquee1.ScrollStep = 52;
+    marquee1.Start();
+
 </script>

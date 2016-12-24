@@ -17,7 +17,7 @@
  em { font-style: normal; }
  /** 重置列表元素 **/
  ul, ol { list-style: none; }
- /** 重置超链接元素 **/
+ /** 重置超链接元�**/
  a { text-decoration: none; color: #333; }
  a:hover { text-decoration: underline; }
  /** 重置图片元素 **/
@@ -110,6 +110,9 @@
 	margin: 0px;
 
 
+}
+body{
+    overflow-x:hidden;
 }
 .w1200{
 	width: 1200px;
@@ -470,7 +473,7 @@ body{
 	background-color: #cac9c9;
 
 }
-/*页面内容开始*/
+/*页面内容开�/
 .index-page .p1th{
 	position: relative;
 }
@@ -604,7 +607,7 @@ body{
 	font-weight: 700;
 }
 
-/* --焦点图样式-- */
+/* --焦点图样�- */
 .index-page .p3th{
 	margin-top: 10px;
 }
@@ -1029,7 +1032,7 @@ body{
 }
 
 
-/*列表页*/
+/*列表�/
 .new-page .p2th .rbox .content .item{
 
 }
@@ -1050,7 +1053,7 @@ body{
 }
 
 
-/*详情页*/
+/*详情�/
 .detail-page .p2th .item-wrap .content .item{
 	padding:30px;
 }
@@ -1219,4 +1222,166 @@ body{
 .lxwm-page .p2th .rbox .item{
 	padding:20px;
 	font-size: 16px;
+}
+
+
+/*详情�/
+.detail-page .p2th .item-wrap .content .item{
+	padding:30px;
+}
+.detail-page .p2th .item-wrap .content .title-item{
+	font-size: 20px;
+	padding:15px 0px;
+}
+
+.detail-page .p2th .item-wrap .content .ly-item{
+	color: #333;
+	padding-bottom: 20px;
+}
+.detail-page .p2th .item-wrap .content .main-con{
+	overflow: hidden;
+	padding:30px 0px;
+	border-top: 1px solid #eee;
+}
+.detail-page .p2th .item-wrap .content .main-con p{
+	text-indent: 2em;
+	text-align: left;
+	line-height: 40px;
+	font-size: 14px;
+
+}
+.detail-page .p2th .item-wrap .content .commentBlock {width:550px; margin: 0 auto;}
+.detail-page .p2th .item-wrap .content .commentBlock .comList{margin-top: 30px;}
+.detail-page .p2th .item-wrap .content .commentBlock .comList .list{}
+.detail-page .p2th .item-wrap .content .commentBlock .comList .list .desBox{margin:0px 0 0 15px;width:470px;line-height:23px;}
+.detail-page .p2th .item-wrap .content .commentBlock .comList .list li{border-bottom:1px dotted #c8c7c7;clear:both; overflow:hidden;zoom:1;padding-bottom:6px;margin-top:6px;}
+.detail-page .p2th .item-wrap .content .commentBlock .comList .list .desBox .zan{float:right;padding:5px 0px 0px 0px;}
+.detail-page .p2th .item-wrap .content .commentBlock .comList .list .desBox .zan img{vertical-align:text-bottom;}
+
+.detail-page .p2th .item-wrap .content .commentBlock .textareaBox textarea{width:544px;height:122px;border:1px solid #082b6f; margin-top: 10px;}
+.detail-page .p2th .item-wrap .content .commentBlock .iconBar{padding:5px 5px 0 0 ;}
+.detail-page .p2th .item-wrap .content .commentBlock .iconBar img{vertical-align:middle;}
+
+/*会员中心*/
+.hyzx-page .p2th .item-wrap .content .step-item{
+	width: 530px;
+	margin:30px auto;
+
+}
+.hyzx-page .p2th .item-wrap .content .step-item .list li{
+	float: left;
+	margin-right: 30px;
+	cursor: pointer;
+}
+.hyzx-page .p2th .item-wrap .content .step-item .list li.cur,
+.hyzx-page .p2th .item-wrap .content .step-item .list li:hover{
+	color: #dc1d1c;
+}
+.hyzx-page .p2th .item-wrap .content .step-item .list li img{
+	vertical-align: middle;
+}
+.hyzx-page .p2th .item-wrap .content  .item{
+	padding:30px  30px 0px 30px;
+	border-top: 1px dashed #eee;
+}
+.hyzx-page .p2th .item-wrap .content  .item .title-item{
+	font-size: 20px;
+	margin-bottom: 5px;
+}
+.hyzx-page .p2th .item-wrap .content  .item .main-con{
+	margin: 20px 0px 30px 0px;
+}
+.hyzx-page .p2th .item-wrap .content  .item-1 .main-con  .txt{
+	text-indent: 2em;
+	font-size: 16px;
+	line-height: 30px;
+}
+.hyzx-page .p2th .item-wrap .content  .item-1 .main-con dl{
+	margin:10px 30px 0px 30px;
+}
+.hyzx-page .p2th .item-wrap .content  .item-1 .main-con dl dt{
+	font-size: 16px;
+	font-weight: bold;
+}
+.hyzx-page .p2th .item-wrap .content  .item-1 .main-con dl dd{
+	line-height: 28px;
+	font-size: 14px;
+}
+.hyzx-page .p2th .item-wrap .content  .item-2 .main-con  .txt{
+	text-indent: 2em;
+	font-size: 16px;
+	line-height: 30px;
+}
+.hyzx-page .p2th .item-wrap .content  .item-2 .main-con dl{
+	margin:10px 30px 0px 30px;
+}
+.hyzx-page .p2th .item-wrap .content  .item-2 .main-con dl dd{
+	line-height: 28px;
+	font-size: 14px;
+}
+.hyzx-page .p2th .item-wrap .content  .item-3 .main-con p{
+	font-size: 14px;
+}
+.hyzx-page .p2th .item-wrap .content  .item-3 .check-item{
+	margin-bottom: 30px;
+}
+.hyzx-page .p2th .item-wrap .content  .item-3 .register-btn{
+	display: inline-block;
+	cursor: pointer;
+	vertical-align: middle;
+	margin-left: 20px;
+	
+}
+
+.hyzx-page .p2th .item-wrap .content  .item-4 .main-con .txt{
+	text-indent: 2em;
+	font-size: 16px;
+	line-height: 30px
+}
+.register-page .p2th .rbox{
+	width: 1200px;
+}
+.register-page .p2th .item-wrap .rbox   .content{
+	width: 1000px;
+	margin: 40px auto;
+}
+.register-page .p2th .rbox .cur-title{
+	width: 1200px;
+}
+.register-page .p2th .rbox .tips-item .xing{
+	color:#FF0000;
+}
+
+.register-page .p2th .item-wrap .rbox .item{
+	margin-bottom: 20px;
+}
+.register-page .p2th .item-wrap .rbox  .item .tips-item{
+	width: 320px;
+	margin-right: 50px;
+	text-align: right;
+	margin-top: 3px;
+}
+.register-page .p2th .item-wrap  .rbox  .input-item{
+	width: 600px;
+}
+.register-page .p2th .item-wrap .rbox  .input-item .input-txt{
+	width: 220px;
+	height: 15px;
+	border: 1px solid #CCCCCC;
+	padding:5px;
+	font-size: 14px;
+}
+.register-page .p2th .item-wrap .rbox  .input-item label{
+	margin-right: 10px;
+	font-size: 14px;
+}
+.register-page .p2th .item-wrap .rbox  .input-item .radio-txt{
+	margin-right: 3px;
+	width: 16px;
+	height: 16px;
+	
+}
+.register-page .p2th .item-wrap .rbox  .input-item .location-select{
+	height: 27px;
+	margin-right: 10px;
 }
