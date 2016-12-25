@@ -1304,6 +1304,7 @@
     <Content Include="Views\member\MemberDynamicDetail.cshtml" />
     <Content Include="Views\Policy\Index.cshtml" />
     <Content Include="Views\Policy\PolicyDetail.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

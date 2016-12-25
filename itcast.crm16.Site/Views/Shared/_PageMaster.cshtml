@@ -49,11 +49,11 @@
                             if (objMenusList != null)
                             {
                                 List<sysMenus> mList = objMenusList as List<sysMenus>;
-                                string url = Request.Url.AbsolutePath;
-                                sysMenus currentMenus = mList.Where(c => (c.mUrl.Split('?')[0].ToLower() == url.ToLower())).FirstOrDefault();
+                             
+                                sysMenus currentMenus = mList.Where(c =>c.mUrl.Contains(ViewBag.url)).FirstOrDefault();
                                 int currentUrlParentId = 0;
                                 //获取当前访问的parentid
-                                if (currentMenus != null)
+                                if (currentMenus != null&&!string.IsNullOrWhiteSpace(ViewBag.url))
                                 {
                                     currentUrlParentId = currentMenus.mID;
                                 }
@@ -63,7 +63,7 @@
                                 </li>
                                 foreach (var item in pMenusList)
                                 {
-                                    <li class=" first-li @(currentUrlParentId == item.mID ? "cur" : "") ">
+                                    <li class=" first-li @(item.mID ==currentMenus.mID ? "cur" : "") ">
                                         <a href="@(item.mUrl)">@item.mName</a>
                                     </li>
                                 }

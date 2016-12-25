@@ -11,7 +11,7 @@ namespace itcast.crm16.Site.Controllers
 {
     public class PolicyController : BaseController
     {
-        public PolicyController(IsysMenusServices mSer, IPolicyServices policySer) : base(mSer)
+        public PolicyController(IsysMenusServices mSer, IPolicyServices policySer) : base(mSer, "/policy/index")
         {
             base.policySer = policySer;
         }
