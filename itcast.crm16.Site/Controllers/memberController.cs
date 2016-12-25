@@ -46,9 +46,17 @@ namespace itcast.crm16.Site.Controllers
         public ActionResult MemberDynamic()
         {
             int count = 0;
-            List<MemberDynamic> memberList = memberSer.GetMemberMsgByPage(1, 15, out count, 1, false);
+            List<MemberDynamic> memberList = memberSer.GetMemberMsgByPage(1, 2, out count, 1, false);
             ViewBag.MemberList = memberList;
+            ViewBag.TotalPage = Math.Ceiling(count * 1.0 / 2);
             return View();
+        }
+
+        public ActionResult MemberDynamicByPage(int pageIndex)
+        {
+            int count = 0;
+            List<MemberDynamic> memberList = memberSer.GetMemberMsgByPage(pageIndex, 2, out count, 1, false);
+            return WriteSuccess("获取成功", memberList.Select(c=>new {c.id,c.Title,CreateTime=c.CreateTime.ToString("yyyy-MM-dd") }));
         }
 
     }
