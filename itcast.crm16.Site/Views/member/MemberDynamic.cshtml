@@ -44,7 +44,7 @@
                         <div class="content" id="content">
 
                             <div class="item">
-                                <ul class="list">
+                                <ul class="list" id="contentlist">
                                     @*<a href="#">
                                             <li class="clearfix">
                                                 <span class="title fldi">商会代表一行回乡考察，寻找适宜商会发展项目商会代表一行回乡考察，寻找适宜商会发展项目</span>
@@ -68,16 +68,16 @@
                                         }
 
                                     }
-                                    
+
                             </div>
                             <div class="page-item" id="page">
-                                        <a href="#">上一页</a>
-                                        <a href="#" class="cur">1</a>
-                                        <a href="#">2</a>
-                                        <a href="#">3</a>
+                                <a href="#">上一页</a>
+                                <a href="#" class="cur">1</a>
+                                <a href="#">2</a>
+                                <a href="#">3</a>
 
-                                        <a href="#">下一页</a>
-                           </div>
+                                <a href="#">下一页</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -92,11 +92,39 @@
 <script type="text/javascript">
     // 分页组件
     $("#page").Page({
-        totalPages: 9,//分页总数
+        totalPages: @ViewBag.TotalPage,//分页总数
         liNums: 7,//分页的数字按钮数(建议取奇数)
         activeClass: 'activP', //active 类样式定义
         callBack: function (page) {
-            console.log(page)
+            var content={
+                "pageIndex":page
+            }
+            $.post("/member/MemberDynamicByPage",content,function(e){
+                if(e.status==0)
+                {
+                    //<a href="/member/memberdynamicdetail/24">
+                    //    <li class="clearfix">
+                    //        <span class="title fldi">Who am I</span>
+                    //        <span class="time frdi">[2016-12-24]</span>
+                    //    </li>
+                    //</a>
+                    var data=e.datas;
+                    var conhtml="";
+                    
+                    for (var i = 0; i < data.length; i++) {
+                        conhtml+='<a href="/member/memberdynamicdetail/'+data[i].id+'">';
+                        conhtml+='<li class="clearfix">';
+                        conhtml+='<span class="title fldi">'+data[i].Title+'</span>';
+                        conhtml+='<span class="time frdi">'+data[i].CreateTime+'</span>';
+                        conhtml+='</li></a>';
+                    }
+                    $("#contentlist").html(conhtml);
+                }
+                else
+                {
+                    alert("网络异常");
+                }
+            },"json")
         }
     });
 </script>

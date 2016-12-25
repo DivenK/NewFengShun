@@ -1,0 +1,135 @@
+﻿@{
+    ViewBag.Title = "MemberDynamicDetail";
+    Layout = "~/Views/Shared/_PageMaster.cshtml";
+}
+<!-- 页面内容开始 -->
+<div class="detail-page font_wryh inner-same-iframe">
+    <div class="w1200">
+
+        <div class="p2th">
+            <div class="w1200">
+                <div class="item-wrap clearfix">
+                    <div class="lbox fldi">
+                        <h3 class="title">动态新闻</h3>
+                        <ul class="list">
+                            <li class="cur">
+                                <a href="javascript:;">商会动态</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">乡情资讯</a>
+                            </li>
+
+                        </ul>
+                        <div class="lx-item">
+                            <div class="code-item">
+                                <img src="images/code_03.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rbox frdi">
+                        <div class="cur-title">
+                            <p>
+                                当前位置：<a href="#">首页</a> >>
+                                <a href="#">动态新闻</a> >>
+                                <a href="#">商会动态</a>
+                            </p>
+                        </div>
+                        <div class="content" id="content">
+                            @{
+                                if (ViewBag.Entity != null)
+                                {
+                                    itcast.crm16.model.MemberDynamic entity = ViewBag.Entity as itcast.crm16.model.MemberDynamic;
+                                    <div class="item">
+
+                                        <div class="title-item tc">
+                                            @entity.Title
+                                        </div>
+                                        <div class="ly-item tc">
+                                            <span class="time-txt mr20">时间： @entity.CreateTime.ToString("yyyy年MM月dd日") </span>
+                                            <span class="ly-txt mr20">来源：丰顺商会</span>
+                                            <span class="ll-txt mr20"> 浏览次数： 1257 </span>
+                                            <a href="javascript:;" class="zan-btn"><img src="images/zan.gif" />123</a>
+
+                                        </div>
+                                        <div class="main-con tc">
+                                            <img src="images/test/19.jpg" /><br>
+                                            <p>
+                                                4月30日，广东丰顺商会2016年度第一次理事会，在新晋理事李海周先生旗下—深圳市兆威机电有限公司顺利召开。
+                                            </p>
+                                            <p>
+                                                此次会议以“共谋发展谱新章”为主题，提出把工作重点放在对会员提供良好的投资项目上，进一步提高服务品质，凝心聚力，共同开创商会新局面！
+                                            </p>
+                                            <p>
+                                                会上，与会人员对商会章程的细化及内容增加进行表决，同时根据推荐及对商会的贡献，对张建周先生、叶松锦先生、陈克勇先生晋升商会副会长，李海周先生、徐位欣先生晋升商会常务理事，进行表决。以上表决，均全票通过。
+                                            </p>
+
+                                            <img src="images/test/33.jpg" /> <br /> <br />
+                                            <img src="images/test/34.jpg" /> <br />
+                                        </div>
+
+                                        <div class="commentBlock">
+                                            <p class="f14 mt10">请发表评论： </p>
+                                            <div class="textareaBox">
+                                                <textarea name="" rows="" cols=""></textarea>
+                                            </div>
+                                            <div class="iconBar clearfix">
+                                                <div class="fldi"><img src="images/smile.jpg" alt="">表情</div>
+                                                <div class="frdi"><a href="#">发表</a></div>
+                                            </div>
+                                            <div class="comList">
+                                                <ul class="list">
+                                                    <li>
+                                                        <div class="userImg fldi">
+                                                            <img alt="" src="images/userImg.jpg">
+                                                        </div>
+                                                        <div class="desBox fldi">
+                                                            <p>
+                                                                <span class="fr">#123楼 16-12-17 5:28 </span> <span class="fb">昵称：</span> 黄思婷
+                                                            </p>
+                                                            <div class="zan">
+                                                                <a href=""><img src="images/zan.gif" alt=""></a>(221)
+                                                            </div>
+                                                            <p>作品很棒！</p>
+                                                            <p>
+                                                                <a href="">[回复]</a>
+                                                                <a href="">[引用]</a>
+                                                                <a href="">[举报]</a>
+                                                            </p>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="userImg fldi">
+                                                            <img alt="" src="images/userImg.jpg">
+                                                        </div>
+                                                        <div class="desBox fldi">
+                                                            <p>
+                                                                <span class="fr">#123楼 16-12-17 5:28 </span> <span class="fb">昵称：</span> 黄思婷
+                                                            </p>
+                                                            <div class="zan">
+                                                                <a href=""><img src="images/zan.gif" alt=""></a>(221)
+                                                            </div>
+                                                            <p>作品很棒！</p>
+                                                            <p>
+                                                                <a href="">[回复]</a>
+                                                                <a href="">[引用]</a>
+                                                                <a href="">[举报]</a>
+                                                            </p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
