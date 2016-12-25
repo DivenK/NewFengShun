@@ -20,7 +20,7 @@ namespace itcast.crm16.Site.Controllers
         }
         public ActionResult Index()
         {
-            base.pageSize = 3;
+            base.pageSize = 15;
             var list= FSHistorySer.GetItemModel(1, out TotalPage, "", base.pageSize, true);
             SetViewBagPage();
             ViewBag.list = list;
@@ -29,7 +29,7 @@ namespace itcast.crm16.Site.Controllers
 
         public ActionResult AjaxGetItens(int pageIndex = 1,int type=0)
         {
-            base.pageSize = 3;
+            base.pageSize = 15;
 
             var list = FSHistorySer.GetItemModel(pageIndex, out TotalPage, "", base.pageSize, true);
             return WriteSuccess("", list);

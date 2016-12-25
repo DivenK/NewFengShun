@@ -5,7 +5,7 @@
     ViewBag.Title = "丰顺商会欢迎您";
     Layout = "~/Views/Shared/_PageMaster.cshtml";
     var modelItems = (ViewBag.ModelList as HomeViewModel);
-    }  
+}
 
 
 <div class="index-page font_wryh">
@@ -16,7 +16,7 @@
                 <ul class="img_list clearfix" id="foo3">
                     @foreach (var item in modelItems.ImageList)
                     {
-                    <li class="banner" style="background-image:url(@item.Image)"></li>
+                        <li class="banner" style="background-image:url(@item.Image)"></li>
                     }
                 </ul>
                 <!-- 大图缩率图 -->
@@ -35,7 +35,7 @@
                         <p class="title-txt fldi">
                             商会动态
                         </p>
-                        <a href="#" class="more-txt frdi">+MORE</a>
+                        <a href="/SiteNew/index?type=1" class="more-txt frdi">+MORE</a>
                     </div>
                     <div class="content">
                         <div class="box-1">
@@ -48,18 +48,19 @@
                         </div>
                         <div class="box-2">
                             <ul class="list">
-                                <a href="">
-                                    @for (int i = 1; i < 5; i++)
-                                    {
-                                    <li class="clearfix">
-                                        <p class="txt fldi">
-                                            @(modelItems.NewList[i].Name))
-                                        </p>
-                                        <span class="time-txt frdi">@modelItems.NewList[i].CreatTime.ToShortDateString()</span>
-                                    </li>
 
-                                    }
-                                </a>
+                                @for (int i = 1; i < 5; i++)
+                                {
+                                    <a href="@("/SiteNew/GetModel?id"+modelItems.NewList[i])">
+                                        <li class="clearfix">
+                                            <p class="txt fldi">
+                                                @(modelItems.NewList[i].Name))
+                                            </p>
+                                            <span class="time-txt frdi">@modelItems.NewList[i].CreatTime.ToShortDateString()</span>
+                                        </li>
+                                    </a>
+                                }
+
                             </ul>
                         </div>
                     </div>
@@ -70,7 +71,7 @@
                         <p class="title-txt fldi">
                             乡情咨询
                         </p>
-                        <a href="#" class="more-txt frdi">+MORE</a>
+                        <a href="/SiteNew/index?type=3" class="more-txt frdi">+MORE</a>
                     </div>
                     <div class="content">
                         <div class="box-1">
@@ -83,17 +84,19 @@
                         </div>
                         <div class="box-2">
                             <ul class="list">
-                                <a href="">
-                                    @for (int i = 1; i < 5; i++)
-                                    {
-                                    <li class="clearfix">
-                                        <p class="txt fldi">
-                                            @(modelItems.NewListType[i].Name))
-                                        </p>
-                                        <span class="time-txt frdi">@modelItems.NewListType[i].CreatTime.ToShortDateString()</span>
-                                    </li>
-                                    }
-                                </a>
+
+                                @for (int i = 1; i < 5; i++)
+                                {
+                                    <a href="@("/SiteNew/GetModel?id"+modelItems.NewListType[i])">
+                                        <li class="clearfix">
+                                            <p class="txt fldi">
+                                                @(modelItems.NewListType[i].Name))
+                                            </p>
+                                            <span class="time-txt frdi">@modelItems.NewListType[i].CreatTime.ToShortDateString()</span>
+                                        </li>
+                                    </a>
+                                }
+
                             </ul>
                         </div>
                     </div>
@@ -108,7 +111,7 @@
                     <p class="title-txt fldi">
                         商会领导
                     </p>
-                    <a href="#" class="more-txt frdi">+MORE</a>
+                    <a href="/Cemmend/GetLeader" class="more-txt frdi">+MORE</a>
                 </div>
             </div>
             <div class="item-wrap">
@@ -121,14 +124,14 @@
                                 <tr>
                                     @foreach (var item in modelItems.vipUserImageList)
                                     {
-                                    <td>
-                                        <div class="item">
-                                            <div class="img">
-                                                <img src="@item.ImageUrl">
-                                            </div>
+                                        <td>
+                                            <div class="item">
+                                                <div class="img">
+                                                    <img src="@item.ImageUrl">
+                                                </div>
 
-                                        </div>
-                                    </td>
+                                            </div>
+                                        </td>
                                     }
                                 </tr>
                             </table>
@@ -148,25 +151,27 @@
                             <p class="title-txt fldi">
                                 人物访谈
                             </p>
-                            <a href="#" class="more-txt frdi">+MORE</a>
+                            <a href="/member/MemberDynamic/1" class="more-txt frdi">+MORE</a>
                         </div>
                         <ul class="list clearfix">
                             @for (int i = 0; i < 3; i++)
                             {
-                               <li>
-                                <div class="img">
-                                    <img src="/Content/images/test/25.jpg" alt="">
-                                </div>
-                                <div class="txt">
-                                    <dl class="clearfix">
-                                        <dt class="">@modelItems.MemberTellList[i].Title</dt>
-                                        <dd class="">
-                                            
-                                        @Html.Raw(modelItems.MemberTellList[i].Content.GetContent().Trim())
-                                        </dd>
-                                    </dl>
-                                </div>
-                              </li>
+                                <a href="/member/MemberDynamicDetail/@modelItems.MemberTellList[i].id">
+                                <li>
+                                    <div class="img">
+                                        <img src="/Content/images/test/25.jpg" alt="">
+                                    </div>
+                                    <div class="txt">
+                                        <dl class="clearfix">
+                                            <dt class="">@modelItems.MemberTellList[i].Title</dt>
+                                            <dd class="">
+
+                                                @Html.Raw(modelItems.MemberTellList[i].Content.GetContent().Trim())
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </li>
+                                    </a>
                             }
                         </ul>
                     </div>
@@ -176,48 +181,48 @@
                             <p class="title-txt fldi">
                                 会员动态
                             </p>
-                            <a href="#" class="more-txt frdi">+MORE</a>
+                            <a href="/member/MemberDynamic/2" class="more-txt frdi">+MORE</a>
                         </div>
                         <div id="lately-new" class="list">
                             <ul class="">
                                 @if (modelItems.MemberNewsList.Count > 0)
                                 {
-                                    for (int i = 0; i < 5; i++)
+                                    for (int i = 0; i < modelItems.MemberNewsList.Count; i++)
                                     {
-                                <a href="">
-                                    <li class="clearfix">
-                                        <span class="txt fldi">@modelItems.MemberNewsList[0].Title</span><span class="time frdi">@modelItems.MemberNewsList[0].CreateTime.ToShortDateString()</span>
-                                    </li>
-                                </a>
+                                        <a href="/member/MemberDynamicDetail/@modelItems.MemberNewsList[i].id">
+                                            <li class="clearfix">
+                                                <span class="txt fldi">@modelItems.MemberNewsList[i].Title</span><span class="time frdi">@modelItems.MemberNewsList[i].CreateTime.ToString("yyyy-MM-dd")</span>
+                                            </li>
+                                        </a>
                                     }
                                 }
                                 else
                                 {
-                                <a href="">
-                                    <li class="clearfix">
-                                        <span class="txt fldi">商会的招聘飒飒大苏打盛大</span><span class="time frdi">2016-12-14</span>
-                                    </li>
-                                </a>
-                                <a href="">
-                                    <li class="clearfix">
-                                        <span class="txt fldi">商会的招聘飒飒大苏打盛大</span><span class="time frdi">2016-12-14</span>
-                                    </li>
-                                </a>
-                                <a href="">
-                                    <li class="clearfix">
-                                        <span class="txt fldi">商会的招聘飒飒大苏打盛大</span><span class="time frdi">2016-12-14</span>
-                                    </li>
-                                </a>
-                                <a href="">
-                                    <li class="clearfix">
-                                        <span class="txt fldi">商会的招聘飒飒大苏打盛大</span><span class="time frdi">2016-12-14</span>
-                                    </li>
-                                </a>
-                                <a href="">
-                                    <li class="clearfix">
-                                        <span class="txt fldi">商会的招聘飒飒大苏打盛大</span><span class="time frdi">2016-12-14</span>
-                                    </li>
-                                </a>
+                                    <a href="">
+                                        <li class="clearfix">
+                                            <span class="txt fldi">商会的招聘飒飒大苏打盛大</span><span class="time frdi">2016-12-14</span>
+                                        </li>
+                                    </a>
+                                    <a href="">
+                                        <li class="clearfix">
+                                            <span class="txt fldi">商会的招聘飒飒大苏打盛大</span><span class="time frdi">2016-12-14</span>
+                                        </li>
+                                    </a>
+                                    <a href="">
+                                        <li class="clearfix">
+                                            <span class="txt fldi">商会的招聘飒飒大苏打盛大</span><span class="time frdi">2016-12-14</span>
+                                        </li>
+                                    </a>
+                                    <a href="">
+                                        <li class="clearfix">
+                                            <span class="txt fldi">商会的招聘飒飒大苏打盛大</span><span class="time frdi">2016-12-14</span>
+                                        </li>
+                                    </a>
+                                    <a href="">
+                                        <li class="clearfix">
+                                            <span class="txt fldi">商会的招聘飒飒大苏打盛大</span><span class="time frdi">2016-12-14</span>
+                                        </li>
+                                    </a>
                                 }
                             </ul>
                         </div>
@@ -238,19 +243,19 @@
                             <p class="title-txt fldi">
                                 丰顺文史
                             </p>
-                            <a href="#" class="more-txt frdi">+MORE</a>
+                            <a href="/SiteFSHistory" class="more-txt frdi">+MORE</a>
                         </div>
                         <ul class="list clearfix">
                             @for (int i = 0; i < 4; i++)
                             {
-                            <li>
-                                <a href="#">
-                                    <div class="title-con clearfix">
-                                        <span class="title">@modelItems.FSHistoryList[i].Title</span>
-                                        <span class="time frdi ">@modelItems.FSHistoryList[i].CreaterTime.ToShortDateString()</span>
-                                    </div>
-                                </a>
-                            </li>
+                                <li>
+                                    <a href="@("/SiteFSHistory/GetModel?id="+modelItems.FSHistoryList[i].id)">
+                                        <div class="title-con clearfix">
+                                            <span class="title">@modelItems.FSHistoryList[i].Title</span>
+                                            <span class="time frdi ">@modelItems.FSHistoryList[i].CreaterTime.ToString("yyyy-MM-dd")</span>
+                                        </div>
+                                    </a>
+                                </li>
                             }
                         </ul>
                     </div>
@@ -259,50 +264,50 @@
                             <p class="title-txt fldi">
                                 会员招聘
                             </p>
-                            <a href="#" class="more-txt frdi">+MORE</a>
+                            <a href="/member/MemberDynamic/3" class="more-txt frdi">+MORE</a>
                         </div>
                         <ul class="list clearfix">
                             @if (modelItems.MemberZhaoList.Count > 3)
                             {
                                 for (int i = 0; i < 2; i++)
                                 {
-                            <li>
-                                <a href="#">
-                                    <div class="title-con clearfix">
-                                        <span class="title">@modelItems.MemberZhaoList[i].Title</span>
-                                        <span class="time frdi ">@modelItems.MemberZhaoList[i].CreateTime.ToShortDateString()</span>
-                                    </div>
-                                </a>
-                                <div class="txt-item">
-                                    @Html.Raw(modelItems.MemberZhaoList[i].Content.GetContent())
-                                </div>
-                            </li>
+                                    <li>
+                                        <a href="/member/MemberDynamicDetail/@modelItems.MemberZhaoList[i].id">
+                                            <div class="title-con clearfix">
+                                                <span class="title">@modelItems.MemberZhaoList[i].Title</span>
+                                                <span class="time frdi ">@modelItems.MemberZhaoList[i].CreateTime.ToString("yyyy-MM-dd")</span>
+                                            </div>
+                                        </a>
+                                        <div class="txt-item">
+                                            @Html.Raw(modelItems.MemberZhaoList[i].Content.GetContent())
+                                        </div>
+                                    </li>
                                 }
                             }
                             else
                             {
-                            <li>
-                                <a href="#">
-                                    <div class="title-con clearfix">
-                                        <span class="title">龙归寨瀑布</span>
-                                        <span class="time frdi ">2016-04-14</span>
+                                <li>
+                                    <a href="#">
+                                        <div class="title-con clearfix">
+                                            <span class="title">龙归寨瀑布</span>
+                                            <span class="time frdi ">2016-04-14</span>
+                                        </div>
+                                    </a>
+                                    <div class="txt-item">
+                                        龙归飞瀑位于丰顺县汤坑镇东联横东，距县城13公里，来源于丰顺第二高、海拔1285米的释迦山脉。龙归飞瀑被誉为“广东省黄果树瀑布”、“粤东第一瀑
                                     </div>
-                                </a>
-                                <div class="txt-item">
-                                    龙归飞瀑位于丰顺县汤坑镇东联横东，距县城13公里，来源于丰顺第二高、海拔1285米的释迦山脉。龙归飞瀑被誉为“广东省黄果树瀑布”、“粤东第一瀑
-                                </div>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="title-con clearfix">
-                                        <span class="title">云天相掩映 古堂展风采</span>
-                                        <span class="time frdi ">2016-04-14</span>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="title-con clearfix">
+                                            <span class="title">云天相掩映 古堂展风采</span>
+                                            <span class="time frdi ">2016-04-14</span>
+                                        </div>
+                                    </a>
+                                    <div class="txt-item">
+                                        建筑是历史的最佳见证。位于丰顺县留隍镇口铺村的笃庆堂，占地总面积1万平方米左右，距今已有161年的历史，整体呈太极形平面布局。
                                     </div>
-                                </a>
-                                <div class="txt-item">
-                                    建筑是历史的最佳见证。位于丰顺县留隍镇口铺村的笃庆堂，占地总面积1万平方米左右，距今已有161年的历史，整体呈太极形平面布局。
-                                </div>
-                            </li>
+                                </li>
                             }
                         </ul>
                     </div>
@@ -395,17 +400,17 @@
     marquee1.ScrollStep = 52;
     marquee1.Start();
 
-    	$('#foo3').carouFredSel({
-		prev: '#prev3',
-		next: '#next3',
-		pagination: "#pager3",
-		auto: true,
-		responsive: true,
-			items: 1,
-			scroll: {
-				fx: "crossfade"
-			}
-	});
+    $('#foo3').carouFredSel({
+        prev: '#prev3',
+        next: '#next3',
+        pagination: "#pager3",
+        auto: true,
+        responsive: true,
+        items: 1,
+        scroll: {
+            fx: "crossfade"
+        }
+    });
     var swiper = new Swiper('.swiper-container-1', {
         nextButton: '.swiper-button-next-1',
         prevButton: '.swiper-button-prev-1',

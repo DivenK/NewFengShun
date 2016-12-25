@@ -1226,9 +1226,10 @@
     <Content Include="Areas\admin\Views\Commerce\Index.cshtml" />
     <Content Include="Areas\admin\Views\FSHistory\Index.cshtml" />
     <Content Include="Areas\admin\Views\member\MemberMsgIndex.cshtml" />
-    <Content Include="Content\aa.docx" />
+    <None Include="Content\aa.doc" />
     <Content Include="Areas\admin\Views\Policy\Index.cshtml" />
     <Content Include="Areas\admin\Views\SiteSet\Index.cshtml" />
+    <Content Include="Content\广东丰顺商会个人会员登记表.doc" />
     <None Include="Properties\PublishProfiles\FSSite.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="iconsel.html" />
