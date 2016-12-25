@@ -9,6 +9,7 @@ using itcast.crm16.model;
 
 namespace itcast.crm16.Site.Controllers
 {
+    [WebHelper.Attrs.SkipCheckLogin]
     public class PolicyController : BaseController
     {
         public PolicyController(IsysMenusServices mSer, IPolicyServices policySer) : base(mSer, "/policy/index")

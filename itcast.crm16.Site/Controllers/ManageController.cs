@@ -9,6 +9,7 @@ using itcast.crm16.model;
 
 namespace itcast.crm16.Site.Controllers
 {
+    [WebHelper.Attrs.SkipCheckLogin]
     public class ManageController : BaseController
     {
         public ManageController(IsysMenusServices mSer,IManageServices manageSer) : base(mSer, "/manage/index")
