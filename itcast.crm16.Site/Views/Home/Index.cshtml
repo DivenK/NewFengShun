@@ -51,7 +51,7 @@
 
                                 @for (int i = 1; i < 5; i++)
                                 {
-                                    <a href="@("/SiteNew/GetModel?id"+modelItems.NewList[i])">
+                                    <a href="@("/SiteNew/GetModel?id="+modelItems.NewList[i].id)">
                                         <li class="clearfix">
                                             <p class="txt fldi">
                                                 @(modelItems.NewList[i].Name))
@@ -87,7 +87,7 @@
 
                                 @for (int i = 1; i < 5; i++)
                                 {
-                                    <a href="@("/SiteNew/GetModel?id"+modelItems.NewListType[i])">
+                                    <a href="@("/SiteNew/GetModel?id="+modelItems.NewListType[i].id)">
                                         <li class="clearfix">
                                             <p class="txt fldi">
                                                 @(modelItems.NewListType[i].Name))
