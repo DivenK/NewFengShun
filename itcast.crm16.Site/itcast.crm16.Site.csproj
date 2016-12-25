@@ -166,8 +166,10 @@
     <Compile Include="Controllers\CemmendController.cs" />
     <Compile Include="Controllers\ExpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\memberController.cs" />
     <Compile Include="Controllers\SiteNewController.cs" />
+    <Compile Include="Controllers\PolicyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1306,6 +1308,10 @@
     <Content Include="Views\Cemmend\LeaderModel.cshtml" />
     <Content Include="Views\SiteNew\Index.cshtml" />
     <Content Include="Views\SiteNew\GetModel.cshtml" />
+    <Content Include="Views\Policy\Index.cshtml" />
+    <Content Include="Views\Policy\PolicyDetail.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

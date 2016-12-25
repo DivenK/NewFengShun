@@ -11,17 +11,11 @@
         <div class="p2th">
             <div class="w1200">
                 <div class="item-wrap clearfix">
-                    <div class="lbox fldi">
-                        <h3 class="title">丰顺商人</h3>
+                     <div class="lbox fldi">
+                        <h3 class="title">企业管理</h3>
                         <ul class="list" id="showul">
-                            <li>
-                                <a href="/member//memberdynamic?id=1">会员风采</a>
-                            </li>
-                            <li>
-                                <a href="/member/memberdynamic?id=2">会员动态</a>
-                            </li>
-                            <li>
-                                <a href="/member//memberdynamic?id=3">招聘信息</a>
+                            <li class="cur">
+                                <a href="/manage/index">企业信息</a>
                             </li>
                         </ul>
                         <div class="lx-item">
@@ -34,7 +28,7 @@
                         <div class="cur-title">
                             <p>
                                 当前位置：<a href="/Home/index">首页</a> >>
-                                <a href="/member//memberdynamic?id=1">会员风采</a> 
+                                <a href="/manage/index">企业信息</a>
                             </p>
                         </div>
                         <div class="content" id="content">
@@ -49,12 +43,12 @@
                                         </a>*@
                                     @{
 
-                                        if (ViewBag.MemberList != null)
+                                        if (ViewBag.ManageList != null)
                                         {
-                                            List<MemberDynamic> memberList = ViewBag.MemberList as List<MemberDynamic>;
-                                            foreach (var item in memberList)
+                                            List<Manage> manageList = ViewBag.ManageList as List<Manage>;
+                                            foreach (var item in manageList)
                                             {
-                                                <a href="/member/memberdynamicdetail/@item.id">
+                                                <a href="/manage/manageDetail/@item.id">
                                                     <li class="clearfix">
                                                         <span class="title fldi">@item.Title</span>
                                                         <span class="time frdi">[@item.CreateTime.ToString("yyyy-MM-dd")]</span>
@@ -86,24 +80,16 @@
 <!-- 页面内容结束 -->
 
 <script type="text/javascript">
-    var type=@ViewBag.Type;
-    $(function(){
-        var liindex=parseInt(type)-1;
-        $("#showul li").eq(liindex).addClass("cur");
-    })
-
-
-    // 分页组件
+// 分页组件
     $("#page").Page({
         totalPages: @ViewBag.TotalPage,//分页总数
         liNums: 7,//分页的数字按钮数(建议取奇数)
         activeClass: 'activP', //active 类样式定义
         callBack: function (page) {
             var content={
-                "pageIndex":page,
-                "type":type
+                "pageIndex":page
             }
-            $.post("/member/MemberDynamicByPage",content,function(e){
+            $.post("/manage/ManageByPage",content,function(e){
                 if(e.status==0)
                 {
                     //<a href="/member/memberdynamicdetail/24">
@@ -116,7 +102,7 @@
                     var conhtml="";
                     
                     for (var i = 0; i < data.length; i++) {
-                        conhtml+='<a href="/member/memberdynamicdetail/'+data[i].id+'">';
+                        conhtml+='<a href="/manage/manageDetail/'+data[i].id+'">';
                         conhtml+='<li class="clearfix">';
                         conhtml+='<span class="title fldi">'+data[i].Title+'</span>';
                         conhtml+='<span class="time frdi">'+data[i].CreateTime+'</span>';

@@ -69,7 +69,7 @@ namespace itcast.crm16.Services
                 IsDelete = d.IsDelete,
                 LookBool = d.Look == 0 ? true : false,
                 id = d.id,
-                Contents = d.Contents.Length > 10&&IsShow==false ? d.Contents.Substring(0, 8) : d.Contents,
+                Contents = d.Contents.Length > 10 ? d.Contents.Substring(0, 8) : d.Contents,
                 Creater = d.Creater,
                 CreateTime = d.CreateTime,
                 Look = d.Look,

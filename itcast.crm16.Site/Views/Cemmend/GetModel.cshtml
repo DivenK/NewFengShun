@@ -1,6 +1,6 @@
 ﻿@using itcast.crm16.Site.Models;
 @{
-    ViewBag.Title = "关于商会";
+    ViewBag.Title = "GetModel";
     Layout = "~/Views/Shared/_PageMaster.cshtml";
     var modelList = ViewBag.items as List<CommerceViewModel>;
 }
@@ -340,7 +340,7 @@
                                     </div>
 
                                     <div class="main-con tc">
-                                        @Html.Raw(modelList.Where(p => p.id == ViewBag.id).First().Contents)
+                                        @Html.Raw(@modelList.Where(p => p.id == ViewBag.id).First().Contents)
                                     </div>
 
                                     <div class="commentBlock">
