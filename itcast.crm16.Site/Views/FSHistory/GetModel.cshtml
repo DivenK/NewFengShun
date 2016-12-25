@@ -1,8 +1,7 @@
 ﻿@using itcast.crm16.model;
 @{
-    ViewBag.Title = "GetModel";
-    Layout = "~/Views/Shared/_PageMaster.cshtml";
-    var model = ViewBag.Model as New;
+    ViewBag.Title = "丰顺详情";
+    var modeSet = ViewBag.model as FSHistory;
 }
 <div class="detail-page font_wryh inner-same-iframe">
     <div class="w1200">
@@ -11,14 +10,9 @@
             <div class="w1200">
                 <div class="item-wrap clearfix">
                     <div class="lbox fldi">
-                        <h3 class="title">动态新闻</h3>
+                        <h3 class="title">丰顺文史</h3>
                         <ul class="list">
-                            <li class="@(model.TypeId==1?"cur":"")">
-                                <a href="/SiteNew/Index">商会公告</a>
-                            </li>
-                            <li class="@(model.TypeId==3?"cur":"")">
-                                <a href="/SiteNew/Index?id=3">乡情资讯</a>
-                            </li>
+                            
                         </ul>
                         <div class="lx-item">
                             <div class="code-item">
