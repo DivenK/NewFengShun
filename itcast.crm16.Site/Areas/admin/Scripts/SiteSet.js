@@ -171,7 +171,7 @@ function GetItems(index)
             result.date.forEach(function (e) {
                 htmlTem += '<tr> <td>'+e.Nid+'</td>';
                 htmlTem += '<td>' + e.Name + '</td>';
-                htmlTem += '<td class="am-hide-sm-only">' + e.Contents + '</td>';
+                htmlTem += '<td class="am-hide-sm-only"   style="width:250px;height:150px"><img style="width:100%;height:100%"  src="'+ e.Image +'"/></td>';
                 htmlTem += ' <td class="am-hide-sm-only" data-id='+e.id+'><div _switch="" class="am-switch  am-switch-success newDisplay ' + (e.LookBool ? 'am-active' : '') + '"><div class="am-switch-handle"><input type="checkbox"  '+(e.LookBool ? 'checked' : '')+'></div></div></td>';
                 htmlTem += '  <td class="am-hide-sm-only">' + e.Creater + '</td>';
                 htmlTem += ' <td class="am-hide-sm-only">' + e.UpdateTimeStr + '</td>';

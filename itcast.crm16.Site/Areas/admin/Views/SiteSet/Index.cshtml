@@ -44,7 +44,7 @@
                                    
                                     <td>@(item.NId)</td>
                                     <td>@(item.Title)</td>
-                                    <td >@Html.Raw( item.Contents)</td>
+                                    <td   style="width:250px;height:150px"><img style="width:100%;height:100%"  src="@(item.Image)"/></td>
                                     <td class="am-hide-sm-only" data-id="@item.id"><input type="checkbox" class="am-switch  am-switch-success  newDisplay" @(item.Look == 0 ? "Checked" : "") /></td>
                                     <td class="am-hide-sm-only">@item.Creator</td>
                                     <td class="am-hide-sm-only">@item.TimeStr</td>
