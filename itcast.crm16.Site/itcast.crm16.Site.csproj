@@ -167,6 +167,7 @@
     <Compile Include="Controllers\ExpController.cs" />
     <Compile Include="Controllers\SiteFSHistoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InterviewController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\memberController.cs" />
     <Compile Include="Controllers\SiteNewController.cs" />
@@ -1315,6 +1316,7 @@
     <Content Include="Views\Manage\ManageDetail.cshtml" />
     <Content Include="Views\SiteFSHistory\GetModel.cshtml" />
     <Content Include="Views\SiteFSHistory\Index.cshtml" />
+    <Content Include="Views\Interview\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,6 +9,7 @@ using itcast.crm16.model;
 
 namespace itcast.crm16.Site.Controllers
 {
+    [WebHelper.Attrs.SkipCheckLogin]
     public class InterviewController : BaseController
     {
         public InterviewController(IsysMenusServices mSer, IMemberDynamicServices memberSer) : base(mSer, "/interview/index")

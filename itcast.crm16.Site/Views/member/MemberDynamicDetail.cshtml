@@ -13,9 +13,6 @@
                         <h3 class="title">丰顺商人</h3>
                         <ul class="list" id="showul">
                             <li>
-                                <a href="/member//memberdynamic?id=1">会员风采</a>
-                            </li>
-                            <li>
                                 <a href="/member/memberdynamic?id=2">会员动态</a>
                             </li>
                             <li>
@@ -148,7 +145,7 @@
     var type=@ViewBag.Type;
     
     $(function(){
-        var liindex=parseInt(type)-1;
+        var liindex=parseInt(type)-2;
         $("#showul li").eq(liindex).addClass("cur");
         var lookContent={
             "id":@ViewBag.id,
