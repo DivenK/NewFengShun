@@ -83,7 +83,7 @@ namespace itcast.crm16.Site.Controllers
             var result = news.SaveChanges();
             if (result > 0)
             {
-                return WriteSuccess("", ++count);
+                return WriteSuccess("",count);
             }
             return WriteError("网络错误");
         }

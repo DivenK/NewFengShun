@@ -1,6 +1,7 @@
 ﻿@using itcast.crm16.model;
 @{
     ViewBag.Title = "丰顺详情";
+    Layout = "~/Views/Shared/_PageMaster.cshtml";
     var modeSet = ViewBag.model as FSHistory;
 }
 <div class="detail-page font_wryh inner-same-iframe">
@@ -10,13 +11,15 @@
             <div class="w1200">
                 <div class="item-wrap clearfix">
                     <div class="lbox fldi">
-                        <h3 class="title">丰顺文史</h3>
+                        <h3 class="title">丰顺风情</h3>
                         <ul class="list">
-                            
+                             <li class="cur">
+                                <a href="/SiteFSHistory">文史详情</a>
+                            </li>
                         </ul>
                         <div class="lx-item">
                             <div class="code-item">
-                                <img src="/Content/images/code_03.jpg" />
+                                <img src="/Content/images/logoweixin.png" />
                             </div>
                         </div>
                     </div>
@@ -24,26 +27,26 @@
                         <div class="cur-title">
                             <p>
                                 当前位置：<a href="/Home">首页</a> >>
-                                <a href="#">动态新闻</a> >>
-                                <a href="#">新闻详情</a>
+                                <a href="#">丰顺风情</a> >>
+                                <a href="#">文史详情</a>
                             </p>
                         </div>
                         <div class="content" id="content">
 
                             <div class="item">
                                 <div class="title-item tc">
-                                    @(model.Name)
+                                    @(modeSet.Title)
                                 </div>
                                 <div class="ly-item tc">
-                                    <span class="time-txt mr20">时间：@(model.CreatTime.ToString("yyyy-MM-dd")) </span>
+                                    <span class="time-txt mr20">时间：@(modeSet.CreaterTime.ToString("yyyy-MM-dd")) </span>
                                     <span class="ly-txt mr20">来源：丰顺商会</span>
                                     <span class="zz-txt mr20"> 作者： 丰顺商会秘书处</span>
-                                    <span class="ll-txt mr20"> 浏览次数：<span id="look" data-look="@(model.Look)" data-id="@(model.id)"> @(model.Look) </span></span>
-                                    <a href="javascript:;" class="zan-btn" id="zan" data-zan="@(model.Praise)" data-id="@(model.id)"><img src="/Content/images/zan.gif">@(model.Praise)</a>
+                                    <span class="ll-txt mr20"> 浏览次数：<span id="look" data-look="@(modeSet.Look)" data-id="@(modeSet.id)"> @(modeSet.Look) </span></span>
+                                    <a href="javascript:;" class="zan-btn" id="zan" data-zan="@(modeSet.Likes)" data-id="@(modeSet.id)"><img src="/Content/images/zan.gif"><span id="zanCount">@(modeSet.Likes)</span></a>
                                 </div>
 
                                 <div class="main-con tc">
-                                    @Html.Raw(model.Conent)
+                                    @Html.Raw(modeSet.Contents)
                                 </div>
 
                                 <div class="commentBlock">
@@ -116,7 +119,7 @@
             "id": $('#look').attr('data-id'),
             "count": $('#look').attr('data-look')
         }
-        $.post("/SiteNew/Look", content, function (e) {
+        $.post("/SiteFSHistory/Look", content, function (e) {
             if (e.status == 0) {
               
                 $('#look').attr('data-look', e.datas);
@@ -132,10 +135,10 @@
                 "id": $(this).attr('data-id'),
                 "count": $(this).attr('data-zan')
             }
-            $.post("/SiteNew/AddZan", content, function (e) {
+            $.post("/SiteFSHistory/AddZan", content, function (e) {
                 if (e.status == 0) {
-                    $(ss).attr('data-look', e.datas);
-                    $(ss).html(e.datas);
+                    $(ss).attr('data-zan', e.datas);
+                    $("#zanCount").html(e.datas);
                 }
                 else {
                     alert("网络异常");

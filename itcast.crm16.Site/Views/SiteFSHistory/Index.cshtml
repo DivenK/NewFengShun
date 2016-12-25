@@ -1,12 +1,10 @@
 ﻿@using itcast.crm16.model;
 @using itcast.crm16.Site.Models;
 @{
-    ViewBag.Title = "动态新闻";
+    ViewBag.Title = "丰顺风情";
     Layout = "~/Views/Shared/_PageMaster.cshtml";
-    var modelList = ViewBag.list as List<New>;
+   var modelList= ViewBag.list as List< FSHistoryViewModel>;
 }
-
-
 
 <div class="new-page font_wryh inner-same-iframe">
     <div class="w1200">
@@ -15,13 +13,10 @@
             <div class="w1200">
                 <div class="item-wrap clearfix">
                     <div class="lbox fldi">
-                        <h3 class="title">动态新闻</h3>
+                        <h3 class="title">丰顺风情</h3>
                         <ul class="list">
-                            <li class="@(ViewBag.type==1?"cur":"")">
-                                <a href="/SiteNew/Index">商会公告</a>
-                            </li>
-                            <li class="@(ViewBag.type==3?"cur":"")">
-                                <a href="/SiteNew/Index?type=3">乡情资讯</a>
+                          <li class="cur">
+                                <a href="/SiteFSHistory">文史列表</a>
                             </li>
                         </ul>
                         <div class="lx-item">
@@ -34,7 +29,7 @@
                         <div class="cur-title">
                             <p>
                                 当前位置：<a href="/Home">首页</a> >>
-                                <a href="#">动态新闻</a> >>
+                                <a href="#">丰顺风情</a> >>
                              
                             </p>
                         </div>
@@ -44,10 +39,10 @@
                                 <ul class="list" id="contentList">
                                     @foreach (var item in modelList)
                                     {
-                                        <a href="@("/SiteNew/GetModel?id="+item.id)">
+                                        <a href="@("/SiteFSHistory/GetModel?id="+item.id)">
                                             <li class="clearfix">
-                                                <span class="title fldi">@(item.Name)</span>
-                                                <span class="time frdi">[@item.CreatTime.ToShortDateString()]</span>
+                                                <span class="title fldi">@(item.Title)</span>
+                                                <span class="time frdi">[@item.UpdateTime.ToString("yyyy-MM-dd")]</span>
                                             </li>
                                         </a>
                                     }
@@ -70,34 +65,37 @@
 </div>
 <script src="~/Content/js/jquery.page.js"></script>
 <script type="text/javascript">
-    // 分页组件
-    $("#page").Page({
-        totalPages:@ViewBag.PageCount,//分页总数
-        liNums: @(ViewBag.PageCount<5?ViewBag.PageCount:5),//分页的数字按钮数(建议取奇数)
-        activeClass: 'activP', //active 类样式定义
-        callBack: function (page) {
-            var content={
-                "pageIndex":page
-            }
-            $.post("/SiteNew/GetSiteNew",content,function(e){
-                if(e.status==0)
-                {
-                    var data=e.datas;
-                    var conhtml="";
-                    for (var i = 0; i < data.length; i++) {
-                        conhtml+=' <a href="/SiteNew/GetModel?id='+data[i].id+'">  <li class="clearfix"><span class="title fldi">';
-                        conhtml+=data[i].Name+'</span>';
-                        conhtml+=' <span class="time frdi">'+data[i].CreatTimeStr+'</span></li></a>';
-                    }
-                    $("#contentList").html(conhtml);
-                }
-                else
-                {
-                    alert("网络异常");
-                }
-            },"json")
-        }
-    });
+    $(function()
+    {
 
+        // 分页组件
+        $("#page").Page({
+            totalPages:@ViewBag.PageCount,//分页总数
+            liNums: @(ViewBag.PageCount<5?ViewBag.PageCount:5),//分页的数字按钮数(建议取奇数)
+            activeClass: 'activP', //active 类样式定义
+            callBack: function (page) {
+                var content={
+                    "pageIndex":page
+                }
+                $.post("/SiteFSHistory/AjaxGetItens",content,function(e){
+                    if(e.status==0)
+                    {
+                        var data=e.datas;
+                        var conhtml="";
+                        for (var i = 0; i < data.length; i++) {
+                            conhtml+=' <a href="/SiteFSHistory/GetModel?id='+data[i].id+'">  <li class="clearfix"><span class="title fldi">';
+                            conhtml+=data[i].Title+'</span>';
+                            conhtml+=' <span class="time frdi">['+data[i].UpdateTimeStr+']</span></li></a>';
+                        }
+                        $("#contentList").html(conhtml);
+                    }
+                    else
+                    {
+                        alert("网络异常");
+                    }
+                },"json")
+            }
+        });
+    });
 
 </script>

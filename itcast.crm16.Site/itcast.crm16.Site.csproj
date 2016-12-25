@@ -165,7 +165,7 @@
     <Compile Include="Content\ueditor\net\App_Code\UploadHandler.cs" />
     <Compile Include="Controllers\CemmendController.cs" />
     <Compile Include="Controllers\ExpController.cs" />
-    <Compile Include="Controllers\FSHistoryController.cs" />
+    <Compile Include="Controllers\SiteFSHistoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\memberController.cs" />
@@ -678,6 +678,7 @@
     <Content Include="Content\images\left-btn.png" />
     <Content Include="Content\images\logo.gif" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\logoweixin.png" />
     <Content Include="Content\images\max-logo.png" />
     <Content Include="Content\images\min-code.jpg" />
     <Content Include="Content\images\min-logo.png" />
@@ -1312,7 +1313,8 @@
     <Content Include="Views\Policy\PolicyDetail.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Manage\ManageDetail.cshtml" />
-    <Content Include="Views\FSHistory\GetModel.cshtml" />
+    <Content Include="Views\SiteFSHistory\GetModel.cshtml" />
+    <Content Include="Views\SiteFSHistory\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

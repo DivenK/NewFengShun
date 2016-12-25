@@ -9,11 +9,12 @@ using itcast.crm16.WebHelper;
 
 namespace itcast.crm16.Site.Controllers
 {
-    public class FSHistoryController : BaseController
+    [WebHelper.Attrs.SkipCheckLogin]
+    public class SiteFSHistoryController : BaseController
     {
         //
         // GET: /FSHistory/
-        public FSHistoryController(IsysMenusServices mSer, IFSHistoryService newSer):base(mSer,"/SiteNew")
+        public SiteFSHistoryController(IsysMenusServices mSer, IFSHistoryService newSer, IFSHistoryService pMenusList) : base(mSer, "SiteFSHistory")
         {
             base.FSHistorySer = newSer;
         }
@@ -21,6 +22,7 @@ namespace itcast.crm16.Site.Controllers
         {
             base.pageSize = 3;
             var list= FSHistorySer.GetItemModel(1, out TotalPage, "", base.pageSize, true);
+            SetViewBagPage();
             ViewBag.list = list;
             return View();
         }
@@ -28,7 +30,8 @@ namespace itcast.crm16.Site.Controllers
         public ActionResult AjaxGetItens(int pageIndex = 1,int type=0)
         {
             base.pageSize = 3;
-            var list = FSHistorySer.GetItemModel(1, out TotalPage, "", base.pageSize, true);
+
+            var list = FSHistorySer.GetItemModel(pageIndex, out TotalPage, "", base.pageSize, true);
             return WriteSuccess("", list);
         }
 
@@ -54,7 +57,7 @@ namespace itcast.crm16.Site.Controllers
             model.Look = ++count;
 
             FSHistorySer.Edit(model, new string[] { "Look" });
-            var result = news.SaveChanges();
+            var result = FSHistorySer.SaveChanges();
             if (result > 0)
             {
                 return WriteSuccess("", count);
@@ -72,10 +75,10 @@ namespace itcast.crm16.Site.Controllers
             model.Likes = ++count;
 
             FSHistorySer.Edit(model, new string[] { "Likes" });
-            var result = news.SaveChanges();
+            var result = FSHistorySer.SaveChanges();
             if (result > 0)
             {
-                return WriteSuccess("", ++count);
+                return WriteSuccess("",count);
             }
             return WriteError("网络错误");
         }

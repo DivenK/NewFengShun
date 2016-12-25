@@ -34,19 +34,19 @@ namespace itcast.crm16.Site.Controllers
 
         public ActionResult GetLeader(int id=0)
         {
-            var list = Commerce.GetItemModel(1, "", out TotalPage,0, 10, true).ToList();
-            ViewBag.items = list.OrderByDescending(c => c.Nid).ToList();
-            var lists = Commerce.GetItemModel(1, "", out TotalPage,2,10, true).ToList();
-            base.pageSize = 10;
+            base.pageSize = 12;
+            var list = Commerce.GetItemModel(1, "", out TotalPage, 0, base.pageSize, true).ToList();
+            ViewBag.list = list.OrderByDescending(c => c.Nid).ToList();
+            var lists = Commerce.GetItemModel(1, "", out TotalPage,2, base.pageSize, true).ToList();
             SetViewBagPage();
-            ViewBag.list = list;
-            ViewBag.Items = lists;
+            ViewBag.items = lists;
             ViewBag.id = id;
             return View();
         }
         public ActionResult AjaxGetLeader(int pageIndex)
         {
-            var lists = Commerce.GetItemModel(pageIndex, "", out TotalPage, 2,10, true).ToList();
+            base.pageSize = 12;
+            var lists = Commerce.GetItemModel(pageIndex, "", out TotalPage, 2, base.pageSize, true).ToList();
            
             if (lists.Count > 0)
             {
