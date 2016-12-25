@@ -1,14 +1,17 @@
 ﻿@using itcast.crm16.Site.Models;
+@using itcast.crm16.Common;
+@using System.Text.RegularExpressions;
 @{
     ViewBag.Title = "丰顺商会欢迎您";
     Layout = "~/Views/Shared/_PageMaster.cshtml";
-    var modelItems = ViewBag.ModelList as HomeViewModel;
-}
+    var modelItems = (ViewBag.ModelList as HomeViewModel);
+    }  
+
+
 <div class="index-page font_wryh">
     <div class="w1200">
         <div class="p1th">
             <div class="scrollBox">
-
                 <!-- 放图片或者背景都可以 -->
                 <ul class="img_list clearfix" id="foo3">
                     @foreach (var item in modelItems.ImageList)
@@ -40,7 +43,7 @@
                                 @(modelItems.NewList.FirstOrDefault().Name)
                             </div>
                             <div class="des-txt clearfix">
-                                @Html.Raw(modelItems.NewList.FirstOrDefault().Conent.Substring(0, 35)) <span class="time-txt frdi">@modelItems.NewList.FirstOrDefault().CreatTime.ToShortDateString()</span>
+                                @Html.Raw(modelItems.NewList.FirstOrDefault().Conent.GetContent()) <span class="time-txt frdi">@modelItems.NewList.FirstOrDefault().CreatTime.ToShortDateString()</span>
                             </div>
                         </div>
                         <div class="box-2">
@@ -75,7 +78,7 @@
                                 @(modelItems.NewListType.FirstOrDefault().Name)
                             </div>
                             <div class="des-txt clearfix">
-                                @(modelItems.NewListType.FirstOrDefault().Conent.Substring(0, 35)) <span class="time-txt frdi">@modelItems.NewListType.FirstOrDefault().CreatTime.ToShortDateString()</span>
+                                @(modelItems.NewListType.FirstOrDefault().Conent.GetContent()) <span class="time-txt frdi">@modelItems.NewListType.FirstOrDefault().CreatTime.ToShortDateString()</span>
                             </div>
                         </div>
                         <div class="box-2">
@@ -156,8 +159,11 @@
                                 </div>
                                 <div class="txt">
                                     <dl class="clearfix">
-                                        <dt class="fldi">@modelItems.MemberTellList[i].Title</dt>
-                                        <dd class="fldi">@Html.Raw(modelItems.MemberTellList[i].Content.Length > 20 ? modelItems.MemberTellList[i].Content.Substring(0, 20) : modelItems.MemberTellList[i].Content)</dd>
+                                        <dt class="">@modelItems.MemberTellList[i].Title</dt>
+                                        <dd class="">
+                                            
+                                        @Html.Raw(modelItems.MemberTellList[i].Content.GetContent().Trim())
+                                        </dd>
                                     </dl>
                                 </div>
                               </li>
@@ -268,7 +274,7 @@
                                     </div>
                                 </a>
                                 <div class="txt-item">
-                                    @Html.Raw(modelItems.MemberZhaoList[i].Content.Length > 25 ? modelItems.MemberZhaoList[i].Content.Substring(0, 25) : modelItems.MemberZhaoList[i].Content)
+                                    @Html.Raw(modelItems.MemberZhaoList[i].Content.GetContent())
                                 </div>
                             </li>
                                 }

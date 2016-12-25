@@ -51,6 +51,7 @@
     <Compile Include="Kits.cs" />
     <Compile Include="LogHelp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringHelp.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
