@@ -166,6 +166,7 @@
     <Compile Include="Controllers\CemmendController.cs" />
     <Compile Include="Controllers\ExpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\memberController.cs" />
     <Compile Include="Controllers\PolicyController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1305,6 +1306,7 @@
     <Content Include="Views\Policy\Index.cshtml" />
     <Content Include="Views\Policy\PolicyDetail.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
