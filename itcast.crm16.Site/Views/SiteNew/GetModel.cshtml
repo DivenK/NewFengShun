@@ -1,0 +1,151 @@
+﻿@using itcast.crm16.model;
+@{
+    ViewBag.Title = "GetModel";
+    Layout = "~/Views/Shared/_PageMaster.cshtml";
+    var model = ViewBag.Model as New;
+}
+<div class="detail-page font_wryh inner-same-iframe">
+    <div class="w1200">
+
+        <div class="p2th">
+            <div class="w1200">
+                <div class="item-wrap clearfix">
+                    <div class="lbox fldi">
+                        <h3 class="title">动态新闻</h3>
+                        <ul class="list">
+                            <li class="@(model.TypeId==1?"cur":"")">
+                                <a href="/SiteNew/Index">商会公告</a>
+                            </li>
+                            <li class="@(model.TypeId==3?"cur":"")">
+                                <a href="/SiteNew/Index?id=3">乡情资讯</a>
+                            </li>
+                        </ul>
+                        <div class="lx-item">
+                            <div class="code-item">
+                                <img src="/Content/images/code_03.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rbox frdi">
+                        <div class="cur-title">
+                            <p>
+                                当前位置：<a href="/Home">首页</a> >>
+                                <a href="#">动态新闻</a> >>
+                                <a href="#">新闻详情</a>
+                            </p>
+                        </div>
+                        <div class="content" id="content">
+
+                            <div class="item">
+                                <div class="title-item tc">
+                                    @(model.Name)
+                                </div>
+                                <div class="ly-item tc">
+                                    <span class="time-txt mr20">时间：@(model.CreatTime.ToString("yyyy-MM-dd")) </span>
+                                    <span class="ly-txt mr20">来源：丰顺商会</span>
+                                    <span class="zz-txt mr20"> 作者： 丰顺商会秘书处</span>
+                                    <span class="ll-txt mr20"> 浏览次数：<span id="look" data-look="@(model.Look)" data-id="@(model.id)"> @(model.Look) </span></span>
+                                    <a href="javascript:;" class="zan-btn" id="zan" data-zan="@(model.Praise)" data-id="@(model.id)"><img src="/Content/images/zan.gif">@(model.Praise)</a>
+                                </div>
+
+                                <div class="main-con tc">
+                                    @Html.Raw(model.Conent)
+                                </div>
+
+                                <div class="commentBlock">
+                                    <p class="f14 mt10">请发表评论： </p>
+                                    <div class="textareaBox">
+                                        <textarea name="" rows="" cols=""></textarea>
+                                    </div>
+                                    <div class="iconBar clearfix">
+                                        <div class="fldi"><img src="/Content/images/smile.jpg" alt="">表情</div>
+                                        <div class="frdi"><a href="#">发表</a></div>
+                                    </div>
+                                    <div class="comList">
+                                        <ul class="list">
+                                            <li>
+                                                <div class="userImg fldi">
+                                                    <img alt="" src="/Content/images/userImg.jpg">
+                                                </div>
+                                                <div class="desBox fldi">
+                                                    <p>
+                                                        <span class="fr">#123楼 16-12-17 5:28 </span> <span class="fb">昵称：</span> 黄思婷
+                                                    </p>
+                                                    <div class="zan">
+                                                        <a href=""><img src="/Content/images/zan.gif" alt=""></a>(221)
+                                                    </div>
+                                                    <p>作品很棒！</p>
+                                                    <p>
+                                                        <a href="">[回复]</a>
+                                                        <a href="">[引用]</a>
+                                                        <a href="">[举报]</a>
+                                                    </p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="userImg fldi">
+                                                    <img alt="" src="/Content/images/userImg.jpg">
+                                                </div>
+                                                <div class="desBox fldi">
+                                                    <p>
+                                                        <span class="fr">#123楼 16-12-17 5:28 </span> <span class="fb">昵称：</span> 黄思婷
+                                                    </p>
+                                                    <div class="zan">
+                                                        <a href=""><img src="/Content/images/zan.gif" alt=""></a>(221)
+                                                    </div>
+                                                    <p>作品很棒！</p>
+                                                    <p>
+                                                        <a href="">[回复]</a>
+                                                        <a href="">[引用]</a>
+                                                        <a href="">[举报]</a>
+                                                    </p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    $(function () {
+        var content = {
+            "id": $('#look').attr('data-id'),
+            "count": $('#look').attr('data-look')
+        }
+        $.post("/SiteNew/Look", content, function (e) {
+            if (e.status == 0) {
+              
+                $('#look').attr('data-look', e.datas);
+                $('#look').html(e.datas);
+            }
+            else {
+                alert("网络异常");
+            }
+        }, "json");
+        $('#zan').click(function () {
+            var content = {
+                "id": $(this).attr('data-id'),
+                "count": $(this).attr('data-zan')
+            }
+            $.post("/SiteNew/AddZan", content, function (e) {
+                if (e.status == 0) {
+                    $(this).attr('data-look', e.datas);
+                    $(this).html(e.datas);
+                }
+                else {
+                    alert("网络异常");
+                }
+            }, "json")
+        });
+    });
+</script>

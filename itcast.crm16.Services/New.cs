@@ -59,7 +59,7 @@ namespace itcast.crm16.Services
                     where = (c => c.IsDelete == 0 && c.TypeId == typeId && c.display == 0);
                 }
             }
-            return dal.QueryByPage(index, 10, out count, where,c => c.id);
+            return dal.QueryByPage(index,pageSize, out count, where,c => c.id);
         }
     }
 }

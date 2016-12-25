@@ -1,0 +1,103 @@
+﻿@using itcast.crm16.model;
+@using itcast.crm16.Site.Models;
+@{
+    ViewBag.Title = "新闻";
+    Layout = "~/Views/Shared/_PageMaster.cshtml";
+    var modelList = ViewBag.list as List<New>;
+}
+
+
+
+<div class="new-page font_wryh inner-same-iframe">
+    <div class="w1200">
+
+        <div class="p2th">
+            <div class="w1200">
+                <div class="item-wrap clearfix">
+                    <div class="lbox fldi">
+                        <h3 class="title">动态新闻</h3>
+                        <ul class="list">
+                            <li class="@(ViewBag.type==1?"cur":"")">
+                                <a href="/SiteNew/Index">商会公告</a>
+                            </li>
+                            <li class="@(ViewBag.type==3?"cur":"")">
+                                <a href="/SiteNew/Index?type=3">乡情资讯</a>
+                            </li>
+                        </ul>
+                        <div class="lx-item">
+                            <div class="code-item">
+                                <img src="/Content/images/code_03.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rbox frdi">
+                        <div class="cur-title">
+                            <p>
+                                当前位置：<a href="/Home">首页</a> >>
+                                <a href="#">动态新闻</a> >>
+                             
+                            </p>
+                        </div>
+                        <div class="content" id="content">
+
+                            <div class="item">
+                                <ul class="list" id="contentList">
+                                    @foreach (var item in modelList)
+                                    {
+                                        <a href="@("/SiteNew/GetModel?id="+item.id)">
+                                            <li class="clearfix">
+                                                <span class="title fldi">@(item.Name)</span>
+                                                <span class="time frdi">[@item.CreatTime.ToShortDateString()]</span>
+                                            </li>
+                                        </a>
+                                    }
+                                </ul>
+                                <div class="page-item" id="page">
+                                    <a href="#">上一页</a>
+                                    <a href="#" class="cur">1</a>
+                                    <a href="#">2</a>
+                                    <a href="#">3</a>
+                                    <a href="#">下一页</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="~/Content/js/jquery.page.js"></script>
+<script type="text/javascript">
+    // 分页组件
+    $("#page").Page({
+        totalPages:@ViewBag.PageCount,//分页总数
+        liNums: @(ViewBag.PageCount<5?ViewBag.PageCount:5),//分页的数字按钮数(建议取奇数)
+        activeClass: 'activP', //active 类样式定义
+        callBack: function (page) {
+            var content={
+                "pageIndex":page
+            }
+            $.post("/SiteNew/GetSiteNew",content,function(e){
+                if(e.status==0)
+                {
+                    var data=e.datas;
+                    var conhtml="";
+                    for (var i = 0; i < data.length; i++) {
+                        conhtml+=' <a href="/SiteNew/GetModel?id='+data[i].id+'">  <li class="clearfix"><span class="title fldi">';
+                        conhtml+=data[i].Name+'</span>';
+                        conhtml+=' <span class="time frdi">'+data[i].CreatTimeStr+'</span></li></a>';
+                    }
+                    $("#contentList").html(conhtml);
+                }
+                else
+                {
+                    alert("网络异常");
+                }
+            },"json")
+        }
+    });
+
+
+</script>

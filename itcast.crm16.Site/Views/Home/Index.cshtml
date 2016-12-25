@@ -43,7 +43,7 @@
                                 @(modelItems.NewList.FirstOrDefault().Name)
                             </div>
                             <div class="des-txt clearfix">
-                                @Html.Raw(modelItems.NewList.FirstOrDefault().Conent.GetContent()) <span class="time-txt frdi">@modelItems.NewList.FirstOrDefault().CreatTime.ToShortDateString()</span>
+                                @Html.Raw(modelItems.NewList.FirstOrDefault().Conent.GetContent().Trim()) <span class="time-txt frdi">@modelItems.NewList.FirstOrDefault().CreatTime.ToShortDateString()</span>
                             </div>
                         </div>
                         <div class="box-2">
@@ -78,7 +78,7 @@
                                 @(modelItems.NewListType.FirstOrDefault().Name)
                             </div>
                             <div class="des-txt clearfix">
-                                @(modelItems.NewListType.FirstOrDefault().Conent.GetContent()) <span class="time-txt frdi">@modelItems.NewListType.FirstOrDefault().CreatTime.ToShortDateString()</span>
+                                @(modelItems.NewListType.FirstOrDefault().Conent.GetContent().Trim()) <span class="time-txt frdi">@modelItems.NewListType.FirstOrDefault().CreatTime.ToShortDateString()</span>
                             </div>
                         </div>
                         <div class="box-2">

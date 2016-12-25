@@ -36,8 +36,8 @@ namespace itcast.crm16.Site.Controllers
         {
             var list = Commerce.GetItemModel(1, "", out TotalPage,0, 10, true).ToList();
             ViewBag.items = list.OrderByDescending(c => c.Nid).ToList();
-            var lists = Commerce.GetItemModel(1, "", out TotalPage,2,3, true).ToList();
-            base.pageSize = 3;
+            var lists = Commerce.GetItemModel(1, "", out TotalPage,2,10, true).ToList();
+            base.pageSize = 10;
             SetViewBagPage();
             ViewBag.list = list;
             ViewBag.Items = lists;
@@ -46,7 +46,7 @@ namespace itcast.crm16.Site.Controllers
         }
         public ActionResult AjaxGetLeader(int pageIndex)
         {
-            var lists = Commerce.GetItemModel(pageIndex, "", out TotalPage, 2,3, true).ToList();
+            var lists = Commerce.GetItemModel(pageIndex, "", out TotalPage, 2,10, true).ToList();
            
             if (lists.Count > 0)
             {
