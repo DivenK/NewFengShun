@@ -1299,7 +1299,7 @@
     <Content Include="Views\member\Index.cshtml" />
     <Content Include="Views\Cemmend\GetModel.cshtml" />
     <Content Include="Views\member\MemberDynamic.cshtml" />
-    <Content Include="Views\Cemmend\GetAddCemmend.cshtml" />
+    <Content Include="Views\Cemmend\GetLeader.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

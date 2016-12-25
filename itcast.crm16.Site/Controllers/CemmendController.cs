@@ -13,7 +13,7 @@ namespace itcast.crm16.Site.Controllers
     {
         //
         // GET: /Cemmend/
-        public CemmendController(IsysMenusServices mSer,ICommerce monser):base(mSer)
+        public CemmendController(IsysMenusServices mSer,ICommerce monser):base(mSer,"/Cemmend")
         {
             base.Commerce = monser;
         }
@@ -31,7 +31,7 @@ namespace itcast.crm16.Site.Controllers
             return View();
         }
 
-        public ActionResult GetAddCemmend()
+        public ActionResult GetLeader()
         {
             var list = Commerce.GetItemModel(1, "", out TotalPage,1, 10, true).ToList();
             ViewBag.items = list.OrderByDescending(c => c.Nid).ToList();
