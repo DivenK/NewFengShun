@@ -1318,6 +1318,7 @@
     <Content Include="Views\SiteFSHistory\GetModel.cshtml" />
     <Content Include="Views\SiteFSHistory\Index.cshtml" />
     <Content Include="Views\Interview\Index.cshtml" />
+    <Content Include="Views\Interview\MemberDynamicDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
