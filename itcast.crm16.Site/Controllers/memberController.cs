@@ -53,10 +53,10 @@ namespace itcast.crm16.Site.Controllers
             return View();
         }
 
-        public ActionResult MemberDynamicByPage(int pageIndex,int id)
+        public ActionResult MemberDynamicByPage(int pageIndex,int type)
         {
             int count = 0;
-            List<MemberDynamic> memberList = memberSer.GetMemberMsgByPage(pageIndex, 15, out count, id, false);
+            List<MemberDynamic> memberList = memberSer.GetMemberMsgByPage(pageIndex, 15, out count, type, false);
             return WriteSuccess("获取成功", memberList.Select(c=>new {c.id,c.Title,CreateTime=c.CreateTime.ToString("yyyy-MM-dd") }));
         }
 
@@ -65,15 +65,32 @@ namespace itcast.crm16.Site.Controllers
             MemberDynamic entity = memberSer.GetMemberMsgById(id);
 
             ViewBag.Type = entity.Type;
-            if (entity!=null)
-            {
-                memberSer.SaveChanges();
-                entity.LookCount += 1;
-                memberSer.Edit(entity, new string[] { "LookCount" });
-                memberSer.SaveChanges();
-            }
+          
             ViewBag.Entity = entity;
+            ViewBag.id = entity.id;
+            ViewBag.Praise = entity.Praise;
+            ViewBag.LookCount = entity.LookCount;
             return View();
+        }
+
+        public ActionResult LookAdd(int id,int lookCount)
+        {
+            MemberDynamic editModel = new model.MemberDynamic();
+            editModel.id = id;
+            editModel.LookCount = lookCount+1;
+            memberSer.Edit(editModel, new string[] { "LookCount" });
+            memberSer.SaveChanges();
+            return WriteSuccess("");
+        }
+
+        public ActionResult PraiseDynamic(int id,int praise)
+        {
+            MemberDynamic editModel = new model.MemberDynamic();
+            editModel.id = id;
+            editModel.Praise = praise+1;
+            memberSer.Edit(editModel, new string[] { "Praise" });
+            memberSer.SaveChanges();
+            return WriteSuccess("");
         }
     }
 }

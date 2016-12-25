@@ -167,6 +167,7 @@
     <Compile Include="Controllers\ExpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\memberController.cs" />
+    <Compile Include="Controllers\PolicyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1301,6 +1302,8 @@
     <Content Include="Views\member\MemberDynamic.cshtml" />
     <Content Include="Views\Cemmend\GetAddCemmend.cshtml" />
     <Content Include="Views\member\MemberDynamicDetail.cshtml" />
+    <Content Include="Views\Policy\Index.cshtml" />
+    <Content Include="Views\Policy\PolicyDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "MemberDynamicDetail";
+    ViewBag.Title = "丰顺商会欢迎您";
     Layout = "~/Views/Shared/_PageMaster.cshtml";
 }
 <!-- 页面内容开始 -->
@@ -10,16 +10,10 @@
             <div class="w1200">
                 <div class="item-wrap clearfix">
                     <div class="lbox fldi">
-                        <h3 class="title">丰顺商人</h3>
+                        <h3 class="title">政策法规</h3>
                         <ul class="list" id="showul">
-                            <li>
-                                <a href="/member//memberdynamic?id=1">会员风采</a>
-                            </li>
-                            <li>
-                                <a href="/member/memberdynamic?id=2">会员动态</a>
-                            </li>
-                            <li>
-                                <a href="/member//memberdynamic?id=3">招聘信息</a>
+                            <li class="cur">
+                                <a href="/policy/index">政策信息</a>
                             </li>
                         </ul>
                         <div class="lx-item">
@@ -32,23 +26,15 @@
                         <div class="cur-title">
                             <p>
                                 当前位置：<a href="/Home/index">首页</a> >>
-                                <a href="/member//memberdynamic?id=1">会员风采</a> >>
-                                <a href="#">
-                                    @{ if (ViewBag.Type != null)
-                                        {
-                                            string[] names = new string[] { "会员风采", "会员动态", "招聘信息" };
-                                            int t = ViewBag.Type;
-                                            @names[t - 1]
-                                        }
-                                    }
-                                </a>
+                                <a href="/policy/index">政策法规</a> >>
+                                <a href="#">政策信息</a>
                             </p>
                         </div>
                         <div class="content" id="content">
                             @{
                                 if (ViewBag.Entity != null)
                                 {
-                                    itcast.crm16.model.MemberDynamic entity = ViewBag.Entity as itcast.crm16.model.MemberDynamic;
+                                    itcast.crm16.model.Policy entity = ViewBag.Entity as itcast.crm16.model.Policy;
                                     <div class="item">
 
                                         <div class="title-item tc">
@@ -57,8 +43,7 @@
                                         <div class="ly-item tc">
                                             <span class="time-txt mr20">时间： @entity.CreateTime.ToString("yyyy年MM月dd日") </span>
                                             <span class="ly-txt mr20">来源：丰顺商会</span>
-                                            <span class="ll-txt mr20"> 浏览次数： @entity.LookCount </span>
-                                            <a href="javascript:;" class="zan-btn" id="btnPraise"><img src="/Content/images/zan.gif" /><label id="lblPraise">@entity.Praise</label></a>
+                                             <a href="javascript:;" class="zan-btn" id="btnPraise"><img src="/Content/images/zan.gif" /><label id="lblPraise">@entity.Praise</label></a>
 
                                         </div>
                                         <div class="main-con tc">
@@ -145,27 +130,14 @@
 
 </div>
 <script type="text/javascript">
-    var type=@ViewBag.Type;
-    
-    $(function(){
-        var liindex=parseInt(type)-1;
-        $("#showul li").eq(liindex).addClass("cur");
-        var lookContent={
-            "id":@ViewBag.id,
-            "lookCount":@ViewBag.LookCount
-            };
-        $.post("/member/LookAdd",lookContent,function(e){},"json");
-    })
-
-    $(document).on("click","#btnPraise",function(){
+     $(document).on("click","#btnPraise",function(){
          var  praiseContet={
             "id":@ViewBag.id,
-            "praise":parseInt($("#lblPraise").text())
+            "count":parseInt($("#lblPraise").text())
             };
-        $.post("/member/PraiseDynamic",praiseContet,function(e){
+        $.post("/policy/Praise",praiseContet,function(e){
             var praiseCount=parseInt($("#lblPraise").text());
             $("#lblPraise").text(praiseCount+1);
         },"json")
     })
-
 </script>

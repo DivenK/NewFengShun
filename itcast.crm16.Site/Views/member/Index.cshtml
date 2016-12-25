@@ -225,8 +225,8 @@
 				fx: "crossfade"
 			}
 	});
-	
-	$('[data-role="submit-btn"]').click(function(event) {
+	$(function () {
+        $('[data-role="submit-btn"]').click(function(event) {
 		// 以下是需要验证的信息
 		var nicheng_text=$('[data-role="nicheng-text"]').val();
 		var mima_text=$('[data-role="mima-text"]').val();
@@ -249,18 +249,15 @@
 		var sheng_text = "";
 		for (var j = 0; j < s_length; j++) {
 		                var selectChild = $('#sheng-text option').eq(j);
-		                if (selectChild.attr('selected')) {
-
+		                if (selectChild.is(':selected')) {
 		                    	sheng_text = selectChild.val();
-		                    	
 		                }
 		}
 		var c_length = $('#city-text option').length;
 		var city_text = "";
 		for (var j = 0; j < c_length; j++) {
 		                var selectChild = $('#city-text option').eq(j);
-		                if (selectChild.attr('selected')) {
-
+		                 if (selectChild.is(':selected')) {
 		                    	city_text = selectChild.val();
 		                    	
 		                }
@@ -361,6 +358,8 @@
 		
 		
 	});
+	})
+	
 	$('[data-role="reset-btn"]').click(function() {
 	        $('input').val("");
 	});
