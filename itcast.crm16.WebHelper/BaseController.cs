@@ -26,20 +26,21 @@ namespace itcast.crm16.WebHelper
         protected IMemberMsgServices memberMsgSer;
         protected ISiteSetService siteService;
         protected IPolicyServices policySer;
+        protected string url = "";//用来首页的菜单选项
         protected int pageSize=10;
         protected int TotalPage;//总行数
         protected int PageCount;//有多少页
 
 
-        public BaseController(IsysMenusServices mSer)
+        public BaseController(IsysMenusServices mSer,string url="")
         {
             menuSer = mSer;
             var list = menuSer.QueryWhere(c => c.mStatus == 0).OrderBy(c => c.mSortid).ToList();
 
-
-            //获取当前左边的菜单
-            // var permissMenus = menuSer.RunProc<sysMenus>("USP_GetMenusForUserid16 " + UserMgr.GetUserInfo().uID);
-            ViewBag.mList = list;
+          ViewBag.url = url;
+          //获取当前左边的菜单
+          // var permissMenus = menuSer.RunProc<sysMenus>("USP_GetMenusForUserid16 " + UserMgr.GetUserInfo().uID);
+          ViewBag.mList = list;
         }
         #endregion
 

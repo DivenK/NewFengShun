@@ -11,16 +11,8 @@
         <div class="p2th">
             <div class="w1200">
                 <div class="item-wrap clearfix">
-                    <div class="lbox fldi">
-                        <h3 class="title">丰顺商人</h3>
-                        <ul class="list" id="showul">
-                            <li>
-                                <a href="/member/memberdynamic?id=2">会员动态</a>
-                            </li>
-                            <li>
-                                <a href="/member//memberdynamic?id=3">招聘信息</a>
-                            </li>
-                        </ul>
+                     <div class="lbox fldi">
+                        <h3 class="title">人物访谈</h3>
                         <div class="lx-item">
                             <div class="code-item">
                                 <img src="/Content/images/code_03.jpg" />
@@ -31,7 +23,7 @@
                         <div class="cur-title">
                             <p>
                                 当前位置：<a href="/Home/index">首页</a> >>
-                                <a href="/member//memberdynamic?id=1">会员风采</a> 
+                                <a href="/InterView/index">人物访谈</a>
                             </p>
                         </div>
                         <div class="content" id="content">
@@ -61,7 +53,6 @@
                                         }
 
                                     }
-
                             </div>
                             <div class="page-item" id="page">
                                 <a href="#">上一页</a>
@@ -83,24 +74,16 @@
 <!-- 页面内容结束 -->
 
 <script type="text/javascript">
-    var type=@ViewBag.Type;
-    $(function(){
-        var liindex=parseInt(type)-2;
-        $("#showul li").eq(liindex).addClass("cur");
-    })
-
-
-    // 分页组件
+// 分页组件
     $("#page").Page({
         totalPages: @ViewBag.TotalPage,//分页总数
         liNums: 7,//分页的数字按钮数(建议取奇数)
         activeClass: 'activP', //active 类样式定义
         callBack: function (page) {
             var content={
-                "pageIndex":page,
-                "type":type
+                "pageIndex":page
             }
-            $.post("/member/MemberDynamicByPage",content,function(e){
+            $.post("/InterView/InterViewByPage",content,function(e){
                 if(e.status==0)
                 {
                     //<a href="/member/memberdynamicdetail/24">
@@ -113,7 +96,7 @@
                     var conhtml="";
                     
                     for (var i = 0; i < data.length; i++) {
-                        conhtml+='<a href="/member/memberdynamicdetail/'+data[i].id+'">';
+                        conhtml+='<a href="/InterView/MemberDynamicDetail/'+data[i].id+'">';
                         conhtml+='<li class="clearfix">';
                         conhtml+='<span class="title fldi">'+data[i].Title+'</span>';
                         conhtml+='<span class="time frdi">'+data[i].CreateTime+'</span>';
