@@ -11,8 +11,13 @@
         <div class="p2th">
             <div class="w1200">
                 <div class="item-wrap clearfix">
-                     <div class="lbox fldi">
+                    <div class="lbox fldi">
                         <h3 class="title">人物访谈</h3>
+                        <ul class="list" id="showul">
+                            <li  class="cur">
+                                <a href="#">经典访谈</a>
+                            </li>
+                        </ul>
                         <div class="lx-item">
                             <div class="code-item">
                                 <img src="/Content/images/code_03.jpg" />
@@ -43,7 +48,7 @@
                                             List<MemberDynamic> memberList = ViewBag.MemberList as List<MemberDynamic>;
                                             foreach (var item in memberList)
                                             {
-                                                <a href="/member/memberdynamicdetail/@item.id">
+                                                <a href="/InterView/MemberDynamicDetail/@item.id">
                                                     <li class="clearfix">
                                                         <span class="title fldi">@item.Title</span>
                                                         <span class="time frdi">[@item.CreateTime.ToString("yyyy-MM-dd")]</span>
@@ -74,7 +79,7 @@
 <!-- 页面内容结束 -->
 
 <script type="text/javascript">
-// 分页组件
+    // 分页组件
     $("#page").Page({
         totalPages: @ViewBag.TotalPage,//分页总数
         liNums: 7,//分页的数字按钮数(建议取奇数)
@@ -94,7 +99,7 @@
                     //</a>
                     var data=e.datas;
                     var conhtml="";
-                    
+
                     for (var i = 0; i < data.length; i++) {
                         conhtml+='<a href="/InterView/MemberDynamicDetail/'+data[i].id+'">';
                         conhtml+='<li class="clearfix">';
