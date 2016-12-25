@@ -56,7 +56,7 @@ namespace itcast.crm16.Services
                 DisplayStr = d.Display == 0 ? true : false,
                 Likes = d.Likes,
                 id = d.id,
-                Contents = d.Contents.Length > 10 ? d.Contents.Substring(0, 8) : d.Contents,
+                Contents = d.Contents.Length >10&&IsShow==false? d.Contents.Substring(0, 8) : d.Contents,
                 Creater = d.Creater,
                 CreaterTime = d.CreaterTime,
                 Look = d.Look,

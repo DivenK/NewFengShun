@@ -13,7 +13,7 @@ namespace itcast.crm16.Site.Controllers
     [WebHelper.Attrs.SkipCheckLogin]
     public class memberController : BaseController
     {
-        public memberController(IsysMenusServices mSer, IMemberMsgServices memberMsgSer, IMemberDynamicServices memberDynamicSer) : base(mSer, "/member/memberdynamic?id=1")
+        public memberController(IsysMenusServices mSer, IMemberMsgServices memberMsgSer, IMemberDynamicServices memberDynamicSer) : base(mSer, "/member/memberdynamic?id=2")
         {
             base.memberMsgSer = memberMsgSer;
             base.memberSer = memberDynamicSer;
