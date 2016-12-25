@@ -35,7 +35,7 @@ namespace itcast.crm16.Services
         public MemberDynamic GetMemberMsgById(int  id)
         {
             List<MemberDynamic> mList = this.dal.QueryWhere(c => c.id == id && c.IsComment == true && c.IsDelete == 0);
-            if(mList!=null)
+            if(mList!=null&&mList.Count>0)
             {
                 return mList[0];
             }

@@ -1300,6 +1300,8 @@
     <Content Include="Views\Cemmend\GetModel.cshtml" />
     <Content Include="Views\member\MemberDynamic.cshtml" />
     <Content Include="Views\Cemmend\GetLeader.cshtml" />
+    <Content Include="Views\Cemmend\GetAddCemmend.cshtml" />
+    <Content Include="Views\member\MemberDynamicDetail.cshtml" />
     <Content Include="Views\Cemmend\LeaderModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
