@@ -15,8 +15,8 @@
                         <ul class="list">
                             @foreach (var item in modelList)
                             {
-                                <li class="@(item.id==ViewBag.id?"Cur":"")">
-                                    <a href="@("/Cemmend/GetModel?id="+item.id)">@item.Name</a>
+                                <li class="@(item.id==ViewBag.id?"cur":"")">
+                                    <a href="@(item.Name=="商会领导"?"/Cemmend/GetLeader?id="+item.id:"/Cemmend/GetModel?id="+item.id)">@item.Name</a>
                                 </li>
                             }
                         </ul>
