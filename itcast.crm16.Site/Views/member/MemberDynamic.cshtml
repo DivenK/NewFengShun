@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "MemberDynamic";
+    ViewBag.Title = "丰顺商会欢迎您";
     Layout = "~/Views/Shared/_PageMaster.cshtml";
 }
 @using itcast.crm16.model
@@ -12,19 +12,16 @@
             <div class="w1200">
                 <div class="item-wrap clearfix">
                     <div class="lbox fldi">
-                        <h3 class="title">动态新闻</h3>
-                        <ul class="list">
-                            <li class="cur">
-                                <a href="/member/memberdynamic">会员动态</a>
+                        <h3 class="title">丰顺商人</h3>
+                        <ul class="list" id="showul">
+                            <li>
+                                <a href="/member//memberdynamic?id=1">会员风采</a>
                             </li>
                             <li>
-                                <a href="/member/memberstyle">会员风采</a>
+                                <a href="/member/memberdynamic?id=2">会员动态</a>
                             </li>
                             <li>
-                                <a href="/member/memberrecruit">招聘信息</a>
-                            </li>
-                            <li>
-                                <a href="/member/memberregister">会员注册</a>
+                                <a href="/member//memberdynamic?id=3">招聘信息</a>
                             </li>
                         </ul>
                         <div class="lx-item">
@@ -36,9 +33,8 @@
                     <div class="rbox frdi">
                         <div class="cur-title">
                             <p>
-                                当前位置：<a href="#">首页</a> >>
-                                <a href="#">会员风采</a> >>
-                                <a href="#">会员动态</a>
+                                当前位置：<a href="/Home/index">首页</a> >>
+                                <a href="/member//memberdynamic?id=1">会员风采</a> 
                             </p>
                         </div>
                         <div class="content" id="content">
@@ -90,6 +86,13 @@
 <!-- 页面内容结束 -->
 
 <script type="text/javascript">
+    var type=@ViewBag.Type;
+    $(function(){
+        var liindex=parseInt(type)-1;
+        $("#showul li").eq(liindex).addClass("cur");
+    })
+
+
     // 分页组件
     $("#page").Page({
         totalPages: @ViewBag.TotalPage,//分页总数

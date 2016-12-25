@@ -43,21 +43,37 @@ namespace itcast.crm16.Site.Controllers
             }
         }
 
-        public ActionResult MemberDynamic()
+        public ActionResult MemberDynamic(int id)
         {
             int count = 0;
-            List<MemberDynamic> memberList = memberSer.GetMemberMsgByPage(1, 2, out count, 1, false);
+            List<MemberDynamic> memberList = memberSer.GetMemberMsgByPage(1, 15, out count, id, false);
             ViewBag.MemberList = memberList;
-            ViewBag.TotalPage = Math.Ceiling(count * 1.0 / 2);
+            ViewBag.Type = id;
+            ViewBag.TotalPage = Math.Ceiling(count * 1.0 / 15);
             return View();
         }
 
-        public ActionResult MemberDynamicByPage(int pageIndex)
+        public ActionResult MemberDynamicByPage(int pageIndex,int id)
         {
             int count = 0;
-            List<MemberDynamic> memberList = memberSer.GetMemberMsgByPage(pageIndex, 2, out count, 1, false);
+            List<MemberDynamic> memberList = memberSer.GetMemberMsgByPage(pageIndex, 15, out count, id, false);
             return WriteSuccess("获取成功", memberList.Select(c=>new {c.id,c.Title,CreateTime=c.CreateTime.ToString("yyyy-MM-dd") }));
         }
 
+        public ActionResult MemberDynamicDetail(int id)
+        {
+            MemberDynamic entity = memberSer.GetMemberMsgById(id);
+
+            ViewBag.Type = entity.Type;
+            if (entity!=null)
+            {
+                memberSer.SaveChanges();
+                entity.LookCount += 1;
+                memberSer.Edit(entity, new string[] { "LookCount" });
+                memberSer.SaveChanges();
+            }
+            ViewBag.Entity = entity;
+            return View();
+        }
     }
 }

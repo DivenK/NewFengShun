@@ -1300,6 +1300,7 @@
     <Content Include="Views\Cemmend\GetModel.cshtml" />
     <Content Include="Views\member\MemberDynamic.cshtml" />
     <Content Include="Views\Cemmend\GetAddCemmend.cshtml" />
+    <Content Include="Views\member\MemberDynamicDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
