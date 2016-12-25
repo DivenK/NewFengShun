@@ -66,6 +66,7 @@
           <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Content" Type="nvarchar" MaxLength="2000" Nullable="false" />
           <Property Name="Praise" Type="int" Nullable="false" />
+          <Property Name="LookCount" Type="int" Nullable="false" />
           <Property Name="IsComment" Type="bit" Nullable="false" />
           <Property Name="Creator" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
@@ -117,10 +118,6 @@
         <EntityType Name="NewType">
           <Key>
             <PropertyRef Name="id" />
-            
-            
-            
-            
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -230,10 +227,6 @@
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserId" />
-            
-            
-            
-            
           </Key>
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -245,10 +238,6 @@
         <EntityType Name="VipUser">
           <Key>
             <PropertyRef Name="id" />
-            
-            
-            
-            
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VipName" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -426,6 +415,7 @@
           <Property Name="Updator" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="UpdateTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="ArticleType" Relationship="FS_SiteModel.FK_MemberDynamic_ArticleType" FromRole="MemberDynamic" ToRole="ArticleType" />
+          <Property Name="LookCount" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="MemberMsg">
           <Key>
@@ -704,6 +694,7 @@
           <EntitySetMapping Name="MemberDynamic">
             <EntityTypeMapping TypeName="FS_SiteModel.MemberDynamic">
               <MappingFragment StoreEntitySet="MemberDynamic">
+                <ScalarProperty Name="LookCount" ColumnName="LookCount" />
                 <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
                 <ScalarProperty Name="Updator" ColumnName="Updator" />
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
