@@ -7,8 +7,14 @@ using System.Threading.Tasks;
 
 namespace itcast.crm16.Common
 {
-   public static class StringHelp
+    public static class StringHelp
     {
+
+        /// <summary>
+        /// 过滤HTML标签的元素
+        /// </summary>
+        /// <param name="conters"></param>
+        /// <returns></returns>
         public static string GetContent(this string conters)
         {
             System.Text.RegularExpressions.Regex regImg = new Regex(@"<(\/\s*)?!?((\w+:)?\w+)(\w+(\s*=?\s*(([""'])(\\[""'tbnr]|[^\7])*?\7|\w+)|.{0})|\s)*?(\/\s*)?>", RegexOptions.IgnoreCase);
@@ -16,10 +22,11 @@ namespace itcast.crm16.Common
             MatchCollection matches = regImg.Matches(conters);
             foreach (var item in matches)
             {
-               var ss= conters.Replace(item.ToString(),string.Empty);
+                var ss = conters.Replace(item.ToString(), string.Empty);
                 conters = ss;
             }
-        
+            var result = conters.Replace("&nbsp;", string.Empty).Replace("&nbsp",string.Empty);
+            conters = result;
             return conters.Trim();
         }
         public static string Quot(this string _input, string _quot)
@@ -28,9 +35,14 @@ namespace itcast.crm16.Common
         }
 
         public static DateTime First(this DateTime current)
-          {
-          var first = current.AddDays(1 - current.Day);
+        {
+            var first = current.AddDays(1 - current.Day);
             return first;
-         }
-}
+        }
+
+        public static string ToyyyyMMddDateTime(this DateTime current)
+        {
+            return current.ToString("yyyy-MM-dd");
+        }
+    }
 }
