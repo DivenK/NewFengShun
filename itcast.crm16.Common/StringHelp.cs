@@ -11,7 +11,7 @@ namespace itcast.crm16.Common
     {
         public static string GetContent(this string conters)
         {
-            System.Text.RegularExpressions.Regex regImg = new Regex(@"<(.[^>]*)/>", RegexOptions.IgnoreCase);
+            System.Text.RegularExpressions.Regex regImg = new Regex(@"<(\/\s*)?!?((\w+:)?\w+)(\w+(\s*=?\s*(([""'])(\\[""'tbnr]|[^\7])*?\7|\w+)|.{0})|\s)*?(\/\s*)?>", RegexOptions.IgnoreCase);
             // 搜索匹配的字符串 
             MatchCollection matches = regImg.Matches(conters);
             foreach (var item in matches)
