@@ -55,7 +55,7 @@
                                               {
                                             <tr data-count="@(i++)">
                                                 <td>@i</td>
-                                                <td>@item.Title</td>
+                                                <td title="@item.Title">@((item.Title!=null&&item.Title.Length>15)?item.Title.Substring(0,15):item.Title)</td>
                                                 <td class="am-hide-sm-only" ><input type="checkbox" class="am-switch am-round am-switch-success  newDisplay changelook" @(item.Look==0 ? "Checked" : "") data-id="@item.id"/></td>
                                                 <td>@item.Author</td>
                                                 <td class="am-hide-sm-only">@item.Creator</td>

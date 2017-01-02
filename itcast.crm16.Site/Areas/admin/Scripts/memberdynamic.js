@@ -92,7 +92,7 @@ function GetContentByPage(typeId,pageIndex, pageSize, searchMsg) {
                 showHtml += '<tr>';
                 showHtml += '<td>' + (i + 1) + '</td>';
                 showHtml += '<td>' + dataContent[i].typeName + '</td>';
-                showHtml += '<td>' + dataContent[i].Title + '</td>';
+                showHtml += '<td title="'+dataContent[i].Title+'">' + (dataContent[i].Title.length>15?dataContent[i].Title.substring(0,15):dataContent[i].Title) + '</td>';
                 showHtml += '<td class="am-hide-sm-only" ><div _switch="" class="am-switch am-round am-switch-success changelook  newDisplay ' + (dataContent[i].IsComment ? "am-active" : "") + '"><div class="am-switch-handle"><input type="checkbox" class="" ' + (dataContent[i].IsComment == 0 ? "checked" : "") + ' data-id="' + dataContent[i].id + '"></div></div></td>';
                 showHtml += '<td class="am-hide-sm-only">' + dataContent[i].CreateTime + '</td>';
                 showHtml += '<td><div class="am-btn-toolbar"><div class="am-btn-group am-btn-group-xs">';
