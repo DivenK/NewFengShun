@@ -8,6 +8,7 @@ using itcast.crm16.IServices;
 using itcast.crm16.model;
 using itcast.crm16.WebHelper.Attrs;
 using itcast.crm16.Common;
+using System.Text.RegularExpressions;
 
 namespace itcast.crm16.Site.Areas.admin.Controllers
 {
@@ -45,13 +46,13 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             int count = 0;
             List<MemberDynamic> memberList = null;
             System.Linq.Expressions.Expression<Func<MemberMsg, bool>> where = null;
-            if(typeid==0)
+            if (typeid == 0)
             {
-               if(string.IsNullOrEmpty(searchMsg))
+                if (string.IsNullOrEmpty(searchMsg))
                 {
                     memberList = memberSer.QueryByPage(pageIndex, pageSize, out count, c => c.IsDelete == 0, c => c.id);
                 }
-               else
+                else
                 {
                     memberList = memberSer.QueryByPage(pageIndex, pageSize, out count, c => c.Title.Contains(searchMsg) && c.IsDelete == 0, c => c.id);
                 }
@@ -60,7 +61,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             {
                 if (string.IsNullOrEmpty(searchMsg))
                 {
-                    memberList = memberSer.QueryByPage(pageIndex, pageSize, out count, c => c.IsDelete == 0&&c.Type==typeid, c => c.id);
+                    memberList = memberSer.QueryByPage(pageIndex, pageSize, out count, c => c.IsDelete == 0 && c.Type == typeid, c => c.id);
                 }
                 else
                 {
@@ -68,7 +69,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 }
             }
 
-            
+
             if (memberList != null)
             {
                 return WriteSuccess("获取成功", new
@@ -111,7 +112,9 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 addModel.Type = type;
                 addModel.IsComment = true;
                 addModel.CreateTime = DateTime.Now;
-                addModel.Creator = (Session[Keys.uinfo] as sysUserInfo).uLoginName; ;
+                addModel.Creator = (Session[Keys.uinfo] as sysUserInfo).uLoginName;
+                if (!string.IsNullOrEmpty(content))
+                    addModel.ImgUrl = GetImageUrl(content);
                 memberSer.Add(addModel);
                 int addRet = memberSer.SaveChanges();
                 if (addRet == 1)
@@ -132,7 +135,9 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 editModel.Type = type;
                 editModel.UpdateTime = DateTime.Now;
                 editModel.Updator = (Session[Keys.uinfo] as sysUserInfo).uLoginName;
-                memberSer.Edit(editModel, new string[] { "Title", "Content", "Type", "UpdateTime", "Updator" });
+                if (!string.IsNullOrEmpty(content))
+                    editModel.ImgUrl = GetImageUrl(content);
+                memberSer.Edit(editModel, new string[] { "Title", "Content", "Type", "UpdateTime", "Updator", "ImgUrl" });
                 int editRet = memberSer.SaveChanges();
                 if (editRet == 1)
                 {
@@ -143,6 +148,16 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                     return WriteError("修改失败");
                 }
             }
+        }
+
+        public string GetImageUrl(string conters)
+        {
+            System.Text.RegularExpressions.Regex regImg = new Regex(@"<img\b[^<>]*?\bsrc[\s\t\r\n]*=[\s\t\r\n]*[""']?[\s\t\r\n]*(?<imgUrl>[^\s\t\r\n""'<>]*)[^<>]*?/?[\s\t\r\n]*>", RegexOptions.IgnoreCase);
+            // 搜索匹配的字符串 
+            MatchCollection matches = regImg.Matches(conters);
+            if (matches.Count > 0)
+            { return matches[0].Groups["imgUrl"].Value; }
+            return string.Empty;
         }
 
 
