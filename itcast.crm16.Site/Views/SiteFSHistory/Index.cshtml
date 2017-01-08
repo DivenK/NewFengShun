@@ -39,7 +39,7 @@
                                 <ul class="list" id="contentList">
                                     @foreach (var item in modelList)
                                     {
-                                        <a href="@("/SiteFSHistory/GetModel/id="+item.id)">
+                                        <a href="@("/SiteFSHistory/GetModel/" + item.id)">
                                             <li class="clearfix">
                                                 <span class="title fldi">@(item.Title)</span>
                                                 <span class="time frdi">[@item.UpdateTime.ToString("yyyy-MM-dd")]</span>
@@ -84,7 +84,7 @@
                             var data = e.datas;
                             var conhtml = "";
                             for (var i = 0; i < data.length; i++) {
-                                conhtml += ' <a href="/SiteFSHistory/GetModel/id=' +
+                                conhtml += ' <a href="/SiteFSHistory/GetModel/' +
                                     data[i].id +
                                     '">  <li class="clearfix"><span class="title fldi">';
                                 conhtml += data[i].Title + '</span>';

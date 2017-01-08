@@ -1,4 +1,5 @@
-﻿@using itcast.crm16.Site.Models;
+﻿@using itcast.crm16.Common
+@using itcast.crm16.Site.Models;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/admin/Views/Shared/AdminMaster.cshtml";
@@ -49,8 +50,8 @@
                                 <tr>
 
                                     <td>@(item.Nid)</td>
-                                    <td>@(item.Title)</td>
-                                    <td>@item.Contents</td>
+                                    <td>@(item.Title.GetSubValue(8))</td>
+                                    <td>@item.Contents.GetContent().GetSubValue(8)</td>
                                     <td class="am-hide-sm-only" data-id="@item.id"><input type="checkbox" class="am-switch  am-switch-success  newDisplay" @(item.DisplayStr ==true? "Checked" : "") /></td>
                                     <td class="am-hide-sm-only">@item.Creater</td>
                                     <td class="am-hide-sm-only">@item.UpdateTimeStr</td>

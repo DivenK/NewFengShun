@@ -56,7 +56,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             if (id > 0)//是不是编辑
             {
                 model.id = id;
-                FSHistorySer.Edit(model, new string[] { "Title", "Contents" });
+                FSHistorySer.Edit(model, new string[] { "Title", "Contents", "Image" });
             }
             else
             {

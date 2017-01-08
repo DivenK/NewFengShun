@@ -1,11 +1,13 @@
-﻿@using itcast.crm16.Site.Models;
+﻿@using itcast.crm16.Common
+@using itcast.crm16.Site.Models;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/admin/Views/Shared/AdminMaster.cshtml";
+    var modelList = ViewBag.DateList as List<FSHistoryViewModel>;
 }
 
 <div class="content">
-    <div class="card-box">
+    <div class="card-box" style="@(modelList.Count>0?"":"margin-top:70px")">
         <!-- Row start -->
         <div class="am-g">
             <div class="am-u-sm-12 am-u-md-6">
@@ -43,28 +45,35 @@
                                 <th class="table-set">操作</th>
                             </tr>
                         </thead>
-                        <tbody id="CommerceTbody" data-type="@((ViewBag.DateList as List<FSHistoryViewModel>).FirstOrDefault())">
-                            @foreach (var item in (ViewBag.DateList as List<FSHistoryViewModel>))
-                            {
-                                <tr>
+                        <tbody id="CommerceTbody" data-type="">
+                        @if (modelList.Count > 0)
+                        {
+                            foreach (var item in modelList)
+                             {
+                                 <tr>
 
-                                    <td>@(item.Nid)</td>
-                                    <td>@(item.Title)</td>
-                                    <td>@item.Contents</td>
-                                    <td class="am-hide-sm-only" data-id="@item.id"><input type="checkbox" class="am-switch  am-switch-success  newDisplay" @(item.DisplayStr ==true? "Checked" : "") /></td>
-                                    <td class="am-hide-sm-only">@item.Creater</td>
-                                    <td class="am-hide-sm-only">@item.UpdateTimeStr</td>
-                                    <td>
-                                        <div class="am-btn-toolbar">
-                                            <div class="am-btn-group am-btn-group-xs">
-                                                <a class="am-btn am-btn-default am-btn-xs am-text-secondary editFSHistory" data-id="@item.id"><span class="am-icon-pencil-square-o"></span> 编辑</a>
+                                     <td>@(item.Nid)</td>
+                                     <td>@(item.Title.GetSubValue(8))</td>
+                                     <td>@item.Contents.GetContent().GetSubValue(7)</td>
+                                     <td class="am-hide-sm-only" data-id="@item.id"><input type="checkbox" class="am-switch  am-switch-success  newDisplay" @(item.DisplayStr == true ? "Checked" : "")/></td>
+                                     <td class="am-hide-sm-only">@item.Creater</td>
+                                     <td class="am-hide-sm-only">@item.UpdateTimeStr</td>
+                                     <td>
+                                         <div class="am-btn-toolbar">
+                                             <div class="am-btn-group am-btn-group-xs">
+                                                 <a class="am-btn am-btn-default am-btn-xs am-text-secondary editFSHistory" data-id="@item.id"><span class="am-icon-pencil-square-o"></span> 编辑</a>
 
-                                                <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only delFSHistory" data-id="@item.id"><span class="am-icon-trash-o"></span> 删除</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only delFSHistory" data-id="@item.id"><span class="am-icon-trash-o"></span> 删除</a>
+                                             </div>
+                                         </div>
+                                     </td>
+                                 </tr>
                             }
+                        }
+                        else
+                        {
+                            <tr>  <p>暂无数据,请添加</p></tr>
+                        }
                         </tbody>
                     </table>
                     <div class="am-cf">
@@ -146,4 +155,4 @@
     editor.render('doc-ta-1');  //绑定id
     </script>
 }
-<script src="~/Areas/admin/Scripts/FSHistory.js"></script>
+<script src="~/Areas/admin/Scripts/Chamber.js"></script>

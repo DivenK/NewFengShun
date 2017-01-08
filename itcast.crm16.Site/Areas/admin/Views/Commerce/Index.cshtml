@@ -1,11 +1,13 @@
-﻿@using itcast.crm16.Site.Models;
+﻿@using itcast.crm16.Common
+@using itcast.crm16.Site.Models;
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/admin/Views/Shared/AdminMaster.cshtml";
+    var modelList = ViewBag.DateList as List<CommerceViewModel>;
 }
 <div class="content">
-    <div class="card-box">
+    <div class="card-box"style="@(modelList.Count>0?"":"margin-top:70px")">
         <!-- Row start -->
         <div class="am-g">
             <div class="am-u-sm-12 am-u-md-6">
@@ -32,25 +34,26 @@
                 <form class="am-form">
                     <table class="am-table am-table-striped am-table-hover table-main am-table-centered">
                         <thead>
-                            <tr>
-                                
-                                <th class="table-id">ID</th>
-                                <th class="table-title">标题</th>
-                                <th class="table-type">内容</th>
-                                <th class="table-type">显示</th>
-                                <th class="table-author am-hide-sm-only">作者</th>
-                                <th class="table-date am-hide-sm-only">修改日期</th>
-                                <th class="table-set">操作</th>
-                            </tr>
+                        <tr>
+
+                            <th class="table-id">ID</th>
+                            <th class="table-title">标题</th>
+                            <th class="table-type">内容</th>
+                            <th class="table-type">显示</th>
+                            <th class="table-author am-hide-sm-only">作者</th>
+                            <th class="table-date am-hide-sm-only">修改日期</th>
+                            <th class="table-set">操作</th>
+                        </tr>
                         </thead>
-                        <tbody id="CommerceTbody"  data-type="@((ViewBag.DateList as List<CommerceViewModel>).FirstOrDefault().typeName)">
-                            @foreach (var item in (ViewBag.DateList as List<CommerceViewModel>))
+
+                        <tbody id="CommerceTbody"  data-type="@(modelList.FirstOrDefault().typeName)">
+                            @foreach (var item in modelList)
                             {
                                 <tr>
                                    
                                     <td>@(item.Nid)</td>
-                                    <td>@(item.Name)</td>
-                                    <td>@item.Contents</td>
+                                    <td>@(item.Name.GetSubValue(8))</td>
+                                    <td>@item.Contents.GetContent().GetSubValue(8)</td>
                                     <td class="am-hide-sm-only" data-id="@item.id"><input type="checkbox" class="am-switch  am-switch-success  newDisplay" @(item.Look == 0 ? "Checked" : "") /></td>
                                     <td class="am-hide-sm-only">@item.Creater</td>
                                     <td class="am-hide-sm-only">@item.UpdateTimeStr</td>
@@ -68,7 +71,7 @@
                         </tbody>
                     </table>
                     <div class="am-cf">
-                        共 <span id="rowCount" data-pageCount="@((ViewBag.DateList as List<CommerceViewModel>).FirstOrDefault().typeName==2?ViewBag.PageCount:"")">@(ViewBag.TotalPage)</span> 条记录
+                        共 <span id="rowCount" data-pageCount="@(modelList.FirstOrDefault().typeName==2?ViewBag.PageCount:"")">@(ViewBag.TotalPage)</span> 条记录
                         <div class="am-fr" id="pageDemo">
                         </div>
                     </div>

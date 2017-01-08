@@ -7,28 +7,28 @@
    var modelItems= ViewBag.Items  as List<CommerceViewModel>;
 }
 <div class="detail-page font_wryh inner-same-iframe">
-    <div class="w1200">
-        <div class="p2th">
-            <div class="w1200">
-                <div class="item-wrap clearfix">
-                    <div class="lbox fldi">
-                        <h3 class="title">关于商会</h3>
-                        <ul class="list">
-                            @foreach (var item in modelList)
-                            {
-                                <li class="@(item.id==ViewBag.id?"cur":"")">
-                                    <a href="@(item.Name=="商会领导"?"/Cemmend/GetLeader?id="+item.id:"/Cemmend/GetModel?id="+item.id)">@item.Name</a>
-                                </li>
-                            }
-                        </ul>
-                        <div class="lx-item">
-                            <div class="code-item">
-                                <img src="/Content/images/logoweixin.png" />
-                            </div>
+<div class="w1200">
+    <div class="p2th">
+        <div class="w1200">
+            <div class="item-wrap clearfix">
+                <div class="lbox fldi">
+                    <h3 class="title">关于商会</h3>
+                    <ul class="list">
+                        @foreach (var item in modelList)
+                        {
+                            <li class="@(item.id == ViewBag.id ? "cur" : "")">
+                                <a href="@(item.Name == "商会领导" ? "/Cemmend/GetLeader?id=" + item.id : "/Cemmend/GetModel?id=" + item.id)">@item.Name</a>
+                            </li>
+                        }
+                    </ul>
+                    <div class="lx-item">
+                        <div class="code-item">
+                            <img src="/Content/images/logoweixin.png"/>
                         </div>
                     </div>
-                    <div class="product-page">
-                        <div class="rbox frdi">
+                </div>
+                <div class="product-page">
+                    <div class="rbox frdi">
                         <div class="cur-title">
                             <p>
                                 当前位置：<a href="#">首页</a> >>
@@ -41,16 +41,16 @@
                                 <ul class="clearfix list" id="contentList">
                                     @foreach (var item in modelItems)
                                     {
-                                     <li>
-                                         <a href="@("/Cemmend/LeaderModel?id="+item.id)">
-                                        <div class="img">
-                                            <img src="@item.ImageUrl" />
-                                        </div>
-                                        <div class="txt">
-                                            @item.Name
-                                        </div>
-                                             </a>
-                                    </li>
+                                        <li>
+                                            <a href="@("/Cemmend/LeaderModel?id=" + item.id)">
+                                                <div class="img">
+                                                    <img src="@item.ImageUrl"/>
+                                                </div>
+                                                <div class="txt">
+                                                    @item.Name
+                                                </div>
+                                            </a>
+                                        </li>
                                     }
                                 </ul>
                                 <div class="page-item" id="page">
@@ -63,12 +63,13 @@
                             </div>
                         </div>
                     </div>
-                    </div>
                 </div>
             </div>
-
         </div>
 
+    </div>
+</div>
+</div>
         <script src="~/Content/js/jquery.page.js"></script>
         <script type="text/javascript">
     // 分页组件
@@ -80,23 +81,23 @@
             var content={
                 "pageIndex":page
             }
-            $.post("/Cemmend/AjaxGetLeader",content,function(e){
-                if(e.status==0)
-                {
-                    var data=e.datas;
-                    var conhtml="";
-                    for (var i = 0; i < data.length; i++) {      
-                        conhtml+=' <a href="/Cemmend/LeaderModel?id='+data[i].id+'"> <li><div class="img">';
-                        conhtml+='<img src="'+data[i].ImageUrl+'" /> </div>';
-                        conhtml+=' <div class="txt">'+data[i].Name+'</div></li></a>';
+            $.post("/Cemmend/AjaxGetLeader",
+                content,
+                function(e) {
+                    if (e.status == 0) {
+                        var data = e.datas;
+                        var conhtml = "";
+                        for (var i = 0; i < data.length; i++) {
+                            conhtml += ' <a href="/Cemmend/LeaderModel?id=' + data[i].id + '"> <li><div class="img">';
+                            conhtml += '<img src="' + data[i].ImageUrl + '" /> </div>';
+                            conhtml += ' <div class="txt">' + data[i].Name + '</div></li></a>';
+                        }
+                        $("#contentList").html(conhtml);
+                    } else {
+                        alert("网络异常");
                     }
-                    $("#contentList").html(conhtml);
-                }
-                else
-                {
-                    alert("网络异常");
-                }
-            },"json")
+                },
+                "json");
         }
     });
 </script>

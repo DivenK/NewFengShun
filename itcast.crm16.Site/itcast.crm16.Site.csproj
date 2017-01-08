@@ -187,6 +187,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\admin\Scripts\Chamber.js" />
     <Content Include="Areas\admin\Scripts\Commerce.js" />
     <Content Include="Areas\admin\Scripts\FSHistory.js" />
     <Content Include="Areas\admin\Scripts\login.js" />
