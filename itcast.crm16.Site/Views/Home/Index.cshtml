@@ -13,12 +13,22 @@
         <div class="p1th">
             <div class="scrollBox">
                 <!-- 放图片或者背景都可以 -->
-                <ul class="img_list clearfix" id="foo3">
-                    @foreach (var item in modelItems.ImageList)
+                @{
+
+                    string imgstrs = "";
+                    foreach (var item in modelItems.ImageList)
                     {
-                        <li class="banner" style="background-image:url(@item.Image)"></li>
+                        imgstrs += (item.Image + "|");
                     }
-                </ul>
+                    <ul class="img_list clearfix" id="foo3" data-imgstr="@imgstrs.Substring(0,imgstrs.Length-2)">
+                    @for (int i = 0; i <modelItems.ImageList.Count; i++)
+                    {
+                        <li class="banner" style="background-image:url(@modelItems.ImageList[0].Image)"></li>
+                    }
+                    
+                        
+                    </ul>
+                }
                 <!-- 大图缩率图 -->
                 <!-- 渐变切换 -->
                 <div class="page-wrap clearfix">
@@ -157,21 +167,21 @@
                             @for (int i = 0; i < 3; i++)
                             {
                                 <a href="/member/MemberDynamicDetail/@modelItems.MemberTellList[i].id">
-                                <li>
-                                    <div class="img">
-                                        <img src="/Content/images/test/25.jpg" alt="">
-                                    </div>
-                                    <div class="txt">
-                                        <dl class="clearfix">
-                                            <dt class="">@modelItems.MemberTellList[i].Title</dt>
-                                            <dd class="">
+                                    <li>
+                                        <div class="img">
+                                            <img src="/Content/images/test/25.jpg" alt="">
+                                        </div>
+                                        <div class="txt">
+                                            <dl class="clearfix">
+                                                <dt class="">@modelItems.MemberTellList[i].Title</dt>
+                                                <dd class="">
 
-                                                @Html.Raw(modelItems.MemberTellList[i].Content.GetContent().Trim())
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                </li>
-                                    </a>
+                                                    @Html.Raw(modelItems.MemberTellList[i].Content.GetContent().Trim())
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                    </li>
+                                </a>
                             }
                         </ul>
                     </div>
@@ -329,36 +339,36 @@
                         <div class="swiper-wrapper" data-role="swiper-slide">
                             <div class="swiper-slide">
                                 <a href="/Cemmend/Index">
-                                <div class="img-item">
-                                    <div class="img">
-                                        <img src="/Content/images/test/16.jpg">
+                                    <div class="img-item">
+                                        <div class="img">
+                                            <img src="/Content/images/test/16.jpg">
+                                        </div>
+                                        <div class="txt dn">关于商会</div>
                                     </div>
-                                    <div class="txt dn">关于商会</div>
-                                </div>
-                                <div class="txt-item">关于商会</div>
-                                 </a>
+                                    <div class="txt-item">关于商会</div>
+                                </a>
                             </div>
                             <div class="swiper-slide">
                                 <a href="/SiteNew">
-                                <div class="img-item">
-                                    <div class="img">
-                                        <img src="/Content/images/test/19.jpg">
+                                    <div class="img-item">
+                                        <div class="img">
+                                            <img src="/Content/images/test/19.jpg">
+                                        </div>
+                                        <div class="txt dn">动态新闻</div>
                                     </div>
-                                    <div class="txt dn">动态新闻</div>
-                                </div>
-                                <div class="txt-item">动态新闻</div>
-                                    </a>
+                                    <div class="txt-item">动态新闻</div>
+                                </a>
                             </div>
                             <div class="swiper-slide">
                                 <a href="/interview/index">
-                                <div class="img-item" data-role="swiper-img-hover">
-                                    <div class="img">
-                                        <img src="/Content/images/test/18.jpg">
+                                    <div class="img-item" data-role="swiper-img-hover">
+                                        <div class="img">
+                                            <img src="/Content/images/test/18.jpg">
+                                        </div>
+                                        <div class="txt dn">采访风采</div>
                                     </div>
-                                    <div class="txt dn">采访风采</div>
-                                </div>
-                                <div class="txt-item">采访风采</div>
-                                    </a>
+                                    <div class="txt-item">采访风采</div>
+                                </a>
                             </div>
                             <div class="swiper-slide">
                                 <a href="/SiteFSHistory"></a>
@@ -465,6 +475,16 @@
         if (!stop_2) box_2.scrollTop == parseInt(box_2.scrollHeight / 2) ? box_2.scrollTop = 0 : box_2.scrollTop++;
         setTimeout(arguments.callee, box_2.scrollTop % 42 ? 10 : 1500);
     };
+
+    $(function () {
+        var imgurls = $("#foo3").attr("data-imgstr");
+        var  imgurllist=imgurls.split('|');
+        var banners = $("#foo3").find("li");
+        banners.each(function (i, e) {
+            $(banners[i]).css("background-image", 'url(' + imgurllist[i] + ')');
+        })
+
+    })
 
 </script>
 <script type="text/javascript">
