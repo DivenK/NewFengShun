@@ -22,12 +22,12 @@ namespace itcast.crm16.Common
             MatchCollection matches = regImg.Matches(conters);
             foreach (var item in matches)
             {
-                var ss = conters.Replace(item.ToString(), string.Empty);
+                var ss = conters.Replace(item.ToString(), string.Empty); 
                 conters = ss;
             }
             var result = conters.Replace("&nbsp;", string.Empty).Replace("&nbsp",string.Empty);
-            conters = result;
-            return conters.Trim();
+ 
+            return result.Trim();
         }
         public static string Quot(this string _input, string _quot)
         {
@@ -43,6 +43,24 @@ namespace itcast.crm16.Common
         public static string ToyyyyMMddDateTime(this DateTime current)
         {
             return current.ToString("yyyy-MM-dd");
+        }
+
+        public static bool IsEmpty(this string Content)
+        {
+            if (string.IsNullOrWhiteSpace(Content))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static string GetSubValue(this string content, int length)
+        {
+            if (length>=content.Length)
+            {
+                return content;
+            }
+            return content.Substring(0, length).ToString();
         }
     }
 }
