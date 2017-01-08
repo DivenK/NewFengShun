@@ -43,6 +43,8 @@
           <Property Name="Creater" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CreaterTime" Type="datetime" Nullable="false" />
           <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Manage">
           <Key>
@@ -64,9 +66,10 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Content" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="ImgUrl" Type="nvarchar" MaxLength="512" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Praise" Type="int" Nullable="false" />
-          <Property Name="LookCount" Type="int" Nullable="false" />
+          <Property Name="LookCount" Type="int" />
           <Property Name="IsComment" Type="bit" Nullable="false" />
           <Property Name="Creator" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
@@ -131,7 +134,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Content" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Praise" Type="int" Nullable="false" />
           <Property Name="IsComment" Type="bit" Nullable="false" />
           <Property Name="Creator" Type="nvarchar" MaxLength="64" />
@@ -385,6 +388,8 @@
           <Property Name="Creater" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreaterTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Manage">
           <Key>
@@ -406,7 +411,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="Int32" Nullable="false" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Praise" Type="Int32" Nullable="false" />
           <Property Name="IsComment" Type="Boolean" Nullable="false" />
           <Property Name="Creator" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
@@ -415,7 +420,8 @@
           <Property Name="Updator" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="UpdateTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="ArticleType" Relationship="FS_SiteModel.FK_MemberDynamic_ArticleType" FromRole="MemberDynamic" ToRole="ArticleType" />
-          <Property Name="LookCount" Type="Int32" Nullable="false" />
+          <Property Name="LookCount" Type="Int32" />
+          <Property Name="ImgUrl" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="MemberMsg">
           <Key>
@@ -620,7 +626,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Praise" Type="Int32" Nullable="false" />
           <Property Name="IsComment" Type="Boolean" Nullable="false" />
           <Property Name="Creator" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
@@ -665,6 +671,8 @@
           <EntitySetMapping Name="FSHistory">
             <EntityTypeMapping TypeName="FS_SiteModel.FSHistory">
               <MappingFragment StoreEntitySet="FSHistory">
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
                 <ScalarProperty Name="CreaterTime" ColumnName="CreaterTime" />
                 <ScalarProperty Name="Creater" ColumnName="Creater" />
@@ -694,6 +702,7 @@
           <EntitySetMapping Name="MemberDynamic">
             <EntityTypeMapping TypeName="FS_SiteModel.MemberDynamic">
               <MappingFragment StoreEntitySet="MemberDynamic">
+                <ScalarProperty Name="ImgUrl" ColumnName="ImgUrl" />
                 <ScalarProperty Name="LookCount" ColumnName="LookCount" />
                 <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
                 <ScalarProperty Name="Updator" ColumnName="Updator" />

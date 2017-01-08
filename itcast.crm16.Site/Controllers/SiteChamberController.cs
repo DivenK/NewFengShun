@@ -6,32 +6,33 @@ using System.Web.Mvc;
 using itcast.crm16.Site.Models;
 using itcast.crm16.IServices;
 using itcast.crm16.WebHelper;
+using itcast.crm16.WebHelper.Attrs;
 
 namespace itcast.crm16.Site.Controllers
 {
-    [WebHelper.Attrs.SkipCheckLogin]
-    public class SiteFSHistoryController : BaseController
+    [SkipCheckLogin]
+    public class SiteChamberController :BaseController
     {
         //
-        // GET: /FSHistory/
-        public SiteFSHistoryController(IsysMenusServices mSer, IFSHistoryService newSer, IFSHistoryService pMenusList) : base(mSer, "SiteFSHistory")
+        // GET: /SiteChamber/
+        public SiteChamberController(IsysMenusServices mSer, IFSHistoryService newSer, IFSHistoryService pMenusList) : base(mSer, "SiteChamber")
         {
             base.FSHistorySer = newSer;
         }
         public ActionResult Index()
         {
             base.pageSize = 15;
-            var list= FSHistorySer.GetItemModel(1, out TotalPage, "", base.pageSize, 0,true);
+            var list = FSHistorySer.GetItemModel(1, out TotalPage, "", base.pageSize,1, true);
             SetViewBagPage();
             ViewBag.list = list;
             return View();
         }
 
-        public ActionResult AjaxGetItens(int pageIndex = 1,int type=0)
+        public ActionResult AjaxGetItens(int pageIndex = 1, int type = 0)
         {
             base.pageSize = 15;
 
-            var list = FSHistorySer.GetItemModel(pageIndex, out TotalPage, "", base.pageSize, 0,true);
+            var list = FSHistorySer.GetItemModel(pageIndex, out TotalPage, "", base.pageSize,1, true);
             return WriteSuccess("", list);
         }
 
@@ -40,7 +41,7 @@ namespace itcast.crm16.Site.Controllers
             model.FSHistory model = null;
             if (id > 0)
             {
-                model= FSHistorySer.QueryWhere(c => c.id == id).FirstOrDefault();
+                model = FSHistorySer.QueryWhere(c => c.id == id).FirstOrDefault();
             }
             ViewBag.model = model;
             return View();
@@ -78,7 +79,7 @@ namespace itcast.crm16.Site.Controllers
             var result = FSHistorySer.SaveChanges();
             if (result > 0)
             {
-                return WriteSuccess("",count);
+                return WriteSuccess("", count);
             }
             return WriteError("网络错误");
         }

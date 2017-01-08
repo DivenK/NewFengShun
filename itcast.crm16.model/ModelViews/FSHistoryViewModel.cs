@@ -17,6 +17,8 @@ namespace itcast.crm16.Site.Models
         public int Likes { get; set; }
         public string Creater { get; set; }
         public System.DateTime CreaterTime { get; set; }
+        public string Image { get; set; }
+        public int type { get; set; }
 
         public string UpdateTimeStr { get; set; }
         public System.DateTime UpdateTime { get; set; }

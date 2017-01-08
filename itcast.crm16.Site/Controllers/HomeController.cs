@@ -29,7 +29,7 @@ namespace itcast.crm16.Site.Controllers
         public ActionResult Index()
         {
             HomeViewModel model = new HomeViewModel();
-            model.FSHistoryList = FSHistorySer.GetItemModel(1, out TotalPage, "",10,true).ToList();
+            model.FSHistoryList = FSHistorySer.GetItemModel(1, out TotalPage, "",10,0,true).ToList();
             model.ImageList = siteService.GetItems(1, 5, 0,true).ToList();
             model.NewList = news.NewPageList(1, 1, "", out TotalPage,10,true);
             model.NewListType = news.NewPageList(1,3, "", out TotalPage,10,true);

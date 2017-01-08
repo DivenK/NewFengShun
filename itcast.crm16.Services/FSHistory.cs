@@ -24,25 +24,27 @@ namespace itcast.crm16.Services
             base.basedal = dal;
         }
 
-        public IEnumerable<FSHistoryViewModel> GetItemModel(int index, out int totalPage, string name, int pageSize = 10,bool IsShow=false)
+        public IEnumerable<FSHistoryViewModel> GetItemModel(int index, out int totalPage, string name, int pageSize = 10,int type=0,bool IsShow=false)
         {
             List<FSHistory> itemList = null;
             Expression<Func<FSHistory, bool>> where;
             if (string.IsNullOrWhiteSpace(name))
             {
-                where = c => true;
+                where =(c=>c.Type==type);
                 if (IsShow)
                 {
-                    where = (c => true && c.Display == 0);
+                    where = (c =>c.Display == 0&&c.Type==type);
                 }
+             
             }
             else
             {
-                where = c => c.Title.Contains(name);
+                where = (c => c.Title.Contains(name) && c.Type == type);
                 if (IsShow)
                 {
-                    where = (c => c.Title.Contains(name) && c.Display == 0);
+                    where = (c => c.Title.Contains(name) && c.Display == 0 &&c.Type==type);
                 }
+              
             }
             itemList = dal.QueryByPage(index, pageSize, out totalPage, where, c => c.id).ToList<FSHistory>();
             int newid = 1;
@@ -61,6 +63,8 @@ namespace itcast.crm16.Services
                 CreaterTime = d.CreaterTime,
                 Look = d.Look,
                 Title = d.Title,
+                type =d.Type,
+                Image=d.Image,
                 UpdateTime = d.UpdateTime,
                 UpdateTimeStr = d.UpdateTime.ToShortDateString(),
             }).ToList();

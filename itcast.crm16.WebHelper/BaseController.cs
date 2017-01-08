@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace itcast.crm16.WebHelper
 {
     using itcast.crm16.IServices;
+    using System.Text.RegularExpressions;
     using System.Web.Mvc;
 
 
@@ -94,6 +95,21 @@ namespace itcast.crm16.WebHelper
             ViewBag.TotalPage = TotalPage;
             ViewBag.PageSize = pageSize;
             ViewBag.PageCount=(int)Math.Ceiling(TotalPage * 1.0 / pageSize);
+        }
+
+        /// <summary>
+        /// 正则匹配图片
+        /// </summary>
+        /// <param name="conters"></param>
+        /// <returns></returns>
+        public string GetImageUrl(string conters)
+        {
+            System.Text.RegularExpressions.Regex regImg = new Regex(@"<img\b[^<>]*?\bsrc[\s\t\r\n]*=[\s\t\r\n]*[""']?[\s\t\r\n]*(?<imgUrl>[^\s\t\r\n""'<>]*)[^<>]*?/?[\s\t\r\n]*>", RegexOptions.IgnoreCase);
+            // 搜索匹配的字符串 
+            MatchCollection matches = regImg.Matches(conters);
+            if (matches.Count > 0)
+            { return matches[0].Groups["imgUrl"].Value; }
+            return string.Empty;
         }
     }
 }

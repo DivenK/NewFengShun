@@ -1,9 +1,9 @@
 ﻿@using itcast.crm16.model;
 @using itcast.crm16.Site.Models;
 @{
-    ViewBag.Title = "丰顺风情";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_PageMaster.cshtml";
-   var modelList= ViewBag.list as List< FSHistoryViewModel>;
+     var modelList= ViewBag.list as List< FSHistoryViewModel>;
 }
 
 <div class="new-page font_wryh inner-same-iframe">
@@ -13,10 +13,10 @@
             <div class="w1200">
                 <div class="item-wrap clearfix">
                     <div class="lbox fldi">
-                        <h3 class="title">丰顺风情</h3>
+                        <h3 class="title">商会会刊</h3>
                         <ul class="list">
                           <li class="cur">
-                                <a href="/SiteFSHistory">文史列表</a>
+                                <a href="/SiteChamber">会刊列表</a>
                             </li>
                         </ul>
                         <div class="lx-item">
@@ -29,22 +29,24 @@
                         <div class="cur-title">
                             <p>
                                 当前位置：<a href="/Home">首页</a> >>
-                                <a href="#">丰顺风情</a> >>
-                             
+                                <a href="javascript::void">商会会刊</a> >>
                             </p>
                         </div>
-                        <div class="content" id="content">
-
+                       <div class="content" id="content">
                             <div class="item">
-                                <ul class="list" id="contentList">
+                                <ul class="clearfix list" id="contentList">
                                     @foreach (var item in modelList)
                                     {
-                                        <a href="@("/SiteFSHistory/GetModel/id="+item.id)">
-                                            <li class="clearfix">
-                                                <span class="title fldi">@(item.Title)</span>
-                                                <span class="time frdi">[@item.UpdateTime.ToString("yyyy-MM-dd")]</span>
-                                            </li>
-                                        </a>
+                                     <li>
+                                         <a href="@("/SiteChamber/GetModel/id="+item.id)">
+                                        <div class="img">
+                                            <img src="@item.Image" />
+                                        </div>
+                                        <div class="txt">
+                                            @item.Title
+                                        </div>
+                                             </a>
+                                    </li>
                                     }
                                 </ul>
                                 <div class="page-item" id="page">
@@ -84,11 +86,9 @@
                             var data = e.datas;
                             var conhtml = "";
                             for (var i = 0; i < data.length; i++) {
-                                conhtml += ' <a href="/SiteFSHistory/GetModel/id=' +
-                                    data[i].id +
-                                    '">  <li class="clearfix"><span class="title fldi">';
-                                conhtml += data[i].Title + '</span>';
-                                conhtml += ' <span class="time frdi">[' + data[i].UpdateTimeStr + ']</span></li></a>';
+                        conhtml+=' <a href="/SiteChamber/GetModel/id='+data[i].id+'"> <li><div class="img">';
+                        conhtml+='<img src="'+data[i].Image+'" /> </div>';
+                        conhtml+=' <div class="txt">'+data[i].Title+'</div></li></a>';
                             }
                             $("#contentList").html(conhtml);
                         } else {

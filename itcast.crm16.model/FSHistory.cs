@@ -23,5 +23,7 @@ namespace itcast.crm16.model
         public string Creater { get; set; }
         public System.DateTime CreaterTime { get; set; }
         public System.DateTime UpdateTime { get; set; }
+        public int Type { get; set; }
+        public string Image { get; set; }
     }
 }

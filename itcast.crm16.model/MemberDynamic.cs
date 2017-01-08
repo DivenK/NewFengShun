@@ -25,7 +25,8 @@ namespace itcast.crm16.model
         public int IsDelete { get; set; }
         public string Updator { get; set; }
         public Nullable<System.DateTime> UpdateTime { get; set; }
-        public int LookCount { get; set; }
+        public Nullable<int> LookCount { get; set; }
+        public string ImgUrl { get; set; }
     
         public virtual ArticleType ArticleType { get; set; }
     }

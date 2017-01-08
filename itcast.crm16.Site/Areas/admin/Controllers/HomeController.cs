@@ -12,8 +12,6 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
     using WebHelper.Attrs;
     using itcast.crm16.Common;
 
-    [SkipCheckPermiss]
-    [SkipCheckLogin]
     public class HomeController : BaseController
     {
         public HomeController(IsysMenusServices mSer, IsysUserInfoServices user):base(mSer)

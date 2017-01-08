@@ -139,6 +139,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\admin\adminAreaRegistration.cs" />
+    <Compile Include="Areas\admin\Controllers\ChamberController.cs" />
     <Compile Include="Areas\admin\Controllers\CommerceController.cs" />
     <Compile Include="Areas\admin\Controllers\FSHistoryController.cs" />
     <Compile Include="Areas\admin\Controllers\HomeController.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="Content\ueditor\net\App_Code\UploadHandler.cs" />
     <Compile Include="Controllers\CemmendController.cs" />
     <Compile Include="Controllers\ExpController.cs" />
+    <Compile Include="Controllers\SiteChamberController.cs" />
     <Compile Include="Controllers\SiteFSHistoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InterviewController.cs" />
@@ -1226,6 +1228,7 @@
     <Content Include="Areas\admin\Views\Commerce\Index.cshtml" />
     <Content Include="Areas\admin\Views\FSHistory\Index.cshtml" />
     <Content Include="Areas\admin\Views\member\MemberMsgIndex.cshtml" />
+    <Content Include="Areas\admin\Views\Chamber\Index.cshtml" />
     <None Include="Content\aa.doc" />
     <Content Include="Areas\admin\Views\Policy\Index.cshtml" />
     <Content Include="Areas\admin\Views\SiteSet\Index.cshtml" />
@@ -1319,6 +1322,8 @@
     <Content Include="Views\SiteFSHistory\Index.cshtml" />
     <Content Include="Views\Interview\Index.cshtml" />
     <Content Include="Views\Interview\MemberDynamicDetail.cshtml" />
+    <Content Include="Views\SiteChamber\Index.cshtml" />
+    <Content Include="Views\SiteChamber\GetModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
