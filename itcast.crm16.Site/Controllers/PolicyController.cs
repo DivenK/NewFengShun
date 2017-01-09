@@ -12,7 +12,7 @@ namespace itcast.crm16.Site.Controllers
     [WebHelper.Attrs.SkipCheckLogin]
     public class PolicyController : BaseController
     {
-        public PolicyController(IsysMenusServices mSer, IPolicyServices policySer) : base(mSer, "policy")
+        public PolicyController(IsysMenusServices mSer, IPolicyServices policySer) : base(mSer, "/policy/index?type=1")
         {
             base.policySer = policySer;
         }

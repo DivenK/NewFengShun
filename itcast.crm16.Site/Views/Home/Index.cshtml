@@ -13,12 +13,22 @@
         <div class="p1th">
             <div class="scrollBox">
                 <!-- 放图片或者背景都可以 -->
-                <ul class="img_list clearfix" id="foo3">
-                    @foreach (var item in modelItems.ImageList)
+                @{
+
+                    string imgstrs = "";
+                    foreach (var item in modelItems.ImageList)
                     {
-                        <li class="banner" style="background-image:url(@item.Image)"></li>
+                        imgstrs += (item.Image + "|");
                     }
-                </ul>
+                    <ul class="img_list clearfix" id="foo3" data-imgstr="@imgstrs.Substring(0,imgstrs.Length-2)">
+                    @for (int i = 0; i <modelItems.ImageList.Count; i++)
+                    {
+                        <li class="banner" style="background-image:url(@modelItems.ImageList[0].Image)"></li>
+                    }
+                    
+                        
+                    </ul>
+                }
                 <!-- 大图缩率图 -->
                 <!-- 渐变切换 -->
                 <div class="page-wrap clearfix">
@@ -469,6 +479,16 @@
         if (!stop_2) box_2.scrollTop == parseInt(box_2.scrollHeight / 2) ? box_2.scrollTop = 0 : box_2.scrollTop++;
         setTimeout(arguments.callee, box_2.scrollTop % 42 ? 10 : 1500);
     };
+
+    $(function () {
+        var imgurls = $("#foo3").attr("data-imgstr");
+        var  imgurllist=imgurls.split('|');
+        var banners = $("#foo3").find("li");
+        banners.each(function (i, e) {
+            $(banners[i]).css("background-image", 'url(' + imgurllist[i] + ')');
+        })
+
+    })
 
 </script>
 <script type="text/javascript">
