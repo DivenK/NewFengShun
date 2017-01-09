@@ -102,6 +102,26 @@ namespace itcast.crm16.Repository
             return _dbset.Where(where).OrderByDescending(order).Skip(skipCount).Take(pagesize).ToList();
         }
 
+        /// <summary>
+        /// 正序排序
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <param name="pageindex"></param>
+        /// <param name="pagesize"></param>
+        /// <param name="rowcount"></param>
+        /// <param name="where"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        public List<TEntity> QueryByPageASC<TKey>(int pageindex, int pagesize, out int rowcount, Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, TKey>> order)
+        {
+            int skipCount = (pageindex - 1) * pagesize;
+
+            //2.0 获取总条数
+            rowcount = _dbset.Count(where);
+
+            //3.0 开始分页：注意先排序
+            return _dbset.Where(where).OrderBy(order).Skip(skipCount).Take(pagesize).ToList();
+        }
         #endregion
 
         #region 3.0.4 通用调用存储过程的方法
@@ -200,6 +220,8 @@ namespace itcast.crm16.Repository
         {
             return db.SaveChanges();
         }
+
+     
         #endregion
 
     }

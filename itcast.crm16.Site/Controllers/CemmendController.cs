@@ -20,14 +20,14 @@ namespace itcast.crm16.Site.Controllers
         public ActionResult Index()
         {
             var list = Commerce.GetItemModel(1, "", out TotalPage, 0, 10, true).ToList();
-            ViewBag.items= list.OrderByDescending(c => c.Nid).ToList();
+            ViewBag.items= list;
             ViewBag.id = 0;
             return View();
         }
         public ActionResult GetModel(int id=0,int type=0)
         {
             var list = Commerce.GetItemModel(1, "", out TotalPage, type, 10, true).ToList();
-            ViewBag.items = list.OrderByDescending(c => c.Nid).ToList();
+            ViewBag.items = list;
             ViewBag.id = id;
             return View();
         }
@@ -36,7 +36,7 @@ namespace itcast.crm16.Site.Controllers
         {
             base.pageSize = 12;
             var list = Commerce.GetItemModel(1, "", out TotalPage, 0, base.pageSize, true).ToList();
-            ViewBag.list = list.OrderByDescending(c => c.Nid).ToList();
+            ViewBag.list = list;
             var lists = Commerce.GetItemModel(1, "", out TotalPage,2, base.pageSize, true).ToList();
             SetViewBagPage();
             ViewBag.items = lists;

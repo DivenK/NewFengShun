@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
 
 namespace itcast.crm16.Site.Areas.admin.Controllers
 {
@@ -87,6 +88,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             if (CommerceModel.Type == 2)//是不是商会领导相册的那些数据。
             {
                 CommerceModel.ImageUrl=GetImageUrl(CommerceModel.Contents);
+                CommerceModel.Sort = GetSortValue(CommerceModel.Name);
             }
             try
             {
@@ -148,6 +150,41 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             }
             return WriteError("删除失败:选择值参数为空，请在尝试");
         }
-  
+
+        public static int GetSortValue(string content)
+        {
+
+            if (!content.IsEmpty())
+            {
+                if (content.Contains("副会长"))
+                {
+                    return (int) SortItem.Thress;
+                }
+                if (content.Contains("荣誉会长"))
+                {
+                    return (int)SortItem.Two;
+                }
+                if (content.Contains("会长"))
+                {
+                    return (int)SortItem.One;
+                }
+                if (content.Contains("常务理事会"))
+                {
+                    return (int)SortItem.Thred;
+                }
+            }
+            throw new Exception("参数错误！");
+        }
+
+    }
+    
+
+    //排序枚举值
+    public enum SortItem
+    {
+        One=1,//会长
+        Two=2,//荣誉会长
+        Thress=3,//副会长
+        Thred=4,//常务理事会
     }
 }

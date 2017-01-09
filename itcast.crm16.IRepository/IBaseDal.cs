@@ -34,8 +34,13 @@ namespace itcast.crm16.IRepository
            , out int rowcount
            , Expression<Func<TEntity, bool>> where
            , Expression<Func<TEntity, TKey>> order);
-      
 
+
+        List<TEntity> QueryByPageASC<TKey>(int pageindex
+        , int pagesize
+        , out int rowcount
+        , Expression<Func<TEntity, bool>> where
+        , Expression<Func<TEntity, TKey>> order);
         #endregion
 
         #region 3.0.4 通用调用存储过程的方法

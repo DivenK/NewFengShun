@@ -41,12 +41,14 @@ namespace itcast.crm16.Services
         {
             List<Commerce> itemList = null;
             Expression<Func<Commerce, bool>> where;
+            Expression<Func<Commerce, int>> sort = c => c.id; 
             if (string.IsNullOrWhiteSpace(name))
             {
                 where = (c => c.IsDelete == 0 && c.Type == type);
                 if (IsShow)
                 {
                     where = (c => c.IsDelete == 0 && c.Type == type&&c.Look==0);
+                    sort = c => (int)c.Sort;
                 }
             }
             else
@@ -55,9 +57,18 @@ namespace itcast.crm16.Services
                 if (IsShow)
                 {
                     where = (c => c.IsDelete == 0 && c.Type == type && c.Look == 0 && c.Name.Contains(name));
+                    sort = c => (int)c.Sort;
                 }
             }
-            itemList = dal.QueryByPage(index, pageSize, out totalPage, where, c => c.id).ToList<Commerce>();
+            if (IsShow)
+            {
+                itemList = dal.QueryByPageASC(index, pageSize, out totalPage, where, sort).ToList<Commerce>();
+            }
+            else
+            {
+                itemList = dal.QueryByPage(index, pageSize, out totalPage, where, sort).ToList<Commerce>();
+            }
+           
             int newid = 1;
             if (index > 1)
             {
@@ -78,7 +89,8 @@ namespace itcast.crm16.Services
                 ImageUrl=d.ImageUrl,
                 UpdateTime = d.UpdateTime,
                 UpdateTimeStr = d.UpdateTime.ToShortDateString(),
-                typeName = d.Type
+                typeName = d.Type,
+                Sort=string.IsNullOrWhiteSpace(d.Sort.ToString())?0:(int)d.Sort
             });
         }
     }
