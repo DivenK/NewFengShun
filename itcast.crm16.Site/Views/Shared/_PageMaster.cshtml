@@ -12,6 +12,7 @@
     <script type="text/javascript" src="/Content/js/jquery.carouFredSel-5.5.0-auto.js"></script>
     <script type="text/javascript" src="/Content/js/swiper-3.4.0.min.js"></script>
     <script type="text/javascript" src="/Content/js/MSClass.js"></script>
+    <link href="/Content/images/logotitle.ico" rel="shortcut icon">
 </head>
 <body>
     <!-- 公共头部开始 -->
@@ -19,7 +20,7 @@
         <div class="top-item">
             <div class="w1200 clearfix">
                 <div class="lbox fldi">
-                    <img src="~/Content/images/logo.png" alt="">
+                    <img src="~/Content/images/newLogo.png" alt="">
                 </div>
                 <!-- <div class="rbox fldi clearfix">
                     <p class="time f14 mb5">2016年12月13日</p>
@@ -49,11 +50,11 @@
                             if (objMenusList != null)
                             {
                                 List<sysMenus> mList = objMenusList as List<sysMenus>;
-                             
-                                sysMenus currentMenus = mList.Where(c =>c.mUrl.Contains(ViewBag.url)).FirstOrDefault();
+
+                                sysMenus currentMenus = mList.Where(c => c.mUrl.Contains(ViewBag.url)).FirstOrDefault();
                                 int currentUrlParentId = 0;
                                 //获取当前访问的parentid
-                                if (currentMenus != null&&!string.IsNullOrWhiteSpace(ViewBag.url))
+                                if (currentMenus != null && !string.IsNullOrWhiteSpace(ViewBag.url))
                                 {
                                     currentUrlParentId = currentMenus.mID;
                                 }
@@ -63,7 +64,7 @@
                                 </li>
                                 foreach (var item in pMenusList)
                                 {
-                                    <li class=" first-li @(item.mID ==currentMenus.mID ? "cur" : "") ">
+                                    <li class=" first-li @(item.mID == currentMenus.mID ? "cur" : "") ">
                                         <a href="@(item.mUrl)">@item.mName</a>
                                     </li>
                                 }

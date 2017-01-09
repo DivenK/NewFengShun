@@ -39,19 +39,21 @@
                     </div>
                     <div class="content">
                         <div class="box-1">
-                            <div class="title">
-                                @(modelItems.NewList.FirstOrDefault().Name)
-                            </div>
-                            <div class="des-txt clearfix">
-                                @Html.Raw(modelItems.NewList.FirstOrDefault().Conent.GetContent().Trim()) <span class="time-txt frdi">@modelItems.NewList.FirstOrDefault().CreatTime.ToString("yyyy-MM-dd")</span>
-                            </div>
+                            <a href="@("/SiteNew/GetModel?id=" + modelItems.NewList.FirstOrDefault().id)">
+                                <div class="title">
+                                    @(modelItems.NewList.FirstOrDefault().Name)
+                                </div>
+                                <div class="des-txt clearfix">
+                                    @Html.Raw(modelItems.NewList.FirstOrDefault().Conent.GetContent().Trim()) <span class="time-txt frdi">@modelItems.NewList.FirstOrDefault().CreatTime.ToString("yyyy-MM-dd")</span>
+                                </div>
+                            </a>
                         </div>
                         <div class="box-2">
                             <ul class="list">
 
                                 @for (int i = 1; i < 5; i++)
                                 {
-                                    <a href="@("/SiteNew/GetModel?id="+modelItems.NewList[i].id)">
+                                    <a href="@("/SiteNew/GetModel?id=" + modelItems.NewList[i].id)">
                                         <li class="clearfix">
                                             <p class="txt fldi">
                                                 @(modelItems.NewList[i].Name))
@@ -69,18 +71,20 @@
                 <div class="lbox frdi">
                     <div class="title-item clearfix">
                         <p class="title-txt fldi">
-                            乡情资讯
+                            丰顺乡讯
                         </p>
                         <a href="/SiteNew/index?type=3" class="more-txt frdi">+MORE</a>
                     </div>
                     <div class="content">
                         <div class="box-1">
-                            <div class="title">
-                                @(modelItems.NewListType.FirstOrDefault().Name)
-                            </div>
-                            <div class="des-txt clearfix">
-                                @(modelItems.NewListType.FirstOrDefault().Conent.GetContent().Trim()) <span class="time-txt frdi">@modelItems.NewListType.FirstOrDefault().CreatTime.ToString("yyyy-MM-dd")</span>
-                            </div>
+                            <a href="@("/SiteNew/GetModel?id="+modelItems.NewListType.FirstOrDefault().id)">
+                                <div class="title">
+                                    @(modelItems.NewListType.FirstOrDefault().Name)
+                                </div>
+                                <div class="des-txt clearfix">
+                                    @(modelItems.NewListType.FirstOrDefault().Conent.GetContent().Trim()) <span class="time-txt frdi">@modelItems.NewListType.FirstOrDefault().CreatTime.ToString("yyyy-MM-dd")</span>
+                                </div>
+                            </a>
                         </div>
                         <div class="box-2">
                             <ul class="list">
@@ -157,21 +161,21 @@
                             @for (int i = 0; i < 3; i++)
                             {
                                 <a href="/member/MemberDynamicDetail/@modelItems.MemberTellList[i].id">
-                                <li>
-                                    <div class="img">
-                                        <img src="/Content/images/test/25.jpg" alt="">
-                                    </div>
-                                    <div class="txt">
-                                        <dl class="clearfix">
-                                            <dt class="">@modelItems.MemberTellList[i].Title</dt>
-                                            <dd class="">
+                                    <li>
+                                        <div class="img">
+                                            <img src="/Content/images/test/25.jpg" alt="">
+                                        </div>
+                                        <div class="txt">
+                                            <dl class="clearfix">
+                                                <dt class="">@modelItems.MemberTellList[i].Title</dt>
+                                                <dd class="">
 
-                                                @Html.Raw(modelItems.MemberTellList[i].Content.GetContent().Trim())
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                </li>
-                                    </a>
+                                                    @Html.Raw(modelItems.MemberTellList[i].Content.GetContent().Trim())
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                    </li>
+                                </a>
                             }
                         </ul>
                     </div>
@@ -329,36 +333,36 @@
                         <div class="swiper-wrapper" data-role="swiper-slide">
                             <div class="swiper-slide">
                                 <a href="/Cemmend/Index">
-                                <div class="img-item">
-                                    <div class="img">
-                                        <img src="/Content/images/test/16.jpg">
+                                    <div class="img-item">
+                                        <div class="img">
+                                            <img src="/Content/images/test/16.jpg">
+                                        </div>
+                                        <div class="txt dn">关于商会</div>
                                     </div>
-                                    <div class="txt dn">关于商会</div>
-                                </div>
-                                <div class="txt-item">关于商会</div>
-                                 </a>
+                                    <div class="txt-item">关于商会</div>
+                                </a>
                             </div>
                             <div class="swiper-slide">
                                 <a href="/SiteNew">
-                                <div class="img-item">
-                                    <div class="img">
-                                        <img src="/Content/images/test/19.jpg">
+                                    <div class="img-item">
+                                        <div class="img">
+                                            <img src="/Content/images/test/19.jpg">
+                                        </div>
+                                        <div class="txt dn">动态新闻</div>
                                     </div>
-                                    <div class="txt dn">动态新闻</div>
-                                </div>
-                                <div class="txt-item">动态新闻</div>
-                                    </a>
+                                    <div class="txt-item">动态新闻</div>
+                                </a>
                             </div>
                             <div class="swiper-slide">
                                 <a href="/interview/index">
-                                <div class="img-item" data-role="swiper-img-hover">
-                                    <div class="img">
-                                        <img src="/Content/images/test/18.jpg">
+                                    <div class="img-item" data-role="swiper-img-hover">
+                                        <div class="img">
+                                            <img src="/Content/images/test/18.jpg">
+                                        </div>
+                                        <div class="txt dn">采访风采</div>
                                     </div>
-                                    <div class="txt dn">采访风采</div>
-                                </div>
-                                <div class="txt-item">采访风采</div>
-                                    </a>
+                                    <div class="txt-item">采访风采</div>
+                                </a>
                             </div>
                             <div class="swiper-slide">
                                 <a href="/SiteFSHistory"></a>
