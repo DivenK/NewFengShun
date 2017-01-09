@@ -52,7 +52,7 @@
                                             <td>@policyList[i].Title</td>
                                             <td class="am-hide-sm-only" data-id="@policyList[i].id"><input type="checkbox" class="am-switch am-round am-switch-success  newDisplay changelook" @(policyList[i].IsComment ? "Checked" : "") data-id="@policyList[i].id" /></td>
                                             <td>@policyList[i].Creator</td>
-                                            <td>@policyList[i].CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                            <td>@policyList[i].CreateTime.ToString("yyyy-MM-dd")</td>
                                             <td>
                                                 <div class="newtableBTN">
                                                     <div class="am-btn-group am-btn-group-xs">
@@ -93,7 +93,12 @@
                                             <input class="am-u-md-10 form-control" id="doc-ipt-text-1" placeholder="输入标题信息" data-id="0" required>
                                         </div>
                                     </div>
-
+                                    <div class="am-form-group">
+                                        <div class="am-g">
+                                            <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ipt-text-1">发布时间</label>
+                                            <input class="am-u-md-10 form-control" id="doc-createtime-text-1" data-am-datepicker readonly value="@DateTime.Now.ToString("yyyy-MM-dd")"  placeholder="请选择发布时间" data-id="0" required>
+                                        </div>
+                                    </div>
                                     <div class="am-form-group">
                                         <div class="am-g">
                                             <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ta-1">内容</label>

@@ -35,7 +35,7 @@
             display: 0,
             IsComment: false,
             IsDelete: false,
-            CreatTime: new Date("yyyy-MM-dd HH:MM:SS")
+            CreateTime: $("#doc-datetime-text-1").val()
         };
            if (newModel.Name == "")
         {
@@ -50,7 +50,7 @@
             return;
         }
         $.post("../New/UpdateNews",
-            { "Conent": newModel.Conent, "Name": newModel.Name, "TypeId": newModel.TypeId, "id": id },
+            { "Conent": newModel.Conent, "Name": newModel.Name, "TypeId": newModel.TypeId, "id": id,"CreateTime":newModel.CreateTime },
             function (result) {
                 $modal.modal('close');
                 if (result.status == 0) {
@@ -207,8 +207,8 @@ function AjaxGetList(index, typeId, Name) {
                 htmlTem += '<tr>';
                 htmlTem += ' <td>'+e.Nid+'</td>';
                 htmlTem += '<td>' + e.TypeName + '</td>';
-                htmlTem += '<td>' + e.Name + '</td>';
-                htmlTem += '<td class="am-hide-sm-only">' + e.Conent + '</td>';
+                htmlTem += '<td title="'+e.Name +'">' + (e.Name.length>10?e.Name.substring(0,10):e.Name) + '</td>';
+                htmlTem += '<td class="am-hide-sm-only">' + e.Conent+ '</td>';
                 htmlTem += ' <td class="am-hide-sm-only" data-id='+e.id+'><div _switch="" class="am-switch am-round am-switch-success newDisplay ' + (e.displayBool ? 'am-active' : '') + '"><div class="am-switch-handle"><input type="checkbox"  '+(e.displayBool ? 'checked' : '')+'></div></div></td>';
                 htmlTem += '  <td class="am-hide-sm-only">' + e.Author + '</td>';
                 htmlTem += ' <td class="am-hide-sm-only">' + e.CreatTimeStr + '</td>';
