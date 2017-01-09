@@ -30,8 +30,7 @@ $(function () {
             "id": editId,
             "title": title,
             "type": $("#selectType").val(),
-            "content": editor.getContent(),
-            "createtime":$("#doc-createtime-text-1").val()
+            "content": editor.getContent()
         }
         $.ajax({
             url: "/admin/member/Change",

@@ -16,6 +16,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
     /// <summary>
     /// 控制网站设置
     /// </summary>
+    [SkipCheckLogin]
     public class SiteSetController : BaseController
     {
         //

@@ -58,7 +58,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                         c.Title,
                         c.Praise,
                         c.Creator,
-                        CreateTime = c.CreateTime.ToString("yyyy-MM-dd")
+                        CreateTime = c.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")
                     })
                 });
             }
@@ -69,7 +69,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult Change(int id, string title,  string content,DateTime createtime)
+        public ActionResult Change(int id, string title,  string content)
         {
             if (string.IsNullOrEmpty(title))
             {
@@ -82,7 +82,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 addModel.Title = title;
                 addModel.Content = content;
                 addModel.IsComment = true;
-                addModel.CreateTime = createtime;
+                addModel.CreateTime = DateTime.Now;
                 addModel.Creator = (Session[Keys.uinfo] as sysUserInfo).uLoginName; ;
                 policySer.Add(addModel);
                 int addRet = policySer.SaveChanges();
@@ -101,10 +101,9 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 editModel.id = id;
                 editModel.Title = title;
                 editModel.Content = content;
-                editModel.CreateTime = createtime;
                 editModel.UpdateTime = DateTime.Now;
                 editModel.Updator = (Session[Keys.uinfo] as sysUserInfo).uLoginName;
-                policySer.Edit(editModel, new string[] { "Title", "Content",  "UpdateTime", "Updator","CreateTime" });
+                policySer.Edit(editModel, new string[] { "Title", "Content",  "UpdateTime", "Updator" });
                 int editRet = policySer.SaveChanges();
                 if (editRet == 1)
                 {

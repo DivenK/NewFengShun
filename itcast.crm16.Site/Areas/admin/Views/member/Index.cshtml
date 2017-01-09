@@ -3,6 +3,7 @@
     ViewBag.Title = "丰顺商人";
     Layout = "~/Areas/admin/Views/Shared/AdminMaster.cshtml";
 }
+<script src="/Areas/admin/Scripts/memberdynamic.js"></script>
 <div class="content">
     <div class="card-box">
         <!-- Row start -->
@@ -66,7 +67,7 @@
                                             <td>@memberList[i].ArticleType.typeName</td>
                                             <td title="@memberList[i].Title">@(memberList[i].Title.Length>15?memberList[i].Title.Substring(0,15):memberList[i].Title)</td>
                                             <td class="am-hide-sm-only" data-id="@memberList[i].id"><input type="checkbox" class="am-switch am-round am-switch-success  newDisplay changelook" @(memberList[i].IsComment ? "Checked" : "") data-id="@memberList[i].id" /></td>
-                                            <td>@memberList[i].CreateTime.ToString("yyyy-MM-dd")</td>
+                                            <td>@memberList[i].CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
                                             <td>
                                                 <div class="newtableBTN">
                                                     <div class="am-btn-group am-btn-group-xs">
@@ -126,12 +127,7 @@
                                             <input class="am-u-md-10 form-control" id="doc-ipt-text-1" placeholder="输入标题信息" data-id="0" required>
                                         </div>
                                     </div>
-                                    <div class="am-form-group">
-                                        <div class="am-g">
-                                            <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ipt-text-1">发布日期</label>
-                                            <input class="am-u-md-10 form-control" id="doc-createtime-text-1"  data-am-datepicker readonly value="@DateTime.Now.ToString("yyyy-MM-dd")"  placeholder="请选择发布日期" data-id="0" required>
-                                        </div>
-                                    </div>
+
                                     <div class="am-form-group">
                                         <div class="am-g">
                                             <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ta-1">内容</label>
@@ -156,7 +152,6 @@
         </div>
     </div>
 </div>
-<script src="/Areas/admin/Scripts/memberdynamic.js"></script>
 
 @section Scripts{
 

@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace itcast.crm16.Site.Areas.admin.Controllers
 {
+    [SkipCheckLogin]
     public class roleController :BaseController
     {
         public roleController(IsysMenusServices mSer, INewServices news, INewTypeServices newsType) : base(mSer)

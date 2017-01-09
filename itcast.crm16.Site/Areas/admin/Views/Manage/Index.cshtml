@@ -3,6 +3,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/admin/Views/Shared/AdminMaster.cshtml";
 }
+<script src="~/Areas/admin/Scripts/manage.js"></script>
 <div class="content">
     <div class="card-box">
         <!-- Row start -->
@@ -58,7 +59,7 @@
                                                 <td class="am-hide-sm-only" ><input type="checkbox" class="am-switch am-round am-switch-success  newDisplay changelook" @(item.Look==0 ? "Checked" : "") data-id="@item.id"/></td>
                                                 <td>@item.Author</td>
                                                 <td class="am-hide-sm-only">@item.Creator</td>
-                                                <td class="am-hide-sm-only">@(item.CreateTime == null ? DateTime.Now.ToString("yyyy-MM-dd") : item.CreateTime.ToString("yyyy-MM-dd"))</td>
+                                                <td class="am-hide-sm-only">@(item.CreateTime == null ? DateTime.Now.ToString("yyyy-MM-dd HH:mm") : item.CreateTime.ToString("yyyy-MM-dd HH:mm:ss"))</td>
                                                 @*<td style="color:@(item.Look==0?"green":"red")">@(item.Look == 0 ? "开启" : "关闭")</td>*@
                                                 <td>
                                                     <div class="am-btn-toolbar">
@@ -106,12 +107,7 @@
                                             <input class="am-u-md-10 form-control" id="doc-author" placeholder="输入作者名称" data-id="0" required>
                                         </div>
                                     </div>
-                                    <div class="am-form-group">
-                                        <div class="am-g">
-                                            <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-author">发布日期</label>
-                                            <input class="am-u-md-10 form-control" id="doc-datetime-text-1" data-am-datepicker readonly  placeholder="输入发布日期" value="@DateTime.Now.ToString("yyyy-MM-dd")" >
-                                        </div>
-                                    </div>
+
                                     <div class="am-form-group">
                                         <div class="am-g">
                                             <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ta-1">企业管理</label>
@@ -261,5 +257,4 @@
     </script>
 }@*//要用这个包起来*@
 
-<script src="~/Areas/admin/Scripts/manage.js"></script>
 

@@ -9,6 +9,7 @@ using itcast.crm16.IServices;
 using itcast.crm16.Site.Models;
 namespace itcast.crm16.Site.Areas.admin.Controllers
 {
+    [SkipCheckLogin]
     public class NewController : BaseController
     {
         //
@@ -35,7 +36,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [ValidateInput(false)]//防止对文本验证，保存不了HTML元素
-        public ActionResult UpdateNews(string Name, string Conent, int TypeId, int id,DateTime CreateTime)
+        public ActionResult UpdateNews(string Name, string Conent, int TypeId, int id)
         {
             model.New newModel = new model.New();
             newModel.Name = Name;
@@ -44,18 +45,18 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             newModel.id = id;
             newModel.IsComment = true;
             newModel.display = 0;
-            newModel.CreatTime = CreateTime;
             try
             {
                 if (id > 0)
                 {
 
-                    news.Edit(newModel, new string[] { "Name", "Conent", "IsComment", "TypeId", "display", "CreatTime" });
+                    news.Edit(newModel, new string[] { "Name", "Conent", "IsComment", "TypeId", "display" });
                 }
                 else
                 {
                     newModel.Author = "User";
                     newModel.Creator = "User";
+                    newModel.CreatTime = DateTime.Now;
                     news.Add(newModel);
                 }
                 news.SaveChanges();
