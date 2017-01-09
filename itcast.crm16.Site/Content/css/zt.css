@@ -649,7 +649,7 @@ body{
 }
 .index-page .p3th .item-wrap .lbox .list li .txt dl dd{
 	color: #595959;
-	height: 50px;
+	height:46px;
 	overflow: hidden;
 	margin-top: 5px;
 }
@@ -829,15 +829,15 @@ body{
 	margin-bottom: 20px;
 }
 .index-page .p5th .list li .title-con{
-	font-size: 18px;
+	font-size: 16px;
 }
 .index-page .p5th .list li .title-con .time{
 	color: #333;
 }
 .index-page .p5th .list li .txt-item{
-	font-size: 14px;
+	font-size: 12px;
 	color: #333;
-	height: 46px;
+	height: 40px;
 	overflow: hidden;
 	margin-top: 10px;
 }
