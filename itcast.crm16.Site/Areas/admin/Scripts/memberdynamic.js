@@ -182,6 +182,7 @@ $(document).on("click", ".member-edit", function () {
         if (e.status == 0) {
             $("#doc-ipt-text-1").val(e.datas.Title);
             $("#selectType").find("option[value='" + e.datas.Type + "']").attr("selected", true);
+            $("#doc-createtime-text-1").datepicker('setValue', e.datas.CreateTime);
             editor.setContent(e.datas.Content);
             $modal.modal({ closeViaDimmer: 0, width: 800, height: 800 });
         }

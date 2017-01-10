@@ -9,7 +9,7 @@
 
         $modal.modal({
             width: 800,
-            height: 710
+            height: 790
         });
 
     });
@@ -75,7 +75,7 @@
             type: "post",
             dataType: 'json',
             success: function (result) {
-                SetNewModel(result.id, result.Name, result.TypeId, result.Conent)
+                SetNewModel(result.id, result.Name, result.TypeId, result.Conent,result.CreatTime)
                 $modal.modal({
                     width: 900,
                     height: 800
@@ -186,6 +186,7 @@ function SetNewModel(id, title, typeId, content, d) {
     $('#formSubmit').attr('date-id', id);
     $('#selectType').val(typeId);
     $('#doc-ipt-text-1').val(title);
+    $('#doc-datetime-text-1').datepicker('setValue', d);
     editor.setContent(content);
 }
 

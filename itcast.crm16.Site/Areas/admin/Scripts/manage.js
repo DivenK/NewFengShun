@@ -125,6 +125,7 @@ $(document).on("click", ".edit-model", function () {
                 editId = e.datas.id;
                 $("#doc-title").val(e.datas.Title);
                 $("#doc-author").val(e.datas.Author);
+                $("#doc-datetime-text-1").datepicker('setValue', e.datas.CreateTime)
                 editor.setContent(e.datas.Conter);
                 $modal.modal({ closeViaDimmer: 0, width: 800, height: 800 });//弹起
             }
@@ -161,8 +162,8 @@ function GetContentByPage(pageIndex, pageSize, searchMsg) {
             for (var i = 0; i < dataContent.length; i++) {
                 showHtml += '<tr>';
                 showHtml += '<td>' + (i + 1) + '</td>';
-                showHtml += '<td title="'+dataContent[i].Title+'">' + (dataContent[i].Title.length>15?dataContent[i].Title.substring(0,15):dataContent[i].Title) + '</td>';
-                showHtml += '<td class="am-hide-sm-only" ><div _switch="" class="am-switch am-round am-switch-success changelook  newDisplay '+ (dataContent[i].Look == 0 ? "am-active" : "") + '"><div class="am-switch-handle"><input type="checkbox" class="" ' + (dataContent[i].Look == 0 ? "checked" : "") + ' data-id="' + dataContent[i].id + '"></div></div></td>';
+                showHtml += '<td title="' + dataContent[i].Title + '">' + (dataContent[i].Title.length > 15 ? dataContent[i].Title.substring(0, 15) : dataContent[i].Title) + '</td>';
+                showHtml += '<td class="am-hide-sm-only" ><div _switch="" class="am-switch am-round am-switch-success changelook  newDisplay ' + (dataContent[i].Look == 0 ? "am-active" : "") + '"><div class="am-switch-handle"><input type="checkbox" class="" ' + (dataContent[i].Look == 0 ? "checked" : "") + ' data-id="' + dataContent[i].id + '"></div></div></td>';
                 showHtml += '<td>' + dataContent[i].Author + '</td>';
                 showHtml += '<td class="am-hide-sm-only">' + dataContent[i].Creator + '</td>';
                 showHtml += '<td class="am-hide-sm-only">' + dataContent[i].CreateTime + '</td>';

@@ -173,6 +173,7 @@ $(document).on("click", ".member-edit", function () {
     $.post("/admin/Policy/GetPolicyById", content, function (e) {
         if (e.status == 0) {
             $("#doc-ipt-text-1").val(e.datas.Title);
+            $("#doc-createtime-text-1").datepicker('setValue', e.datas.CreateTime);
             editor.setContent(e.datas.Content);
             $modal.modal({ closeViaDimmer: 0, width: 800, height: 800 });
         }

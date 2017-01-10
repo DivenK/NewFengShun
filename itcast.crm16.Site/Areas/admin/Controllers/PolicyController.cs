@@ -171,7 +171,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             }
             else
             {
-                return WriteSuccess("", new { entity.id, entity.Title, entity.Content });
+                return WriteSuccess("", new { entity.id, entity.Title, entity.Content, CreateTime=entity.CreateTime.ToString("yyyy-MM-dd") });
             }
         }
 

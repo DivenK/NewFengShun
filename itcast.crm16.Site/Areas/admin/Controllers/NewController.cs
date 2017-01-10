@@ -7,6 +7,8 @@ using itcast.crm16.WebHelper;
 using itcast.crm16.WebHelper.Attrs;
 using itcast.crm16.IServices;
 using itcast.crm16.Site.Models;
+using itcast.crm16.Common;
+
 namespace itcast.crm16.Site.Areas.admin.Controllers
 {
     public class NewController : BaseController
@@ -127,7 +129,13 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             if (id > 0)
             {
                 var model = news.QueryWhere(c => c.IsDelete == 0 && c.id == id).FirstOrDefault();
-                return Json(model);
+                return Json(new {
+                    model.id,
+                    model.TypeId,
+                    model.Conent,
+                    CreatTime = model.CreatTime.ToyyyyMMddDateTime(),
+                    model.Name
+                });
             }
             return WriteError("修改的索引不能小于0");
         }
