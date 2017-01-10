@@ -18,7 +18,7 @@ $(function () {
         $("#doc-title").val("");
         $("#doc-author").val("");
         editor.setContent("");
-        $modal.modal({ closeViaDimmer: 0, width: 800, height: 800 });//弹起
+        $modal.modal({ closeViaDimmer: 0, width: 800, height: 650 });//弹起
     });
 
     //  GetContentByPage(1,15,"");
@@ -37,7 +37,8 @@ $(function () {
             "id": editId,
             "title": title,
             "conter": editor.getContent(),
-            "author": $("#doc-author").val()
+            "author": $("#doc-author").val(),
+            "createtime": $("#doc-datetime-text-1").val()
         }
         $.ajax({
             url: "/admin/manage/change",

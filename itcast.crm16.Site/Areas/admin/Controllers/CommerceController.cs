@@ -17,7 +17,6 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
     /// <summary>
     /// 关于商会的控制器
     /// </summary>
-    [SkipCheckLogin]
     public class CommerceController : BaseController
     {
         public CommerceController(IsysMenusServices mSer,ICommerce Commerce):base(mSer)

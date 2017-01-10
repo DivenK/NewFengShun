@@ -29,7 +29,8 @@ $(function () {
         var postContent = {
             "id": editId,
             "title": title,
-            "content": editor.getContent()
+            "content": editor.getContent(),
+            "createtime":$("#doc-createtime-text-1").val()
         }
         $.ajax({
             url: "/admin/Policy/Change",

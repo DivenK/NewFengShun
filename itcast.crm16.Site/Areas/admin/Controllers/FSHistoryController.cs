@@ -14,7 +14,6 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
     /// <summary>
     /// 丰顺文史
     /// </summary>
-    [SkipCheckLogin]
     public class FSHistoryController : BaseController
     {
         public FSHistoryController(IsysMenusServices mSer, IFSHistoryService Ser) : base(mSer)

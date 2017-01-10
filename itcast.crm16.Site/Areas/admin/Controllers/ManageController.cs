@@ -58,7 +58,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult Change(int flag, int id, string title, string conter, string author)
+        public ActionResult Change(int flag, int id, string title, string conter, string author, DateTime createtime)
         {
             if (string.IsNullOrEmpty(title))
             {
@@ -70,7 +70,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 addModel.Title = title;
                 addModel.Conter = conter;
                 addModel.Author =author ;
-                addModel.CreateTime = DateTime.Now;
+                addModel.CreateTime = createtime;
                 addModel.Creator = (Session[Keys.uinfo] as sysUserInfo).uLoginName;
                 manageSer.Add(addModel);
                 int retAdd = manageSer.SaveChanges();
@@ -90,7 +90,8 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 editModel.Author = author;
                 editModel.Conter = conter;
                 editModel.Title = title;
-                manageSer.Edit(editModel, new string[] { "Author", "Conter", "Title" });
+                editModel.CreateTime = createtime;
+                manageSer.Edit(editModel, new string[] { "Author", "Conter", "Title", "CreateTime" });
                 int editRet = manageSer.SaveChanges();
                 if (editRet == 1)
                 {
@@ -151,7 +152,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             }
             else
             {
-                return WriteSuccess("获取成功", entity);
+                return WriteSuccess("获取成功", new { entity.id, entity.Title, entity.Conter, CreateTime=entity.CreateTime.ToString("yyyy-MM-dd"),entity.Author });
             }
         }
     }
