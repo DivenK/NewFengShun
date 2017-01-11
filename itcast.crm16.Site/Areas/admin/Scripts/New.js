@@ -75,7 +75,7 @@
             type: "post",
             dataType: 'json',
             success: function (result) {
-                SetNewModel(result.id, result.Name, result.TypeId, result.Conent,result.CreatTime)
+                SetNewModel(result.id, result.Name, result.TypeId, result.Conent, result.CreatTime);
                 $modal.modal({
                     width: 900,
                     height: 800
@@ -140,9 +140,8 @@ $(document).on('click','.am-switch',function(){
 			}
 });
 
-function UpdateNewDisplay(e,val)
-{
-      id = $(e).parent('td').attr('data-id')
+function UpdateNewDisplay(e,val) {
+   var id = $(e).parent('td').attr('data-id');
         $.ajax({
             url: "../New/UpdateDispay",
             data: { id: id, display: val },
@@ -191,7 +190,7 @@ function SetNewModel(id, title, typeId, content, d) {
 }
 
 //异步获取数据并更新列表
-function AjaxGetList(index, typeId, Name) {
+function AjaxGetList(index, typeId, Name,isChang) {
     $('#my-modal-loading').modal();//正在加载...
     typeId = $('#newType').val();
     Name= $('#searchName').val();
@@ -203,7 +202,7 @@ function AjaxGetList(index, typeId, Name) {
         success: function (result) {
              $('#my-modal-loading').modal('close');
             var htmlTem = '';
-            SetAllCount(result.page.count);
+            SetAllCount(result.page.count, result.page.pageCount);
             result.rows.forEach(function (e) {
                 htmlTem += '<tr>';
                 htmlTem += ' <td>'+e.Nid+'</td>';
@@ -221,12 +220,12 @@ function AjaxGetList(index, typeId, Name) {
                 htmlTem += '</div>';
                 htmlTem += '</div>';
                 htmlTem += '</td>';
-                htmlTem += '</tr>'
+                htmlTem += '</tr>';
             });
             $("#newTbody").html('');
             $("#newTbody").html(htmlTem);
             //还差重新初始化分页控件
-            SetPageHtmlz();
+            SetPageHtml();
         },
         error: function (er) {
              $('#my-modal-loading').modal('close');
@@ -236,11 +235,12 @@ function AjaxGetList(index, typeId, Name) {
 }
 
 //总行数赋值
-function SetAllCount(count) {
+function SetAllCount(count, pageCount) {
     $('#new-pageCount').text(count);
+    $('#pageDemo').attr("data-pagecount", pageCount);
 }
 
 $('#newType').on('change', function ()
 {
-    AjaxGetList(1, 0, "");
+    AjaxGetList(1, 0, "",1);
 })

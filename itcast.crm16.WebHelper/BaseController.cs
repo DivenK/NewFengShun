@@ -94,7 +94,7 @@ namespace itcast.crm16.WebHelper
         protected void SetViewBagPage() {
             ViewBag.TotalPage = TotalPage;
             ViewBag.PageSize = pageSize;
-            ViewBag.PageCount=(int)Math.Ceiling(TotalPage * 1.0 / pageSize);
+            ViewBag.PageCount=PageCount=(int)Math.Ceiling(TotalPage * 1.0 / pageSize);
         }
 
         /// <summary>

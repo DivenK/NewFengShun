@@ -24,7 +24,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
         {
             int index = 1;
             var list = newsType.QueryWhere(c => c.IsDelete == 0);
-            var newlist= GetItems(index, 0, "");
+            var newlist= GetItems(index,1, "");
             ViewBag.newList = newlist;
             ViewBag.newsType = list;
             SetViewBagPage();
@@ -56,8 +56,8 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 }
                 else
                 {
-                    newModel.Author = "User";
-                    newModel.Creator = "User";
+                    newModel.Author = "丰顺商会";
+                    newModel.Creator = "丰顺商会";
                     news.Add(newModel);
                 }
                 news.SaveChanges();
@@ -143,7 +143,8 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
         public ActionResult GetList(int index, int typeId,string Name)
         {
             var pagelist=GetItems(index, typeId, Name);
-            var page = new { index = index, count = TotalPage };
+            SetViewBagPage();
+            var page = new { index = index, count = TotalPage,pageCount=PageCount};
             return Json(new { page = page, rows = pagelist });
         }
 
@@ -165,7 +166,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 Conent = c.Conent.Substring(0, 4) + "...",
                 Author = c.Author,
                 display = c.display,
-                CreatTimeStr = c.CreatTime.ToString(),
+                CreatTimeStr = c.CreatTime.ToyyyyMMddDateTime(),
                 TypeId = c.TypeId,
                 CreatTime = c.CreatTime,
                 displayBool = c.display == 0 ? true : false

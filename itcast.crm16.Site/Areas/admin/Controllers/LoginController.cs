@@ -13,7 +13,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
 
     using itcast.crm16.WebHelper.Attrs;
     using model;
-    
+    [SkipCheckLogin]
     public class LoginController : BaseController
     {
         //public LoginController(IsysUserInfoServices userSer, IsysPermissListServices pser)
