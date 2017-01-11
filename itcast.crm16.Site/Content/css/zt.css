@@ -826,7 +826,7 @@ body{
 	margin-top: 10px;
 }
 .index-page .p5th .list li{
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 .index-page .p5th .list li .title-con{
 	font-size: 16px;
@@ -839,7 +839,7 @@ body{
 	color: #333;
 	height: 40px;
 	overflow: hidden;
-	margin-top: 10px;
+	margin-top: 5px;
 }
 .index-page .p5th .list li a:hover,
 .index-page .p5th .list li a:hover .time{
