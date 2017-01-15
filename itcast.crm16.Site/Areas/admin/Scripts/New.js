@@ -121,6 +121,8 @@
         var earchName = $('#searchName').val();
         AjaxGetList(1, 0, earchName);
     });
+
+    var $page;
 });
 
 ///开关监控
@@ -163,7 +165,7 @@ function UpdateNewDisplay(e,val) {
 function SetPageHtml() {
     var pageCount = $("#pageDemo").attr("data-PageCount");
     var pageIndex = $("#pageDemo").attr("data-indexPage");
-    $('#pageDemo').page({
+   $page=$('#pageDemo').page({
         pages: pageCount,
         first: "首页", //设置false则不显示，默认为false  
         last: "尾页", //设置false则不显示，默认为false      
@@ -225,7 +227,8 @@ function AjaxGetList(index, typeId, Name,isChang) {
             $("#newTbody").html('');
             $("#newTbody").html(htmlTem);
             //还差重新初始化分页控件
-            SetPageHtml();
+            delPage(result.page.index);
+           
         },
         error: function (er) {
              $('#my-modal-loading').modal('close');
@@ -234,6 +237,14 @@ function AjaxGetList(index, typeId, Name,isChang) {
     });
 }
 
+function delPage(index)
+{
+    if (index == 1) {
+        //$page.remove();
+        $('#pageDemo').html('');
+          SetPageHtml();
+    }
+}
 //总行数赋值
 function SetAllCount(count, pageCount) {
     $('#new-pageCount').text(count);

@@ -25,9 +25,9 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
         {
             this.siteService = siteService;
         }
-        public ActionResult Index(int index=1,int pageSize=10,int type=0)
+        public ActionResult Index(int type=0)
         {
-           ViewBag.items=siteService.GetItems(index, pageSize, type);
+           ViewBag.items=siteService.GetItems(1, 10, type);
             return View();
         }
 

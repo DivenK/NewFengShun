@@ -37,7 +37,7 @@
         }
         if (newModel.Conent == "")
         {
-            bfeMsgBox.jsError("选择的相册不能为空");
+            bfeMsgBox.jsError("选择的内容不能为空");
             editor.target.focus();
             return;
         }
