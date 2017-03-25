@@ -1,0 +1,181 @@
+﻿@model itcast.crm16.model.ModelViews.sysUserInfoAdd
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+    <script type="text/javascript">
+        function loadDep(t) {
+            //1.0 获取当前选择的公司value值
+            var val = t.value;
+          
+            //2.0 将当前的val只发送给服务器执行：select * from sysOrganStruct where osParentid=val
+            getorgandata("uDepID", val);
+        }
+
+        function loadwk(t) {
+            //1.0 获取当前选择的部门value值
+            var val = t.value;
+            //2.0 将当前的val只发送给服务器执行：select * from sysOrganStruct where osParentid=val
+            getorgandata("uWorkGroupID",val);
+        }
+
+        //3.0 统一实现组织结构数据的请求
+        //id:表示当前数据要加载到的dom元素
+        function getorgandata(id,val) {
+            $.post("/admin/userinfo/getorgandata/" + val, null, function (ajaxobj) {
+                helper.checkstatus(ajaxobj, function () {
+                    //2.0.1  获取ajaxobj中的datas:[{存放的是工作组数据},{存放的是工作组数据}]
+                    var selobj = document.getElementById(id);
+                    selobj.options.length = 0; //清除老数据
+                    var data = ajaxobj.datas;
+                    for (var i = 0; i < data.length; i++) {
+                        var opt = new Option(data[i].osName, data[i].osID);
+                        selobj.options.add(opt);
+                    }
+                });
+            }, "json");
+        }
+
+
+
+    </script>
+</head>
+<body>
+    <div style="margin-top: 15px">
+        @using (Ajax.BeginForm("add", "userinfo", new AjaxOptions()
+    {
+        Url = Url.Action("add", "userinfo"),
+        HttpMethod = "post",
+        OnBegin = "helper.ajaxbegin",
+        OnSuccess = "helper.ajaxsuccess"
+    }))
+        {
+            @Html.ValidationSummary(true)
+    
+            <table class="list">
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.uLoginName)
+                    </th>
+                    <td>
+                        @Html.EditorFor(model => model.uLoginName)
+                        @Html.ValidationMessageFor(model => model.uLoginName)
+                    </td>
+                </tr>
+                 <tr>
+                    <th>
+                        @Html.LabelFor(model => model.uRealName)
+                    </th>
+                    <td>
+                        @Html.EditorFor(model => model.uRealName)
+                        @Html.ValidationMessageFor(model => model.uRealName)
+                    </td>
+                </tr>
+                
+                 <tr>
+                    <th>
+                        @Html.LabelFor(model => model.uTelphone)
+                    </th>
+                    <td>
+                        @Html.EditorFor(model => model.uTelphone)
+                        @Html.ValidationMessageFor(model => model.uTelphone)
+                    </td>
+                </tr>
+
+                     <tr>
+                    <th>
+                        @Html.LabelFor(model => model.uMobile)
+                    </th>
+                    <td>
+                        @Html.EditorFor(model => model.uMobile)
+                        @Html.ValidationMessageFor(model => model.uMobile)
+                    </td>
+                </tr>
+
+                     <tr>
+                    <th>
+                        @Html.LabelFor(model => model.uEmial)
+                    </th>
+                    <td>
+                        @Html.EditorFor(model => model.uEmial)
+                        @Html.ValidationMessageFor(model => model.uEmial)
+                    </td>
+                </tr>
+                    <tr>
+                    <th>
+                        @Html.LabelFor(model => model.uQQ)
+                    </th>
+                    <td>
+                        @Html.EditorFor(model => model.uQQ)
+                        @Html.ValidationMessageFor(model => model.uQQ)
+                    </td>
+                </tr>
+                   <tr>
+                    <th>
+                        @Html.LabelFor(model => model.uGender)
+                    </th>
+                    <td>
+                         @Html.RadioButtonFor(model => model.uGender,"0") 女
+                        @Html.RadioButtonFor(model => model.uGender,"1") 男
+                        @Html.RadioButtonFor(model => model.uGender,"2") 保密                    
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.uStatus)
+                    </th>
+                    <td>
+                        @Html.DropDownListFor(model => model.uStatus, ViewBag.status as SelectList)
+                        @Html.ValidationMessageFor(model => model.uStatus)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.uCompanyID)
+                    </th>
+                    <td>
+                        @Html.DropDownListFor(model => model.uCompanyID, ViewBag.companys as SelectList, new {onchange="loadDep(this)" })
+                        @Html.ValidationMessageFor(model => model.uCompanyID)
+                    </td>
+                </tr>
+
+                   <tr>
+                    <th>
+                        @Html.LabelFor(model => model.uDepID)
+                    </th>
+                    <td>
+                     <select name="uDepID" id="uDepID" onchange="loadwk(this)" ></select>
+                    </td>
+                </tr>               
+                 <tr>
+                    <th>
+                        @Html.LabelFor(model => model.uWorkGroupID)
+                    </th>
+                    <td>
+                     <select name="uWorkGroupID" id="uWorkGroupID"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <input type="submit" value="新增" class="btn btn-info" />
+                        <input type="button" onclick="window.parent.helper.win.close();" value="返回" class="btn btn-info" />
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+</body>
+</html>

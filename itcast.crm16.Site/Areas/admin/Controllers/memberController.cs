@@ -85,6 +85,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                         c.Creator,
                         CreateTime = c.CreateTime.ToString("yyyy-MM-dd"),
                         c.Type,
+                        c.ImgUrl,
                         typeName = artList.Where(d => d.id == c.Type).FirstOrDefault().typeName
                     })
                 });
@@ -97,7 +98,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
 
 
         [ValidateInput(false)]
-        public ActionResult Change(int id, string title, int type, string content,DateTime createtime)
+        public ActionResult Change(int id, string title, int type, string content, DateTime createtime, string imageUrl)
         {
             if (string.IsNullOrEmpty(title))
             {
@@ -114,7 +115,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 addModel.CreateTime = createtime;
                 addModel.Creator = (Session[Keys.uinfo] as sysUserInfo).uLoginName;
                 if (!string.IsNullOrEmpty(content))
-                    addModel.ImgUrl = GetImageUrl(content);
+                    addModel.ImgUrl = imageUrl;
                 memberSer.Add(addModel);
                 int addRet = memberSer.SaveChanges();
                 if (addRet == 1)
@@ -137,7 +138,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 editModel.UpdateTime = DateTime.Now;
                 editModel.Updator = (Session[Keys.uinfo] as sysUserInfo).uLoginName;
                 if (!string.IsNullOrEmpty(content))
-                    editModel.ImgUrl = GetImageUrl(content);
+                    editModel.ImgUrl = imageUrl;
                 memberSer.Edit(editModel, new string[] { "Title", "Content", "Type","CreateTime", "UpdateTime", "Updator", "ImgUrl" });
                 int editRet = memberSer.SaveChanges();
                 if (editRet == 1)
@@ -213,7 +214,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             }
             else
             {
-                return WriteSuccess("", new { entity.id, entity.Title, entity.Content, entity.Type,CreateTime=entity.CreateTime.ToString("yyyy-MM-dd") });
+                return WriteSuccess("", new { entity.id, entity.Title, entity.Content, entity.Type,CreateTime=entity.CreateTime.ToString("yyyy-MM-dd"),imageUrl=entity.ImgUrl });
             }
         }
 

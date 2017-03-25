@@ -67,7 +67,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             return WriteError("设置失败:选择值参数为空，请在尝试");
         }
         [ValidateInput(false)]//防止对文本验证，保存不了HTML元素
-        public ActionResult UpdateCommerce(string Name, string Conent,  int id,int type)
+        public ActionResult UpdateCommerce(string Name, string Conent, int id, int type, string imageURL)
         {
             if (string.IsNullOrWhiteSpace(Name))
             {
@@ -86,7 +86,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             CommerceModel.UpdateTime = DateTime.Now;
             if (CommerceModel.Type == 2)//是不是商会领导相册的那些数据。
             {
-                CommerceModel.ImageUrl=GetImageUrl(CommerceModel.Contents);
+                CommerceModel.ImageUrl = imageURL;
                 CommerceModel.Sort = GetSortValue(CommerceModel.Name);
             }
             try

@@ -83,8 +83,8 @@
                         </tbody>
                     </table>
                     <div class="am-cf">
-                        共<span id="new-pageCount"> @ViewBag.TotalPage</span> 条记录
-                        <div class="am-fr" id="pageDemo" date-pageSize="@ViewBag.PageSize" date-TotalPage="@ViewBag.TotalPage" data-indexPage="1" data-PageCount="@ViewBag.PageCount">
+                        共<span id="new-pageCount" data-type="@(memberList.First().Type)"> @ViewBag.TotalPage</span> 条记录
+                        <div class="am-fr" id="pageDemo"  date-pageSize="@ViewBag.PageSize" date-TotalPage="@ViewBag.TotalPage" data-indexPage="1" data-PageCount="@ViewBag.PageCount">
 
                         </div>
                     </div>
@@ -124,6 +124,12 @@
                                         <div class="am-g">
                                             <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ipt-text-1">标题</label>
                                             <input class="am-u-md-10 form-control" id="doc-ipt-text-1" placeholder="输入标题信息" data-id="0" required>
+                                        </div>
+                                    </div>
+                                   <div class="am-form-group  hide" id="hideName">
+                                        <div class="am-g">
+                                            <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ta-2">封面相册</label>
+                                            <textarea class="am-u-md-10" id="doc-ta-2"></textarea>
                                         </div>
                                     </div>
                                     <div class="am-form-group">
@@ -278,5 +284,22 @@
 
         });
         editor.render('doc-ta-1');  //绑定id
+
+            var editorOption2 = {
+            initialFrameWidth: 620,
+            initialFrameHeight: 100,
+            autoHeightEnabled: false,//设置滚动条出现
+            toolbars: [
+    [
+    'insertimage']
+            ]
+        };
+        var editor2 = new baidu.editor.ui.Editor(editorOption2);
+        editor2.addListener("ready", function () {
+            // editor准备好之后才可以使用
+            editor2.setContent("");
+
+        });
+        editor2.render('doc-ta-2');  //绑定id
     </script>
 }@*//要用这个包起来*@

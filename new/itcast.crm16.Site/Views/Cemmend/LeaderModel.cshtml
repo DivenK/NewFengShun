@@ -1,0 +1,146 @@
+﻿@using itcast.crm16.model;
+@using itcast.crm16.Site.Models;
+@{
+    ViewBag.Title = "商会领导";
+    Layout = "~/Views/Shared/_PageMaster.cshtml";
+    var modelCom = ViewBag.Model as Commerce;
+      var modelList = ViewBag.list as List<CommerceViewModel>;
+}
+<div class="detail-page font_wryh inner-same-iframe">
+    <div class="w1200">
+
+        <div class="p2th">
+            <div class="w1200">
+                <div class="item-wrap clearfix">
+                    <div class="lbox fldi">
+                        <h3 class="title">关于商会</h3>
+                        <ul class="list">
+                            @foreach (var item in modelList)
+                            {
+                                <li class="@(item.Name=="商会领导"?"cur":"")">
+                                    <a href="@(item.Name=="商会领导"?"/Cemmend/GetLeader?id="+item.id:"/Cemmend/GetModel?id="+item.id)">@item.Name</a>
+                                </li>
+                            }
+                        </ul>
+                        <div class="lx-item">
+                            <div class="code-item">
+                                <img src="/Content/images/logoweixin.png" />
+                            </div>
+                        </div>
+                    </div>
+                        <div class="rbox frdi">
+                            <div class="cur-title">
+                                <p>
+                                    当前位置：<a href="/Home">首页</a> >>
+                                    <a href="#">关于商会</a> >>
+                                    <a href="#">商会领导</a>
+                                </p>
+                            </div>
+                            <div class="content" id="content">
+
+                                <div class="item">
+                                    <div class="title-item tc">
+                                      @(modelCom.Name)
+                                    </div>
+                                    <div class="ly-item tc">
+										<span class="time-txt mr20">时间：@modelCom.CreateTime.ToString("yyyy-MM-dd") </span>
+										<span class="ly-txt mr20">来源：丰顺商会</span>
+										<span class="zz-txt mr20"> 作者： 丰顺商会秘书处</span>
+									
+									</div>
+                                    <div class="main-con tc">
+                                        @Html.Raw(modelCom.Contents)
+                                    </div>
+
+                                    <div class="commentBlock" style="display: none">
+                                        <p class="f14 mt10">请发表评论： </p>
+                                        <div class="textareaBox">
+                                            <textarea name="" rows="" cols=""></textarea>
+                                        </div>
+                                        <div class="iconBar clearfix">
+                                            <div class="fldi"><img src="/Content/images/smile.jpg" alt="">表情</div>
+                                            <div class="frdi"><a href="#">发表</a></div>
+                                        </div>
+                                        <div class="comList">
+                                            <ul class="list">
+                                                <li>
+                                                    <div class="userImg fldi">
+                                                        <img alt="" src="/Content/images/userImg.jpg">
+                                                    </div>
+                                                    <div class="desBox fldi">
+                                                        <p>
+                                                            <span class="fr">#123楼 16-12-17 5:28 </span> <span class="fb">昵称：</span> 黄思婷
+                                                        </p>
+                                                        <div class="zan">
+                                                            <a href=""><img src="/Content/images/zan.gif" alt=""></a>(221)
+                                                        </div>
+                                                        <p>作品很棒！</p>
+                                                        <p>
+                                                            <a href="">[回复]</a>
+                                                            <a href="">[引用]</a>
+                                                            <a href="">[举报]</a>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="userImg fldi">
+                                                        <img alt="" src="/Content/images/userImg.jpg">
+                                                    </div>
+                                                    <div class="desBox fldi">
+                                                        <p>
+                                                            <span class="fr">#123楼 16-12-17 5:28 </span> <span class="fb">昵称：</span> 黄思婷
+                                                        </p>
+                                                        <div class="zan">
+                                                            <a href=""><img src="/Content/images/zan.gif" alt=""></a>(221)
+                                                        </div>
+                                                        <p>作品很棒！</p>
+                                                        <p>
+                                                            <a href="">[回复]</a>
+                                                            <a href="">[引用]</a>
+                                                            <a href="">[举报]</a>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="~/Content/js/jquery.js"></script>
+<script>
+    $(function () {
+        $('#step-item').find('li').click(function () {
+            var index = $(this).index();
+            $(this).addClass("cur").siblings("li").removeClass("cur");
+
+            $("#content").find(".item").eq(index).removeClass('dn').siblings('.item').addClass('dn');
+
+        });
+
+        $('[data-role="agree-check"]').click(function () {
+            if ($('[data-role="agree-check"]').attr('checked') == true) {
+                $('[data-role="agree-check"]').attr('checked') == false;
+            }
+            else {
+
+            }
+        });
+
+        $('#register-btn').click(function () {
+            if ($('[data-role="agree-check"]').attr('checked') == true) {
+                window.location.href = "./register.html";
+            }
+        });
+    });
+</script>
+

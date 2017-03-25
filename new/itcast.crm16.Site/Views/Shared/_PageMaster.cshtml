@@ -1,0 +1,156 @@
+﻿@using itcast.crm16.model
+@using itcast.crm16.Common
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html" charset="utf-8"></meta>
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/css/zt.css" rel="stylesheet" />
+    <link href="/Content/css/swiper-3.4.0.min.css" type="text/css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.page.js"></script>
+    <script type="text/javascript" src="/Content/js/jquery.carouFredSel-5.5.0-auto.js"></script>
+    <script type="text/javascript" src="/Content/js/swiper-3.4.0.min.js"></script>
+    <script type="text/javascript" src="/Content/js/MSClass.js"></script>
+    <link href="/Content/images/logotitle.ico" rel="shortcut icon">
+</head>
+<body>
+    <!-- 公共头部开始 -->
+    <div class="header-item font_wryh">
+        <div class="top-item">
+            <div class="w1200 clearfix">
+                <div class="lbox fldi">
+                    <img src="~/Content/images/newLogo.png" alt="">
+                </div>
+                <!-- <div class="rbox fldi clearfix">
+                    <p class="time f14 mb5">2016年12月13日</p>
+                    <p>
+                        <a href="#" class="weibo-btn"></a>
+                        <input  type="text" class="search-input" placeholder="点击这里搜索"/><a href="#" class="search-btn">搜索</a>
+                    </p>
+                </div> -->
+                <div class="center frdi">
+                    敦睦乡谊 促进工商
+                    <br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加强交流 共促发展
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-item">
+            <div class="w1200 clearfix">
+
+                <div class="nav-item fldi">
+                    <ul class="list clearfix first-nav" data-role="first-nav">
+                        @{
+                            object objMenusList = ViewBag.mList;
+                            int nav = 1;
+                            if (objMenusList != null)
+                            {
+                                List<sysMenus> mList = objMenusList as List<sysMenus>;
+
+                                sysMenus currentMenus = mList.Where(c => c.mUrl.Contains(ViewBag.url)).FirstOrDefault();
+                                int currentUrlParentId = 0;
+                                //获取当前访问的parentid
+                                if (currentMenus != null && !string.IsNullOrWhiteSpace(ViewBag.url))
+                                {
+                                    currentUrlParentId = currentMenus.mID;
+                                }
+                                var pMenusList = mList.Where(c => c.mParentID == -2);
+                                <li class=" first-li @(currentUrlParentId == 0 ? "cur" : "") ">
+                                    <a href="/Home/Index">首页</a>
+                                </li>
+                                foreach (var item in pMenusList)
+                                {
+                                    <li class=" first-li @(item.mID == currentMenus.mID ? "cur" : "") ">
+                                        <a href="@(item.mUrl)">@item.mName</a>
+                                    </li>
+                                }
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 公共头部结束 -->
+    @RenderBody()
+
+    <!-- 页面内容结束 -->
+    <!-- 公共footer开始 -->
+    <div class="footer font_wryh f14">
+        <div class="w1200">
+            <div class="top-item clearfix">
+
+
+                <div class="rbox fldi clearfix ">
+
+                    <div class="box-2">
+                        <p class="title f16">友情链接：</p>
+                        <a href="javascript:;">广东省新南方集团有限公司</a>
+                        <a href="javascript:;">广东丰联投资有限公司</a>
+                        <a href="javascript:;">广东速度投资（集团）有限公司</a>
+                        <a href="javascript:;">广东讯联科技（集团）有限公司</a>
+                        <a href="javascript:;">潮 客 汇 网</a>
+                        <a href="javascript:;">广州金马模特道具有限公司</a>
+                        <a href="javascript:;">深圳市喜德盛自行车有限公司</a>
+                        <a href="javascript:;">广州木棉花商旅服务有限公司</a>
+                        <a href="javascript:;">泰华房地产[中国]有限公司</a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-item">
+                <div class="content">
+                    <div class="box-1 clearfix mt10">
+                        <span class="txt fldi">地址：广东省广州市天河区珠江新城马场路富力公园28-A1栋2401室-广东丰顺商会 邮编：510000 </span>
+                        <span class="txt frdi">会员服务电话：020-34022585   E_mail：gdfssh@126.com  </span>
+                    </div>
+                    <div class="box-2 clearfix mt5">
+                        <span class="txt fldi">Copyright 2009 All rights reserved  粤ICP备10027412号 </span>
+                        <a href="#" class="txt frdi color-fff">网站设计联系方式： </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="code-pop" data-role="code-pop">
+        <a href="javascript:;" class="close-ewm-btn" data-role="close-ewm-btn"><img src="/Content/images/close-btn.png" alt=""></a>
+
+        <div class="img">
+            <img src="/Content/images/logoweixin.png">
+        </div>
+        <div class="txt tc color-333 pt5">扫一扫，关注公众号</div>
+    </div>
+    <a href="javascript:;" class="arrow-icon" data-role="open-ewm-btn"></a>
+    <div class="global-max-logo">
+        <img src="/Content/images/max-logo.png">
+    </div>
+    <div class="global-min-logo">
+        <img src="/Content/images/min-logo.png">
+    </div>
+    <!-- 公共footer结束 -->
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    // 头部二维码显示或隐藏
+    $('[data-role="min-code-icon"]').hover(function () {
+        $(this).find('.max-code').removeClass('dn');
+
+    }, function () {
+        $(this).find('.max-code').addClass('dn');
+    });
+
+    $('[data-role="close-ewm-btn"]').click(function () {
+        $('[data-role="code-pop"]').addClass('dn');
+    });
+    $('[data-role="open-ewm-btn"]').click(function () {
+        $('[data-role="code-pop"]').removeClass('dn');
+    });
+
+</script>

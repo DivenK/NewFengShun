@@ -1,0 +1,84 @@
+﻿@model itcast.crm16.model.ModelViews.wfWorkNodesView
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    <div style="margin-top: 15px">
+        @using (Ajax.BeginForm("addNode", "wfwork", new AjaxOptions()
+    {
+        Url = Url.Action("addNode", "wfwork"),
+        HttpMethod = "post",
+        OnBegin = "helper.ajaxbegin",
+        OnSuccess = "helper.ajaxsuccess"
+    }))
+        {
+            @Html.ValidationSummary(true)
+    
+            <table class="list">
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.wfNodeTitle)
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(model => model.wfNodeTitle)
+                        @Html.ValidationMessageFor(model => model.wfNodeTitle)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.wfNodeType)
+                    </th>
+                    <td>
+                        @Html.DropDownListFor(model => model.wfNodeType, ViewBag.nodetypes as SelectList)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.wfnRoleType)
+                    </th>
+                    <td>
+                        @Html.DropDownListFor(model => model.wfnRoleType, ViewBag.roletypes as SelectList)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.wfnBizMethod)
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(model => model.wfnBizMethod)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.wfnMaxNum)
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(model => model.wfnMaxNum)
+                        @Html.ValidationMessageFor(model => model.wfnMaxNum)
+                    </td>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <td>
+                        <input type="submit" value="新增" class="btn btn-info" />
+                        <input type="button" onclick="window.parent.helper.win.close();" value="返回" class="btn btn-info" />
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+</body>
+</html>

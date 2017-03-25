@@ -1,0 +1,103 @@
+﻿@using itcast.crm16.Site.Models;
+@{
+    ViewBag.Title = "商会领导";
+    Layout = "~/Views/Shared/_PageMaster.cshtml";
+    var modelList = ViewBag.list as List<CommerceViewModel>;
+
+   var modelItems= ViewBag.Items  as List<CommerceViewModel>;
+}
+<div class="detail-page font_wryh inner-same-iframe">
+<div class="w1200">
+    <div class="p2th">
+        <div class="w1200">
+            <div class="item-wrap clearfix">
+                <div class="lbox fldi">
+                    <h3 class="title">关于商会</h3>
+                    <ul class="list">
+                        @foreach (var item in modelList)
+                        {
+                            <li class="@(item.id == ViewBag.id ? "cur" : "")">
+                                <a href="@(item.Name == "商会领导" ? "/Cemmend/GetLeader?id=" + item.id : "/Cemmend/GetModel?id=" + item.id)">@item.Name</a>
+                            </li>
+                        }
+                    </ul>
+                    <div class="lx-item">
+                        <div class="code-item">
+                            <img src="/Content/images/logoweixin.png"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-page">
+                    <div class="rbox frdi">
+                        <div class="cur-title">
+                            <p>
+                                当前位置：<a href="#">首页</a> >>
+                                <a href="#">关于商会</a> >>
+                                <a href="#">商会领导</a>
+                            </p>
+                        </div>
+                        <div class="content" id="content">
+                            <div class="item">
+                                <ul class="clearfix list" id="contentList">
+                                    @foreach (var item in modelItems)
+                                    {
+                                        <li>
+                                            <a href="@("/Cemmend/LeaderModel?id=" + item.id)">
+                                                <div class="img">
+                                                    <img src="@item.ImageUrl"/>
+                                                </div>
+                                                <div class="txt">
+                                                    @item.Name
+                                                </div>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                                <div class="page-item" id="page">
+                                    <a href="#">上一页</a>
+                                    <a href="#" class="cur">1</a>
+                                    <a href="#">2</a>
+                                    <a href="#">3</a>
+                                    <a href="#">下一页</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+        <script src="~/Content/js/jquery.page.js"></script>
+        <script type="text/javascript">
+    // 分页组件
+    $("#page").Page({
+        totalPages:@ViewBag.PageCount,//分页总数
+        liNums: @(ViewBag.PageCount<5?ViewBag.PageCount:5),//分页的数字按钮数(建议取奇数)
+        activeClass: 'activP', //active 类样式定义
+        callBack: function (page) {
+            var content={
+                "pageIndex":page
+            }
+            $.post("/Cemmend/AjaxGetLeader",
+                content,
+                function(e) {
+                    if (e.status == 0) {
+                        var data = e.datas;
+                        var conhtml = "";
+                        for (var i = 0; i < data.length; i++) {
+                            conhtml += ' <a href="/Cemmend/LeaderModel?id=' + data[i].id + '"> <li><div class="img">';
+                            conhtml += '<img src="' + data[i].ImageUrl + '" /> </div>';
+                            conhtml += ' <div class="txt">' + data[i].Name + '</div></li></a>';
+                        }
+                        $("#contentList").html(conhtml);
+                    } else {
+                        alert("网络异常");
+                    }
+                },
+                "json");
+        }
+    });
+</script>

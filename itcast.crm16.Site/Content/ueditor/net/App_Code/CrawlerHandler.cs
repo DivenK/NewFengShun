@@ -74,6 +74,7 @@ public class Crawler
                 State = "Url is not an image";
                 return this;
             }
+            //上传的文件夹位置
             ServerUrl = PathFormatter.Format(Path.GetFileName(this.SourceUrl), Config.GetString("catcherPathFormat"));
             var savePath = Server.MapPath(ServerUrl);
             if (!Directory.Exists(Path.GetDirectoryName(savePath)))

@@ -16,49 +16,63 @@ $(function () {
         editId = 0;
         editor.setContent("");
         $("doc-ipt-text-1").val("");
-        $modal.modal({ closeViaDimmer: 0, width: 800, height: 800 });//弹起
+        var height = 950;
+     $("#hideName").css("display", "block");
+    var type = $("#new-pageCount").attr('data-type');
+    if (type != 1&&type!="1") {
+            $("#hideName").css("display", "none");
+            height = 800;
+    }
+        $($modal).removeData('amui.modal');
+        $modal.modal({ closeViaDimmer: 0, width: 800, height: height });//弹起
     })
 
     //保存新增或者修改
-    $("#formSubmit").bind("click", function () {
-        var title = $("#doc-ipt-text-1").val();
-        if (title == "") {
-            $("#doc-ipt-text-1").focus();
-            return;
-        }
-        var postContent = {
-            "id": editId,
-            "title": title,
-            "type": $("#selectType").val(),
-            "content": editor.getContent(),
-            "createtime":$("#doc-createtime-text-1").val()
-        }
-        $.ajax({
-            url: "/admin/member/Change",
-            data: postContent,
-            type: "post",
-            dataType: "json",
-            success: function (e) {
-                if (e.status == 0) {
-                    bfeMsgBox.success("", e.msg);
-                    window.location.reload();
+    $("#formSubmit")
+        .bind("click",
+            function () {
+                var title = $("#doc-ipt-text-1").val();
+                if (title == "") {
+                    $("#doc-ipt-text-1").focus();
+                    return;
                 }
-                else {
-                    bfeMsgBox.error("", e.msg);
+
+                var postContent = {
+                    "id": editId,
+                    "title": title,
+                    "type": $("#selectType").val(),
+                    "content": editor.getContent(),
+                    "createtime": $("#doc-createtime-text-1").val(),
+                    "imageUrl": $(editor2.getContent()).find('img').attr('src')
                 }
-            },
-            error: function (er) {
-                bfeMsgBox.error("", er);
-            }
-        })
-    })
+                $.ajax({
+                    url: "/admin/member/Change",
+                    data: postContent,
+                    type: "post",
+                    dataType: "json",
+                    success: function (e) {
+                        if (e.status == 0) {
+                            bfeMsgBox.success("", e.msg);
+                            window.location.reload();
+                        } else {
+                            bfeMsgBox.error("", e.msg);
+                        }
+                    },
+                    error: function (er) {
+                        bfeMsgBox.error("", er);
+                    }
+                });
+            });
 
 
     //取消
-    $("#Cancel").unbind("click").bind("click", function () {
-        editId = 0;
-        $modal.modal('close');
-    })
+    $("#Cancel")
+        .unbind("click")
+        .bind("click",
+            function () {
+                editId = 0;
+                $modal.modal('close');
+            });
 
     SetPageHtml();
 
@@ -74,36 +88,51 @@ $(function () {
 /***********************
 获取数据 typeId=0,标识获取全部类型数据
 ***********************/
-function GetContentByPage(typeId,pageIndex, pageSize, searchMsg) {
+function GetContentByPage(typeId, pageIndex, pageSize, searchMsg) {
     var content = {
-        "typeid":typeId,
+        "typeid": typeId,
         "pageIndex": pageIndex,
         "PageSize": pageSize,
         "searchMsg": searchMsg
     };
-    $.post("/Admin/member/GetContentByPage", content, function (retContent) {
-        if (retContent.status == 0) {
-            var totalPage = retContent.datas.TotalPage;
-            var dataContent = retContent.datas.Content;
-
-            $("#new-pageCount").text(totalPage);
-            //将数据展示到页面
-            var showHtml = "";
-            for (var i = 0; i < dataContent.length; i++) {
-                showHtml += '<tr>';
-                showHtml += '<td>' + (i + 1) + '</td>';
-                showHtml += '<td>' + dataContent[i].typeName + '</td>';
-                showHtml += '<td title="'+dataContent[i].Title+'">' + (dataContent[i].Title.length>15?dataContent[i].Title.substring(0,15):dataContent[i].Title) + '</td>';
-                showHtml += '<td class="am-hide-sm-only" ><div _switch="" class="am-switch am-round am-switch-success changelook  newDisplay ' + (dataContent[i].IsComment ? "am-active" : "") + '"><div class="am-switch-handle"><input type="checkbox" class="" ' + (dataContent[i].IsComment == 0 ? "checked" : "") + ' data-id="' + dataContent[i].id + '"></div></div></td>';
-                showHtml += '<td class="am-hide-sm-only">' + dataContent[i].CreateTime + '</td>';
-                showHtml += '<td><div class="am-btn-toolbar"><div class="am-btn-group am-btn-group-xs">';
-                showHtml += '<a class="am-btn am-btn-default am-btn-xs am-text-secondary member-edit" data-id="' + dataContent[i].id + '"><span class="am-icon-pencil-square-o"></span> 编辑</a>';
-                showHtml += '<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only member-del" data-id="' + dataContent[i].id + '"><span class="am-icon-trash-o"></span> 删除</a>';
-                showHtml += '</div></div></td></tr>';
+    $.post("/Admin/member/GetContentByPage",
+        content,
+        function (retContent) {
+            if (retContent.status == 0) {
+                var totalPage = retContent.datas.TotalPage;
+                var dataContent = retContent.datas.Content;
+                $("#new-pageCount").attr('data-type', typeId);
+                $("#new-pageCount").text(totalPage);
+                //将数据展示到页面
+                var showHtml = "";
+                for (var i = 0; i < dataContent.length; i++) {
+                    showHtml += '<tr>';
+                    showHtml += '<td>' + (i + 1) + '</td>';
+                    showHtml += '<td>' + dataContent[i].typeName + '</td>';
+                    showHtml += '<td title="' +
+                        dataContent[i].Title +
+                        '">' +
+                        (dataContent[i].Title
+                            .length >
+                            15
+                            ? dataContent[i].Title.substring(0, 15)
+                            : dataContent[i].Title) +
+                        '</td>';
+                    showHtml +=
+                        '<td class="am-hide-sm-only" ><div _switch="" class="am-switch am-round am-switch-success changelook  newDisplay ' + (dataContent[i].IsComment ? "am-active" : "") + '"><div class="am-switch-handle"><input type="checkbox" class="" ' + (dataContent[i].IsComment == 0 ? "checked" : "") + ' data-id="' + dataContent[i].id + '"></div></div></td>';
+                    showHtml += '<td class="am-hide-sm-only">' + dataContent[i].CreateTime + '</td>';
+                    showHtml += '<td><div class="am-btn-toolbar"><div class="am-btn-group am-btn-group-xs">';
+                    showHtml += '<a class="am-btn am-btn-default am-btn-xs am-text-secondary member-edit" data-id="' +
+                        dataContent[i].id +
+                        '"><span class="am-icon-pencil-square-o"></span> 编辑</a>';
+                    showHtml +=
+                        '<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only member-del" data-id="' + dataContent[i].id + '"><span class="am-icon-trash-o"></span> 删除</a>';
+                    showHtml += '</div></div></td></tr>';
+                }
+                $("#memberTbody").html(showHtml);
             }
-            $("#memberTbody").html(showHtml);
-        }
-    }, "json")
+        },
+        "json");
 
 }
 
@@ -178,20 +207,32 @@ $(document).on("click", ".member-edit", function () {
     var content = {
         "id": editId
     }
-    $.post("/admin/member/GetMemberDyNamicById", content, function (e) {
-        if (e.status == 0) {
-            $("#doc-ipt-text-1").val(e.datas.Title);
-            $("#selectType").find("option[value='" + e.datas.Type + "']").attr("selected", true);
-            $("#doc-createtime-text-1").datepicker('setValue', e.datas.CreateTime);
-            editor.setContent(e.datas.Content);
-            $modal.modal({ closeViaDimmer: 0, width: 800, height: 800 });
-        }
-    }, "json")
+    var height = 950;
+     $("#hideName").css("display", "block");
+    var type = $("#new-pageCount").attr('data-type');
+    if (type != 1&&type!="1") {
+        $("#hideName").css("display", "none");
+        height = 800;
+    }
+    $.post("/admin/member/GetMemberDyNamicById",
+        content,
+        function(e) {
+            if (e.status == 0) {
+                $("#doc-ipt-text-1").val(e.datas.Title);
+                $("#selectType").find("option[value='" + e.datas.Type + "']").attr("selected", true);
+                $("#doc-createtime-text-1").datepicker('setValue', e.datas.CreateTime);
+                editor.setContent(e.datas.Content);
+                editor2.setContent("<img src='"+e.datas.imageUrl+"' />");
+                  $($modal).removeData('amui.modal');
+                $modal.modal({ width: 800, height: height });
+            }
+        },
+        "json");
 })
 
 
 $(document).on("click", "#seachNew", function () {
-    GetContentByPage(0,1, 10, $("#searchName").val());
+    GetContentByPage(0, 1, 10, $("#searchName").val());
 })
 
 function SetPageHtml() {
@@ -207,7 +248,7 @@ function SetPageHtml() {
         groups: 5, //连续显示分页数
         jump: function (context) {
             if (!isFirst) {
-                GetContentByPage(0,context.option.curr, 10, searchContent);
+                GetContentByPage(0, context.option.curr, 10, searchContent);
             }
         }//这里就是去异步请求方法
     });

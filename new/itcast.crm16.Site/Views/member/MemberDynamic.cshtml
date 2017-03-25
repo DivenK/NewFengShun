@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "丰顺商会欢迎您";
+    Layout = "~/Views/Shared/_PageMaster.cshtml";
+}
+@using itcast.crm16.model
+
+<!-- 页面内容开始 -->
+<div class="new-page font_wryh inner-same-iframe">
+    <div class="w1200">
+
+        <div class="p2th">
+            <div class="w1200">
+                <div class="item-wrap clearfix">
+                    <div class="lbox fldi">
+                        <h3 class="title">丰顺商人</h3>
+                        <ul class="list" id="showul">
+                            <li>
+                                <a href="/member/memberdynamic?id=2">会员动态</a>
+                            </li>
+                            <li>
+                                <a href="/member//memberdynamic?id=3">招聘信息</a>
+                            </li>
+                        </ul>
+                        <div class="lx-item">
+                            <div class="code-item">
+                                <img src="/Content/images/logoweixin.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rbox frdi">
+                        <div class="cur-title">
+                            <p>
+                                当前位置：<a href="/Home/index">首页</a> >>
+                                <a href="/member//memberdynamic?id=1">会员风采</a> 
+                            </p>
+                        </div>
+                        <div class="content" id="content">
+
+                            <div class="item">
+                                <ul class="list" id="contentlist">
+                                    @*<a href="#">
+                                            <li class="clearfix">
+                                                <span class="title fldi">商会代表一行回乡考察，寻找适宜商会发展项目商会代表一行回乡考察，寻找适宜商会发展项目</span>
+                                                <span class="time frdi">[2016/12/3]</span>
+                                            </li>
+                                        </a>*@
+                                    @{
+
+                                        if (ViewBag.MemberList != null)
+                                        {
+                                            List<MemberDynamic> memberList = ViewBag.MemberList as List<MemberDynamic>;
+                                            foreach (var item in memberList)
+                                            {
+                                                <a href="/member/memberdynamicdetail/@item.id">
+                                                    <li class="clearfix">
+                                                        <span class="title fldi">@item.Title</span>
+                                                        <span class="time frdi">[@item.CreateTime.ToString("yyyy-MM-dd")]</span>
+                                                    </li>
+                                                </a>
+                                            }
+                                        }
+
+                                    }
+
+                            </div>
+                            <div class="page-item" id="page">
+                                <a href="#">上一页</a>
+                                <a href="#" class="cur">1</a>
+                                <a href="#">2</a>
+                                <a href="#">3</a>
+
+                                <a href="#">下一页</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- 页面内容结束 -->
+
+<script type="text/javascript">
+    var type=@ViewBag.Type;
+    $(function(){
+        var liindex=parseInt(type)-2;
+        $("#showul li").eq(liindex).addClass("cur");
+    })
+
+
+    // 分页组件
+    $("#page").Page({
+        totalPages: @ViewBag.TotalPage,//分页总数
+        liNums: 7,//分页的数字按钮数(建议取奇数)
+        activeClass: 'activP', //active 类样式定义
+        callBack: function (page) {
+            var content={
+                "pageIndex":page,
+                "type":type
+            }
+            $.post("/member/MemberDynamicByPage",content,function(e){
+                if(e.status==0)
+                {
+                    //<a href="/member/memberdynamicdetail/24">
+                    //    <li class="clearfix">
+                    //        <span class="title fldi">Who am I</span>
+                    //        <span class="time frdi">[2016-12-24]</span>
+                    //    </li>
+                    //</a>
+                    var data=e.datas;
+                    var conhtml="";
+                    
+                    for (var i = 0; i < data.length; i++) {
+                        conhtml+='<a href="/member/memberdynamicdetail/'+data[i].id+'">';
+                        conhtml+='<li class="clearfix">';
+                        conhtml+='<span class="title fldi">'+data[i].Title+'</span>';
+                        conhtml+='<span class="time frdi">'+data[i].CreateTime+'</span>';
+                        conhtml+='</li></a>';
+                    }
+                    $("#contentlist").html(conhtml);
+                }
+                else
+                {
+                    alert("网络异常");
+                }
+            },"json")
+        }
+    });
+</script>

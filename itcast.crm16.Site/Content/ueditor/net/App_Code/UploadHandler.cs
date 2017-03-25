@@ -62,8 +62,13 @@ public class UploadHandler : Handler
         }
 
         Result.OriginFileName = uploadFileName;
-
-        var savePath = PathFormatter.Format(uploadFileName, UploadConfig.PathFormat);
+        var fileName = "";
+        var cookieN = Request.Cookies["MWS_User"];
+        if (cookieN != null)
+        {
+            fileName = cookieN["DirectoryName"]+"/";
+        }
+        var savePath = UploadConfig.PathFormat + fileName + uploadFileName;// PathFormatter.Format(uploadFileName, UploadConfig.PathFormat);
         var localPath = Server.MapPath(savePath);
         try
         {

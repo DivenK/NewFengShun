@@ -16,7 +16,7 @@
     ajax = UE.ajax;
 
     $G = function ( id ) {
-        return document.getElementById( id )
+        return document.getElementById(id);
     };
     //focus元素
     $focus = function ( node ) {

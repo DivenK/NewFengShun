@@ -64,8 +64,8 @@
                 onlineImage.reset();
                 break;
             case 'search':
-                setAlign(editor.getOpt('imageManagerInsertAlign'));
-                searchImage = searchImage || new SearchImage();
+                //setAlign(editor.getOpt('imageManagerInsertAlign'));
+                //searchImage = searchImage || new SearchImage();
                 break;
         }
     }
@@ -104,7 +104,7 @@
             }
 
             if(list) {
-                editor.execCommand('insertimage', list);
+                //editor.execCommand('insertimage', list);
                 remote && editor.fireEvent("catchRemoteImage");
             }
         };
@@ -304,40 +304,55 @@
             this.$queue = this.$wrap.find('.filelist');
         },
         /* 初始化容器 */
-        initUploader: function () {
+        initUploader: function() {
             var _this = this,
-                $ = jQuery,    // just in case. Make sure it's not an other libaray.
+                $ = jQuery, // just in case. Make sure it's not an other libaray.
                 $wrap = _this.$wrap,
-            // 图片容器
+                // 图片容器
                 $queue = $wrap.find('.filelist'),
-            // 状态栏，包括进度和控制按钮
+                // 状态栏，包括进度和控制按钮
                 $statusBar = $wrap.find('.statusBar'),
-            // 文件总体选择信息。
+                // 文件总体选择信息。
                 $info = $statusBar.find('.info'),
-            // 上传按钮
+                // 上传按钮
                 $upload = $wrap.find('.uploadBtn'),
-            // 上传按钮
+                // 上传按钮
                 $filePickerBtn = $wrap.find('.filePickerBtn'),
-            // 上传按钮
+                // 上传按钮
                 $filePickerBlock = $wrap.find('.filePickerBlock'),
-            // 没选择文件之前的内容。
+                // 没选择文件之前的内容。
                 $placeHolder = $wrap.find('.placeholder'),
-            // 总体进度条
+                // 总体进度条
                 $progress = $statusBar.find('.progress').hide(),
-            // 添加的文件数量
+                // 添加的文件数量
                 fileCount = 0,
-            // 添加的文件总大小
+                // 添加的文件总大小
                 fileSize = 0,
-            // 优化retina, 在retina下这个值是2
+                // 优化retina, 在retina下这个值是2
                 ratio = window.devicePixelRatio || 1,
-            // 缩略图大小
+                // 缩略图大小
                 thumbnailWidth = 113 * ratio,
                 thumbnailHeight = 113 * ratio,
-            // 可能有pedding, ready, uploading, confirm, done.
+                // 可能有pedding, ready, uploading, confirm, done.
                 state = '',
-            // 所有文件的进度信息，key为file id
+                // 所有文件的进度信息，key为file id
                 percentages = {},
-                supportTransition = (function () {
+                //所选上传的相册名字
+                $DirectoryName = (function () {
+                  
+                    var conten = document.getElementById('searchListUl');
+                    var rs = conten.getElementsByClassName('selected');
+                    var r = "";
+                     $('#searchListUl li')
+                        .each(function() {
+                            if ($(this).hasClass('selected')) {
+                                r = $(this).text();
+                            }
+                        });
+                    return r;
+                })(),
+        
+                 supportTransition = (function () {
                     var s = document.createElement('p').style,
                         r = 'transition' in s ||
                             'WebkitTransition' in s ||
@@ -348,8 +363,8 @@
                     return r;
                 })(),
             // WebUploader实例
-                uploader,
-                actionUrl = editor.getActionUrl(editor.getOpt('imageActionName')),
+                
+                actionUrl = editor.getActionUrl(editor.getOpt('imageActionName'))+"&DirectoryName="+$DirectoryName,
                 acceptExtensions = (editor.getOpt('imageAllowFiles') || []).join('').replace(/\./g, ',').replace(/^[,]/, ''),
                 imageMaxSize = editor.getOpt('imageMaxSize'),
                 imageCompressBorder = editor.getOpt('imageCompressBorder');
@@ -373,7 +388,7 @@
                     mimeTypes: 'image/*'
                 },
                 swf: '../../third-party/webuploader/Uploader.swf',
-                server: actionUrl,
+                server:"/Content/ueditor/net/controller.ashx?action=uploadimage&DirectoryName="+$DirectoryName,
                 fileVal: editor.getOpt('imageFieldName'),
                 duplicate: true,
                 fileSingleSizeLimit: imageMaxSize,    // 默认 2 M
@@ -625,9 +640,9 @@
                 }
 
                 if (!_this.getQueueCount()) {
-                    $upload.addClass('disabled')
+                    $upload.addClass('disabled');
                 } else {
-                    $upload.removeClass('disabled')
+                    $upload.removeClass('disabled');
                 }
 
             }
@@ -985,6 +1000,14 @@
                     _this.getImageData();
                 }
             });
+            /**
+             * 相册的创建
+             */
+               domUtils.on($G('newFile'), 'click', function() {
+                   var filename = $G('searchTxt').value;
+                   var $file = $('<li class="button fileType">' + filename + '</li>');
+                   $file.appendTo($G('searchListUl'));
+               });
             /* 点击清除妞 */
             domUtils.on($G('searchReset'), 'click', function(){
                 $G('searchTxt').value = lang.searchRemind;

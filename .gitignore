@@ -192,3 +192,5 @@ _Pvt_Extensions/
 *.dll
 *.pdb
 
+new/itcast.crm16.Site/Web.Debug.config
+new/itcast.crm16.Site/Web.Release.config

@@ -1,0 +1,504 @@
+﻿@using itcast.crm16.Site.Models;
+@using itcast.crm16.Common;
+@using System.Text.RegularExpressions;
+@{
+    ViewBag.Title = "丰顺商会欢迎您";
+    Layout = "~/Views/Shared/_PageMaster.cshtml";
+    var modelItems = (ViewBag.ModelList as HomeViewModel);
+}
+
+
+<div class="index-page font_wryh">
+    <div class="w1200">
+        <div class="p1th">
+            <div class="scrollBox">
+                <!-- 放图片或者背景都可以 -->
+                @{
+
+                    string imgstrs = "";
+                    foreach (var item in modelItems.ImageList)
+                    {
+                        imgstrs += (item.Image + "|");
+                    }
+                    <ul class="img_list clearfix" id="foo3" data-imgstr="@imgstrs.Substring(0,imgstrs.Length-2)">
+                    @for (int i = 0; i <modelItems.ImageList.Count; i++)
+                    {
+                        <li class="banner" style="background-image:url(@modelItems.ImageList[0].Image)"></li>
+                    }
+                    
+                        
+                    </ul>
+                }
+                <!-- 大图缩率图 -->
+                <!-- 渐变切换 -->
+                <div class="page-wrap clearfix">
+                    <a href="#" class="pre fl" id="prev3"></a>
+                    <a href="#" class="next fl" id="next3"></a>
+                </div>
+                <div class="page-box" id="pager3" style="display: block;"><a href="#" class="selected"><span>1</span></a><a href="#" class=""><span>2</span></a><a href="#" class=""><span>3</span></a></div>
+            </div>
+        </div>
+        <div class="p2th">
+            <div class="w1200 clearfix">
+                <div class="lbox fldi">
+                    <div class="title-item clearfix">
+                        <p class="title-txt fldi">
+                            商会动态
+                        </p>
+                        <a href="/SiteNew/index?type=1" class="more-txt frdi">+MORE</a>
+                    </div>
+                    <div class="content">
+                        <div class="box-1">
+                            <a href="@("/SiteNew/GetModel?id=" + modelItems.NewList.FirstOrDefault().id)">
+                                <div class="title">
+                                    @(modelItems.NewList.FirstOrDefault().Name)
+                                </div>
+                                <div class="des-txt clearfix">
+                                    @Html.Raw(modelItems.NewList.FirstOrDefault().Conent.GetContent().Trim()) <span class="time-txt frdi">@modelItems.NewList.FirstOrDefault().CreatTime.ToString("yyyy-MM-dd")</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="box-2">
+                            <ul class="list">
+
+                                @for (int i = 1; i < 5; i++)
+                                {
+                                    <a href="@("/SiteNew/GetModel?id=" + modelItems.NewList[i].id)">
+                                        <li class="clearfix">
+                                            <p class="txt fldi">
+                                                @(modelItems.NewList[i].Name))
+                                            </p>
+                                            <span class="time-txt frdi">@modelItems.NewList[i].CreatTime.ToString("yyyy-MM-dd")</span>
+                                        </li>
+                                    </a>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="lbox frdi">
+                    <div class="title-item clearfix">
+                        <p class="title-txt fldi">
+                            丰顺乡讯
+                        </p>
+                        <a href="/SiteNew/index?type=3" class="more-txt frdi">+MORE</a>
+                    </div>
+                    <div class="content">
+                        <div class="box-1">
+                            <a href="@("/SiteNew/GetModel?id="+modelItems.NewListType.FirstOrDefault().id)">
+                                <div class="title">
+                                    @(modelItems.NewListType.FirstOrDefault().Name)
+                                </div>
+                                <div class="des-txt clearfix">
+                                    @(modelItems.NewListType.FirstOrDefault().Conent.GetContent().Trim()) <span class="time-txt frdi">@modelItems.NewListType.FirstOrDefault().CreatTime.ToString("yyyy-MM-dd")</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="box-2">
+                            <ul class="list">
+
+                                @for (int i = 1; i < 5; i++)
+                                {
+                                    <a href="@("/SiteNew/GetModel?id="+modelItems.NewListType[i].id)">
+                                        <li class="clearfix">
+                                            <p class="txt fldi">
+                                                @(modelItems.NewListType[i].Name))
+                                            </p>
+                                            <span class="time-txt frdi">@modelItems.NewListType[i].CreatTime.ToString("yyyy-MM-dd")</span>
+                                        </li>
+                                    </a>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="p4th">
+
+            <div class="w1200">
+                <div class="title-item clearfix">
+                    <p class="title-txt fldi">
+                        商会领导
+                    </p>
+                    <a href="/Cemmend/GetLeader" class="more-txt frdi">+MORE</a>
+                </div>
+            </div>
+            <div class="item-wrap">
+                <div class="w1200">
+
+                    <div class="clearfix content " id="" data-role="swiper-slide-2">
+
+                        <div class="" id="pic_marquee">
+                            <table border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    @foreach (var item in modelItems.vipUserImageList)
+                                    {
+                                        <td>
+                                            <div class="item">
+                                                <div class="img">
+                                                    <img src="@item.ImageUrl">
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                    }
+                                </tr>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p3th">
+
+            <div class="w1200 clearfix">
+
+                <div class="item-wrap f14 clearfix">
+                    <div class="lbox fldi">
+                        <div class="title-item clearfix">
+                            <p class="title-txt fldi">
+                                人物访谈
+                            </p>
+                            <a href="/member/MemberDynamic/1" class="more-txt frdi">+MORE</a>
+                        </div>
+                        <ul class="list clearfix">
+                            @for (int i = 0; i < 3; i++)
+                            {
+                                <a href="/member/MemberDynamicDetail/@modelItems.MemberTellList[i].id">
+                                    <li>
+                                        <div class="img">
+                                            <img src="/Content/images/test/25.jpg" alt="">
+                                        </div>
+                                        <div class="txt">
+                                            <dl class="clearfix">
+                                                <dt class="">@modelItems.MemberTellList[i].Title</dt>
+                                                <dd class="">
+
+                                                    @Html.Raw(modelItems.MemberTellList[i].Content.GetContent().Trim())
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                    </li>
+                                </a>
+                            }
+                        </ul>
+                    </div>
+                    <div class="rbox frdi">
+
+                        <div class="title-item clearfix">
+                            <p class="title-txt fldi">
+                                会员动态
+                            </p>
+                            <a href="/member/MemberDynamic/2" class="more-txt frdi">+MORE</a>
+                        </div>
+                        <div id="lately-new" class="list">
+                            <ul class="">
+                                @if (modelItems.MemberNewsList.Count > 0)
+                                {
+                                    for (int i = 0; i < modelItems.MemberNewsList.Count; i++)
+                                    {
+                                        <a href="/member/MemberDynamicDetail/@modelItems.MemberNewsList[i].id">
+                                            <li class="clearfix">
+                                                <span class="txt fldi">@modelItems.MemberNewsList[i].Title</span><span class="time frdi">@modelItems.MemberNewsList[i].CreateTime.ToString("yyyy-MM-dd")</span>
+                                            </li>
+                                        </a>
+                                    }
+                                }
+                                else
+                                {
+                                    <a href="">
+                                        <li class="clearfix">
+                                            <span class="txt fldi">商会的招聘飒飒大苏打盛大</span><span class="time frdi">2016-12-14</span>
+                                        </li>
+                                    </a>
+                                    <a href="">
+                                        <li class="clearfix">
+                                            <span class="txt fldi">商会的招聘飒飒大苏打盛大</span><span class="time frdi">2016-12-14</span>
+                                        </li>
+                                    </a>
+                                    <a href="">
+                                        <li class="clearfix">
+                                            <span class="txt fldi">商会的招聘飒飒大苏打盛大</span><span class="time frdi">2016-12-14</span>
+                                        </li>
+                                    </a>
+                                    <a href="">
+                                        <li class="clearfix">
+                                            <span class="txt fldi">商会的招聘飒飒大苏打盛大</span><span class="time frdi">2016-12-14</span>
+                                        </li>
+                                    </a>
+                                    <a href="">
+                                        <li class="clearfix">
+                                            <span class="txt fldi">商会的招聘飒飒大苏打盛大</span><span class="time frdi">2016-12-14</span>
+                                        </li>
+                                    </a>
+                                }
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="p5th">
+            <div class="w1200">
+
+            </div>
+            <div class="w1200">
+                <div class="item-wrap clearfix">
+                    <div class="lbox fldi">
+                        <div class="title-item clearfix">
+                            <p class="title-txt fldi">
+                                丰顺文史
+                            </p>
+                            <a href="/SiteFSHistory" class="more-txt frdi">+MORE</a>
+                        </div>
+                        <ul class="list clearfix">
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                <li>
+                                    <a href="@("/SiteFSHistory/GetModel?id="+modelItems.FSHistoryList[i].id)">
+                                        <div class="title-con clearfix">
+                                            <span class="title">@modelItems.FSHistoryList[i].Title</span>
+                                            <span class="time frdi ">@modelItems.FSHistoryList[i].CreaterTime.ToString("yyyy-MM-dd")</span>
+                                        </div>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="rbox frdi">
+                        <div class="title-item clearfix">
+                            <p class="title-txt fldi">
+                                会员招聘
+                            </p>
+                            <a href="/member/MemberDynamic/3" class="more-txt frdi">+MORE</a>
+                        </div>
+                        <ul class="list clearfix">
+                            @if (modelItems.MemberZhaoList.Count > 3)
+                            {
+                                for (int i = 0; i < 2; i++)
+                                {
+                                    <li>
+                                        <a href="/member/MemberDynamicDetail/@modelItems.MemberZhaoList[i].id">
+                                            <div class="title-con clearfix">
+                                                <span class="title">@modelItems.MemberZhaoList[i].Title</span>
+                                                <span class="time frdi ">@modelItems.MemberZhaoList[i].CreateTime.ToString("yyyy-MM-dd")</span>
+                                            </div>
+                                        </a>
+                                        <div class="txt-item">
+                                            @Html.Raw(modelItems.MemberZhaoList[i].Content.GetContent())
+                                        </div>
+                                    </li>
+                                }
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="#">
+                                        <div class="title-con clearfix">
+                                            <span class="title">龙归寨瀑布</span>
+                                            <span class="time frdi ">2016-04-14</span>
+                                        </div>
+                                    </a>
+                                    <div class="txt-item">
+                                        龙归飞瀑位于丰顺县汤坑镇东联横东，距县城13公里，来源于丰顺第二高、海拔1285米的释迦山脉。龙归飞瀑被誉为“广东省黄果树瀑布”、“粤东第一瀑
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="title-con clearfix">
+                                            <span class="title">云天相掩映 古堂展风采</span>
+                                            <span class="time frdi ">2016-04-14</span>
+                                        </div>
+                                    </a>
+                                    <div class="txt-item">
+                                        建筑是历史的最佳见证。位于丰顺县留隍镇口铺村的笃庆堂，占地总面积1万平方米左右，距今已有161年的历史，整体呈太极形平面布局。
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p6th">
+            <div class="w1200">
+                <div class="title-item clearfix">
+                    <p class="title-txt fldi">
+                        商会风采
+                    </p>
+                    <a href="#" class="more-txt frdi">+MORE</a>
+                </div>
+            </div>
+            <div class="item-wrap">
+                <div class="w1200">
+                    <div class="swiper-container swiper-container-1">
+                        <div class="swiper-wrapper" data-role="swiper-slide">
+                            <div class="swiper-slide">
+                                <a href="/Cemmend/Index">
+                                    <div class="img-item">
+                                        <div class="img">
+                                            <img src="/Content/images/test/16.jpg">
+                                        </div>
+                                        <div class="txt dn">关于商会</div>
+                                    </div>
+                                    <div class="txt-item">关于商会</div>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="/SiteNew">
+                                    <div class="img-item">
+                                        <div class="img">
+                                            <img src="/Content/images/test/19.jpg">
+                                        </div>
+                                        <div class="txt dn">动态新闻</div>
+                                    </div>
+                                    <div class="txt-item">动态新闻</div>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="/interview/index">
+                                    <div class="img-item" data-role="swiper-img-hover">
+                                        <div class="img">
+                                            <img src="/Content/images/test/18.jpg">
+                                        </div>
+                                        <div class="txt dn">采访风采</div>
+                                    </div>
+                                    <div class="txt-item">采访风采</div>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="/SiteFSHistory"></a>
+                                <div class="img-item">
+                                    <div class="img">
+                                        <img src="/Content/images/test/17.jpg">
+                                    </div>
+                                    <div class="txt dn">特色丰顺</div>
+                                </div>
+                                <div class="txt-item">特色丰顺</div>
+                            </div>
+
+                        </div>
+
+
+                        <!-- Add Arrows -->
+                        <div class="swiper-button-next swiper-button-next-1">
+                            <img src="/Content/images/right-btn-2.png">
+
+                        </div>
+                        <div class="swiper-button-prev swiper-button-prev-1">
+                            <img src="/Content/images/left-btn-2.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var box_2 = document.getElementById("lately-new"), iscan = true;
+    box_2.innerHTML += box_2.innerHTML;
+    box_2.onmouseover = function () { iscan = false };
+    box_2.onmouseout = function () { iscan = true };
+    new function () {
+        var stop_2 = box_2.scrollTop % 42 == 0 && !iscan;
+        if (!stop_2) box_2.scrollTop == parseInt(box_2.scrollHeight / 2) ? box_2.scrollTop = 0 : box_2.scrollTop++;
+        setTimeout(arguments.callee, box_2.scrollTop % 42 ? 10 : 1500);
+    };
+    var marquee1 = new Marquee("pic_marquee")
+    marquee1.Direction = "left";
+    marquee1.Step = 1;
+    marquee1.Width = 1200;
+    marquee1.Height = 185;
+    marquee1.Timer = 20;
+    marquee1.ScrollStep = 52;
+    marquee1.Start();
+
+    $('#foo3').carouFredSel({
+        prev: '#prev3',
+        next: '#next3',
+        pagination: "#pager3",
+        auto: true,
+        responsive: true,
+        items: 1,
+        scroll: {
+            fx: "crossfade"
+        }
+    });
+    var swiper = new Swiper('.swiper-container-1', {
+        nextButton: '.swiper-button-next-1',
+        prevButton: '.swiper-button-prev-1',
+        autoplay: 5000,
+        slidesPerView: 4,
+        spaceBetween: 5,
+        loop: true,
+        loopAdditionalSlides: 1,
+    });
+    var swiper3 = new Swiper('.swiper-container-3', {
+        nextButton: '.swiper-button-next-3',
+        prevButton: '.swiper-button-prev-3',
+        autoplay: 5000,
+        slidesPerView: 5,
+        spaceBetween: 10,
+        loop: true,
+        loopAdditionalSlides: 1,
+    });
+    $('[data-role="swiper-slide"]').find('.swiper-slide').hover(function () {
+        $(this).find('.txt').removeClass('dn');
+    }, function () {
+        $(this).find('.txt').addClass('dn');
+    });
+    $('[data-role="swiper-slide-1"]').find('.swiper-slide').hover(function () {
+        $(this).find('.txt').removeClass('dn');
+        console.log($(this).index());
+    }, function () {
+        $(this).find('.txt').addClass('dn');
+    });
+
+    $('[data-role="swiper-slide-2"]').find('.item').hover(function () {
+        $(this).find('.txt-item').removeClass('dn');
+
+    }, function () {
+        $(this).find('.txt-item').addClass('dn');
+    });
+
+
+    var box_2 = document.getElementById("lately-new"), iscan = true;
+    box_2.innerHTML += box_2.innerHTML;
+    box_2.onmouseover = function () { iscan = false };
+    box_2.onmouseout = function () { iscan = true };
+    new function () {
+        var stop_2 = box_2.scrollTop % 42 == 0 && !iscan;
+        if (!stop_2) box_2.scrollTop == parseInt(box_2.scrollHeight / 2) ? box_2.scrollTop = 0 : box_2.scrollTop++;
+        setTimeout(arguments.callee, box_2.scrollTop % 42 ? 10 : 1500);
+    };
+
+    $(function () {
+        var imgurls = $("#foo3").attr("data-imgstr");
+        var  imgurllist=imgurls.split('|');
+        var banners = $("#foo3").find("li");
+        banners.each(function (i, e) {
+            $(banners[i]).css("background-image", 'url(' + imgurllist[i] + ')');
+        })
+
+    })
+
+</script>
+<script type="text/javascript">
+    var marquee1 = new Marquee("pic_marquee")
+    marquee1.Direction = "left";
+    marquee1.Step = 1;
+    marquee1.Width = 1200;
+    marquee1.Height = 185;
+    marquee1.Timer = 20;
+    marquee1.ScrollStep = 52;
+    marquee1.Start();
+
+</script>

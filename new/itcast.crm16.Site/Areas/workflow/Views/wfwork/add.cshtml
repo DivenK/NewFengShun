@@ -1,0 +1,59 @@
+﻿@model itcast.crm16.model.ModelViews.wfWorkView
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>   
+</head>
+<body>
+    <div style="margin-top: 15px">
+        @using (Ajax.BeginForm("Add", "wfwork", new AjaxOptions()
+    {
+        Url = Url.Action("Add", "wfwork"),
+        HttpMethod = "post",
+        OnBegin = "helper.ajaxbegin",
+        OnSuccess = "helper.ajaxsuccess"
+    }))
+        {
+            @Html.ValidationSummary(true)
+    
+            <table class="list">
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.wfTitle)
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(model => model.wfTitle)
+                        @Html.ValidationMessageFor(model => model.wfTitle)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.wfRemark)
+                    </th>
+                    <td>
+                        @Html.TextAreaFor(model => model.wfRemark)
+                        @Html.ValidationMessageFor(model => model.wfRemark)
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <input type="submit" value="新增" class="btn btn-info" />
+                        <input type="button" onclick="window.parent.helper.win.close();" value="返回" class="btn btn-info" />
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* dialog样式 */
 .wrapper {
     zoom: 1;
@@ -633,25 +633,31 @@
 
 
 /* 图片管理样式 */
-#online {
+#online,
+#searchImageList {
     width: 100%;
     height: 336px;
     padding: 10px 0 0 0;
 }
-#online #imageList{
+#online #imageList,
+#searchImageList
+{
     width: 100%;
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
     position: relative;
 }
-#online ul {
+#online ul,
+#searchImageList ul {
     display: block;
     list-style: none;
     margin: 0;
     padding: 0;
 }
-#online li {
+#online li,
+#ImageListListUl li
+ {
     float: left;
     display: block;
     list-style: none;
@@ -674,10 +680,14 @@
     margin: 0;
     padding: 0;
 }
-#online li img {
+#online li img ,
+#ImageListListUl li img
+{
     cursor: pointer;
 }
-#online li .icon {
+#online li .icon,
+#ImageListListUl li .icon
+ {
     cursor: pointer;
     width: 113px;
     height: 113px;
@@ -688,17 +698,22 @@
     border: 0;
     background-repeat: no-repeat;
 }
-#online li .icon:hover {
+#online li .icon:hover,
+#ImageListListUl li .icon:hover
+ {
     width: 107px;
     height: 107px;
     border: 3px solid #1094fa;
 }
-#online li.selected .icon {
+#online li.selected .icon,
+#ImageListListUl li.selected .icon {
     background-image: url(images/success.png);
     background-image: url(images/success.gif)\9;
     background-position: 75px 75px;
 }
-#online li.selected .icon:hover {
+#online li.selected .icon:hover,
+#ImageListListUl li.selected .icon:hover
+ {
     width: 107px;
     height: 107px;
     border: 3px solid #1094fa;
@@ -746,6 +761,14 @@
     float: left;
     dislay: block;
 }
+#search input.searchTxt:focus
+ {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+    
+}
 
 #search .searchType {
     width: 65px;
@@ -761,7 +784,8 @@
 }
 
 #search #searchBtn,
-#search #searchReset {
+#search #searchReset,
+#search #newFile  {
     display: inline-block;
     margin-bottom: 0;
     margin-right: 5px;
@@ -782,8 +806,12 @@
     vertical-align: top;
     float: right;
 }
-
-#search #searchBtn {
+#search #newFile {
+        margin-right: 140px;
+}
+#search #searchBtn ,
+#search #newFile 
+ {
     color: white;
     border-color: #285e8e;
     background-color: #3b97d7;
@@ -793,7 +821,8 @@
     border-color: #ccc;
     background-color: #fff;
 }
-#search #searchBtn:hover {
+#search #searchBtn,
+#search #newFile :hover {
     background-color: #3276b1;
 }
 #search #searchReset:hover {
@@ -804,13 +833,17 @@
     margin-left: 5px;
 }
 
-#search .searchList{
+#search .searchList,
+#ImageList .searchList
+{
     width: 100%;
     height: 300px;
     overflow: hidden;
     clear: both;
 }
-#search .searchList ul{
+#search .searchList ul,
+#ImageList .searchList ul
+{
     margin:0;
     padding:0;
     list-style:none;
@@ -823,7 +856,9 @@
     position: relative;
 }
 
-#search .searchList li {
+#search .searchList li,
+#ImageList .searchList li
+ {
     list-style:none;
     float: left;
     display: block;
@@ -891,4 +926,15 @@
 }
 #search .searchList .clearFloat{
     clear: both;
+}
+
+#search .fileType
+ {
+    background-color:lightgoldenrodyellow;
+    height:40px;
+}
+#ImageList .fileType
+ {
+    background-color:lightgoldenrodyellow;
+    height:40px;
 }

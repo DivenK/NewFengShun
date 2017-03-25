@@ -1224,3 +1224,6 @@ body{
 	padding:20px;
 	font-size: 16px;
 }
+.hide {
+    display: none;
+}

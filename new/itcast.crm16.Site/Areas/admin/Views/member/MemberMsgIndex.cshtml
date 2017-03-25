@@ -1,0 +1,201 @@
+﻿@{
+    ViewBag.Title = "会员信息";
+    Layout = "~/Areas/admin/Views/Shared/AdminMaster.cshtml";
+}
+@using itcast.crm16.model
+<script src="~/Areas/admin/Scripts/membermsg.js"></script>
+<div class="content" style="margin-top:50px;">
+    <div class="card-box">
+        <!-- Row start -->
+        <div class="am-g">
+            <div class="am-u-sm-12 am-u-md-6">
+                
+            </div>
+
+            <div class="am-u-sm-12 am-u-md-3">
+                <div class="am-input-group am-input-group-sm">
+                    <input type="text" id="txtSearchContent" class="am-form-field" placeholder="请输入会员姓名">
+                    <span class="am-input-group-btn">
+                        <button class="am-btn am-btn-default" type="button" id="btnSearch">搜索</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- Row end -->
+        <!-- Row start -->
+        <div class="am-g">
+            <div class="am-u-sm-12">
+                <form class="am-form">
+                    <table class="am-table am-table-striped am-table-hover  table-main am-table-centered">
+                        <thead>
+                            <tr>
+                                <th class="table-id">序号</th>
+                                <th class="table-author">登录名</th>
+                                <th class="table-title">姓 名</th>
+                                <th class="table-site">性别</th>
+                                <th class="table-author am-hide-sm-only">所在企业</th>
+                                <th class="table-date am-hide-sm-only">担任职务</th>
+                                <th class="table-date am-hide-sm-only">正式会员</th>
+                                <th class="table-date am-hide-sm-only">审核通过</th>
+                                <th class="table-set">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="showTb">
+                            @{ 
+                                List<MemberMsg> memberList = ViewBag.MemberList as List<MemberMsg>;
+                                if(memberList!=null&&memberList.Count>0)
+                                {
+                                    for (int i = 0; i < memberList.Count; i++)
+                                    {
+                                        <tr>
+                                            <td>@(i+1)</td>
+                                            <td>@memberList[i].LoginName</td>
+                                            <td>@memberList[i].RealName</td>
+                                            <td>@(memberList[i].Gender?"男":"女")</td>
+                                            <td>@memberList[i].Enterprise</td>
+                                            <td>@memberList[i].Post</td>
+                                            <td style="color:@(memberList[i].IsFormal?"green":"red")">@(memberList[i].IsFormal?"是":"否")</td>
+                                            <td style="color:@(memberList[i].IsPass?"green":"red")">@(memberList[i].IsPass?"是":"否")</td>
+                                            <td>
+                                                 <div class="am-btn-toolbar">
+                                                        <div class="am-btn-group am-btn-group-xs">
+                                                            <a class="am-btn am-btn-default am-btn-xs am-text-secondary detailed-model" data-id="@memberList[i].Id"><span class="am-icon-pencil-square-o"></span>详细</a>
+                                                            <a class="am-btn am-btn-default am-btn-xs am-text-secondary pass-model" @(memberList[i].IsPass?"style=display:none;":"") data-id="@memberList[i].Id"><span class="am-icon-pencil-square-o"></span>审核</a>
+                                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only del-model" data-id="@memberList[i].Id"><span class="am-icon-trash-o"></span> 删除</a>
+                                                            <a class="am-btn am-btn-default am-btn-xs am-text-secondary formal-model" @(memberList[i].IsFormal?"style=display:none;":"") data-id="@memberList[i].Id"><span class="am-icon-trash-o"></span> 转正式</a>
+                                                        </div>
+                                                    </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }else
+                                {
+                                    <tr>
+                                        <td colspan="11">暂无数据……</td>
+                                    </tr>
+                                }
+
+                            }
+                        </tbody>
+                    </table>
+                    <div class="am-cf">
+                        共 <span id="new-pageCount">@ViewBag.TotalPage</span> 条记录
+                        <div class="am-fr" id="pageDemo" date-pageSize="@ViewBag.PageSize" date-TotalPage="@ViewBag.TotalPage" data-indexPage="1" data-PageCount="@ViewBag.PageCount">
+
+                        </div>
+                    </div>
+                    <hr />
+                    <p>注：.....</p>
+                </form>
+                <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1" dat>
+                    <div class="am-modal-dialog">
+                        <div class="am-modal-hd">
+                            <label id="newTitle">会员详细信息</label>
+                            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+                        </div>
+                        <div class="am-modal-bd">
+                            <div class="am-u-md-12">
+                                <form class="am-form am-text-sm">
+                                    <div class="am-form-group">
+                                        <div class="am-g">
+                                            <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-loginname">登录名：</label>
+                                            <input class="am-u-md-10 form-control" id="doc-loginname" data-id="0" readonly="readonly" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <div class="am-g">
+                                            <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-author">姓  名：</label>
+                                            <input class="am-u-md-10 form-control" id="doc-realname" data-id="0" readonly="readonly" required>
+                                        </div>
+                                    </div>
+                                     <div class="am-form-group">
+                                        <div class="am-g">
+                                            <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-title">性  别：</label>
+                                            <input class="am-u-md-10 form-control" id="doc-gender" readonly="readonly" data-id="0" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <div class="am-g">
+                                            <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-author">居住地址：</label>
+                                            <input class="am-u-md-10 form-control" id="doc-address"  readonly="readonly" data-id="0" required>
+                                        </div>
+                                    </div>
+                                     <div class="am-form-group">
+                                        <div class="am-g">
+                                            <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-title">所在单位：</label>
+                                            <input class="am-u-md-10 form-control" id="doc-enterprise" readonly="readonly"  data-id="0" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <div class="am-g">
+                                            <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-author">担任职务：</label>
+                                            <input class="am-u-md-10 form-control" id="doc-post" readonly="readonly" data-id="0" required>
+                                        </div>
+                                    </div>
+                                    <div class="am-form-group">
+                                        <div class="am-g">
+                                            <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-author">正式会员：</label>
+                                            <input class="am-u-md-10 form-control" id="doc-isformal" readonly="readonly" data-id="0" required>
+                                        </div>
+                                    </div>
+                                    <div class="am-form-group">
+                                        <div class="am-g">
+                                            <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-author">审核通过：</label>
+                                            <input class="am-u-md-10 form-control" id="doc-ispass" readonly="readonly" data-id="0" required>
+                                        </div>
+                                    </div>
+                                     <div class="am-form-group">
+                                        <div class="am-g">
+                                            <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-title">联系人：</label>
+                                            <input class="am-u-md-10 form-control" id="doc-contact" readonly="readonly"  data-id="0" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <div class="am-g">
+                                            <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-author">联系方式：</label>
+                                            <input class="am-u-md-10 form-control" id="doc-cellphone" readonly="readonly"  data-id="0" required>
+                                        </div>
+                                    </div>
+                                     <div class="am-form-group">
+                                        <div class="am-g">
+                                            <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-title">邮  箱：</label>
+                                            <input class="am-u-md-10 form-control" id="doc-email" readonly="readonly"  data-id="0" required>
+                                        </div>
+                                    </div>
+                                    <div class="am-form-group">
+                                        <div class="am-g">
+                                            <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-author">联系地址：</label>
+                                            <input class="am-u-md-10 form-control" id="doc-contactaddress" readonly="readonly" data-id="0" required>
+                                        </div>
+                                    </div>
+                                    <div class="am-form-group">
+                                        <div class="am-g">
+                                            <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-title">邮  编：</label>
+                                            <input class="am-u-md-10 form-control" id="doc-postcode" readonly="readonly"  data-id="0" required>
+                                        </div>
+                                    </div>
+                                    <div class="am-form-group">
+                                        <div class="am-g">
+                                            <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-author">审核人员：</label>
+                                            <input class="am-u-md-10 form-control" id="doc-whopass" readonly="readonly" data-id="0" required>
+                                        </div>
+                                    </div>
+                                    <div class="am-form-group">
+                                        <div class="am-g">
+                                            <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-author">审核时间：</label>
+                                            <input class="am-u-md-10 form-control" id="doc-passtime" readonly="readonly" data-id="0" required>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

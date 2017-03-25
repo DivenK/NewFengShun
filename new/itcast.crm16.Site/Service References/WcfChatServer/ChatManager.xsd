@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/itcast.crm16.ChatModel" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/itcast.crm16.ChatModel" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ChatMsg">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FromRealName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FromUserId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="MessageBody" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SendTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ToRealName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ToUserId" type="xs:int" />
+      <xs:element minOccurs="0" name="cid" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ChatMsg" nillable="true" type="tns:ChatMsg" />
+  <xs:complexType name="ArrayOfChatMsg">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ChatMsg" nillable="true" type="tns:ChatMsg" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfChatMsg" nillable="true" type="tns:ArrayOfChatMsg" />
+  <xs:complexType name="ArrayOfUsp_GetHistoryMsg16_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Usp_GetHistoryMsg16_Result" nillable="true" type="tns:Usp_GetHistoryMsg16_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUsp_GetHistoryMsg16_Result" nillable="true" type="tns:ArrayOfUsp_GetHistoryMsg16_Result" />
+  <xs:complexType name="Usp_GetHistoryMsg16_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FromRealName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FromUserId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="MessageBody" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SendTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ToRealName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ToUserId" type="xs:int" />
+      <xs:element minOccurs="0" name="cid" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Usp_GetHistoryMsg16_Result" nillable="true" type="tns:Usp_GetHistoryMsg16_Result" />
+</xs:schema>

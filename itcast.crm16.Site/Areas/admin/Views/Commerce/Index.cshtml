@@ -7,7 +7,7 @@
     var modelList = ViewBag.DateList as List<CommerceViewModel>;
 }
 <div class="content">
-    <div class="card-box"style="@(modelList.Count>0?"":"margin-top:70px")">
+    <div class="card-box" style="@(modelList.Count>0?"":"margin-top:70px")">
         <!-- Row start -->
         <div class="am-g">
             <div class="am-u-sm-12 am-u-md-6">
@@ -34,23 +34,23 @@
                 <form class="am-form">
                     <table class="am-table am-table-striped am-table-hover table-main am-table-centered">
                         <thead>
-                        <tr>
+                            <tr>
 
-                            <th class="table-id">ID</th>
-                            <th class="table-title">标题</th>
-                            <th class="table-type">内容</th>
-                            <th class="table-type">显示</th>
-                            <th class="table-author am-hide-sm-only">作者</th>
-                            <th class="table-date am-hide-sm-only">修改日期</th>
-                            <th class="table-set">操作</th>
-                        </tr>
+                                <th class="table-id">ID</th>
+                                <th class="table-title">标题</th>
+                                <th class="table-type">内容</th>
+                                <th class="table-type">显示</th>
+                                <th class="table-author am-hide-sm-only">作者</th>
+                                <th class="table-date am-hide-sm-only">修改日期</th>
+                                <th class="table-set">操作</th>
+                            </tr>
                         </thead>
 
-                        <tbody id="CommerceTbody"  data-type="@(modelList.FirstOrDefault().typeName)">
+                        <tbody id="CommerceTbody" data-type="@(modelList.FirstOrDefault().typeName)">
                             @foreach (var item in modelList)
                             {
                                 <tr>
-                                   
+
                                     <td>@(item.Nid)</td>
                                     <td>@(item.Name.GetSubValue(8))</td>
                                     <td>@item.Contents.GetContent().GetSubValue(8)</td>
@@ -61,7 +61,6 @@
                                         <div class="am-btn-toolbar">
                                             <div class="am-btn-group am-btn-group-xs">
                                                 <a class="am-btn am-btn-default am-btn-xs am-text-secondary editCommerce" data-id="@item.id"><span class="am-icon-pencil-square-o"></span> 编辑</a>
-
                                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only delCommerce" data-id="@item.id"><span class="am-icon-trash-o"></span> 删除</a>
                                             </div>
                                         </div>
@@ -71,7 +70,7 @@
                         </tbody>
                     </table>
                     <div class="am-cf">
-                        共 <span id="rowCount" data-pageCount="@(modelList.FirstOrDefault().typeName==2?ViewBag.PageCount:"")">@(ViewBag.TotalPage)</span> 条记录
+                        共 <span id="rowCount" data-type="@(modelList.FirstOrDefault().typeName)" data-pageCount="@(modelList.FirstOrDefault().typeName==2?ViewBag.PageCount:"")">@(ViewBag.TotalPage)</span> 条记录
                         <div class="am-fr" id="pageDemo">
                         </div>
                     </div>
@@ -88,15 +87,18 @@
                         <div class="am-modal-bd">
                             <div class="am-u-md-12">
                                 <form class="am-form am-text-sm">
-
-
                                     <div class="am-form-group">
                                         <div class="am-g">
                                             <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ipt-text-1">标题</label>
                                             <input class="am-u-md-10 form-control" id="doc-ipt-text-1" placeholder="输入标题信息" data-id="0" required>
                                         </div>
                                     </div>
-
+                                    <div class="am-form-group  hide" id="hideName">
+                                        <div class="am-g">
+                                            <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ta-2">封面相册</label>
+                                            <textarea class="am-u-md-10" id="doc-ta-2"></textarea>
+                                        </div>
+                                    </div>
                                     <div class="am-form-group">
                                         <div class="am-g">
                                             <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ta-1">内容</label>
@@ -123,32 +125,49 @@
     </div>
 </div>
 @section Scripts{
-<script type="text/javascript">
-    var editorOption = {
-        initialFrameWidth: 620,
-        initialFrameHeight: 380,
+    <script type="text/javascript">
+        var editorOption = {
+            initialFrameWidth: 620,
+            initialFrameHeight: 380,
 
-        autoHeightEnabled: false,//设置滚动条出现
-        toolbars: [
-['source', 'undo', 'redo', 'bold', 'italic', 'indent',
-'underline', 'fontborder', 'backcolor', 'fontsize', 'fontfamily',
-'justifyleft', 'justifyright', 'justifycenter', 'justifyjustify',
-'strikethrough', 'superscript', 'subscript', 'removeformat',
-'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'print', 'date',
-'insertimage', 'map',
-'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist',
-'selectall', 'cleardoc', 'link', 'unlink', 'emotion', 'help']
-        ]
-    };
-    var editor = new baidu.editor.ui.Editor(editorOption);
-    editor.addListener("ready", function () {
-        // editor准备好之后才可以使用
-        editor.setContent("");
+            autoHeightEnabled: false,//设置滚动条出现
+            toolbars: [
+    ['source', 'undo', 'redo', 'bold', 'italic', 'indent',
+    'underline', 'fontborder', 'backcolor', 'fontsize', 'fontfamily',
+    'justifyleft', 'justifyright', 'justifycenter', 'justifyjustify',
+    'strikethrough', 'superscript', 'subscript', 'removeformat',
+    'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'print', 'date',
+    'insertimage', 'map',
+    'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist',
+    'selectall', 'cleardoc', 'link', 'unlink', 'emotion', 'help']
+            ]
+        };
+        var editor = new baidu.editor.ui.Editor(editorOption);
+        editor.addListener("ready", function () {
+            // editor准备好之后才可以使用
+            editor.setContent("");
 
-    });
-    editor.render('doc-ta-1');  //绑定id
-</script>
+        });
+        editor.render('doc-ta-1');  //绑定id
 
-    }
+            var editorOption2 = {
+            initialFrameWidth: 620,
+            initialFrameHeight: 100,
+            autoHeightEnabled: false,//设置滚动条出现
+            toolbars: [
+    [
+    'insertimage']
+            ]
+        };
+        var editor2 = new baidu.editor.ui.Editor(editorOption2);
+        editor2.addListener("ready", function () {
+            // editor准备好之后才可以使用
+            editor2.setContent("");
+
+        });
+        editor2.render('doc-ta-2');  //绑定id
+    </script>
+
+}
 
 <script src="~/Areas/admin/Scripts/Commerce.js"></script>

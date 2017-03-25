@@ -51,7 +51,7 @@
                         <div class="box-1">
                             <a href="@("/SiteNew/GetModel?id=" + modelItems.NewList.FirstOrDefault().id)">
                                 <div class="title">
-                                    @(modelItems.NewList.FirstOrDefault().Name)
+                                    @(modelItems.NewList.FirstOrDefault().Name.GetSubValue(10))
                                 </div>
                                 <div class="des-txt clearfix">
                                     @Html.Raw(modelItems.NewList.FirstOrDefault().Conent.GetContent().Trim()) <span class="time-txt frdi">@modelItems.NewList.FirstOrDefault().CreatTime.ToString("yyyy-MM-dd")</span>
@@ -173,7 +173,7 @@
                                 <a href="/member/MemberDynamicDetail/@modelItems.MemberTellList[i].id">
                                     <li>
                                         <div class="img">
-                                            <img src="/Content/images/test/25.jpg" alt="">
+                                            <img src="@modelItems.MemberTellList[i].ImgUrl" alt="">
                                         </div>
                                         <div class="txt">
                                             <dl class="clearfix">
@@ -412,7 +412,7 @@
         if (!stop_2) box_2.scrollTop == parseInt(box_2.scrollHeight / 2) ? box_2.scrollTop = 0 : box_2.scrollTop++;
         setTimeout(arguments.callee, box_2.scrollTop % 42 ? 10 : 1500);
     };
-    var marquee1 = new Marquee("pic_marquee")
+    var marquee1 = new Marquee("pic_marquee");
     marquee1.Direction = "left";
     marquee1.Step = 1;
     marquee1.Width = 1200;
@@ -480,19 +480,19 @@
         setTimeout(arguments.callee, box_2.scrollTop % 42 ? 10 : 1500);
     };
 
-    $(function () {
+    $(function() {
         var imgurls = $("#foo3").attr("data-imgstr");
-        var  imgurllist=imgurls.split('|');
+        var imgurllist = imgurls.split('|');
         var banners = $("#foo3").find("li");
-        banners.each(function (i, e) {
+        banners.each(function(i, e) {
             $(banners[i]).css("background-image", 'url(' + imgurllist[i] + ')');
-        })
+        });
 
-    })
+    });
 
 </script>
 <script type="text/javascript">
-    var marquee1 = new Marquee("pic_marquee")
+    var marquee1 = new Marquee("pic_marquee");
     marquee1.Direction = "left";
     marquee1.Step = 1;
     marquee1.Width = 1200;
