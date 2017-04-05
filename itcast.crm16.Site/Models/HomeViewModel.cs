@@ -10,7 +10,7 @@ namespace itcast.crm16.Site.Models
     public class HomeViewModel
     {
         public List<SiteSetViewModel> ImageList { get; set; }
-
+        public List<SiteSetViewModel> ImageListFoot { get; set; }
         public List<New> NewList { get; set; }
 
         public List<New> NewListType { get; set; }

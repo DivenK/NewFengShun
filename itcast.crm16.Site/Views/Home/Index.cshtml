@@ -16,7 +16,7 @@
                 @{
 
                     string imgstrs = "";
-                    foreach (var item in modelItems.ImageList)
+                    foreach (var item in modelItems.ImageList.Where(p=>p.type==0))
                     {
                         imgstrs += (item.Image + "|");
                     }
@@ -51,7 +51,7 @@
                         <div class="box-1">
                             <a href="@("/SiteNew/GetModel?id=" + modelItems.NewList.FirstOrDefault().id)">
                                 <div class="title">
-                                    @(modelItems.NewList.FirstOrDefault().Name.GetSubValue(10))
+                                    @(modelItems.NewList.FirstOrDefault().Name.GetSubValue(20))
                                 </div>
                                 <div class="des-txt clearfix">
                                     @Html.Raw(modelItems.NewList.FirstOrDefault().Conent.GetContent().Trim()) <span class="time-txt frdi">@modelItems.NewList.FirstOrDefault().CreatTime.ToString("yyyy-MM-dd")</span>
@@ -66,7 +66,7 @@
                                     <a href="@("/SiteNew/GetModel?id=" + modelItems.NewList[i].id)">
                                         <li class="clearfix">
                                             <p class="txt fldi">
-                                                @(modelItems.NewList[i].Name))
+                                                @(modelItems.NewList[i].Name.GetSubValue(25))
                                             </p>
                                             <span class="time-txt frdi">@modelItems.NewList[i].CreatTime.ToString("yyyy-MM-dd")</span>
                                         </li>
@@ -89,7 +89,7 @@
                         <div class="box-1">
                             <a href="@("/SiteNew/GetModel?id="+modelItems.NewListType.FirstOrDefault().id)">
                                 <div class="title">
-                                    @(modelItems.NewListType.FirstOrDefault().Name)
+                                    @(modelItems.NewListType.FirstOrDefault().Name.GetSubValue(20))
                                 </div>
                                 <div class="des-txt clearfix">
                                     @(modelItems.NewListType.FirstOrDefault().Conent.GetContent().Trim()) <span class="time-txt frdi">@modelItems.NewListType.FirstOrDefault().CreatTime.ToString("yyyy-MM-dd")</span>
@@ -104,7 +104,7 @@
                                     <a href="@("/SiteNew/GetModel?id="+modelItems.NewListType[i].id)">
                                         <li class="clearfix">
                                             <p class="txt fldi">
-                                                @(modelItems.NewListType[i].Name))
+                                                @(modelItems.NewListType[i].Name.GetSubValue(25))
                                             </p>
                                             <span class="time-txt frdi">@modelItems.NewListType[i].CreatTime.ToString("yyyy-MM-dd")</span>
                                         </li>
@@ -341,53 +341,22 @@
                 <div class="w1200">
                     <div class="swiper-container swiper-container-1">
                         <div class="swiper-wrapper" data-role="swiper-slide">
-                            <div class="swiper-slide">
-                                <a href="/Cemmend/Index">
+                            @foreach (var item in modelItems.ImageListFoot)
+                            {
+                                 <div class="swiper-slide">
+                                <a href="@item.Remark">
                                     <div class="img-item">
                                         <div class="img">
-                                            <img src="/Content/images/test/16.jpg">
+                                            <img src="@item.Image">
                                         </div>
-                                        <div class="txt dn">关于商会</div>
+                                        <div class="txt dn">@item.Title</div>
                                     </div>
-                                    <div class="txt-item">关于商会</div>
+                                    <div class="txt-item">@item.Title</div>
                                 </a>
                             </div>
-                            <div class="swiper-slide">
-                                <a href="/SiteNew">
-                                    <div class="img-item">
-                                        <div class="img">
-                                            <img src="/Content/images/test/19.jpg">
-                                        </div>
-                                        <div class="txt dn">动态新闻</div>
-                                    </div>
-                                    <div class="txt-item">动态新闻</div>
-                                </a>
-                            </div>
-                            <div class="swiper-slide">
-                                <a href="/interview/index">
-                                    <div class="img-item" data-role="swiper-img-hover">
-                                        <div class="img">
-                                            <img src="/Content/images/test/18.jpg">
-                                        </div>
-                                        <div class="txt dn">采访风采</div>
-                                    </div>
-                                    <div class="txt-item">采访风采</div>
-                                </a>
-                            </div>
-                            <div class="swiper-slide">
-                                <a href="/SiteFSHistory"></a>
-                                <div class="img-item">
-                                    <div class="img">
-                                        <img src="/Content/images/test/17.jpg">
-                                    </div>
-                                    <div class="txt dn">特色丰顺</div>
-                                </div>
-                                <div class="txt-item">特色丰顺</div>
-                            </div>
-
+                            }
+                   
                         </div>
-
-
                         <!-- Add Arrows -->
                         <div class="swiper-button-next swiper-button-next-1">
                             <img src="/Content/images/right-btn-2.png">

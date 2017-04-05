@@ -98,7 +98,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
 
 
         [ValidateInput(false)]
-        public ActionResult Change(int id, string title, int type, string content, DateTime createtime, string imageUrl)
+        public ActionResult Change(int id, string title, int type, string content, DateTime createtime, string imageUrl,string author="")
         {
             if (string.IsNullOrEmpty(title))
             {
@@ -114,6 +114,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 addModel.IsComment = true;
                 addModel.CreateTime = createtime;
                 addModel.Creator = (Session[Keys.uinfo] as sysUserInfo).uLoginName;
+                addModel.Creator = author;
                 if (!string.IsNullOrEmpty(content))
                     addModel.ImgUrl = imageUrl;
                 memberSer.Add(addModel);
@@ -137,9 +138,10 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 editModel.CreateTime = createtime;
                 editModel.UpdateTime = DateTime.Now;
                 editModel.Updator = (Session[Keys.uinfo] as sysUserInfo).uLoginName;
+                editModel.Creator = author;
                 if (!string.IsNullOrEmpty(content))
                     editModel.ImgUrl = imageUrl;
-                memberSer.Edit(editModel, new string[] { "Title", "Content", "Type","CreateTime", "UpdateTime", "Updator", "ImgUrl" });
+                memberSer.Edit(editModel, new string[] { "Title", "Content", "Type", "CreateTime", "UpdateTime", "Updator", "ImgUrl", "Creator"});
                 int editRet = memberSer.SaveChanges();
                 if (editRet == 1)
                 {
@@ -214,7 +216,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             }
             else
             {
-                return WriteSuccess("", new { entity.id, entity.Title, entity.Content, entity.Type,CreateTime=entity.CreateTime.ToString("yyyy-MM-dd"),imageUrl=entity.ImgUrl });
+                return WriteSuccess("", new { entity.id, entity.Title, entity.Content, entity.Type,CreateTime=entity.CreateTime.ToString("yyyy-MM-dd"),imageUrl=entity.ImgUrl,Author=entity.Creator});
             }
         }
 

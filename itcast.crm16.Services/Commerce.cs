@@ -18,6 +18,7 @@ namespace itcast.crm16.Services
     using Site.Models;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Web.WebPages;
 
     public partial class CommerceServices : BaseBLL<Commerce>, ICommerce
     {
@@ -74,7 +75,8 @@ namespace itcast.crm16.Services
             {
                 newid = (index - 1) * 10 + newid;
             }
-            return itemList.Select(d => new CommerceViewModel
+           
+            var list= itemList.Select(d => new CommerceViewModel
             {
                 Nid = newid++,
                 IsDelete = d.IsDelete,
@@ -90,8 +92,22 @@ namespace itcast.crm16.Services
                 UpdateTime = d.UpdateTime,
                 UpdateTimeStr = d.UpdateTime.ToShortDateString(),
                 typeName = d.Type,
-                Sort=string.IsNullOrWhiteSpace(d.Sort.ToString())?0:(int)d.Sort
+                Sort=string.IsNullOrWhiteSpace(d.Sort.ToString())?0:(int)d.Sort,
+                NSort=d.Remark.IsInt()? d.Remark.AsInt():10000,
             });
+            if (!IsShow)
+            {
+                return list;
+            }
+            List<CommerceViewModel> newlist = new List<CommerceViewModel>();
+            foreach (var List in list.GroupBy(c=>c.Sort))
+            {
+                foreach (var item in List.OrderBy(p => p.NSort))
+                {
+                    newlist.Add(item);
+                }
+            }
+            return newlist;
         }
     }
 }

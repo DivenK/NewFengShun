@@ -37,7 +37,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [ValidateInput(false)]//防止对文本验证，保存不了HTML元素
-        public ActionResult UpdateNews(string Name, string Conent, int TypeId, int id,DateTime CreateTime)
+        public ActionResult UpdateNews(string Name, string Conent, int TypeId, int id, DateTime CreateTime, string author="")
         {
             model.New newModel = new model.New();
             newModel.Name = Name;
@@ -47,16 +47,16 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             newModel.IsComment = true;
             newModel.display = 0;
             newModel.CreatTime = CreateTime;
+            newModel.Author = author;
             try
             {
                 if (id > 0)
                 {
 
-                    news.Edit(newModel, new string[] { "Name", "Conent", "IsComment", "TypeId", "display", "CreatTime" });
+                    news.Edit(newModel, new string[] { "Name", "Conent", "IsComment", "TypeId", "display", "CreatTime", "Author" });
                 }
                 else
                 {
-                    newModel.Author = "丰顺商会";
                     newModel.Creator = "丰顺商会";
                     news.Add(newModel);
                 }
@@ -134,7 +134,8 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                     model.TypeId,
                     model.Conent,
                     CreatTime = model.CreatTime.ToyyyyMMddDateTime(),
-                    model.Name
+                    model.Name,
+                    model.Author
                 });
             }
             return WriteError("修改的索引不能小于0");

@@ -43,7 +43,7 @@
                                 <div class="ly-item tc">
                                     <span class="time-txt mr20">时间：@(model.CreatTime.ToString("yyyy-MM-dd")) </span>
                                     <span class="ly-txt mr20">来源：丰顺商会</span>
-                                    <span class="zz-txt mr20"> 作者： 丰顺商会秘书处</span>
+                                    <span class="zz-txt mr20"> 作者：@(model.Author)</span>
                                     <span class="ll-txt mr20"> 浏览次数：<span id="look" data-look="@(model.Look)" data-id="@(model.id)"> @(model.Look) </span></span>
                                     <a href="javascript:;" class="zan-btn" id="zan" data-zan="@(model.Praise)" data-id="@(model.id)"><img src="/Content/images/zan.gif"><span id="zanCount">@(model.Praise)</span></a>
                                 </div>

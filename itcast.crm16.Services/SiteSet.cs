@@ -32,10 +32,10 @@ namespace itcast.crm16.Services
             {
                 indexID = (index - 1 * 10) + indexID;
             }
-           var list=  dal.QueryByPage(index, pageSize, out count, c => true, c => c.id);
+           var list=  dal.QueryByPage(index, pageSize, out count, c => c.type==Type, c => c.id);
             if (IsShow)
             {
-                list = dal.QueryByPage(index, pageSize, out count, c => true&&c.Look==0, c => c.id);
+                list = dal.QueryByPage(index, pageSize, out count, c => c.type == Type && c.Look==0, c => c.id);
             }
             return list.Select(p => new SiteSetViewModel()
             {

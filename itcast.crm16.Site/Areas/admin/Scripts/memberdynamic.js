@@ -16,13 +16,13 @@ $(function () {
         editId = 0;
         editor.setContent("");
         $("doc-ipt-text-1").val("");
-        var height = 950;
-     $("#hideName").css("display", "block");
-    var type = $("#new-pageCount").attr('data-type');
-    if (type != 1&&type!="1") {
+        var height = 1000;
+        $("#hideName").css("display", "block");
+        var type = $("#new-pageCount").attr('data-type');
+        if (type != 1 && type != "1") {
             $("#hideName").css("display", "none");
-            height = 800;
-    }
+            height = 850;
+        }
         $($modal).removeData('amui.modal');
         $modal.modal({ closeViaDimmer: 0, width: 800, height: height });//弹起
     })
@@ -43,7 +43,8 @@ $(function () {
                     "type": $("#selectType").val(),
                     "content": editor.getContent(),
                     "createtime": $("#doc-createtime-text-1").val(),
-                    "imageUrl": $(editor2.getContent()).find('img').attr('src')
+                    "imageUrl": $(editor2.getContent()).find('img').attr('src'),
+                    "author":$('#doc-auth-text-1').val()
                 }
                 $.ajax({
                     url: "/admin/member/Change",
@@ -207,23 +208,24 @@ $(document).on("click", ".member-edit", function () {
     var content = {
         "id": editId
     }
-    var height = 950;
-     $("#hideName").css("display", "block");
+    var height = 1000;
+    $("#hideName").css("display", "block");
     var type = $("#new-pageCount").attr('data-type');
-    if (type != 1&&type!="1") {
+    if (type != 1 && type != "1") {
         $("#hideName").css("display", "none");
-        height = 800;
+        height = 850;
     }
     $.post("/admin/member/GetMemberDyNamicById",
         content,
-        function(e) {
+        function (e) {
             if (e.status == 0) {
                 $("#doc-ipt-text-1").val(e.datas.Title);
                 $("#selectType").find("option[value='" + e.datas.Type + "']").attr("selected", true);
                 $("#doc-createtime-text-1").datepicker('setValue', e.datas.CreateTime);
                 editor.setContent(e.datas.Content);
-                editor2.setContent("<img src='"+e.datas.imageUrl+"' />");
-                  $($modal).removeData('amui.modal');
+                editor2.setContent("<img src='" + e.datas.imageUrl + "' />");
+                $($modal).removeData('amui.modal');
+                $("#doc-auth-text-1").val(e.datas.Author);
                 $modal.modal({ width: 800, height: height });
             }
         },

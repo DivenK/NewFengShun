@@ -33,5 +33,7 @@ namespace itcast.crm16.Site.Models
         public int Sort { get; set; }
         public string ImageUrl { get; set; }
         public int? typeName { get; set; }
+
+        public int NSort { get; set; }
     }
 }

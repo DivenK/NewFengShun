@@ -51,17 +51,19 @@
                                             List<MemberDynamic> memberList = ViewBag.MemberList as List<MemberDynamic>;
                                             foreach (var item in memberList)
                                             {
-                                                <a href="/member/memberdynamicdetail/@item.id">
-                                                    <li class="clearfix">
-                                                        <span class="title fldi">@item.Title</span>
-                                                        <span class="time frdi">[@item.CreateTime.ToString("yyyy-MM-dd")]</span>
-                                                    </li>
-                                                </a>
+
+                                                <li class="clearfix">
+                                                    <a href="/member/memberdynamicdetail/@item.id">
+                                                    <span class="title fldi">@item.Title</span>
+                                                    <span class="time frdi">[@item.CreateTime.ToString("yyyy-MM-dd")]</span>
+                                                     </a>
+                                                </li>
+                                              
                                             }
                                         }
 
                                     }
-
+                                </ul>
                             </div>
                             <div class="page-item" id="page">
                                 <a href="#">上一页</a>

@@ -167,29 +167,40 @@ function GetItems(index)
         success: function (result) {
              $('#my-modal-loading').modal('close');
             var htmlTem = '';
-          
-            result.date.forEach(function (e) {
-                htmlTem += '<tr> <td>'+e.Nid+'</td>';
-                htmlTem += '<td>' + e.Name + '</td>';
-                htmlTem += '<td class="am-hide-sm-only"   style="width:250px;height:150px"><img style="width:100%;height:100%"  src="'+ e.Image +'"/></td>';
-                htmlTem += ' <td class="am-hide-sm-only" data-id='+e.id+'><div _switch="" class="am-switch  am-switch-success newDisplay ' + (e.LookBool ? 'am-active' : '') + '"><div class="am-switch-handle"><input type="checkbox"  '+(e.LookBool ? 'checked' : '')+'></div></div></td>';
-                htmlTem += '  <td class="am-hide-sm-only">' + e.Creater + '</td>';
-                htmlTem += ' <td class="am-hide-sm-only">' + e.UpdateTimeStr + '</td>';
-                htmlTem += ' <td>';
-                htmlTem += ' <div class="">';
-                htmlTem += ' <div class="am-btn-group am-btn-group-xs">';
-                htmlTem += '<a class="am-btn am-btn-default am-btn-xs am-text-secondary editSiteSet"  data-id="' + e.id + '"><span class="am-icon-pencil-square-o"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span> 编辑</a>';
-                htmlTem += ' <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only delSiteSet"  data-id="' + e.id + '"><span class="am-icon-trash-o"></span> 删除</a>';
-                htmlTem += '</div>';
-                htmlTem += '</div>';
-                htmlTem += '</td>';
-                htmlTem += '</tr>'
-            });
-            $("#SiteSetTbody").html('');
-            $("#SiteSetTbody").html(htmlTem);
-            //还差重新初始化分页控件
-            $('#rowCount').text(result.rowCount);
-            SetPage();
+            if (result.date.length > 1) {
+                result.date.forEach(function(e) {
+                    htmlTem += '<tr> <td>' + e.Nid + '</td>';
+                    htmlTem += '<td>' + e.Name + '</td>';
+                    htmlTem +=
+                        '<td class="am-hide-sm-only"   style="width:250px;height:150px"><img style="width:100%;height:100%"  src="' + e.Image + '"/></td>';
+                    htmlTem += ' <td class="am-hide-sm-only" data-id=' +
+                        e.id +
+                        '><div _switch="" class="am-switch  am-switch-success newDisplay ' +
+                        (e.LookBool ? 'am-active' : '') +
+                        '"><div class="am-switch-handle"><input type="checkbox"  ' +
+                        (e.LookBool ? 'checked' : '') +
+                        '></div></div></td>';
+                    htmlTem += '  <td class="am-hide-sm-only">' + e.Creater + '</td>';
+                    htmlTem += ' <td class="am-hide-sm-only">' + e.UpdateTimeStr + '</td>';
+                    htmlTem += ' <td>';
+                    htmlTem += ' <div class="">';
+                    htmlTem += ' <div class="am-btn-group am-btn-group-xs">';
+                    htmlTem += '<a class="am-btn am-btn-default am-btn-xs am-text-secondary editSiteSet"  data-id="' +
+                        e.id +
+                        '"><span class="am-icon-pencil-square-o"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span> 编辑</a>';
+                    htmlTem +=
+                        ' <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only delSiteSet"  data-id="' + e.id + '"><span class="am-icon-trash-o"></span> 删除</a>';
+                    htmlTem += '</div>';
+                    htmlTem += '</div>';
+                    htmlTem += '</td>';
+                    htmlTem += '</tr>'
+                });
+                $("#SiteSetTbody").html('');
+                $("#SiteSetTbody").html(htmlTem);
+                //还差重新初始化分页控件
+                $('#rowCount').text(result.rowCount);
+                SetPage();
+            }
         },
         error: function (er) {
              $('#my-modal-loading').modal('close');

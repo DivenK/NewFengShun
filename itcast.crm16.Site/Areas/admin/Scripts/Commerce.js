@@ -9,6 +9,7 @@
         var type = $("#rowCount").attr('data-type');
         if (type != 2) {
             $("#hideName").css("display", "none");
+            $("#SortNo").css("display", "none");
             height = 650;
         }
         $modal.modal({
@@ -27,6 +28,7 @@
             var id = 0;
             id = $(this).attr('date-id');
             var type = $('#CommerceTbody').attr('data-type');
+            var getSort = $('#doc-ipt-text-5').val();
             var newModel = {
                 id: 0,
                 Name: $('#doc-ipt-text-1').val(),
@@ -49,9 +51,17 @@
                 return;
             }
             var src = $(newModel.Content2).find('img').attr('src');
+            var SortNo = 0;
+            if (type == 2&&getSort=="") {
+                $('#doc-ipt-text-5').focus();
+                return;
+            }
+            if (type == 2) {
+                SortNo = getSort;
+            }
 
             $.post("../Commerce/UpdateCommerce",
-                { "Conent": newModel.Conent, "Name": newModel.Name, "id": id, "type": type, "imageURL": src },
+                { "Conent": newModel.Conent, "Name": newModel.Name, "id": id, "type": type, "imageURL": src,"remark": SortNo },
                 function (result) {
                     $modal.modal('close');
                     if (result.status == 0) {
@@ -103,6 +113,7 @@
             if (type != 2)
             {
                 $("#hideName").css("display", "none");
+                $("#SortNo").css("display", "none");
                 height =650;
             }
             $.ajax({
@@ -111,7 +122,7 @@
                 type: "post",
                 dataType: 'json',
                 success: function (result) {
-                    SetNewModel(result.id, result.Name, result.Contents,result.ImageUrl);
+                    SetNewModel(result.id, result.Name, result.Contents,result.ImageUrl,result.Remark);
                     $modal.modal({
                         width: width,
                         height: height
@@ -160,11 +171,12 @@
         });
     }
 
-    function SetNewModel(id, title, content,imageUrl) {
+    function SetNewModel(id, title, content,imageUrl,remark) {
         $('#newTitle').text("编辑");
         $('#formSubmit').attr('date-id', id);
 
         $('#doc-ipt-text-1').val(title);
+        $('#doc-ipt-text-5').val(remark);//同级排序的字段
         editor.setContent(content);
         editor2.setContent("<img src='"+imageUrl+"'/>");
     }
@@ -202,7 +214,7 @@
                 $("#CommerceTbody").html(htmlTem);
                 //还差重新初始化分页控件
                 $('#rowCount').text(result.rowCount);
-                SetPage();
+             
             },
             error: function (er) {
                 $('#my-modal-loading').modal('close');

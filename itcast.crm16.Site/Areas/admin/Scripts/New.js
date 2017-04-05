@@ -4,12 +4,12 @@
 
     $('#addNews').on('click', function (e) {
 
-        SetNewModel(0, "", 1, "", "");
+        SetNewModel(0, "", 1, "", "","");
         //使用详情看 http://amazeui.org/javascript/modal
 
         $modal.modal({
             width: 800,
-            height: 790
+            height: 850
         });
 
     });
@@ -28,7 +28,7 @@
             TypeId: $('#selectType').val(),
             Name: $('#doc-ipt-text-1').val(),
             Conent: editor.getContent(),
-            Author: "",
+            Author: $('#doc-auto-text-1').val(),
             Creator: "",
             Praise: 0,
             Look: 0,
@@ -37,20 +37,23 @@
             IsDelete: false,
             CreateTime: $("#doc-datetime-text-1").val()
         };
-           if (newModel.Name == "")
-        {
-           bfeMsgBox.jsError("标题不能为空");
-           $('#doc-ipt-text-1').focus();
+        if (newModel.Name == "") {
+            bfeMsgBox.jsError("标题不能为空");
+            $('#doc-ipt-text-1').focus();
             return;
         }
-        if (newModel.Conent == "")
-        {
+        if (newModel.Conent == "") {
             bfeMsgBox.jsError("内容不能为空");
             editor.target.focus();
             return;
         }
+        if (newModel.Author == "") {
+            bfeMsgBox.jsError("作者不能为空");
+            $('#doc-auto-text-1').focus();
+            return;
+        }
         $.post("../New/UpdateNews",
-            { "Conent": newModel.Conent, "Name": newModel.Name, "TypeId": newModel.TypeId, "id": id,"CreateTime":newModel.CreateTime },
+            { "Conent": newModel.Conent, "Name": newModel.Name, "TypeId": newModel.TypeId, "id": id, "CreateTime": newModel.CreateTime,"author":newModel.Author},
             function (result) {
                 $modal.modal('close');
                 if (result.status == 0) {
@@ -67,7 +70,7 @@
             });
     });
 
-    $(document).on('click', '.newEdit',(function () {
+    $(document).on('click', '.newEdit', (function () {
         var id = $(this).attr('data-id');
         $.ajax({
             url: "../New/GetModel",
@@ -75,10 +78,10 @@
             type: "post",
             dataType: 'json',
             success: function (result) {
-                SetNewModel(result.id, result.Name, result.TypeId, result.Conent, result.CreatTime);
+                SetNewModel(result.id, result.Name, result.TypeId, result.Conent, result.CreatTime,result.Author);
                 $modal.modal({
                     width: 900,
-                    height: 800
+                    height: 850
                 });
             },
             error: function (er) {
@@ -88,74 +91,49 @@
     }));
 
 
-    $('.newDel').click(function () {
-        var id = $(this).attr('data-id');
-        $('#my-confirm-Del').modal({
-            relatedTarget: this,
-            onConfirm: function (options) {
-                $.ajax({
-                    url: "../New/DelelNews",
-                    data: { id: id },
-                    type: "get",
-                    dataType: 'json',
-                    success: function (result) {
-                        bfeMsgBox.success("", result.msg);
-                        AjaxGetList(1, 0);
-                    },
-                    error: function (er) {
-                        bfeMsgBox.error("", result.msg);
-                    }
-                });
-            },
-            // closeOnConfirm: false,
-            onCancel: function () {
 
-            }
-        });
-    });
 
 
     //模糊查询标题
-    $('#seachNew').on('click', function (e)
-    {
+    $('#seachNew').on('click', function (e) {
         var earchName = $('#searchName').val();
         AjaxGetList(1, 0, earchName);
     });
 });
 
 ///开关监控
-$(document).on('click','.am-switch',function(){
-			var $checkbox=$(this).find("input[type='checkbox']");
-			var state=$checkbox.is(':checked');
-			$(this).css({
-				'transition-duration': '0.2s'
-			});
-			$checkbox.prop("checked",!state);
-			if(state){
-			    $(this).removeClass('am-active');
-			    UpdateNewDisplay(this,1);
-			}else{
-			    $(this).addClass('am-active');
-                  UpdateNewDisplay(this,0);
-			}
+$(document).on('click', '.am-switch', function () {
+    var $checkbox = $(this).find("input[type='checkbox']");
+    var state = $checkbox.is(':checked');
+    $(this).css({
+        'transition-duration': '0.2s'
+    });
+    $checkbox.prop("checked", !state);
+    if (state) {
+        $(this).removeClass('am-active');
+        UpdateNewDisplay(this, 1);
+    } else {
+        $(this).addClass('am-active');
+        UpdateNewDisplay(this, 0);
+    }
 });
 
-function UpdateNewDisplay(e,val) {
-   var id = $(e).parent('td').attr('data-id');
-        $.ajax({
-            url: "../New/UpdateDispay",
-            data: { id: id, display: val },
-            type: "post",
-            dataType: 'json',
-            success: function (result) {
-                bfeMsgBox.success("", result.msg);
-                 AjaxGetList(1, 0);
-            },
-            error: function (er) {
-                bfeMsgBox.error("", result.msg);
-                AjaxGetList(1, 0);
-            }
-        });
+function UpdateNewDisplay(e, val) {
+    var id = $(e).parent('td').attr('data-id');
+    $.ajax({
+        url: "../New/UpdateDispay",
+        data: { id: id, display: val },
+        type: "post",
+        dataType: 'json',
+        success: function (result) {
+            bfeMsgBox.success("", result.msg);
+            AjaxGetList(1, 0);
+        },
+        error: function (er) {
+            bfeMsgBox.error("", result.msg);
+            AjaxGetList(1, 0);
+        }
+    });
 }
 
 
@@ -180,36 +158,37 @@ function SetPageHtml() {
 }
 
 //修改弹窗赋值
-function SetNewModel(id, title, typeId, content, d) {
+function SetNewModel(id, title, typeId, content, d,author) {
     $('#newTitle').text("编辑新闻");
     $('#formSubmit').attr('date-id', id);
     $('#selectType').val(typeId);
     $('#doc-ipt-text-1').val(title);
+    $('#doc-auto-text-1').val(author);
     $('#doc-datetime-text-1').datepicker('setValue', d);
     editor.setContent(content);
 }
 
 //异步获取数据并更新列表
-function AjaxGetList(index, typeId, Name,isChang) {
+function AjaxGetList(index, typeId, Name, isChang) {
     $('#my-modal-loading').modal();//正在加载...
     typeId = $('#newType').val();
-    Name= $('#searchName').val();
+    Name = $('#searchName').val();
     $.ajax({
         url: "../New/GetList",
-        data: { index: index, typeId: typeId,Name:Name},
+        data: { index: index, typeId: typeId, Name: Name },
         type: "post",
         dataType: 'json',
         success: function (result) {
-             $('#my-modal-loading').modal('close');
+            $('#my-modal-loading').modal('close');
             var htmlTem = '';
             SetAllCount(result.page.count, result.page.pageCount);
             result.rows.forEach(function (e) {
                 htmlTem += '<tr>';
-                htmlTem += ' <td>'+e.Nid+'</td>';
+                htmlTem += ' <td>' + e.Nid + '</td>';
                 htmlTem += '<td>' + e.TypeName + '</td>';
-                htmlTem += '<td title="'+e.Name +'">' + (e.Name.length>10?e.Name.substring(0,10):e.Name) + '</td>';
-                htmlTem += '<td class="am-hide-sm-only">' + e.Conent+ '</td>';
-                htmlTem += ' <td class="am-hide-sm-only" data-id='+e.id+'><div _switch="" class="am-switch am-round am-switch-success newDisplay ' + (e.displayBool ? 'am-active' : '') + '"><div class="am-switch-handle"><input type="checkbox"  '+(e.displayBool ? 'checked' : '')+'></div></div></td>';
+                htmlTem += '<td title="' + e.Name + '">' + (e.Name.length > 10 ? e.Name.substring(0, 10) : e.Name) + '</td>';
+                htmlTem += '<td class="am-hide-sm-only">' + e.Conent + '</td>';
+                htmlTem += ' <td class="am-hide-sm-only" data-id=' + e.id + '><div _switch="" class="am-switch am-round am-switch-success newDisplay ' + (e.displayBool ? 'am-active' : '') + '"><div class="am-switch-handle"><input type="checkbox"  ' + (e.displayBool ? 'checked' : '') + '></div></div></td>';
                 htmlTem += '  <td class="am-hide-sm-only">' + e.Author + '</td>';
                 htmlTem += ' <td class="am-hide-sm-only">' + e.CreatTimeStr + '</td>';
                 htmlTem += ' <td>';
@@ -228,7 +207,7 @@ function AjaxGetList(index, typeId, Name,isChang) {
             SetPageHtml();
         },
         error: function (er) {
-             $('#my-modal-loading').modal('close');
+            $('#my-modal-loading').modal('close');
             bfeMsgBox.error("", "数据更新失败！");
         }
     });
@@ -240,7 +219,6 @@ function SetAllCount(count, pageCount) {
     $('#pageDemo').attr("data-pagecount", pageCount);
 }
 
-$('#newType').on('change', function ()
-{
-    AjaxGetList(1, 0, "",1);
+$('#newType').on('change', function () {
+    AjaxGetList(1, 0, "", 1);
 })

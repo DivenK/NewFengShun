@@ -93,9 +93,10 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             model.Title = title;
             model.Image = GetImageUrl(Content);
             model.type = type;
+            model.CreatTime = DateTime.Now;
             if (id > 0)
             {
-                siteService.Edit(model, new string[] { "Title","Contents","Image","type" });
+                siteService.Edit(model, new string[] { "Title", "Contents", "Image", "type", "CreatTime" });
             }
             else
             {
@@ -137,7 +138,10 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
 
             MatchCollection matches = regImg.Matches(conters);
             if (matches.Count > 0)
-            { return matches[0].Groups["imgUrl"].Value; }
+            {
+                var result= matches[0].Groups[0].Value.Split('=');
+               return result[1].Split('"')[1];
+            }
             return string.Empty;
         }
 
