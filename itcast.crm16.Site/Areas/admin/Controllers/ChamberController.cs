@@ -39,7 +39,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             return Json(model);
         }
         [ValidateInput(false)]//防止对文本验证，保存不了HTML元素
-        public ActionResult UpdateFsHistory(string title, string Content, int id)
+        public ActionResult UpdateFsHistory(string title, string Content, int id,string author)
         {
             if (string.IsNullOrWhiteSpace(title))
             {
@@ -52,17 +52,18 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             FSHistory model = new FSHistory();
             model.Title = title;
             model.Contents = Content;
+            model.Creater = author;
             model.Image = GetImageUrl(Content);
             if (id > 0)//是不是编辑
             {
                 model.id = id;
-                FSHistorySer.Edit(model, new string[] { "Title", "Contents", "Image" });
+                FSHistorySer.Edit(model, new string[] { "Title", "Contents", "Image", "Creater" });
             }
             else
             {
                 model.Likes = 150;//默认有150个点赞
                 model.Look = 200;//默认有250浏览次数
-                model.Creater = "丰顺商会";
+          
                 model.Type = 1;
                 model.CreaterTime = model.UpdateTime = DateTime.Now;
                 FSHistorySer.Add(model);

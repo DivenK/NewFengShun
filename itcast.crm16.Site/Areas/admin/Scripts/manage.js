@@ -18,7 +18,7 @@ $(function () {
         $("#doc-title").val("");
         $("#doc-author").val("");
         editor.setContent("");
-        $modal.modal({ closeViaDimmer: 0, width: 800, height: 650 });//弹起
+        $modal.modal({ closeViaDimmer: 0, width: 800, height: 870 });//弹起
     });
 
     //  GetContentByPage(1,15,"");
@@ -127,7 +127,7 @@ $(document).on("click", ".edit-model", function () {
                 $("#doc-author").val(e.datas.Author);
                 $("#doc-datetime-text-1").datepicker('setValue', e.datas.CreateTime)
                 editor.setContent(e.datas.Conter);
-                $modal.modal({ closeViaDimmer: 0, width: 800, height: 800 });//弹起
+                $modal.modal({ closeViaDimmer: 0, width: 800, height: 870 });//弹起
             }
             else {
                 bfeMsgBox.error("", e.msg);

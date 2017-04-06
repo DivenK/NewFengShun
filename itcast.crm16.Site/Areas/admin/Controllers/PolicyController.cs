@@ -69,7 +69,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult Change(int id, string title,  string content,DateTime createtime)
+        public ActionResult Change(int id, string title,  string content,DateTime createtime,string author)
         {
             if (string.IsNullOrEmpty(title))
             {
@@ -83,7 +83,8 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 addModel.Content = content;
                 addModel.IsComment = true;
                 addModel.CreateTime = createtime;
-                addModel.Creator = (Session[Keys.uinfo] as sysUserInfo).uLoginName; ;
+            
+                addModel.Creator = author;
                 policySer.Add(addModel);
                 int addRet = policySer.SaveChanges();
                 if (addRet == 1)
@@ -103,8 +104,9 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
                 editModel.Content = content;
                 editModel.CreateTime = createtime;
                 editModel.UpdateTime = DateTime.Now;
-                editModel.Updator = (Session[Keys.uinfo] as sysUserInfo).uLoginName;
-                policySer.Edit(editModel, new string[] { "Title", "Content",  "UpdateTime", "Updator","CreateTime" });
+                //editModel.Updator = (Session[Keys.uinfo] as sysUserInfo).uLoginName;
+                editModel.Creator = author;
+                policySer.Edit(editModel, new string[] { "Title", "Content", "UpdateTime", "Updator", "CreateTime", "Creator"});
                 int editRet = policySer.SaveChanges();
                 if (editRet == 1)
                 {
@@ -171,7 +173,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             }
             else
             {
-                return WriteSuccess("", new { entity.id, entity.Title, entity.Content, CreateTime=entity.CreateTime.ToString("yyyy-MM-dd") });
+                return WriteSuccess("", new { entity.id, entity.Title, entity.Content,CreateTime = entity.CreateTime.ToString("yyyy-MM-dd"),Creator=entity.Creator});
             }
         }
 

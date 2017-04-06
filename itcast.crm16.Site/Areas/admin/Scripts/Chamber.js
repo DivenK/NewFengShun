@@ -8,7 +8,7 @@
 
         $modal.modal({
             width: 800,
-            height: 650
+            height: 720
         });
     });
     $('#Cancel').on('click', function () {
@@ -31,6 +31,12 @@
            $('#doc-ipt-text-1').focus();
             return;
         }
+           if ($('#doc-auth-text-1').val() == "")
+        {
+           bfeMsgBox.jsError("作者不能为空");
+           $('#doc-auth-text-1').focus();
+            return;
+        }
         if (newModel.Conent == "")
         {
             bfeMsgBox.jsError("内容不能为空");
@@ -38,7 +44,7 @@
             return;
         }
         $.post("../Chamber/UpdateFsHistory",
-            { "Content": newModel.Conent, "title": newModel.Name, "id": id },
+            { "Content": newModel.Conent, "title": newModel.Name, "id": id ,"author":$('#doc-auth-text-1').val()},
             function (result) {
                 $modal.modal('close');
                 if (result.status == 0) {
@@ -92,11 +98,11 @@
             type: "post",
             dataType: 'json',
             success: function (result) {
-                SetNewModel(result.id, result.Title, result.Contents);
+                SetNewModel(result.id, result.Title, result.Contents,result.Creater);
 
                 $modal.modal({
                     width: 800,
-                    height: 650
+                    height: 720
                 });
             },
             error: function (er) {
@@ -147,7 +153,7 @@ function UpdateLook(e, val) {
     });
 }
 
-function SetNewModel(id, title, content) {
+function SetNewModel(id, title, content,auth) {
     var option="添加文史";
     if (id > 0)
     {
@@ -157,6 +163,7 @@ function SetNewModel(id, title, content) {
     $('#formSubmit').attr('date-id', id);
 
     $('#doc-ipt-text-1').val(title);
+    $('#doc-auth-text-1').val(auth);
     editor.setContent(content);
 }
 

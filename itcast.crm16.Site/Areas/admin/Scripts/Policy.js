@@ -16,7 +16,7 @@ $(function () {
         editId = 0;
         editor.setContent("");
         $("doc-ipt-text-1").val("");
-        $modal.modal({ closeViaDimmer: 0, width: 800, height: 800 });//弹起
+        $modal.modal({ closeViaDimmer: 0, width: 800, height: 870 });//弹起
     })
 
     //保存新增或者修改
@@ -30,7 +30,8 @@ $(function () {
             "id": editId,
             "title": title,
             "content": editor.getContent(),
-            "createtime":$("#doc-createtime-text-1").val()
+            "createtime": $("#doc-createtime-text-1").val(),
+            "author": $("#doc-auth-text-1").val()
         }
         $.ajax({
             url: "/admin/Policy/Change",
@@ -173,9 +174,10 @@ $(document).on("click", ".member-edit", function () {
     $.post("/admin/Policy/GetPolicyById", content, function (e) {
         if (e.status == 0) {
             $("#doc-ipt-text-1").val(e.datas.Title);
+            $("#doc-auth-text-1").val(e.datas.Creator);
             $("#doc-createtime-text-1").datepicker('setValue', e.datas.CreateTime);
             editor.setContent(e.datas.Content);
-            $modal.modal({ closeViaDimmer: 0, width: 800, height: 800 });
+            $modal.modal({ closeViaDimmer: 0, width: 800, height: 870 });
         }
     }, "json")
 })
