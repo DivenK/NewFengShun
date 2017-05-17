@@ -15,7 +15,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
     {
         //
         // GET: /admin/New/
-        public NewController(IsysMenusServices mSer, INewServices news, INewTypeServices newsType) : base(mSer)
+        public NewController(IsysMenusServices mSer, INewServices news, INewTypeServices newsType, ISiteSetService siteS) : base(mSer, siteS)
         {
             base.news = news;
             base.newsType = newsType;

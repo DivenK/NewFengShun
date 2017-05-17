@@ -13,7 +13,7 @@ namespace itcast.crm16.Site.Controllers
     [WebHelper.Attrs.SkipCheckLogin]
     public class memberController : BaseController
     {
-        public memberController(IsysMenusServices mSer, IMemberMsgServices memberMsgSer, IMemberDynamicServices memberDynamicSer) : base(mSer, "/member/memberdynamic?id=2")
+        public memberController(IsysMenusServices mSer, IMemberMsgServices memberMsgSer, IMemberDynamicServices memberDynamicSer, ISiteSetService siteS) : base(mSer, siteS, "/member/memberdynamic?id=2")
         {
             base.memberMsgSer = memberMsgSer;
             base.memberSer = memberDynamicSer;
@@ -43,13 +43,13 @@ namespace itcast.crm16.Site.Controllers
             }
         }
 
-        public ActionResult MemberDynamic(int id)
+        public ActionResult MemberDynamic(int id,int index=1)
         {
             int count = 0;
-            List<MemberDynamic> memberList = memberSer.GetMemberMsgByPage(1, 15, out count, id, false);
+            List<MemberDynamic> memberList = memberSer.GetMemberMsgByPage(1,15, out count, id, false);
             ViewBag.MemberList = memberList;
             ViewBag.Type = id;
-            ViewBag.TotalPage = Math.Ceiling(count * 1.0 / 15);
+            ViewBag.TotalPage = Math.Ceiling(count * 1.0 / 3);
             return View();
         }
 

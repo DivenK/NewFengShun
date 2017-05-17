@@ -28,20 +28,22 @@ namespace itcast.crm16.WebHelper
         protected ISiteSetService siteService;
         protected IPolicyServices policySer;
         protected string url = "";//用来首页的菜单选项
-        protected int pageSize=10;
+        protected int pageSize = 10;
         protected int TotalPage;//总行数
         protected int PageCount;//有多少页
         protected string stringStr = @"<(.[^>]*)/>";
 
-        public BaseController(IsysMenusServices mSer,string url="")
+        public BaseController(IsysMenusServices mSer, ISiteSetService siteService, string url = "")
         {
             menuSer = mSer;
             var list = menuSer.QueryWhere(c => c.mStatus == 0).OrderBy(c => c.mSortid).ToList();
-
-          ViewBag.url = url;
-          //获取当前左边的菜单
-          // var permissMenus = menuSer.RunProc<sysMenus>("USP_GetMenusForUserid16 " + UserMgr.GetUserInfo().uID);
-          ViewBag.mList = list;
+            ViewBag.url = url;
+            //获取当前左边的菜单
+            // var permissMenus = menuSer.RunProc<sysMenus>("USP_GetMenusForUserid16 " + UserMgr.GetUserInfo().uID);
+            ViewBag.mList = list;
+            this.siteService = siteService;
+            var linkList = siteService.QueryWhere(p => p.type.Equals(2) && p.Look==0).OrderByDescending(o => o.CreatTime).ToList();
+            ViewBag.linkList = linkList;
         }
         #endregion
 
@@ -91,10 +93,11 @@ namespace itcast.crm16.WebHelper
         /// 获取分页需要所有  ViewBag.TotalPage   ViewBag.PageSize ViewBag.PageCount
         /// </summary>
         /// <returns></returns>
-        protected void SetViewBagPage() {
+        protected void SetViewBagPage()
+        {
             ViewBag.TotalPage = TotalPage;
             ViewBag.PageSize = pageSize;
-            ViewBag.PageCount=PageCount=(int)Math.Ceiling(TotalPage * 1.0 / pageSize);
+            ViewBag.PageCount = PageCount = (int)Math.Ceiling(TotalPage * 1.0 / pageSize);
         }
 
         /// <summary>

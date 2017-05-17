@@ -14,7 +14,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
 {
     public class ManageController : BaseController
     {
-        public ManageController(IsysMenusServices mMer, IManageServices manageSer) : base(mMer)
+        public ManageController(IsysMenusServices mSer, IManageServices manageSer, ISiteSetService siteS) : base(mSer, siteS)
         {
             base.manageSer = manageSer;
         }

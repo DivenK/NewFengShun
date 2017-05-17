@@ -2,19 +2,17 @@
 @using itcast.crm16.Common;
 @using System.Text.RegularExpressions;
 @{
-    ViewBag.Title = "丰顺商会欢迎您";
+    ViewBag.Title = "广东省丰顺商会";
     Layout = "~/Views/Shared/_PageMaster.cshtml";
     var modelItems = (ViewBag.ModelList as HomeViewModel);
+    modelItems.MemberZhaoList= modelItems.MemberZhaoList.OrderByDescending(x => x.CreateTime).ToList();
 }
-
-
 <div class="index-page font_wryh">
     <div class="w1200">
         <div class="p1th">
             <div class="scrollBox">
                 <!-- 放图片或者背景都可以 -->
                 @{
-
                     string imgstrs = "";
                     foreach (var item in modelItems.ImageList.Where(p=>p.type==0))
                     {
@@ -25,8 +23,6 @@
                     {
                         <li class="banner" style="background-image:url(@modelItems.ImageList[0].Image)"></li>
                     }
-                    
-                        
                     </ul>
                 }
                 <!-- 大图缩率图 -->
@@ -51,7 +47,7 @@
                         <div class="box-1">
                             <a href="@("/SiteNew/GetModel?id=" + modelItems.NewList.FirstOrDefault().id)">
                                 <div class="title">
-                                    @(modelItems.NewList.FirstOrDefault().Name.GetSubValue(20))
+                                    @(modelItems.NewList.FirstOrDefault().Name.GetSubValue(25))
                                 </div>
                                 <div class="des-txt clearfix">
                                     @Html.Raw(modelItems.NewList.FirstOrDefault().Conent.GetContent().Trim()) <span class="time-txt frdi">@modelItems.NewList.FirstOrDefault().CreatTime.ToString("yyyy-MM-dd")</span>
@@ -66,7 +62,7 @@
                                     <a href="@("/SiteNew/GetModel?id=" + modelItems.NewList[i].id)">
                                         <li class="clearfix">
                                             <p class="txt fldi">
-                                                @(modelItems.NewList[i].Name.GetSubValue(25))
+                                                @(modelItems.NewList[i].Name.GetSubValue(28))
                                             </p>
                                             <span class="time-txt frdi">@modelItems.NewList[i].CreatTime.ToString("yyyy-MM-dd")</span>
                                         </li>
@@ -89,7 +85,7 @@
                         <div class="box-1">
                             <a href="@("/SiteNew/GetModel?id="+modelItems.NewListType.FirstOrDefault().id)">
                                 <div class="title">
-                                    @(modelItems.NewListType.FirstOrDefault().Name.GetSubValue(20))
+                                    @(modelItems.NewListType.FirstOrDefault().Name.GetSubValue(25))
                                 </div>
                                 <div class="des-txt clearfix">
                                     @(modelItems.NewListType.FirstOrDefault().Conent.GetContent().Trim()) <span class="time-txt frdi">@modelItems.NewListType.FirstOrDefault().CreatTime.ToString("yyyy-MM-dd")</span>
@@ -104,7 +100,7 @@
                                     <a href="@("/SiteNew/GetModel?id="+modelItems.NewListType[i].id)">
                                         <li class="clearfix">
                                             <p class="txt fldi">
-                                                @(modelItems.NewListType[i].Name.GetSubValue(25))
+                                                @(modelItems.NewListType[i].Name.GetSubValue(28))
                                             </p>
                                             <span class="time-txt frdi">@modelItems.NewListType[i].CreatTime.ToString("yyyy-MM-dd")</span>
                                         </li>

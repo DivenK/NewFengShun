@@ -80,9 +80,10 @@
         activeClass: 'activP', //active 类样式定义
         callBack: function (page) {
             var content={
-                "pageIndex":page
+                "pageindex":page,
+                "type":@(ViewBag.type)
             }
-            $.post("/SiteNew/GetSiteNew",content,function(e){
+            $.post("/SiteNew/GetNew",content,function(e){
                 if(e.status==0)
                 {
                     var data=e.datas;

@@ -15,14 +15,14 @@ namespace itcast.crm16.Site.Controllers
     {
         //
         // GET: /New/
-        public SiteNewController(IsysMenusServices mSer, INewServices newSer):base(mSer,"/SiteNew")
+        public SiteNewController(IsysMenusServices mSer, INewServices newSer,ISiteSetService siteS) : base(mSer, siteS,"/SiteNew")
         {
             base.news = newSer;
         }
-        public ActionResult Index(int type=1)
+        public ActionResult Index(int type=1,int index = 1)
         {
             base.pageSize = 15;
-            var list = news.NewPageList(1, type, "", out TotalPage,base.pageSize , true);
+            var list = news.NewPageList(index, type, "", out TotalPage,base.pageSize , true);
             ViewBag.list = list;
             SetViewBagPage();
             ViewBag.type = type;
@@ -30,6 +30,7 @@ namespace itcast.crm16.Site.Controllers
         }
         public ActionResult GetNew(int type = 1,int pageindex=1)
         {
+            base.pageSize = 15;
             var list = news.NewPageList(pageindex, type, "", out TotalPage,base.pageSize, true);
            var modelList= list.Select(p => new NewViewModel()
             {

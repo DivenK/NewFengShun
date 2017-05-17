@@ -14,7 +14,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
    
     public class ChamberController : BaseController
     {
-        public ChamberController(IsysMenusServices mSer, IFSHistoryService Ser) : base(mSer)
+        public ChamberController(IsysMenusServices mSer, IFSHistoryService Ser,ISiteSetService siteS) : base(mSer, siteS)
         {
             base.FSHistorySer = Ser;
         }

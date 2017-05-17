@@ -46,7 +46,7 @@ namespace itcast.crm16.Services
                 }
               
             }
-            itemList = dal.QueryByPage(index, pageSize, out totalPage, where, c => c.id).ToList<FSHistory>();
+            itemList = dal.QueryByPage(index, pageSize, out totalPage, where, c => c.CreaterTime).ToList<FSHistory>();
             int newid = 1;
             if (index > 1)
             {

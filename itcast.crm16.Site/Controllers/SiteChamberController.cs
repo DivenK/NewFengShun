@@ -15,14 +15,14 @@ namespace itcast.crm16.Site.Controllers
     {
         //
         // GET: /SiteChamber/
-        public SiteChamberController(IsysMenusServices mSer, IFSHistoryService newSer, IFSHistoryService pMenusList) : base(mSer, "SiteChamber")
+        public SiteChamberController(IsysMenusServices mSer, IFSHistoryService newSer, IFSHistoryService pMenusList, ISiteSetService siteS) : base(mSer, siteS, "SiteChamber")
         {
             base.FSHistorySer = newSer;
         }
-        public ActionResult Index()
+        public ActionResult Index(int index=1)
         {
             base.pageSize = 15;
-            var list = FSHistorySer.GetItemModel(1, out TotalPage, "", base.pageSize,1, true);
+            var list = FSHistorySer.GetItemModel(index, out TotalPage, "", base.pageSize,1, true);
             SetViewBagPage();
             ViewBag.list = list;
             return View();

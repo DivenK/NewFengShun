@@ -19,7 +19,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
     /// </summary>
     public class CommerceController : BaseController
     {
-        public CommerceController(IsysMenusServices mSer,ICommerce Commerce):base(mSer)
+        public CommerceController(IsysMenusServices mSer,ICommerce Commerce,ISiteSetService siteS) : base(mSer, siteS)
         {
             base.Commerce = Commerce;
         }

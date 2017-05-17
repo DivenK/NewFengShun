@@ -16,7 +16,7 @@ namespace itcast.crm16.Site.Controllers
     [WebHelper.Attrs.SkipCheckLogin]
     public class HomeController : BaseController
     {
-        public HomeController(IsysMenusServices mSer, INewServices newSer, IMemberMsgServices Mser, IMemberDynamicServices MemberDynamicSer, IFSHistoryService fser, ISiteSetService siteService,ICommerce comSer) :base(mSer)
+        public HomeController(IsysMenusServices mSer, INewServices newSer, IMemberMsgServices Mser, IMemberDynamicServices MemberDynamicSer, IFSHistoryService fser, ISiteSetService siteService,ICommerce comSer) : base(mSer, siteService)
         {
             base.news = newSer;
             base.FSHistorySer = fser;

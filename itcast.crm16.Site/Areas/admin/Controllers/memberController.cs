@@ -14,7 +14,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
 {
     public class memberController : BaseController
     {
-        public memberController(IsysMenusServices mSer, IMemberDynamicServices memberSer, IArticleTypeServices articleTypeSer, IMemberMsgServices memberMsgSer) : base(mSer)
+        public memberController(IsysMenusServices mSer, IMemberDynamicServices memberSer, IArticleTypeServices articleTypeSer, IMemberMsgServices memberMsgSer, ISiteSetService siteS) : base(mSer, siteS)
         {
             base.memberSer = memberSer;
             base.articleSer = articleTypeSer;

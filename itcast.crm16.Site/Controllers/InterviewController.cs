@@ -12,7 +12,7 @@ namespace itcast.crm16.Site.Controllers
     [WebHelper.Attrs.SkipCheckLogin]
     public class InterviewController : BaseController
     {
-        public InterviewController(IsysMenusServices mSer, IMemberDynamicServices memberSer) : base(mSer, "/interview/index")
+        public InterviewController(IsysMenusServices mSer, IMemberDynamicServices memberSer, ISiteSetService siteS) : base(mSer, siteS,"/interview/index")
         {
             base.memberSer = memberSer;
         }
@@ -20,10 +20,10 @@ namespace itcast.crm16.Site.Controllers
         //
         // GET: /Interview/
 
-        public ActionResult Index()
+        public ActionResult Index(int index=1)
         {
             int count = 0;
-            ViewBag.MemberList = memberSer.GetMemberMsgByPage(1, 15, out count, 1, false);
+            ViewBag.MemberList = memberSer.GetMemberMsgByPage(index, 15, out count, 1, false);
             ViewBag.TotalPage = Math.Ceiling(count * 1.0 / 15);
             return View();
         }

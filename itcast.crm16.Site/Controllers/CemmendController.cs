@@ -13,7 +13,7 @@ namespace itcast.crm16.Site.Controllers
     {
         //
         // GET: /Cemmend/
-        public CemmendController(IsysMenusServices mSer, ICommerce monser) : base(mSer, "/Cemmend")
+        public CemmendController(IsysMenusServices mSer, ICommerce monser, ISiteSetService siteS) : base(mSer, siteS, "/Cemmend")
         {
             base.Commerce = monser;
         }

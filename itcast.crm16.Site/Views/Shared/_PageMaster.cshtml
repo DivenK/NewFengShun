@@ -1,6 +1,9 @@
 ﻿@using itcast.crm16.model
 @using itcast.crm16.Common
 <!DOCTYPE html>
+@{ 
+    var linkList = ViewBag.linkList as List<SiteSet>;
+}
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html" charset="utf-8"></meta>
@@ -83,30 +86,38 @@
     <div class="footer font_wryh f14">
         <div class="w1200">
             <div class="top-item clearfix">
-
-
                 <div class="rbox fldi clearfix ">
 
                     <div class="box-2">
                         <p class="title f16">友情链接：</p>
-                        <a href="javascript:;">广东省新南方集团有限公司</a>
-                        <a href="javascript:;">广东丰联投资有限公司</a>
-                        <a href="javascript:;">广东速度投资（集团）有限公司</a>
-                        <a href="javascript:;">广东讯联科技（集团）有限公司</a>
-                        <a href="javascript:;">潮 客 汇 网</a>
-                        <a href="javascript:;">广州金马模特道具有限公司</a>
-                        <a href="javascript:;">深圳市喜德盛自行车有限公司</a>
-                        <a href="javascript:;">广州木棉花商旅服务有限公司</a>
-                        <a href="javascript:;">泰华房地产[中国]有限公司</a>
-
+                        @if (linkList.Count > 0)
+                        {
+                            var legth = linkList.Count > 10 ? 10 : linkList.Count;
+                            for (int i = 0; i < legth; i++)
+                            {
+                                <a href="@linkList[i].Contents.Replace("<p>","").Replace("</p>","")" target="_blank">@linkList[i].Title</a>
+                            }
+                        }
+                        else
+                        {
+                            <a href="javascript:;">广东省新南方集团有限公司</a>
+                            <a href="javascript:;">广东丰联投资有限公司</a>
+                            <a href="javascript:;">广东速度投资（集团）有限公司</a>
+                            <a href="javascript:;">广东讯联科技（集团）有限公司</a>
+                            <a href="javascript:;">潮 客 汇 网</a>
+                            <a href="javascript:;">广州金马模特道具有限公司</a>
+                            <a href="javascript:;">深圳市喜德盛自行车有限公司</a>
+                            <a href="javascript:;">广州木棉花商旅服务有限公司</a>
+                            <a href="javascript:;">泰华房地产[中国]有限公司</a>
+                        }
                     </div>
                 </div>
             </div>
             <div class="bottom-item">
                 <div class="content">
                     <div class="box-1 clearfix mt10">
-                        <span class="txt fldi">地址：广东省广州市天河区珠江新城马场路富力公园28-A1栋2401室-广东丰顺商会 邮编：510000 </span>
-                        <span class="txt frdi">会员服务电话：020-34022585   E_mail：gdfssh@126.com  </span>
+                        <span class="txt fldi">地址：广东省广州市天河区珠江新城马场路富力公园28-A1栋2401室- 广东省丰顺商会 邮编：510000 </span>
+                        <span class="txt frdi">会员服务电话：020-34022585     E_mail：gdfssh@126.com  </span>
                     </div>
                     <div class="box-2 clearfix mt5">
                         <span class="txt fldi">Copyright 2009 All rights reserved  粤ICP备10027412号 </span>

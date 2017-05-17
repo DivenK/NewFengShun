@@ -12,7 +12,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
 {
     public class PolicyController : BaseController
     {
-        public PolicyController(IsysMenusServices mSer,IPolicyServices policySer) : base(mSer)
+        public PolicyController(IsysMenusServices mSer,IPolicyServices policySer, ISiteSetService siteS) : base(mSer, siteS)
         {
             base.policySer = policySer;
         }

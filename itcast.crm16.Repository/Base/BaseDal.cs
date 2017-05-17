@@ -181,7 +181,9 @@ namespace itcast.crm16.Repository
 
             //2.0 将model追加到EF容器中
             System.Data.Entity.Infrastructure.DbEntityEntry entry = db.Entry(model);
+
             entry.State = System.Data.EntityState.Unchanged;
+          
             foreach (var item in propertyNames)
             {
                 entry.Property(item).IsModified = true;

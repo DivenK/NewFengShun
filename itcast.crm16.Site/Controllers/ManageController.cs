@@ -12,7 +12,7 @@ namespace itcast.crm16.Site.Controllers
     [WebHelper.Attrs.SkipCheckLogin]
     public class ManageController : BaseController
     {
-        public ManageController(IsysMenusServices mSer,IManageServices manageSer) : base(mSer, "/manage/index")
+        public ManageController(IsysMenusServices mSer,IManageServices manageSer, ISiteSetService siteS) : base(mSer, siteS, "/manage/index")
         {
             base.manageSer = manageSer;
         }

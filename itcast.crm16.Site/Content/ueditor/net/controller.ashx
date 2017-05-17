@@ -152,6 +152,7 @@ public class DirectorySearchHandle : Handler
             cookie = new HttpCookie("MWS_User");
         }
         cookie.Values.Set("DirectoryName", ditItems[0].Name);
+        Array.Sort<DirectoryInfo>(ditItems, (x,y)=>y.LastWriteTime.CompareTo(x.LastWriteTime));
         cookie.Expires = DateTime.Now.AddDays(1);
         Response.Cookies.Add(cookie);
         this.WriteJson(new
@@ -160,6 +161,8 @@ public class DirectorySearchHandle : Handler
         });
     }
 }
+    //文件夹中按时间排序最新的文件读取
+
 /// <summary>
 /// 保存选择的文件夹
 /// </summary>
@@ -202,6 +205,7 @@ public class SeachFileForNameHandle : Handler
         var localPath = Server.MapPath(savePath);
         DirectoryInfo folder = new DirectoryInfo(localPath);
         var fileList = folder.GetFiles("*");
+        Array.Sort<FileInfo>(fileList, (x,y)=>y.LastWriteTime.CompareTo(x.LastWriteTime));
         this.WriteJson(new
         {
             state="success",

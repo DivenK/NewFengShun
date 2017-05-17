@@ -22,7 +22,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
         //    base.permissSer = pser;
         //}
 
-        public LoginController(IsysUserInfoServices userifoMenus, IsysMenusServices mSer) : base(mSer)
+        public LoginController(IsysUserInfoServices userifoMenus, IsysMenusServices mSer, ISiteSetService siteS) : base(mSer, siteS)
         {
             base.userinfoSer = userifoMenus;
         }
@@ -32,7 +32,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
         public ActionResult Login()
         {
             //1.0 判断浏览器是否将cookie发送过来了
-            LoginInfo info = new LoginInfo() { LoginName = "admin", LoginPWD = "123456", IsReMember = false };
+            LoginInfo info = new LoginInfo() { LoginName = "adminSH", LoginPWD = "gdsfssh2017", IsReMember = false };
             if (Request.Cookies[Keys.isremember] != null)
             {
                 info.IsReMember = true;

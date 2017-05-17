@@ -14,7 +14,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
 
     public class HomeController : BaseController
     {
-        public HomeController(IsysMenusServices mSer, IsysUserInfoServices user):base(mSer)
+        public HomeController(IsysMenusServices mSer, IsysUserInfoServices user, ISiteSetService siteS) : base(mSer, siteS)
         {
             base.menuSer = mSer;
             base.userinfoSer = user;

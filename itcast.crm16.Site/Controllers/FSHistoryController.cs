@@ -13,21 +13,21 @@ namespace itcast.crm16.Site.Controllers
     {
         //
         // GET: /FSHistory/
-        public FSHistoryController(IsysMenusServices mSer, IFSHistoryService newSer):base(mSer,"/SiteNew")
+        public FSHistoryController(IsysMenusServices mSer, IFSHistoryService newSer,ISiteSetService siteS) : base(mSer, siteS,"/SiteNew")
         {
             base.FSHistorySer = newSer;
         }
-        public ActionResult Index()
+        public ActionResult Index(int index=1)
         {
-            base.pageSize = 3;
-            var list= FSHistorySer.GetItemModel(1, out TotalPage, "", base.pageSize, 0,true);
+          
+            var list= FSHistorySer.GetItemModel(index, out TotalPage, "", base.pageSize, 0,true);
             ViewBag.list = list;
             return View();
         }
 
         public ActionResult AjaxGetItens(int pageIndex = 1,int type=0)
         {
-            base.pageSize = 3;
+      
             var list = FSHistorySer.GetItemModel(1, out TotalPage, "", base.pageSize,0, true);
             return WriteSuccess("", list);
         }

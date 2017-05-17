@@ -21,7 +21,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
         //
         // GET: /admin/SiteSet/
 
-        public SiteSetController(IsysMenusServices mSer,ISiteSetService siteService):base(mSer)
+        public SiteSetController(IsysMenusServices mSer,ISiteSetService siteService, ISiteSetService siteS) : base(mSer, siteS)
         {
             this.siteService = siteService;
         }
@@ -87,23 +87,23 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
             {
                 return WriteError("标题或者内容不能为空！");
             }
-            model.SiteSet model = new model.SiteSet();
-            model.id = id;
-            model.Contents = Content;
-            model.Title = title;
-            model.Image = GetImageUrl(Content);
-            model.type = type;
-            model.CreatTime = DateTime.Now;
+            model.SiteSet models = new model.SiteSet();
+            models.id = id;
+            models.Contents = Content;
+            models.Title = title;
+            models.Image = GetImageUrl(Content);
+            models.type = type;
+            models.CreatTime = DateTime.Now;
             if (id > 0)
             {
-                siteService.Edit(model, new string[] { "Title", "Contents", "Image", "type", "CreatTime" });
+                    siteService.Edit(models, new string[] { "Title", "Contents", "Image", "type", "CreatTime" });
             }
             else
             {
-                model.Creator = "丰顺商会";
-                model.CreatTime = DateTime.Now;
-                model.Look = 0;
-                siteService.Add(model);
+                models.Creator = "丰顺商会";
+                models.CreatTime = DateTime.Now;
+                models.Look = 0;
+                siteService.Add(models);
             }
             var result = siteService.SaveChanges();
             if (result > 0)

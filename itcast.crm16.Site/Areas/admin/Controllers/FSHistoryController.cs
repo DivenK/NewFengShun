@@ -16,7 +16,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
     /// </summary>
     public class FSHistoryController : BaseController
     {
-        public FSHistoryController(IsysMenusServices mSer, IFSHistoryService Ser) : base(mSer)
+        public FSHistoryController(IsysMenusServices mSer, IFSHistoryService Ser, ISiteSetService siteS) : base(mSer, siteS)
         {
             base.FSHistorySer = Ser;
         }

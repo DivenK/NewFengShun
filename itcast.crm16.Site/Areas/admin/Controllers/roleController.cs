@@ -11,7 +11,7 @@ namespace itcast.crm16.Site.Areas.admin.Controllers
 {
     public class roleController :BaseController
     {
-        public roleController(IsysMenusServices mSer, INewServices news, INewTypeServices newsType) : base(mSer)
+        public roleController(IsysMenusServices mSer, INewServices news, INewTypeServices newsType, ISiteSetService siteS) : base(mSer, siteS)
         {
             base.news = news;
             base.newsType = newsType;

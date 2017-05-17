@@ -12,12 +12,12 @@ namespace itcast.crm16.Site.Controllers
     [WebHelper.Attrs.SkipCheckLogin]
     public class PolicyController : BaseController
     {
-        public PolicyController(IsysMenusServices mSer, IPolicyServices policySer) : base(mSer, "/policy/index?type=1")
+        public PolicyController(IsysMenusServices mSer, IPolicyServices policySer, ISiteSetService siteS) : base(mSer, siteS, "/policy/index?type=1")
         {
             base.policySer = policySer;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int index=1)
         {
             int count = 0;
             List<Policy> policyList = policySer.QueryByPage(1, 15, out count, c => c.IsComment == true && c.IsDelete == false, c => c.CreateTime);
